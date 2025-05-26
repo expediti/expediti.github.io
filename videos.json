@@ -1,10 +1,12 @@
 [
   {
-    "title": "Episode 1 - VFX Breakdown",
-    "embed": "https://www.youtube.com/embed/VIDEO_ID",
-    "thumbnail": "thumbnails/thumb1.jpg",
-    "views": "2.3K",
-    "tag": "VFX"
+    {
+  "title": "sexy video",
+  "thumbnail": "https://pixeldrain.com/api/file/QEruyRh2",
+  "videoUrl": "https://pixeldrain.com/api/file/LSevn5uJ",
+  "page": "video-1.html"
+}
+
   },
   {
     "title": "Episode 2 - AI in Films",
