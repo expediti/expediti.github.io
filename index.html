@@ -4,655 +4,244 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Xshiver - Premium Video Streaming</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #1a1a2e, #16213e);
-            color: #ffffff;
-            min-height: 100vh;
-        }
-
-        /* Navigation */
-        .navbar {
-            background: rgba(0, 0, 0, 0.9);
-            backdrop-filter: blur(10px);
-            position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 1000;
-            padding: 1rem 0;
-        }
-
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 2rem;
-        }
-
-        .logo {
-            font-size: 2rem;
-            font-weight: bold;
-            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-decoration: none;
-        }
-
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-        }
-
-        .nav-links a {
-            color: #ffffff;
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .nav-links a:hover {
-            color: #4ecdc4;
-        }
-
-        .search-container {
-            display: flex;
-            gap: 0.5rem;
-        }
-
-        .search-box {
-            padding: 0.5rem 1rem;
-            border: none;
-            border-radius: 25px;
-            background: rgba(255, 255, 255, 0.1);
-            color: #ffffff;
-            outline: none;
-            min-width: 200px;
-        }
-
-        .search-box::placeholder {
-            color: rgba(255, 255, 255, 0.7);
-        }
-
-        .search-btn {
-            padding: 0.5rem 1rem;
-            border: none;
-            border-radius: 25px;
-            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
-            color: #ffffff;
-            cursor: pointer;
-            transition: transform 0.3s ease;
-        }
-
-        .search-btn:hover {
-            transform: scale(1.05);
-        }
-
-        /* Main Content */
-        .main-content {
-            margin-top: 80px;
-            padding: 2rem 0;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-
-        /* Hero Section */
-        .hero {
-            text-align: center;
-            padding: 4rem 0;
-            background: linear-gradient(135deg, rgba(255, 107, 107, 0.1), rgba(78, 205, 196, 0.1));
-            border-radius: 20px;
-            margin-bottom: 3rem;
-        }
-
-        .hero h1 {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .hero p {
-            font-size: 1.2rem;
-            opacity: 0.8;
-        }
-
-        /* Categories */
-        .categories {
-            display: flex;
-            gap: 1rem;
-            margin-bottom: 3rem;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-
-        .category-btn {
-            padding: 0.75rem 1.5rem;
-            border: none;
-            border-radius: 25px;
-            background: rgba(255, 255, 255, 0.1);
-            color: #ffffff;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(5px);
-        }
-
-        .category-btn:hover,
-        .category-btn.active {
-            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-        }
-
-        /* Sections */
-        .section-title {
-            font-size: 1.5rem;
-            margin-bottom: 2rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .section-title i {
-            color: #4ecdc4;
-        }
-
-        /* Video Grid */
-        .video-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-bottom: 3rem;
-        }
-
-        .video-card {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 15px;
-            overflow: hidden;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .video-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-            background: rgba(255, 255, 255, 0.1);
-        }
-
-        .video-thumbnail {
-            width: 100%;
-            height: 200px;
-            background: linear-gradient(135deg, #ff6b6b, #4ecdc4);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-        }
-
-        .video-thumbnail i {
-            font-size: 3rem;
-            color: rgba(255, 255, 255, 0.8);
-        }
-
-        .video-duration {
-            position: absolute;
-            bottom: 10px;
-            right: 10px;
-            background: rgba(0, 0, 0, 0.8);
-            color: #ffffff;
-            padding: 0.25rem 0.5rem;
-            border-radius: 5px;
-            font-size: 0.8rem;
-        }
-
-        .video-info {
-            padding: 1rem;
-        }
-
-        .video-title {
-            font-size: 1rem;
-            margin-bottom: 0.5rem;
-            color: #ffffff;
-            line-height: 1.4;
-        }
-
-        .video-meta {
-            color: rgba(255, 255, 255, 0.7);
-            font-size: 0.9rem;
-        }
-
-        /* Video Player */
-        .video-player-container {
-            display: none;
-        }
-
-        .back-btn {
-            background: rgba(255, 255, 255, 0.1);
-            border: none;
-            color: #ffffff;
-            padding: 0.75rem 1.5rem;
-            border-radius: 25px;
-            cursor: pointer;
-            margin-bottom: 2rem;
-            transition: all 0.3s ease;
-        }
-
-        .back-btn:hover {
-            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
-            transform: translateY(-2px);
-        }
-
-        .player-wrapper {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 15px;
-            padding: 2rem;
-            margin-bottom: 3rem;
-            backdrop-filter: blur(10px);
-        }
-
-        .video-player {
-            width: 100%;
-            height: 400px;
-            background: linear-gradient(135deg, #1a1a2e, #16213e);
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 1rem;
-            border: 2px solid rgba(78, 205, 196, 0.3);
-        }
-
-        .video-player i {
-            font-size: 4rem;
-            color: #4ecdc4;
-            cursor: pointer;
-            transition: transform 0.3s ease;
-        }
-
-        .video-player i:hover {
-            transform: scale(1.2);
-        }
-
-        .player-title {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: #ffffff;
-        }
-
-        .player-meta {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            color: rgba(255, 255, 255, 0.7);
-        }
-
-        .player-meta button {
-            margin-left: 1rem;
-        }
-
-        /* Loading */
-        .loading {
-            display: none;
-            text-align: center;
-            padding: 2rem;
-        }
-
-        .spinner {
-            width: 40px;
-            height: 40px;
-            border: 4px solid rgba(255, 255, 255, 0.3);
-            border-top: 4px solid #4ecdc4;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin: 0 auto 1rem;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .nav-container {
-                flex-direction: column;
-                gap: 1rem;
-            }
-
-            .nav-links {
-                gap: 1rem;
-            }
-
-            .search-box {
-                min-width: 150px;
-            }
-
-            .hero h1 {
-                font-size: 2rem;
-            }
-
-            .video-grid {
-                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-                gap: 1rem;
-            }
-
-            .categories {
-                gap: 0.5rem;
-            }
-
-            .category-btn {
-                padding: 0.5rem 1rem;
-                font-size: 0.9rem;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <!-- Navigation -->
     <nav class="navbar">
         <div class="nav-container">
-            <a href="#" class="logo">Xshiver</a>
-            <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#trending">Trending</a></li>
-                <li><a href="#categories">Categories</a></li>
-                <li><a href="#about">About</a></li>
-            </ul>
-            <div class="search-container">
-                <input type="text" class="search-box" placeholder="Search videos...">
-                <button class="search-btn"><i class="fas fa-search"></i></button>
+            <div class="nav-logo">
+                <h1>Xshiver</h1>
+            </div>
+            <div class="nav-menu">
+                <a href="#home" class="nav-link">Home</a>
+                <a href="#trending" class="nav-link">Trending</a>
+                <a href="#categories" class="nav-link">Categories</a>
+                <a href="#about" class="nav-link">About</a>
             </div>
         </div>
     </nav>
 
-    <!-- Main Content -->
-    <main class="main-content">
-        <div class="container">
-            <!-- Homepage -->
-            <div id="homepage">
-                <!-- Hero Section -->
-                <section class="hero">
-                    <h1>Welcome to Xshiver</h1>
-                    <p>Discover amazing videos from creators around the world</p>
-                </section>
-
-                <!-- Categories -->
-                <div class="categories">
-                    <button class="category-btn active" data-category="all">All</button>
-                    <button class="category-btn" data-category="trending">Trending</button>
-                    <button class="category-btn" data-category="music">Music</button>
-                    <button class="category-btn" data-category="gaming">Gaming</button>
-                    <button class="category-btn" data-category="tech">Technology</button>
-                    <button class="category-btn" data-category="entertainment">Entertainment</button>
-                    <button class="category-btn" data-category="education">Education</button>
-                </div>
-
-                <!-- Trending Videos -->
-                <section id="trending">
-                    <h2 class="section-title">
-                        <i class="fas fa-fire"></i>
-                        Trending Now
-                    </h2>
-                    <div class="video-grid" id="trending-grid">
-                        <!-- Videos will be dynamically loaded here -->
-                    </div>
-                </section>
-
-                <!-- Recent Videos -->
-                <section>
-                    <h2 class="section-title">
-                        <i class="fas fa-clock"></i>
-                        Recently Added
-                    </h2>
-                    <div class="video-grid" id="recent-grid">
-                        <!-- Videos will be dynamically loaded here -->
-                    </div>
-                </section>
-            </div>
-
-            <!-- Video Player Page -->
-            <div id="video-player-page" class="video-player-container">
-                <button class="back-btn" onclick="showHomepage()">
-                    <i class="fas fa-arrow-left"></i>
-                    Back to Home
-                </button>
-                
-                <div class="player-wrapper">
-                    <div class="video-player">
-                        <i class="fas fa-play"></i>
-                    </div>
-                    <h1 class="player-title" id="current-video-title">Video Title</h1>
-                    <div class="player-meta">
-                        <div>
-                            <span id="current-video-views">1.2M views</span> • 
-                            <span id="current-video-date">2 days ago</span>
-                        </div>
-                        <div>
-                            <button class="category-btn">
-                                <i class="fas fa-thumbs-up"></i> Like
-                            </button>
-                            <button class="category-btn">
-                                <i class="fas fa-share"></i> Share
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Suggestions -->
-                <div class="suggestions">
-                    <h2 class="section-title">
-                        <i class="fas fa-lightbulb"></i>
-                        Suggested Videos
-                    </h2>
-                    <div class="video-grid" id="suggestions-grid">
-                        <!-- Suggestions will be loaded here -->
-                    </div>
-                </div>
-            </div>
-
-            <!-- Loading -->
-            <div class="loading" id="loading">
-                <div class="spinner"></div>
-                <p>Loading more videos...</p>
-            </div>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title">Welcome to Xshiver</h1>
+            <p class="hero-subtitle">Discover premium content and immersive streaming experience</p>
+            <button class="cta-button">Start Watching</button>
         </div>
-    </main>
+        <div class="hero-gradient"></div>
+    </section>
 
-    <script>
-        // Sample video data
-        const sampleVideos = [
-            {
-                id: 1,
-                title: "Amazing Nature Documentary",
-                views: "2.1M",
-                date: "3 days ago",
-                duration: "15:32",
-                category: "education"
-            },
-            {
-                id: 2,
-                title: "Epic Gaming Moments Compilation",
-                views: "890K",
-                date: "1 day ago",
-                duration: "8:45",
-                category: "gaming"
-            },
-            {
-                id: 3,
-                title: "Latest Tech Reviews 2024",
-                views: "1.5M",
-                date: "5 days ago",
-                duration: "12:18",
-                category: "tech"
-            },
-            {
-                id: 4,
-                title: "Top Music Hits This Week",
-                views: "3.2M",
-                date: "2 days ago",
-                duration: "25:07",
-                category: "music"
-            },
-            {
-                id: 5,
-                title: "Comedy Sketch Collection",
-                views: "756K",
-                date: "4 days ago",
-                duration: "18:22",
-                category: "entertainment"
-            },
-            {
-                id: 6,
-                title: "Trending Dance Challenge",
-                views: "4.8M",
-                date: "1 day ago",
-                duration: "3:45",
-                category: "trending"
-            },
-            {
-                id: 7,
-                title: "Cooking Masterclass",
-                views: "1.1M",
-                date: "6 days ago",
-                duration: "22:15",
-                category: "education"
-            },
-            {
-                id: 8,
-                title: "Sports Highlights",
-                views: "2.7M",
-                date: "2 days ago",
-                duration: "14:38",
-                category: "entertainment"
-            }
-        ];
-
-        // DOM elements
-        const homePage = document.getElementById('homepage');
-        const videoPlayerPage = document.getElementById('video-player-page');
-        const trendingGrid = document.getElementById('trending-grid');
-        const recentGrid = document.getElementById('recent-grid');
-        const suggestionsGrid = document.getElementById('suggestions-grid');
-        const categoryBtns = document.querySelectorAll('.category-btn');
-        const searchBox = document.querySelector('.search-box');
-        const searchBtn = document.querySelector('.search-btn');
-        const loading = document.getElementById('loading');
-
-        // Current state
-        let currentCategory = 'all';
-        let currentVideo = null;
-
-        // Initialize the app
-        function init() {
-            loadVideos();
-            setupEventListeners();
-        }
-
-        // Setup event listeners
-        function setupEventListeners() {
-            // Category buttons
-            categoryBtns.forEach(btn => {
-                btn.addEventListener('click', (e) => {
-                    const category = e.target.dataset.category;
-                    if (category) {
-                        selectCategory(category);
-                    }
-                });
-            });
-
-            // Search functionality
-            searchBtn.addEventListener('click', performSearch);
-            searchBox.addEventListener('keypress', (e) => {
-                if (e.key === 'Enter') {
-                    performSearch();
-                }
-            });
-
-            // Navigation links
-            document.querySelectorAll('.nav-links a').forEach(link => {
-                link.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    const target = e.target.getAttribute('href').substring(1);
-                    if (target === 'home') {
-                        showHomepage();
-                    }
-                });
-            });
-        }
-
-        // Create video card HTML
-        function createVideoCard(video) {
-            return `
-                <div class="video-card" onclick="playVideo(${video.id})">
+    <!-- Featured Videos Section -->
+    <section class="section" id="home">
+        <div class="container">
+            <h2 class="section-title">Featured Videos</h2>
+            <div class="video-grid">
+                <div class="video-card" onclick="openVideo('video1.html')">
                     <div class="video-thumbnail">
-                        <i class="fas fa-play"></i>
-                        <div class="video-duration">${video.duration}</div>
+                        <div class="play-overlay">
+                            <div class="play-button">▶</div>
+                        </div>
+                        <div class="video-duration">10:24</div>
                     </div>
                     <div class="video-info">
-                        <h3 class="video-title">${video.title}</h3>
-                        <div class="video-meta">
-                            ${video.views} views • ${video.date}
-                        </div>
+                        <h3 class="video-title">Amazing Nature Documentary</h3>
+                        <p class="video-meta">2.1M views • 3 days ago</p>
                     </div>
                 </div>
-            `;
+
+                <div class="video-card" onclick="openVideo('video2.html')">
+                    <div class="video-thumbnail">
+                        <div class="play-overlay">
+                            <div class="play-button">▶</div>
+                        </div>
+                        <div class="video-duration">15:42</div>
+                    </div>
+                    <div class="video-info">
+                        <h3 class="video-title">Tech Innovation Spotlight</h3>
+                        <p class="video-meta">890K views • 1 week ago</p>
+                    </div>
+                </div>
+
+                <div class="video-card" onclick="openVideo('video3.html')">
+                    <div class="video-thumbnail">
+                        <div class="play-overlay">
+                            <div class="play-button">▶</div>
+                        </div>
+                        <div class="video-duration">8:17</div>
+                    </div>
+                    <div class="video-info">
+                        <h3 class="video-title">Creative Arts Masterclass</h3>
+                        <p class="video-meta">1.5M views • 5 days ago</p>
+                    </div>
+                </div>
+
+                <div class="video-card" onclick="openVideo('video4.html')">
+                    <div class="video-thumbnail">
+                        <div class="play-overlay">
+                            <div class="play-button">▶</div>
+                        </div>
+                        <div class="video-duration">12:33</div>
+                    </div>
+                    <div class="video-info">
+                        <h3 class="video-title">Adventure Travel Guide</h3>
+                        <p class="video-meta">3.2M views • 2 days ago</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trending Section -->
+    <section class="section" id="trending">
+        <div class="container">
+            <h2 class="section-title">Trending Now</h2>
+            <div class="video-grid">
+                <div class="video-card" onclick="openVideo('video1.html')">
+                    <div class="video-thumbnail trending">
+                        <div class="play-overlay">
+                            <div class="play-button">▶</div>
+                        </div>
+                        <div class="trending-badge">#1</div>
+                        <div class="video-duration">10:24</div>
+                    </div>
+                    <div class="video-info">
+                        <h3 class="video-title">Top Trending Content</h3>
+                        <p class="video-meta">5.7M views • 1 day ago</p>
+                    </div>
+                </div>
+
+                <div class="video-card" onclick="openVideo('video2.html')">
+                    <div class="video-thumbnail trending">
+                        <div class="play-overlay">
+                            <div class="play-button">▶</div>
+                        </div>
+                        <div class="trending-badge">#2</div>
+                        <div class="video-duration">15:42</div>
+                    </div>
+                    <div class="video-info">
+                        <h3 class="video-title">Viral Sensation</h3>
+                        <p class="video-meta">4.2M views • 2 days ago</p>
+                    </div>
+                </div>
+
+                <div class="video-card" onclick="openVideo('video3.html')">
+                    <div class="video-thumbnail trending">
+                        <div class="play-overlay">
+                            <div class="play-button">▶</div>
+                        </div>
+                        <div class="trending-badge">#3</div>
+                        <div class="video-duration">8:17</div>
+                    </div>
+                    <div class="video-info">
+                        <h3 class="video-title">Must Watch Series</h3>
+                        <p class="video-meta">3.8M views • 3 days ago</p>
+                    </div>
+                </div>
+
+                <div class="video-card" onclick="openVideo('video4.html')">
+                    <div class="video-thumbnail trending">
+                        <div class="play-overlay">
+                            <div class="play-button">▶</div>
+                        </div>
+                        <div class="trending-badge">#4</div>
+                        <div class="video-duration">12:33</div>
+                    </div>
+                    <div class="video-info">
+                        <h3 class="video-title">Popular Choice</h3>
+                        <p class="video-meta">2.9M views • 4 days ago</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="section" id="categories">
+        <div class="container">
+            <h2 class="section-title">Browse Categories</h2>
+            <div class="category-grid">
+                <div class="category-card">
+                    <div class="category-icon">🎬</div>
+                    <h3>Entertainment</h3>
+                    <p>Movies, shows, and series</p>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon">🔬</div>
+                    <h3>Education</h3>
+                    <p>Learning and tutorials</p>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon">🎵</div>
+                    <h3>Music</h3>
+                    <p>Songs and performances</p>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon">🎮</div>
+                    <h3>Gaming</h3>
+                    <p>Gameplay and reviews</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Xshiver</h3>
+                    <p>Premium streaming experience for everyone</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <a href="#home">Home</a>
+                    <a href="#trending">Trending</a>
+                    <a href="#categories">Categories</a>
+                </div>
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <a href="#">Help Center</a>
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Xshiver. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function openVideo(videoPage) {
+            window.location.href = videoPage;
         }
 
-        // Load videos into grids
-        function loadVideos() {
-            showLoading();
-            
-            setTimeout(() => {
-                const filteredVideos = currentCategory === 'all' 
-                    ? sampleVideos 
-                    : sampleVideos.filter(video => video.category === currentCategory);
-
-                // Load trending videos (first 4)
-                const trendingVideos = filteredVideos.slice(0, 4);
-                trendingGrid.innerHTML = trendingVideos.map(createVideoCard).join('');
-
-                // Load recent videos (remaining or repeat if not enough)
-                const recentVideos = filteredVideos.slice(4);
-                if (recentVideos.length === 0) {
-                    recentGrid.innerHTML = trendingVideos.map(createVideoCard).join('');
-                } else {
-                    recentGrid.innerHTML = recentVideos.map(createVideoCard).join('');
-                }
-
-                hideLoading();
-            }, 500);
-        }
-
-        // Select category
-        function selectCategory(category) {
-            currentCategory = category;
-            
-            // Update active button
-            categoryBtns.forEach(btn => {
-                btn.classList.remove('active');
-                if (btn.dataset.category === category) {
-                    btn.classList.add('active');
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
                 }
             });
+        });
 
-            loadVideos();
-        }
-
-        // Play video
-  
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 100) {
+                navbar.style.background = 'rgba(15, 15, 23, 0.95)';
+                navbar.style.backdropFilter = 'blur(10px)';
+            } else {
+                navbar.style.background = 'rgba(15, 15, 23, 0.9)';
+                navbar.style.backdropFilter = 'blur(5px)';
+            }
+        });
+    </script>
+</body>
+            </html>
