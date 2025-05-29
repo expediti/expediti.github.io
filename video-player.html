@@ -115,7 +115,7 @@
         <div class="main-video-player">
             <div class="video-wrapper">
                 <div class="video-placeholder" id="main-video">
-                    <!-- Video will be loaded here dynamically -->
+                    Video Loading...
                 </div>
             </div>
             <div class="video-info">
@@ -127,7 +127,7 @@
         
         <div class="video-suggestions">
             <h2>More Videos</h2>
-            <div class="suggestion-card" onclick="loadVideo('video1', 'Amazing Nature Documentary', '2.1M views • 3 days ago', 'Explore the wonders of nature in this breathtaking documentary.', '//mxdrop.to/e/z1k0dmdgaon99m')">
+            <div class="suggestion-card" onclick="loadVideo('video1', 'Amazing Nature Documentary', '2.1M views • 3 days ago', 'Explore the wonders of nature in this breathtaking documentary.')">
                 <div class="suggestion-thumbnail">
                     <div class="play-overlay">
                         <div class="play-button">▶</div>
@@ -139,7 +139,7 @@
                 </div>
             </div>
             
-            <div class="suggestion-card" onclick="loadVideo('video2', 'Tech Innovation Spotlight', '890K views • 1 week ago', 'The latest in tech innovations that are changing the world.', '//mxdrop.to/e/anothervideocode1')">
+            <div class="suggestion-card" onclick="loadVideo('video2', 'Tech Innovation Spotlight', '890K views • 1 week ago', 'The latest in tech innovations that are changing the world.')">
                 <div class="suggestion-thumbnail">
                     <div class="play-overlay">
                         <div class="play-button">▶</div>
@@ -151,7 +151,7 @@
                 </div>
             </div>
             
-            <div class="suggestion-card" onclick="loadVideo('video3', 'Creative Arts Masterclass', '1.5M views • 5 days ago', 'Learn from the masters of creative arts in this exclusive series.', '//mxdrop.to/e/anothervideocode2')">
+            <div class="suggestion-card" onclick="loadVideo('video3', 'Creative Arts Masterclass', '1.5M views • 5 days ago', 'Learn from the masters of creative arts in this exclusive series.')">
                 <div class="suggestion-thumbnail">
                     <div class="play-overlay">
                         <div class="play-button">▶</div>
@@ -163,7 +163,7 @@
                 </div>
             </div>
             
-            <div class="suggestion-card" onclick="loadVideo('video4', 'Adventure Travel Guide', '3.2M views • 2 days ago', 'The ultimate guide to adventure travel around the globe.', '//mxdrop.to/e/anothervideocode3')">
+            <div class="suggestion-card" onclick="loadVideo('video4', 'Adventure Travel Guide', '3.2M views • 2 days ago', 'The ultimate guide to adventure travel around the globe.')">
                 <div class="suggestion-thumbnail">
                     <div class="play-overlay">
                         <div class="play-button">▶</div>
@@ -182,7 +182,7 @@
         <div class="container">
             <h2 class="section-title">You May Also Like</h2>
             <div class="video-grid">
-                <div class="video-card" onclick="loadVideo('video5', 'Top Trending Content', '5.7M views • 1 day ago', 'Check out what everyone is watching right now.', '//mxdrop.to/e/anothervideocode4')">
+                <div class="video-card" onclick="loadVideo('video5', 'Top Trending Content', '5.7M views • 1 day ago', 'Check out what everyone is watching right now.')">
                     <div class="video-thumbnail trending">
                         <div class="play-overlay">
                             <div class="play-button">▶</div>
@@ -196,7 +196,7 @@
                     </div>
                 </div>
 
-                <div class="video-card" onclick="loadVideo('video6', 'Viral Sensation', '4.2M views • 2 days ago', 'The video that took the internet by storm.', '//mxdrop.to/e/anothervideocode5')">
+                <div class="video-card" onclick="loadVideo('video6', 'Viral Sensation', '4.2M views • 2 days ago', 'The video that took the internet by storm.')">
                     <div class="video-thumbnail trending">
                         <div class="play-overlay">
                             <div class="play-button">▶</div>
@@ -210,7 +210,7 @@
                     </div>
                 </div>
 
-                <div class="video-card" onclick="loadVideo('video7', 'Must Watch Series', '3.8M views • 3 days ago', 'The series everyone is talking about.', '//mxdrop.to/e/anothervideocode6')">
+                <div class="video-card" onclick="loadVideo('video7', 'Must Watch Series', '3.8M views • 3 days ago', 'The series everyone is talking about.')">
                     <div class="video-thumbnail trending">
                         <div class="play-overlay">
                             <div class="play-button">▶</div>
@@ -224,7 +224,7 @@
                     </div>
                 </div>
 
-                <div class="video-card" onclick="loadVideo('video8', 'Popular Choice', '2.9M views • 4 days ago', 'Selected by our community as a must-watch.', '//mxdrop.to/e/anothervideocode7')">
+                <div class="video-card" onclick="loadVideo('video8', 'Popular Choice', '2.9M views • 4 days ago', 'Selected by our community as a must-watch.')">
                     <div class="video-thumbnail trending">
                         <div class="play-overlay">
                             <div class="play-button">▶</div>
@@ -272,57 +272,50 @@
         // Video data
         const videos = {
             'video1': {
-                title: 'Amazing Nature Documentary',
+                title: 'Indian Girl',
                 meta: '2.1M views • 3 days ago',
-                description: 'Explore the wonders of nature in this breathtaking documentary.',
-                embedCode: '<iframe width="640" height="480" src="//mxdrop.to/e/z1k0dmdgaon99m" scrolling="no" frameborder="0" allowfullscreen="true"></iframe>'
+                description: 'Explore the wonders of nature in this breathtaking documentary.'
             },
             'video2': {
                 title: 'Tech Innovation Spotlight',
                 meta: '890K views • 1 week ago',
-                description: 'The latest in tech innovations that are changing the world.',
-                embedCode: '<iframe width="640" height="480" src="//mxdrop.to/e/anothervideocode1" scrolling="no" frameborder="0" allowfullscreen="true"></iframe>'
+                description: 'The latest in tech innovations that are changing the world.'
+                embedcode: '<iframe width="560" height="315" src="https://www.youtube.com/embed/ztwx7xFKuRQ?si=dSkF6gJk4SsOSvK7" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>'
             },
             'video3': {
                 title: 'Creative Arts Masterclass',
                 meta: '1.5M views • 5 days ago',
-                description: 'Learn from the masters of creative arts in this exclusive series.',
-                embedCode: '<iframe width="640" height="480" src="//mxdrop.to/e/anothervideocode2" scrolling="no" frameborder="0" allowfullscreen="true"></iframe>'
+                description: 'Learn from the masters of creative arts in this exclusive series.'
             },
             'video4': {
                 title: 'Adventure Travel Guide',
                 meta: '3.2M views • 2 days ago',
-                description: 'The ultimate guide to adventure travel around the globe.',
-                embedCode: '<iframe width="640" height="480" src="//mxdrop.to/e/anothervideocode3" scrolling="no" frameborder="0" allowfullscreen="true"></iframe>'
+                description: 'The ultimate guide to adventure travel around the globe.'
             },
             'video5': {
                 title: 'Top Trending Content',
                 meta: '5.7M views • 1 day ago',
-                description: 'Check out what everyone is watching right now.',
-                embedCode: '<iframe width="640" height="480" src="//mxdrop.to/e/anothervideocode4" scrolling="no" frameborder="0" allowfullscreen="true"></iframe>'
+                description: 'Check out what everyone is watching right now.'
             },
             'video6': {
                 title: 'Viral Sensation',
                 meta: '4.2M views • 2 days ago',
-                description: 'The video that took the internet by storm.',
-                embedCode: '<iframe width="640" height="480" src="//mxdrop.to/e/anothervideocode5" scrolling="no" frameborder="0" allowfullscreen="true"></iframe>'
+                description: 'The video that took the internet by storm.'
             },
             'video7': {
                 title: 'Must Watch Series',
                 meta: '3.8M views • 3 days ago',
-                description: 'The series everyone is talking about.',
-                embedCode: '<iframe width="640" height="480" src="//mxdrop.to/e/anothervideocode6" scrolling="no" frameborder="0" allowfullscreen="true"></iframe>'
+                description: 'The series everyone is talking about.'
             },
             'video8': {
                 title: 'Popular Choice',
                 meta: '2.9M views • 4 days ago',
-                description: 'Selected by our community as a must-watch.',
-                embedCode: '<iframe width="640" height="480" src="//mxdrop.to/e/anothervideocode7" scrolling="no" frameborder="0" allowfullscreen="true"></iframe>'
+                description: 'Selected by our community as a must-watch.'
             }
         };
 
         // Function to load a video
-        function loadVideo(videoId, title, meta, description, embedSrc) {
+        function loadVideo(videoId, title, meta, description) {
             // Update the URL without reloading the page
             window.history.pushState(null, null, '?v=' + videoId);
             
@@ -331,9 +324,9 @@
             document.getElementById('video-meta').textContent = meta;
             document.getElementById('video-description').textContent = description;
             
-            // Load the embedded video
+            // In a real implementation, you would load the actual video here
             const videoPlaceholder = document.getElementById('main-video');
-            videoPlaceholder.innerHTML = videos[videoId].embedCode;
+            videoPlaceholder.innerHTML = `Now Playing: <strong>${title}</strong>`;
             
             // Scroll to the top of the video player
             window.scrollTo({
@@ -352,8 +345,7 @@
                     videoId,
                     videos[videoId].title,
                     videos[videoId].meta,
-                    videos[videoId].description,
-                    videos[videoId].embedCode
+                    videos[videoId].description
                 );
             } else {
                 // Default video if none specified
@@ -361,8 +353,7 @@
                     'video1',
                     videos['video1'].title,
                     videos['video1'].meta,
-                    videos['video1'].description,
-                    videos['video1'].embedCode
+                    videos['video1'].description
                 );
             }
         };
@@ -380,4 +371,4 @@
         });
     </script>
 </body>
-</html>
+              </html>
