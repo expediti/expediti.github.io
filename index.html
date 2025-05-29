@@ -4,47 +4,7 @@
     <meta charset="UTF-8">  
     <meta name="viewport" content="width=device-width, initial-scale=1.0">  
     <title>Xshiver - Premium Video Streaming</title>  
-    <link rel="stylesheet" href="style.css">  
-    <style>
-        .video-player-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-            padding: 20px;
-        }
-        .main-video-player {
-            flex: 2;
-            min-width: 300px;
-        }
-        .video-suggestions {
-            flex: 1;
-            min-width: 250px;
-        }
-        .suggestion-card {
-            display: flex;
-            margin-bottom: 15px;
-            cursor: pointer;
-        }
-        .suggestion-thumbnail {
-            width: 120px;
-            height: 70px;
-            position: relative;
-            margin-right: 10px;
-        }
-        .suggestion-info {
-            flex: 1;
-        }
-        .video-placeholder {
-            width: 100%;
-            aspect-ratio: 16/9;
-            background-color: #222;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #fff;
-            font-size: 18px;
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">  
 </head>  
 <body>  
     <!-- Navigation -->  
@@ -54,146 +14,176 @@
                 <h1>Xshiver</h1>  
             </div>  
             <div class="nav-menu">  
-                <a href="index.html" class="nav-link">Home</a>  
-                <a href="index.html#trending" class="nav-link">Trending</a>  
-                <a href="index.html#categories" class="nav-link">Categories</a>  
-                <a href="index.html#about" class="nav-link">About</a>  
+                <a href="#home" class="nav-link">Home</a>  
+                <a href="#trending" class="nav-link">Trending</a>  
+                <a href="#categories" class="nav-link">Categories</a>  
+                <a href="#about" class="nav-link">About</a>  
             </div>  
         </div>  
     </nav>  
 
-    <!-- Video Player Section -->
-    <section class="section">  
+    <!-- Hero Section -->  
+    <section class="hero">  
+        <div class="hero-content">  
+            <h1 class="hero-title">Welcome to Xshiver</h1>  
+            <p class="hero-subtitle">Discover premium content and immersive streaming experience</p>  
+            <button class="cta-button">Start Watching</button>  
+        </div>  
+        <div class="hero-gradient"></div>  
+    </section>  
+
+    <!-- Featured Videos Section -->  
+    <section class="section" id="home">  
         <div class="container">  
-            <div class="video-player-container">
-                <div class="main-video-player">
-                    <div class="video-placeholder" id="main-video">
-                        [Selected Video Playing Here]
-                    </div>
-                    <div class="video-info">
-                        <h2 id="video-title">Video Title</h2>
-                        <p id="video-description">Video description will appear here. This is where you'll see details about the currently playing video.</p>
-                        <p id="video-meta">1.2M views • 5 days ago</p>
-                    </div>
-                </div>
-                
-                <div class="video-suggestions">
-                    <h3>More Videos</h3>
-                    <div class="suggestion-card" onclick="loadVideo('Amazing Nature Documentary', '2.1M views • 3 days ago', 'Explore the wonders of nature in this breathtaking documentary.')">
-                        <div class="suggestion-thumbnail">
-                            <div class="play-overlay">
-                                <div class="play-button">▶</div>
-                            </div>
-                        </div>
-                        <div class="suggestion-info">
-                            <h4>Amazing Nature Documentary</h4>
-                            <p class="video-meta">2.1M views • 3 days ago</p>
-                        </div>
-                    </div>
-                    
-                    <div class="suggestion-card" onclick="loadVideo('Tech Innovation Spotlight', '890K views • 1 week ago', 'The latest in tech innovations that are changing the world.')">
-                        <div class="suggestion-thumbnail">
-                            <div class="play-overlay">
-                                <div class="play-button">▶</div>
-                            </div>
-                        </div>
-                        <div class="suggestion-info">
-                            <h4>Tech Innovation Spotlight</h4>
-                            <p class="video-meta">890K views • 1 week ago</p>
-                        </div>
-                    </div>
-                    
-                    <div class="suggestion-card" onclick="loadVideo('Creative Arts Masterclass', '1.5M views • 5 days ago', 'Learn from the masters of creative arts in this exclusive series.')">
-                        <div class="suggestion-thumbnail">
-                            <div class="play-overlay">
-                                <div class="play-button">▶</div>
-                            </div>
-                        </div>
-                        <div class="suggestion-info">
-                            <h4>Creative Arts Masterclass</h4>
-                            <p class="video-meta">1.5M views • 5 days ago</p>
-                        </div>
-                    </div>
-                    
-                    <div class="suggestion-card" onclick="loadVideo('Adventure Travel Guide', '3.2M views • 2 days ago', 'The ultimate guide to adventure travel around the globe.')">
-                        <div class="suggestion-thumbnail">
-                            <div class="play-overlay">
-                                <div class="play-button">▶</div>
-                            </div>
-                        </div>
-                        <div class="suggestion-info">
-                            <h4>Adventure Travel Guide</h4>
-                            <p class="video-meta">3.2M views • 2 days ago</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+            <h2 class="section-title">Featured Videos</h2>  
+            <div class="video-grid">  
+                <div class="video-card" onclick="openVideo('video1')">  
+                    <div class="video-thumbnail">  
+                        <div class="play-overlay">  
+                            <div class="play-button">▶</div>  
+                        </div>  
+                        <div class="video-duration">10:24</div>  
+                    </div>  
+                    <div class="video-info">  
+                        <h3 class="video-title">Amazing Nature Documentary</h3>  
+                        <p class="video-meta">2.1M views • 3 days ago</p>  
+                    </div>  
+                </div>  
 
-    <!-- More Suggestions Section -->
-    <section class="section">
-        <div class="container">
-            <h2 class="section-title">You May Also Like</h2>
-            <div class="video-grid">
-                <div class="video-card" onclick="loadVideo('Top Trending Content', '5.7M views • 1 day ago', 'Check out what everyone is watching right now.')">
-                    <div class="video-thumbnail trending">
-                        <div class="play-overlay">
-                            <div class="play-button">▶</div>
-                        </div>
-                        <div class="trending-badge">#1</div>
-                        <div class="video-duration">10:24</div>
-                    </div>
-                    <div class="video-info">
-                        <h3 class="video-title">Top Trending Content</h3>
-                        <p class="video-meta">5.7M views • 1 day ago</p>
-                    </div>
-                </div>
+                <div class="video-card" onclick="openVideo('video2')">  
+                    <div class="video-thumbnail">  
+                        <div class="play-overlay">  
+                            <div class="play-button">▶</div>  
+                        </div>  
+                        <div class="video-duration">15:42</div>  
+                    </div>  
+                    <div class="video-info">  
+                        <h3 class="video-title">Tech Innovation Spotlight</h3>  
+                        <p class="video-meta">890K views • 1 week ago</p>  
+                    </div>  
+                </div>  
 
-                <div class="video-card" onclick="loadVideo('Viral Sensation', '4.2M views • 2 days ago', 'The video that took the internet by storm.')">
-                    <div class="video-thumbnail trending">
-                        <div class="play-overlay">
-                            <div class="play-button">▶</div>
-                        </div>
-                        <div class="trending-badge">#2</div>
-                        <div class="video-duration">15:42</div>
-                    </div>
-                    <div class="video-info">
-                        <h3 class="video-title">Viral Sensation</h3>
-                        <p class="video-meta">4.2M views • 2 days ago</p>
-                    </div>
-                </div>
+                <div class="video-card" onclick="openVideo('video3')">  
+                    <div class="video-thumbnail">  
+                        <div class="play-overlay">  
+                            <div class="play-button">▶</div>  
+                        </div>  
+                        <div class="video-duration">8:17</div>  
+                    </div>  
+                    <div class="video-info">  
+                        <h3 class="video-title">Creative Arts Masterclass</h3>  
+                        <p class="video-meta">1.5M views • 5 days ago</p>  
+                    </div>  
+                </div>  
 
-                <div class="video-card" onclick="loadVideo('Must Watch Series', '3.8M views • 3 days ago', 'The series everyone is talking about.')">
-                    <div class="video-thumbnail trending">
-                        <div class="play-overlay">
-                            <div class="play-button">▶</div>
-                        </div>
-                        <div class="trending-badge">#3</div>
-                        <div class="video-duration">8:17</div>
-                    </div>
-                    <div class="video-info">
-                        <h3 class="video-title">Must Watch Series</h3>
-                        <p class="video-meta">3.8M views • 3 days ago</p>
-                    </div>
-                </div>
+                <div class="video-card" onclick="openVideo('video4')">  
+                    <div class="video-thumbnail">  
+                        <div class="play-overlay">  
+                            <div class="play-button">▶</div>  
+                        </div>  
+                        <div class="video-duration">12:33</div>  
+                    </div>  
+                    <div class="video-info">  
+                        <h3 class="video-title">Adventure Travel Guide</h3>  
+                        <p class="video-meta">3.2M views • 2 days ago</p>  
+                    </div>  
+                </div>  
+            </div>  
+        </div>  
+    </section>  
 
-                <div class="video-card" onclick="loadVideo('Popular Choice', '2.9M views • 4 days ago', 'Selected by our community as a must-watch.')">
-                    <div class="video-thumbnail trending">
-                        <div class="play-overlay">
-                            <div class="play-button">▶</div>
-                        </div>
-                        <div class="trending-badge">#4</div>
-                        <div class="video-duration">12:33</div>
-                    </div>
-                    <div class="video-info">
-                        <h3 class="video-title">Popular Choice</h3>
-                        <p class="video-meta">2.9M views • 4 days ago</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    <!-- Trending Section -->  
+    <section class="section" id="trending">  
+        <div class="container">  
+            <h2 class="section-title">Trending Now</h2>  
+            <div class="video-grid">  
+                <div class="video-card" onclick="openVideo('video5')">  
+                    <div class="video-thumbnail trending">  
+                        <div class="play-overlay">  
+                            <div class="play-button">▶</div>  
+                        </div>  
+                        <div class="trending-badge">#1</div>  
+                        <div class="video-duration">10:24</div>  
+                    </div>  
+                    <div class="video-info">  
+                        <h3 class="video-title">Top Trending Content</h3>  
+                        <p class="video-meta">5.7M views • 1 day ago</p>  
+                    </div>  
+                </div>  
+
+                <div class="video-card" onclick="openVideo('video6')">  
+                    <div class="video-thumbnail trending">  
+                        <div class="play-overlay">  
+                            <div class="play-button">▶</div>  
+                        </div>  
+                        <div class="trending-badge">#2</div>  
+                        <div class="video-duration">15:42</div>  
+                    </div>  
+                    <div class="video-info">  
+                        <h3 class="video-title">Viral Sensation</h3>  
+                        <p class="video-meta">4.2M views • 2 days ago</p>  
+                    </div>  
+                </div>  
+
+                <div class="video-card" onclick="openVideo('video7')">  
+                    <div class="video-thumbnail trending">  
+                        <div class="play-overlay">  
+                            <div class="play-button">▶</div>  
+                        </div>  
+                        <div class="trending-badge">#3</div>  
+                        <div class="video-duration">8:17</div>  
+                    </div>  
+                    <div class="video-info">  
+                        <h3 class="video-title">Must Watch Series</h3>  
+                        <p class="video-meta">3.8M views • 3 days ago</p>  
+                    </div>  
+                </div>  
+
+                <div class="video-card" onclick="openVideo('video8')">  
+                    <div class="video-thumbnail trending">  
+                        <div class="play-overlay">  
+                            <div class="play-button">▶</div>  
+                        </div>  
+                        <div class="trending-badge">#4</div>  
+                        <div class="video-duration">12:33</div>  
+                    </div>  
+                    <div class="video-info">  
+                        <h3 class="video-title">Popular Choice</h3>  
+                        <p class="video-meta">2.9M views • 4 days ago</p>  
+                    </div>  
+                </div>  
+            </div>  
+        </div>  
+    </section>  
+
+    <!-- Categories Section -->  
+    <section class="section" id="categories">  
+        <div class="container">  
+            <h2 class="section-title">Browse Categories</h2>  
+            <div class="category-grid">  
+                <div class="category-card">  
+                    <div class="category-icon">🎬</div>  
+                    <h3>Entertainment</h3>  
+                    <p>Movies, shows, and series</p>  
+                </div>  
+                <div class="category-card">  
+                    <div class="category-icon">🔬</div>  
+                    <h3>Education</h3>  
+                    <p>Learning and tutorials</p>  
+                </div>  
+                <div class="category-card">  
+                    <div class="category-icon">🎵</div>  
+                    <h3>Music</h3>  
+                    <p>Songs and performances</p>  
+                </div>  
+                <div class="category-card">  
+                    <div class="category-icon">🎮</div>  
+                    <h3>Gaming</h3>  
+                    <p>Gameplay and reviews</p>  
+                </div>  
+            </div>  
+        </div>  
+    </section>  
 
     <!-- Footer -->  
     <footer class="footer">  
@@ -205,9 +195,9 @@
                 </div>  
                 <div class="footer-section">  
                     <h4>Quick Links</h4>  
-                    <a href="index.html">Home</a>  
-                    <a href="index.html#trending">Trending</a>  
-                    <a href="index.html#categories">Categories</a>  
+                    <a href="#home">Home</a>  
+                    <a href="#trending">Trending</a>  
+                    <a href="#categories">Categories</a>  
                 </div>  
                 <div class="footer-section">  
                     <h4>Support</h4>  
@@ -223,62 +213,9 @@
     </footer>  
 
     <script>  
-        // Function to load a video into the player
-        function loadVideo(title, meta, description) {
-            document.getElementById('video-title').textContent = title;
-            document.getElementById('video-meta').textContent = meta;
-            document.getElementById('video-description').textContent = description;
-            
-            // In a real implementation, you would load the actual video player here
-            const videoPlaceholder = document.getElementById('main-video');
-            videoPlaceholder.innerHTML = `Now Playing: <strong>${title}</strong>`;
-            
-            // Scroll to the top of the video player
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        }
-
-        // Initialize with the first video
-        window.onload = function() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const videoId = urlParams.get('v');
-            
-            if (videoId) {
-                // Load the requested video based on the ID
-                // This is a simplified example - you would have actual video data
-                const videos = {
-                    'video1': {
-                        title: 'Amazing Nature Documentary',
-                        meta: '2.1M views • 3 days ago',
-                        description: 'Explore the wonders of nature in this breathtaking documentary.'
-                    },
-                    'video2': {
-                        title: 'Tech Innovation Spotlight',
-                        meta: '890K views • 1 week ago',
-                        description: 'The latest in tech innovations that are changing the world.'
-                    },
-                    'video3': {
-                        title: 'Creative Arts Masterclass',
-                        meta: '1.5M views • 5 days ago',
-                        description: 'Learn from the masters of creative arts in this exclusive series.'
-                    },
-                    'video4': {
-                        title: 'Adventure Travel Guide',
-                        meta: '3.2M views • 2 days ago',
-                        description: 'The ultimate guide to adventure travel around the globe.'
-                    }
-                };
-                
-                if (videos[videoId]) {
-                    loadVideo(videos[videoId].title, videos[videoId].meta, videos[videoId].description);
-                }
-            } else {
-                // Default video
-                loadVideo('Amazing Nature Documentary', '2.1M views • 3 days ago', 'Explore the wonders of nature in this breathtaking documentary.');
-            }
-        };
+        function openVideo(videoId) {  
+            window.location.href = 'video-player.html?v=' + videoId;  
+        }  
 
         // Smooth scrolling for navigation links  
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {  
@@ -305,6 +242,6 @@
                 navbar.style.backdropFilter = 'blur(5px)';  
             }  
         });  
-    </script>
+    </script>  
 </body>  
-                        </html>
+</html>
