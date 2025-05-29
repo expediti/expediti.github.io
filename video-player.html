@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xshiver - Video Player</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .video-player-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            padding: 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        .main-video-player {
+            flex: 2;
+            min-width: 300px;
+        }
+        .video-suggestions {
+            flex: 1;
+            min-width: 300px;
+        }
+        .video-wrapper {
+            width: 100%;
+            aspect-ratio: 16/9;
+            background-color: #000;
+            position: relative;
+        }
+        .video-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 18px;
+            background-color: #111;
+        }
+        .suggestion-card {
+            display: flex;
+            margin-bottom: 15px;
+            cursor: pointer;
+            background: rgba(255,255,255,0.05);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.2s;
+        }
+        .suggestion-card:hover {
+            transform: scale(1.02);
+        }
+        .suggestion-thumbnail {
+            width: 160px;
+            height: 90px;
+            position: relative;
+            background-color: #222;
+        }
+        .suggestion-info {
+            flex: 1;
+            padding: 10px;
+        }
+        .suggestion-title {
+            font-size: 14px;
+            margin-bottom: 5px;
+            color: #fff;
+        }
+        .suggestion-meta {
+            font-size: 12px;
+            color: #aaa;
+        }
+        .video-info {
+            margin-top: 20px;
+        }
+        .video-title {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        .video-description {
+            color: #ccc;
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+        .video-meta {
+            color: #aaa;
+            font-size: 14px;
+        }
+        @media (max-width: 768px) {
+            .video-player-container {
+                flex-direction: column;
+            }
+            .suggestion-thumbnail {
+                width: 120px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->  
+    <nav class="navbar">  
+        <div class="nav-container">  
+            <div class="nav-logo">  
+                <h1>Xshiver</h1>  
+            </div>  
+            <div class="nav-menu">  
+                <a href="index.html" class="nav-link">Home</a>  
+                <a href="index.html#trending" class="nav-link">Trending</a>  
+                <a href="index.html#categories" class="nav-link">Categories</a>  
+                <a href="index.html#about" class="nav-link">About</a>  
+            </div>  
+        </div>  
+    </nav>
+
+    <div class="video-player-container">
+        <div class="main-video-player">
+            <div class="video-wrapper">
+                <div class="video-placeholder" id="main-video">
+                    Video Loading...
+                </div>
+            </div>
+            <div class="video-info">
+                <h1 class="video-title" id="video-title">Video Title</h1>
+                <p class="video-description" id="video-description">Video description will appear here.</p>
+                <p class="video-meta" id="video-meta">1.2M views • 5 days ago</p>
+            </div>
+        </div>
+        
+        <div class="video-suggestions">
+            <h2>More Videos</h2>
+            <div class="suggestion-card" onclick="loadVideo('video1', 'Amazing Nature Documentary', '2.1M views • 3 days ago', 'Explore the wonders of nature in this breathtaking documentary.')">
+                <div class="suggestion-thumbnail">
+                    <div class="play-overlay">
+                        <div class="play-button">▶</div>
+                    </div>
+                </div>
+                <div class="suggestion-info">
+                    <h3 class="suggestion-title">Amazing Nature Documentary</h3>
+                    <p class="suggestion-meta">2.1M views • 3 days ago</p>
+                </div>
+            </div>
+            
+            <div class="suggestion-card" onclick="loadVideo('video2', 'Tech Innovation Spotlight', '890K views • 1 week ago', 'The latest in tech innovations that are changing the world.')">
+                <div class="suggestion-thumbnail">
+                    <div class="play-overlay">
+                        <div class="play-button">▶</div>
+                    </div>
+                </div>
+                <div class="suggestion-info">
+                    <h3 class="suggestion-title">Tech Innovation Spotlight</h3>
+                    <p class="suggestion-meta">890K views • 1 week ago</p>
+                </div>
+            </div>
+            
+            <div class="suggestion-card" onclick="loadVideo('video3', 'Creative Arts Masterclass', '1.5M views • 5 days ago', 'Learn from the masters of creative arts in this exclusive series.')">
+                <div class="suggestion-thumbnail">
+                    <div class="play-overlay">
+                        <div class="play-button">▶</div>
+                    </div>
+                </div>
+                <div class="suggestion-info">
+                    <h3 class="suggestion-title">Creative Arts Masterclass</h3>
+                    <p class="suggestion-meta">1.5M views • 5 days ago</p>
+                </div>
+            </div>
+            
+            <div class="suggestion-card" onclick="loadVideo('video4', 'Adventure Travel Guide', '3.2M views • 2 days ago', 'The ultimate guide to adventure travel around the globe.')">
+                <div class="suggestion-thumbnail">
+                    <div class="play-overlay">
+                        <div class="play-button">▶</div>
+                    </div>
+                </div>
+                <div class="suggestion-info">
+                    <h3 class="suggestion-title">Adventure Travel Guide</h3>
+                    <p class="suggestion-meta">3.2M views • 2 days ago</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- More Suggestions Section -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">You May Also Like</h2>
+            <div class="video-grid">
+                <div class="video-card" onclick="loadVideo('video5', 'Top Trending Content', '5.7M views • 1 day ago', 'Check out what everyone is watching right now.')">
+                    <div class="video-thumbnail trending">
+                        <div class="play-overlay">
+                            <div class="play-button">▶</div>
+                        </div>
+                        <div class="trending-badge">#1</div>
+                        <div class="video-duration">10:24</div>
+                    </div>
+                    <div class="video-info">
+                        <h3 class="video-title">Top Trending Content</h3>
+                        <p class="video-meta">5.7M views • 1 day ago</p>
+                    </div>
+                </div>
+
+                <div class="video-card" onclick="loadVideo('video6', 'Viral Sensation', '4.2M views • 2 days ago', 'The video that took the internet by storm.')">
+                    <div class="video-thumbnail trending">
+                        <div class="play-overlay">
+                            <div class="play-button">▶</div>
+                        </div>
+                        <div class="trending-badge">#2</div>
+                        <div class="video-duration">15:42</div>
+                    </div>
+                    <div class="video-info">
+                        <h3 class="video-title">Viral Sensation</h3>
+                        <p class="video-meta">4.2M views • 2 days ago</p>
+                    </div>
+                </div>
+
+                <div class="video-card" onclick="loadVideo('video7', 'Must Watch Series', '3.8M views • 3 days ago', 'The series everyone is talking about.')">
+                    <div class="video-thumbnail trending">
+                        <div class="play-overlay">
+                            <div class="play-button">▶</div>
+                        </div>
+                        <div class="trending-badge">#3</div>
+                        <div class="video-duration">8:17</div>
+                    </div>
+                    <div class="video-info">
+                        <h3 class="video-title">Must Watch Series</h3>
+                        <p class="video-meta">3.8M views • 3 days ago</p>
+                    </div>
+                </div>
+
+                <div class="video-card" onclick="loadVideo('video8', 'Popular Choice', '2.9M views • 4 days ago', 'Selected by our community as a must-watch.')">
+                    <div class="video-thumbnail trending">
+                        <div class="play-overlay">
+                            <div class="play-button">▶</div>
+                        </div>
+                        <div class="trending-badge">#4</div>
+                        <div class="video-duration">12:33</div>
+                    </div>
+                    <div class="video-info">
+                        <h3 class="video-title">Popular Choice</h3>
+                        <p class="video-meta">2.9M views • 4 days ago</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->  
+    <footer class="footer">  
+        <div class="container">  
+            <div class="footer-content">  
+                <div class="footer-section">  
+                    <h3>Xshiver</h3>  
+                    <p>Premium streaming experience for everyone</p>  
+                </div>  
+                <div class="footer-section">  
+                    <h4>Quick Links</h4>  
+                    <a href="index.html">Home</a>  
+                    <a href="index.html#trending">Trending</a>  
+                    <a href="index.html#categories">Categories</a>  
+                </div>  
+                <div class="footer-section">  
+                    <h4>Support</h4>  
+                    <a href="#">Help Center</a>  
+                    <a href="#">Privacy Policy</a>  
+                    <a href="#">Terms of Service</a>  
+                </div>  
+            </div>  
+            <div class="footer-bottom">  
+                <p>&copy; 2025 Xshiver. All rights reserved.</p>  
+            </div>  
+        </div>  
+    </footer>
+
+    <script>
+        // Video data
+        const videos = {
+            'video1': {
+                title: 'Amazing Nature Documentary',
+                meta: '2.1M views • 3 days ago',
+                description: 'Explore the wonders of nature in this breathtaking documentary.'
+            },
+            'video2': {
+                title: 'Tech Innovation Spotlight',
+                meta: '890K views • 1 week ago',
+                description: 'The latest in tech innovations that are changing the world.'
+            },
+            'video3': {
+                title: 'Creative Arts Masterclass',
+                meta: '1.5M views • 5 days ago',
+                description: 'Learn from the masters of creative arts in this exclusive series.'
+            },
+            'video4': {
+                title: 'Adventure Travel Guide',
+                meta: '3.2M views • 2 days ago',
+                description: 'The ultimate guide to adventure travel around the globe.'
+            },
+            'video5': {
+                title: 'Top Trending Content',
+                meta: '5.7M views • 1 day ago',
+                description: 'Check out what everyone is watching right now.'
+            },
+            'video6': {
+                title: 'Viral Sensation',
+                meta: '4.2M views • 2 days ago',
+                description: 'The video that took the internet by storm.'
+            },
+            'video7': {
+                title: 'Must Watch Series',
+                meta: '3.8M views • 3 days ago',
+                description: 'The series everyone is talking about.'
+            },
+            'video8': {
+                title: 'Popular Choice',
+                meta: '2.9M views • 4 days ago',
+                description: 'Selected by our community as a must-watch.'
+            }
+        };
+
+        // Function to load a video
+        function loadVideo(videoId, title, meta, description) {
+            // Update the URL without reloading the page
+            window.history.pushState(null, null, '?v=' + videoId);
+            
+            // Update the video player
+            document.getElementById('video-title').textContent = title;
+            document.getElementById('video-meta').textContent = meta;
+            document.getElementById('video-description').textContent = description;
+            
+            // In a real implementation, you would load the actual video here
+            const videoPlaceholder = document.getElementById('main-video');
+            videoPlaceholder.innerHTML = `Now Playing: <strong>${title}</strong>`;
+            
+            // Scroll to the top of the video player
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        // Initialize with the requested video
+        window.onload = function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const videoId = urlParams.get('v');
+            
+            if (videoId && videos[videoId]) {
+                loadVideo(
+                    videoId,
+                    videos[videoId].title,
+                    videos[videoId].meta,
+                    videos[videoId].description
+                );
+            } else {
+                // Default video if none specified
+                loadVideo(
+                    'video1',
+                    videos['video1'].title,
+                    videos['video1'].meta,
+                    videos['video1'].description
+                );
+            }
+        };
+
+        // Navbar scroll effect  
+        window.addEventListener('scroll', function() {  
+            const navbar = document.querySelector('.navbar');  
+            if (window.scrollY > 100) {  
+                navbar.style.background = 'rgba(15, 15, 23, 0.95)';  
+                navbar.style.backdropFilter = 'blur(10px)';  
+            } else {  
+                navbar.style.background = 'rgba(15, 15, 23, 0.9)';  
+                navbar.style.backdropFilter = 'blur(5px)';  
+            }  
+        });
+    </script>
+</body>
+              </html>
