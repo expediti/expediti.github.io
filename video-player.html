@@ -6,16 +6,73 @@
     <title>Xshiver - Video Player</title>
     <link rel="stylesheet" href="styles.css">
     <style>
-        /* [Keep all your existing CSS styles] */
+        /* Responsive video container */
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            height: 0;
+            overflow: hidden;
+            margin-bottom: 15px;
+        }
+        
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        /* Responsive thumbnail grid */
+        .suggestion-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 15px;
+            padding: 10px;
+        }
+        
+        .suggestion-card {
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        
+        .suggestion-card:hover {
+            transform: scale(1.03);
+        }
+        
+        .thumbnail-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            overflow: hidden;
+        }
+        
+        .thumbnail-container img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .video-info {
+            padding: 10px;
+        }
+        
+        @media (max-width: 768px) {
+            .suggestion-grid {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
 </head>
 <body>
-    <!-- [Keep all your existing HTML structure] -->
-
     <div class="video-player-container">
         <div class="main-video-player">
             <div class="video-wrapper">
-                <iframe id="video-iframe" width="640" height="480" src="//mxdrop.to/e/z1k0dmdgaon99m" scrolling="no" frameborder="0" allowfullscreen="true"></iframe>
+                <iframe id="video-iframe" src="" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay"></iframe>
             </div>
             <div class="video-info">
                 <h1 class="video-title" id="video-title">Video Title</h1>
@@ -24,33 +81,45 @@
             </div>
         </div>
         
-        <!-- [Keep all your suggestion cards] -->
+        <div class="suggestions-section">
+            <h2 class="section-title">More Videos</h2>
+            <div class="suggestion-grid" id="suggestion-grid">
+                <!-- Suggestions will be populated by JavaScript -->
+            </div>
+        </div>
     </div>
 
-    <!-- [Keep the rest of your HTML] -->
-
     <script>
-        // Simplified video data - now only needs the src
         const videos = {
             'video1': {
-    title: 'Indian Nude girl',
-    meta: '2.1M views • 3 days ago',
-    description: 'Indian Nude girl',
-    src: 'https://mxdrop.to/e/z1k0dmdgaon99m',
-    thumbnail: 'https://example.com/path/to/thumbnail.jpg', // Add your thumbnail URL here
-    embedCode: '<iframe width="1280" height="720" src="//sendvid.com/embed/lnjg20xu" frameborder="0" allowfullscreen></iframe>'
-},
+                id: 'video1',
+                title: 'Indian Nude girl',
+                meta: '2.1M views • 3 days ago',
+                description: 'Indian Nude girl',
+                src: '//mxdrop.to/e/z1k0dmdgaon99m',
+                thumbnail: 'https://i.imgur.com/example1.jpg',
+                embedCode: '<iframe width="1280" height="720" src="//sendvid.com/embed/lnjg20xu" frameborder="0" allowfullscreen></iframe>'
             },
             'video2': {
+                id: 'video2',
                 title: 'Tech Innovation Spotlight',
                 meta: '890K views • 1 week ago',
                 description: 'The latest in tech innovations that are changing the world.',
-                src: '//mxdrop.to/e/anothervideocode1'
+                src: '//mxdrop.to/e/anothervideocode1',
+                thumbnail: 'https://i.imgur.com/example2.jpg',
+                embedCode: '<iframe width="1280" height="720" src="//sendvid.com/embed/lnjg20xu" frameborder="0" allowfullscreen></iframe>'
             },
-            // [Keep other video entries but remove embedCode, only keep src]
+            'video3': {
+                id: 'video3',
+                title: 'Amazing Nature Documentary',
+                meta: '1.5M views • 2 weeks ago',
+                description: 'Stunning footage from around the world',
+                src: '//mxdrop.to/e/naturevideo123',
+                thumbnail: 'https://i.imgur.com/example3.jpg',
+                embedCode: '<iframe src="//mxdrop.to/e/naturevideo123" frameborder="0" allowfullscreen></iframe>'
+            }
         };
 
-        // Simplified loadVideo function
         function loadVideo(videoId) {
             const video = videos[videoId];
             if (!video) return;
@@ -58,8 +127,11 @@
             // Update URL
             window.history.pushState(null, null, '?v=' + videoId);
             
-            // Update video player
-            document.getElementById('video-iframe').src = video.src;
+            // Update video player with embedded code
+            const iframe = document.getElementById('video-iframe');
+            iframe.src = video.src;
+            
+            // Update video info
             document.getElementById('video-title').textContent = video.title;
             document.getElementById('video-meta').textContent = video.meta;
             document.getElementById('video-description').textContent = video.description;
@@ -68,17 +140,43 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // Update click handlers in your HTML to just pass the video ID:
-        // onclick="loadVideo('video1')"
+        function generateSuggestionCards() {
+            const grid = document.getElementById('suggestion-grid');
+            grid.innerHTML = '';
+            
+            for (const [id, video] of Object.entries(videos)) {
+                const card = document.createElement('div');
+                card.className = 'suggestion-card';
+                card.onclick = () => loadVideo(id);
+                
+                card.innerHTML = `
+                    <div class="thumbnail-container">
+                        <img src="${video.thumbnail}" alt="${video.title}" loading="lazy">
+                    </div>
+                    <div class="video-info">
+                        <h3>${video.title}</h3>
+                        <p class="video-meta">${video.meta}</p>
+                    </div>
+                `;
+                
+                grid.appendChild(card);
+            }
+        }
 
         // Initialize
         window.onload = function() {
             const urlParams = new URLSearchParams(window.location.search);
-            const videoId = urlParams.get('v') || 'video1'; // Default to video1
+            const videoId = urlParams.get('v') || 'video1';
             loadVideo(videoId);
+            generateSuggestionCards();
         };
 
-        // [Keep your navbar scroll effect]
+        // Handle browser back/forward navigation
+        window.onpopstate = function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const videoId = urlParams.get('v') || 'video1';
+            loadVideo(videoId);
+        };
     </script>
 </body>
 </html>
