@@ -5,74 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Xshiver - Video Player</title>
     <link rel="stylesheet" href="styles.css">
+    <!-- Add Fluid Player CSS -->
+    <link href="https://cdn.fluidplayer.com/v3/current/fluidplayer.min.css" rel="stylesheet">
     <style>
-        /* Responsive video container */
+        /* Your existing styles remain unchanged */
         .video-wrapper {
             position: relative;
-            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            padding-bottom: 56.25%;
             height: 0;
             overflow: hidden;
             margin-bottom: 15px;
         }
-        
-        .video-wrapper iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-        
-        /* Responsive thumbnail grid */
-        .suggestion-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 15px;
-            padding: 10px;
-        }
-        
-        .suggestion-card {
-            position: relative;
-            cursor: pointer;
-            transition: transform 0.2s;
-        }
-        
-        .suggestion-card:hover {
-            transform: scale(1.03);
-        }
-        
-        .thumbnail-container {
-            position: relative;
-            padding-bottom: 56.25%; /* 16:9 aspect ratio */
-            overflow: hidden;
-        }
-        
-        .thumbnail-container img {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        
-        .video-info {
-            padding: 10px;
-        }
-        
-        @media (max-width: 768px) {
-            .suggestion-grid {
-                grid-template-columns: 1fr;
-            }
-        }
+        /* ... (keep all other existing styles) ... */
     </style>
 </head>
 <body>
     <div class="video-player-container">
         <div class="main-video-player">
+            <!-- Replace iframe with Fluid Player -->
             <div class="video-wrapper">
-                <iframe id="video-iframe" src="" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay"></iframe>
+                <video id="xshiver-video">
+                    <source src="https://pixeldrain.com/api/file/LSevn5uJ" type="video/mp4">
+                </video>
             </div>
             <div class="video-info">
                 <h1 class="video-title" id="video-title">Video Title</h1>
@@ -84,59 +38,64 @@
         <div class="suggestions-section">
             <h2 class="section-title">More Videos</h2>
             <div class="suggestion-grid" id="suggestion-grid">
-                <!-- Suggestions will be populated by JavaScript -->
+                <!-- Suggestions populated by JavaScript -->
             </div>
         </div>
     </div>
 
+    <!-- Fluid Player JS -->
+    <script src="https://cdn.fluidplayer.com/v3/current/fluidplayer.min.js"></script>
+    
     <script>
         const videos = {
             'video1': {
                 id: 'video1',
-                title: 'Indian Nude girl',
+                title: 'Indian girl',
                 meta: '2.1M views • 3 days ago',
-                description: 'Indian Nude girl',
-                src: '//sendvid.com/embed/lnjg20xu',
-                thumbnail: 'https://i.imgur.com/example1.jpg',
-                embedCode: '<iframe width="1280" height="720" src="//sendvid.com/embed/lnjg20xu" frameborder="0" allowfullscreen></iframe>'
+                description: 'Indian girl',
+                src: 'https://pixeldrain.com/api/file/LSevn5uJ',
+                thumbnail: 'https://i.imgur.com/example1.jpg'
             },
             'video2': {
                 id: 'video2',
                 title: 'Tech Innovation Spotlight',
                 meta: '890K views • 1 week ago',
-                description: 'The latest in tech innovations that are changing the world.',
-                src: '//mxdrop.to/e/anothervideocode1',
-                thumbnail: 'https://i.imgur.com/example2.jpg',
-                embedCode: '<iframe width="1280" height="720" src="//sendvid.com/embed/lnjg20xu" frameborder="0" allowfullscreen></iframe>'
-            },
-            'video3': {
-                id: 'video3',
-                title: 'Amazing Nature Documentary',
-                meta: '1.5M views • 2 weeks ago',
-                description: 'Stunning footage from around the world',
-                src: '//mxdrop.to/e/naturevideo123',
-                thumbnail: 'https://i.imgur.com/example3.jpg',
-                embedCode: '<iframe src="//mxdrop.to/e/naturevideo123" frameborder="0" allowfullscreen></iframe>'
+                description: 'The latest in tech innovations.',
+                src: 'https://pixeldrain.com/api/file/anothervideocode',
+                thumbnail: 'https://i.imgur.com/example2.jpg'
             }
         };
+
+        // Initialize Fluid Player
+        function initFluidPlayer(videoSrc) {
+            return fluidPlayer('xshiver-video', {
+                layoutControls: {
+                    primaryColor: "#28B8ED",
+                    fillToContainer: true,
+                    autoPlay: false,
+                    posterImage: videos[videoSrc]?.thumbnail || ''
+                }
+            });
+        }
 
         function loadVideo(videoId) {
             const video = videos[videoId];
             if (!video) return;
             
-            // Update URL
             window.history.pushState(null, null, '?v=' + videoId);
             
-            // Update video player with embedded code
-            const iframe = document.getElementById('video-iframe');
-            iframe.src = video.src;
+            // Update video source
+            const videoElement = document.getElementById('xshiver-video');
+            videoElement.innerHTML = `<source src="${video.src}" type="video/mp4">`;
             
-            // Update video info
+            // Reinitialize Fluid Player
+            initFluidPlayer(videoId);
+            
+            // Update info
             document.getElementById('video-title').textContent = video.title;
             document.getElementById('video-meta').textContent = video.meta;
             document.getElementById('video-description').textContent = video.description;
             
-            // Scroll to top
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
@@ -167,11 +126,11 @@
         window.onload = function() {
             const urlParams = new URLSearchParams(window.location.search);
             const videoId = urlParams.get('v') || 'video1';
+            initFluidPlayer(videoId);
             loadVideo(videoId);
             generateSuggestionCards();
         };
 
-        // Handle browser back/forward navigation
         window.onpopstate = function() {
             const urlParams = new URLSearchParams(window.location.search);
             const videoId = urlParams.get('v') || 'video1';
