@@ -24,6 +24,59 @@
             margin-bottom: 30px;
         }
         
+        /* CSS for suggestion thumbnails - added to make thumbnails visible */
+        .suggestion-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .suggestion-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+        
+        .suggestion-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            border-color: rgba(6, 182, 212, 0.5);
+        }
+        
+        .thumbnail-container {
+            position: relative;
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .thumbnail-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .suggestion-card .video-info {
+            padding: 1.5rem;
+        }
+        
+        .suggestion-card .video-info h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #ffffff;
+            line-height: 1.3;
+        }
+        
+        .suggestion-card .video-meta {
+            color: #9ca3af;
+            font-size: 0.9rem;
+            font-weight: 400;
+        }
+        
         /* Rest of your existing styles remain unchanged */
     </style>
 </head>
@@ -62,14 +115,14 @@
                 description: 'Premium content',
                 meta: '2.1M views • 3 days ago',
                 src: 'https://pixeldrain.com/api/file/LSevn5uJ',
-                thumbnail: 'https://pixeldrain.com/api/file/B1y9Y87z' // Example thumbnail
+                thumbnail: 'https://pixeldrain.com/api/file/B1y9Y87z' // Your uploaded thumbnail
             },
             'video2': {
                 title: 'HD Content',
                 description: 'High quality video',
                 meta: '1.5M views • 5 days ago',
                 src: 'https://example.com/another-video.mp4', // Replace with real URL
-                thumbnail: 'https://i.imgur.com/J5lQqyA.jpg'
+                thumbnail: 'https://pixeldrain.com/api/file/B1y9Y87z'
             }
         };
 
@@ -133,7 +186,7 @@
                 card.className = 'suggestion-card';
                 card.innerHTML = `
                     <div class="thumbnail-container">
-                        <img src="${video.thumbnail}" alt="${video.title}">
+                        <img src="${video.thumbnail}" alt="${video.title}" onerror="this.style.display='block'; this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22><rect width=%22100%25%22 height=%22100%25%22 fill=%22%23333%22/><text x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%220.3em%22 fill=%22white%22>No Image</text></svg>';">
                     </div>
                     <div class="video-info">
                         <h3>${video.title}</h3>
