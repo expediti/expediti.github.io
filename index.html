@@ -49,7 +49,7 @@
         </div>
     </footer>
 
-    <script src="videos-data.html"></script>
+    <script src="videos-data.js"></script>
     <script>
         // Load videos from the data file
         function loadVideos() {
@@ -62,7 +62,7 @@
                     videoGrid.appendChild(videoCard);
                 });
             } else {
-                videoGrid.innerHTML = '<p class="no-videos">No videos available. Please add videos to videos-data.html</p>';
+                videoGrid.innerHTML = '<p class="no-videos">No videos available. Please add videos to videos-data.js</p>';
             }
         }
 
@@ -116,7 +116,7 @@
 
         // Load videos when page loads
         document.addEventListener('DOMContentLoaded', function() {
-            // Small delay to ensure videos-data.html is loaded
+            // Small delay to ensure videos-data.js is loaded
             setTimeout(loadVideos, 100);
         });
 
