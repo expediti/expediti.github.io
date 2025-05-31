@@ -80,7 +80,7 @@
 
     <!-- Fluid Player JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fluidplayer/3.46.4/fluidplayer.min.js"></script>
-    <script src="videos-data.html"></script>
+    <script src="videos-data.js"></script>
     <script>
         let fluidPlayer;
         let currentVideo = null;
@@ -256,7 +256,7 @@
 
         // Initialize when page loads
         document.addEventListener('DOMContentLoaded', function() {
-            // Small delay to ensure videos-data.html is loaded
+            // Small delay to ensure videos-data.js is loaded
             setTimeout(loadVideo, 100);
         });
 
