@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Player - Xshiver</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Fluid Player CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fluidplayer/3.46.4/fluidplayer.min.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <a href="index.html"><h1>Xshiver</h1></a>
+            </div>
+            <nav class="nav">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="#trending">Trending</a></li>
+                    <li><a href="#subscriptions">Subscriptions</a></li>
+                    <li><a href="#library">Library</a></li>
+                </ul>
+            </nav>
+            <div class="search-bar">
+                <input type="text" placeholder="Search videos..." id="searchInput">
+                <button onclick="searchAndRedirect()">🔍</button>
+            </div>
+        </div>
+    </header>
+
+    <main class="video-player-container">
+        <section class="main-video-section">
+            <div class="video-player-wrapper">
+                <video id="videoPlayer" controls style="width: 100%; height: 100%;">
+                    <source src="" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+            
+            <div class="video-details">
+                <h1 id="videoTitle">Loading...</h1>
+                
+                <div class="video-stats">
+                    <div class="video-stats-left">
+                        <span id="videoViews">0 views</span>
+                        <span id="videoDate">Jan 1, 2025</span>
+                    </div>
+                    <div class="video-stats-right">
+                        <button class="action-btn" onclick="likeVideo()">👍 Like</button>
+                        <button class="action-btn" onclick="dislikeVideo()">👎 Dislike</button>
+                        <button class="action-btn" onclick="shareVideo()">📤 Share</button>
+                        <button class="action-btn" onclick="saveVideo()">💾 Save</button>
+                    </div>
+                </div>
+
+                <div class="channel-info">
+                    <div class="channel-avatar" id="channelAvatar">X</div>
+                    <div class="channel-details">
+                        <h3 id="channelName">Channel Name</h3>
+                        <p id="channelSubscribers">1M subscribers</p>
+                    </div>
+                    <button class="action-btn" onclick="subscribeChannel()" style="margin-left: auto;">Subscribe</button>
+                </div>
+
+                <div class="video-description">
+                    <h4>Description</h4>
+                    <p id="videoDescription">Loading description...</p>
+                </div>
+            </div>
+        </section>
+
+        <aside class="suggestions-sidebar">
+            <h3>Up Next</h3>
+            <div id="videoSuggestions">
+                <!-- Video suggestions will be loaded here -->
+            </div>
+        </aside>
+    </main>
+
+    <!-- Fluid Player JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fluidplayer/3.46.4/fluidplayer.min.js"></script>
+    <script src="videos-data.html"></script>
+    <script>
+        let fluidPlayer;
+        let currentVideo = null;
+
+        // Get video ID from URL parameters
+        function getVideoIdFromUrl() {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get('id');
+        }
+
+        // Find video by ID
+        function findVideoById(id) {
+            return videosData.find(video => video.id === id);
+        }
+
+        // Initialize Fluid Player
+        function initializePlayer(videoUrl) {
+            const videoElement = document.getElementById('videoPlayer');
+            
+            if (fluidPlayer) {
+                fluidPlayer.destroy();
+            }
+
+            // Set video source
+            videoElement.src = videoUrl;
+
+            // Initialize Fluid Player with configuration
+            fluidPlayer = fluidPlayer('#videoPlayer', {
+                layoutControls: {
+                    fillToContainer: true,
+                    autoPlay: false,
+                    mute: false,
+                    allowTheatre: true,
+                    playPauseAnimation: true,
+                    playbackRateEnabled: true,
+                    allowDownload: false,
+                    playButtonShowing: true,
+                    nextButtonShowing: false,
+                    skipButtonShowing: false,
+                    subtitlesEnabled: false,
+                    keyboardControl: true,
+                    layout: 'default',
+                    playerInitCallback: function() {
+                        console.log('Fluid Player initialized');
+                    }
+                }
+            });
+        }
+
+        // Load video data and initialize player
+        function loadVideo() {
+            const videoId = getVideoIdFromUrl();
+            
+            if (!videoId) {
+                alert('No video ID specified');
+                window.location.href = 'index.html';
+                return;
+            }
+
+            currentVideo = findVideoById(videoId);
+            
+            if (!currentVideo) {
+                alert('Video not found');
+                window.location.href = 'index.html';
+                return;
+            }
+
+            // Update page title
+            document.title = `${currentVideo.title} - Xshiver`;
+
+            // Initialize player with video URL
+            initializePlayer(currentVideo.videoUrl);
+
+            // Update video details
+            document.getElementById('videoTitle').textContent = currentVideo.title;
+            document.getElementById('videoViews').textContent = `${currentVideo.views} views`;
+            document.getElementById('videoDate').textContent = currentVideo.uploadDate;
+            document.getElementById('channelName').textContent = currentVideo.channel;
+            document.getElementById('channelSubscribers').textContent = `${currentVideo.subscribers || '1M'} subscribers`;
+            document.getElementById('videoDescription').textContent = currentVideo.description;
+
+            // Update channel avatar
+            const channelAvatar = document.getElementById('channelAvatar');
+            channelAvatar.textContent = currentVideo.channel.charAt(0).toUpperCase();
+
+            // Load suggestions
+            loadSuggestions();
+        }
+
+        // Load video suggestions (exclude current video)
+        function loadSuggestions() {
+            const suggestionsContainer = document.getElementById('videoSuggestions');
+            const suggestions = videosData.filter(video => video.id !== currentVideo.id).slice(0, 10);
+
+            suggestionsContainer.innerHTML = '';
+
+            suggestions.forEach(video => {
+                const suggestionElement = createSuggestionElement(video);
+                suggestionsContainer.appendChild(suggestionElement);
+            });
+        }
+
+        // Create suggestion element
+        function createSuggestionElement(video) {
+            const suggestion = document.createElement('div');
+            suggestion.className = 'suggestion-video';
+            suggestion.onclick = () => openVideo(video.id);
+
+            suggestion.innerHTML = `
+                <div class="suggestion-thumbnail">
+                    <img src="${video.thumbnail}" alt="${video.title}" onerror="this.src='https://via.placeholder.com/120x68?text=No+Thumbnail'">
+                </div>
+                <div class="suggestion-info">
+                    <h4>${video.title}</h4>
+                    <p>${video.channel}</p>
+                    <span>${video.views} views • ${video.uploadDate}</span>
+                </div>
+            `;
+
+            return suggestion;
+        }
+
+        // Open video (navigate to new video)
+        function openVideo(videoId) {
+            window.location.href = `video-player.html?id=${videoId}`;
+        }
+
+        // Action functions
+        function likeVideo() {
+            alert('Video liked! 👍');
+        }
+
+        function dislikeVideo() {
+            alert('Video disliked! 👎');
+        }
+
+        function shareVideo() {
+            const shareUrl = window.location.href;
+            if (navigator.share) {
+                navigator.share({
+                    title: currentVideo.title,
+                    text: `Check out this video: ${currentVideo.title}`,
+                    url: shareUrl
+                });
+            } else {
+                navigator.clipboard.writeText(shareUrl).then(() => {
+                    alert('Video link copied to clipboard!');
+                });
+            }
+        }
+
+        function saveVideo() {
+            alert('Video saved to your library! 💾');
+        }
+
+        function subscribeChannel() {
+            alert(`Subscribed to ${currentVideo.channel}! 🔔`);
+        }
+
+        function searchAndRedirect() {
+            const searchTerm = document.getElementById('searchInput').value;
+            if (searchTerm.trim()) {
+                window.location.href = `index.html?search=${encodeURIComponent(searchTerm)}`;
+            }
+        }
+
+        // Handle Enter key in search
+        document.getElementById('searchInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                searchAndRedirect();
+            }
+        });
+
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            // Small delay to ensure videos-data.html is loaded
+            setTimeout(loadVideo, 100);
+        });
+
+        // Handle browser back/forward buttons
+        window.addEventListener('popstate', function() {
+            loadVideo();
+        });
+    </script>
+</body>
+</html>
