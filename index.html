@@ -3,129 +3,302 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Xshiver - Video Streaming Platform</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Xshiver Debug - Video Streaming Platform</title>
+    <style>
+        /* Inline CSS for debugging */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #0f0f23;
+            color: #ffffff;
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .debug-info {
+            background: #ff6b6b;
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .logo h1 {
+            color: #ff6b6b;
+            font-size: 2rem;
+            font-weight: bold;
+            text-shadow: 0 0 10px rgba(255, 107, 107, 0.5);
+        }
+
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .video-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 15px;
+        }
+
+        .video-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(255, 107, 107, 0.3);
+            border-color: rgba(255, 107, 107, 0.5);
+        }
+
+        .video-thumbnail {
+            position: relative;
+            width: 100%;
+            height: 180px;
+            overflow: hidden;
+            border-radius: 10px;
+            background: #333;
+            margin-bottom: 10px;
+        }
+
+        .video-thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .video-title {
+            font-size: 1.1rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            color: #ffffff;
+        }
+
+        .video-channel {
+            color: #ff6b6b;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        .no-videos {
+            text-align: center;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 1.2rem;
+            padding: 3rem;
+            grid-column: 1 / -1;
+        }
+
+        .debug-section {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+
+        .debug-section h3 {
+            color: #ff6b6b;
+            margin-bottom: 10px;
+        }
+
+        .debug-log {
+            background: #000;
+            color: #0f0;
+            padding: 10px;
+            border-radius: 5px;
+            font-family: monospace;
+            white-space: pre-wrap;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+    </style>
 </head>
 <body>
+    <div id="debugInfo" class="debug-info">
+        🔍 DEBUG MODE: Checking if JavaScript is working...
+    </div>
+
     <header class="header">
         <div class="container">
             <div class="logo">
-                <h1>Xshiver</h1>
-            </div>
-            <nav class="nav">
-                <ul>
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#trending">Trending</a></li>
-                    <li><a href="#subscriptions">Subscriptions</a></li>
-                    <li><a href="#library">Library</a></li>
-                </ul>
-            </nav>
-            <div class="search-bar">
-                <input type="text" placeholder="Search videos..." id="searchInput">
-                <button onclick="searchVideos()">🔍</button>
+                <h1>Xshiver Debug</h1>
             </div>
         </div>
     </header>
 
     <main class="main-content">
         <div class="container">
-            <section class="hero-section">
-                <h2>Welcome to Xshiver</h2>
-                <p>Discover amazing videos from creators around the world</p>
-            </section>
+            <div class="debug-section">
+                <h3>Debug Information</h3>
+                <div id="debugLog" class="debug-log">Initializing debug log...\n</div>
+            </div>
 
             <section class="videos-section">
-                <h3>Latest Videos</h3>
+                <h3>Video Status</h3>
                 <div class="video-grid" id="videoGrid">
-                    <!-- Videos will be loaded here dynamically -->
+                    <div class="no-videos">Loading videos...</div>
                 </div>
             </section>
         </div>
     </main>
 
-    <footer class="footer">
-        <div class="container">
-            <p>&copy; 2025 Xshiver. All rights reserved.</p>
-        </div>
-    </footer>
-
-    <script src="videos-data.js"></script>
     <script>
-        // Load videos from the data file
-        function loadVideos() {
-            const videoGrid = document.getElementById('videoGrid');
-            videoGrid.innerHTML = '';
-
-            if (typeof videosData !== 'undefined' && videosData.length > 0) {
-                videosData.forEach(video => {
-                    const videoCard = createVideoCard(video);
-                    videoGrid.appendChild(videoCard);
-                });
-            } else {
-                videoGrid.innerHTML = '<p class="no-videos">No videos available. Please add videos to videos-data.js</p>';
+        // Debug logging function
+        function debugLog(message) {
+            console.log(message);
+            const debugElement = document.getElementById('debugLog');
+            if (debugElement) {
+                debugElement.textContent += new Date().toLocaleTimeString() + ': ' + message + '\n';
+                debugElement.scrollTop = debugElement.scrollHeight;
             }
         }
 
+        // Test data (embedded directly to avoid loading issues)
+        const videosData = [
+            {
+                id: "video1",
+                title: "Test Video 1 - Nature Documentary",
+                thumbnail: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=320&h=180&fit=crop&crop=center",
+                videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+                channel: "Nature Explorer",
+                views: "1.2M",
+                uploadDate: "2 days ago",
+                duration: "15:32",
+                description: "Test video to check if the platform is working correctly."
+            },
+            {
+                id: "video2",
+                title: "Test Video 2 - Technology Review",
+                thumbnail: "https://images.unsplash.com/photo-1516116216624-53e697fedbea?w=320&h=180&fit=crop&crop=center",
+                videoUrl: "https://www.learningcontainer.com/wp-content/uploads/2020/05/sample-mp4-file.mp4",
+                channel: "Tech Reviewer",
+                views: "850K",
+                uploadDate: "1 week ago",
+                duration: "10:30",
+                description: "Another test video for debugging purposes."
+            }
+        ];
+
+        // Update debug info
+        function updateDebugInfo(message, isError = false) {
+            const debugElement = document.getElementById('debugInfo');
+            if (debugElement) {
+                debugElement.textContent = (isError ? '❌ ' : '✅ ') + message;
+                debugElement.style.backgroundColor = isError ? '#ff4444' : '#44ff44';
+                debugElement.style.color = isError ? 'white' : 'black';
+            }
+        }
+
+        // Create video card
         function createVideoCard(video) {
+            debugLog(`Creating card for: ${video.title}`);
+            
             const card = document.createElement('div');
             card.className = 'video-card';
-            card.onclick = () => openVideo(video.id);
-
+            
             card.innerHTML = `
                 <div class="video-thumbnail">
-                    <img src="${video.thumbnail}" alt="${video.title}" onerror="this.src='https://via.placeholder.com/320x180?text=No+Thumbnail'">
-                    <div class="video-duration">${video.duration}</div>
+                    <img src="${video.thumbnail}" alt="${video.title}" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIwIiBoZWlnaHQ9IjE4MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjY2NjIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxOCIgZmlsbD0iIzk5OSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPk5vIEltYWdlPC90ZXh0Pjwvc3ZnPg=='">
                 </div>
                 <div class="video-info">
                     <h4 class="video-title">${video.title}</h4>
                     <p class="video-channel">${video.channel}</p>
                     <div class="video-meta">
-                        <span class="views">${video.views} views</span>
-                        <span class="upload-date">${video.uploadDate}</span>
+                        <span>${video.views} views • ${video.uploadDate}</span>
                     </div>
                 </div>
             `;
 
+            card.onclick = () => {
+                debugLog(`Clicked on video: ${video.title}`);
+                alert(`Video clicked: ${video.title}\nThis would normally open the video player.`);
+            };
+
             return card;
         }
 
-        function openVideo(videoId) {
-            window.location.href = `video-player.html?id=${videoId}`;
-        }
-
-        function searchVideos() {
-            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+        // Load videos
+        function loadVideos() {
+            debugLog('Starting to load videos...');
+            updateDebugInfo('Loading videos...');
+            
             const videoGrid = document.getElementById('videoGrid');
+            if (!videoGrid) {
+                debugLog('ERROR: videoGrid element not found!');
+                updateDebugInfo('ERROR: Video container not found!', true);
+                return;
+            }
+
             videoGrid.innerHTML = '';
 
-            const filteredVideos = videosData.filter(video => 
-                video.title.toLowerCase().includes(searchTerm) ||
-                video.channel.toLowerCase().includes(searchTerm) ||
-                video.description.toLowerCase().includes(searchTerm)
-            );
+            if (!videosData || videosData.length === 0) {
+                debugLog('ERROR: No video data available!');
+                updateDebugInfo('ERROR: No video data found!', true);
+                videoGrid.innerHTML = '<div class="no-videos">❌ No video data available</div>';
+                return;
+            }
 
-            if (filteredVideos.length > 0) {
-                filteredVideos.forEach(video => {
+            debugLog(`Found ${videosData.length} videos to display`);
+
+            try {
+                videosData.forEach((video, index) => {
+                    debugLog(`Processing video ${index + 1}: ${video.title}`);
                     const videoCard = createVideoCard(video);
                     videoGrid.appendChild(videoCard);
                 });
-            } else {
-                videoGrid.innerHTML = '<p class="no-videos">No videos found matching your search.</p>';
+
+                debugLog('All videos loaded successfully!');
+                updateDebugInfo(`✅ Successfully loaded ${videosData.length} videos!`);
+            } catch (error) {
+                debugLog(`ERROR: Failed to load videos: ${error.message}`);
+                updateDebugInfo(`ERROR: ${error.message}`, true);
             }
         }
 
-        // Load videos when page loads
+        // Initialize when page loads
         document.addEventListener('DOMContentLoaded', function() {
-            // Small delay to ensure videos-data.js is loaded
-            setTimeout(loadVideos, 100);
+            debugLog('DOM Content Loaded - Starting initialization...');
+            updateDebugInfo('JavaScript is working! Initializing...');
+            
+            // Small delay to ensure everything is ready
+            setTimeout(() => {
+                debugLog('Calling loadVideos()...');
+                loadVideos();
+            }, 500);
         });
 
-        // Handle Enter key in search
-        document.getElementById('searchInput').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                searchVideos();
-            }
-        });
+        // Test if JavaScript is working
+        debugLog('JavaScript file loaded successfully!');
+        console.log('🚀 Xshiver Debug Version - JavaScript is working!');
     </script>
 </body>
 </html>
