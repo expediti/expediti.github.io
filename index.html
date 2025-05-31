@@ -5,60 +5,43 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Xshiver - Video Streaming Platform</title>
     <link rel="stylesheet" href="styles.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <!-- Fluid Player -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fluidplayer/3.46.0/fluidplayer.min.css">
 </head>
 <body>
     <header class="header">
         <div class="container">
-            <div class="nav">
-                <div class="logo">
-                    <i class="fas fa-play-circle"></i>
-                    <span>Xshiver</span>
-                </div>
-                <div class="search-bar">
-                    <input type="text" id="searchInput" placeholder="Search videos...">
-                    <button id="searchButton"><i class="fas fa-search"></i></button>
-                </div>
-                <div class="nav-icons">
-                    <i class="fas fa-bell"></i>
-                    <i class="fas fa-user-circle"></i>
-                </div>
+            <div class="logo">
+                <h1>Xshiver</h1>
+            </div>
+            <nav class="nav">
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#trending">Trending</a></li>
+                    <li><a href="#subscriptions">Subscriptions</a></li>
+                    <li><a href="#library">Library</a></li>
+                </ul>
+            </nav>
+            <div class="search-bar">
+                <input type="text" placeholder="Search videos..." id="searchInput">
+                <button onclick="searchVideos()">🔍</button>
             </div>
         </div>
     </header>
 
-    <main class="main">
+    <main class="main-content">
         <div class="container">
             <section class="hero-section">
-                <h1>Watch. Share. Enjoy.</h1>
-                <p>Discover the best videos on the internet, curated just for you.</p>
+                <h2>Welcome to Xshiver</h2>
+                <p>Discover amazing videos from creators around the world</p>
             </section>
 
-            <section class="video-section">
-                <h2 class="section-title">Trending Now</h2>
-                <div class="video-grid" id="trendingVideos">
-                    <!-- Videos load here -->
-                </div>
-            </section>
-
-            <section class="video-section">
-                <h2 class="section-title">Recently Added</h2>
-                <div class="video-grid" id="recentVideos">
-                    <!-- Videos load here -->
+            <section class="videos-section">
+                <h3>Latest Videos</h3>
+                <div class="video-grid" id="videoGrid">
+                    <!-- Videos will be loaded here dynamically -->
                 </div>
             </section>
         </div>
     </main>
-
-    <!-- Fullscreen Video Player (Hidden by Default) -->
-    <div id="fullscreenPlayer" class="fullscreen-player">
-        <div class="player-container">
-            <video id="fluidPlayerInstance"></video>
-            <button id="closePlayer"><i class="fas fa-times"></i></button>
-        </div>
-    </div>
 
     <footer class="footer">
         <div class="container">
@@ -66,158 +49,83 @@
         </div>
     </footer>
 
-    <!-- Scripts -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/fluidplayer/3.46.0/fluidplayer.min.js"></script>
+    <script src="videos-data.html"></script>
     <script>
-        let allVideos = [];
-        let fluidPlayer;
+        // Load videos from the data file
+        function loadVideos() {
+            const videoGrid = document.getElementById('videoGrid');
+            videoGrid.innerHTML = '';
 
-        // Load videos from videos-data.html
-        async function loadVideos() {
-            try {
-                const response = await fetch('videos-data.html');
-                const html = await response.text();
-                const parser = new DOMParser();
-                const doc = parser.parseFromString(html, 'text/html');
-                const videoElements = doc.querySelectorAll('.video-item');
-                
-                allVideos = Array.from(videoElements).map(item => ({
-                    id: item.dataset.id,
-                    title: item.dataset.title,
-                    description: item.dataset.description,
-                    thumbnail: item.dataset.thumbnail,
-                    videoUrl: item.dataset.videoUrl,
-                    duration: item.dataset.duration,
-                    views: item.dataset.views,
-                    uploadDate: item.dataset.uploadDate,
-                    channel: item.dataset.channel
-                }));
-
-                displayVideos(allVideos.slice(0, 8), 'trendingVideos');
-                displayVideos(allVideos.slice(-8), 'recentVideos');
-                
-                // Initialize Intersection Observer for lazy-loading
-                initLazyLoad();
-            } catch (error) {
-                console.error("Error loading videos:", error);
-                document.querySelector('.main').innerHTML = `
-                    <div class="container">
-                        <p class="error-msg">Failed to load videos. Please try again later.</p>
-                    </div>
-                `;
+            if (typeof videosData !== 'undefined' && videosData.length > 0) {
+                videosData.forEach(video => {
+                    const videoCard = createVideoCard(video);
+                    videoGrid.appendChild(videoCard);
+                });
+            } else {
+                videoGrid.innerHTML = '<p class="no-videos">No videos available. Please add videos to videos-data.html</p>';
             }
         }
 
-        // Display videos with Fluid Player previews
-        function displayVideos(videos, containerId) {
-            const container = document.getElementById(containerId);
-            container.innerHTML = videos.map(video => `
-                <div class="video-card" onclick="openFullscreenPlayer('${video.id}')">
-                    <div class="thumbnail-container">
-                        <video 
-                            muted 
-                            loop 
-                            playsinline 
-                            data-src="${video.videoUrl}" 
-                            poster="${video.thumbnail}"
-                            class="lazy-video"
-                        ></video>
-                        <span class="duration">${video.duration}</span>
-                    </div>
-                    <div class="video-info">
-                        <h3 class="video-title">${video.title}</h3>
-                        <div class="video-channel">${video.channel}</div>
-                        <div class="video-meta">
-                            <span>${video.views} views</span>
-                            <span>•</span>
-                            <span>${video.uploadDate}</span>
-                        </div>
+        function createVideoCard(video) {
+            const card = document.createElement('div');
+            card.className = 'video-card';
+            card.onclick = () => openVideo(video.id);
+
+            card.innerHTML = `
+                <div class="video-thumbnail">
+                    <img src="${video.thumbnail}" alt="${video.title}" onerror="this.src='https://via.placeholder.com/320x180?text=No+Thumbnail'">
+                    <div class="video-duration">${video.duration}</div>
+                </div>
+                <div class="video-info">
+                    <h4 class="video-title">${video.title}</h4>
+                    <p class="video-channel">${video.channel}</p>
+                    <div class="video-meta">
+                        <span class="views">${video.views} views</span>
+                        <span class="upload-date">${video.uploadDate}</span>
                     </div>
                 </div>
-            `).join('');
+            `;
+
+            return card;
         }
 
-        // Lazy-load videos when visible
-        function initLazyLoad() {
-            const lazyVideos = document.querySelectorAll('.lazy-video');
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const video = entry.target;
-                        video.src = video.dataset.src;
-                        observer.unobserve(video);
-                    }
-                });
-            }, { rootMargin: '100px' });
-
-            lazyVideos.forEach(video => observer.observe(video));
+        function openVideo(videoId) {
+            window.location.href = `video-player.html?id=${videoId}`;
         }
-
-        // Open video in fullscreen Fluid Player
-        function openFullscreenPlayer(videoId) {
-            const video = allVideos.find(v => v.id === videoId);
-            if (!video) return;
-
-            const fullscreenPlayer = document.getElementById('fullscreenPlayer');
-            const playerElement = document.getElementById('fluidPlayerInstance');
-
-            // Initialize Fluid Player
-            if (fluidPlayer) fluidPlayer.destroy();
-            fluidPlayer = fluidPlayer(playerElement, {
-                layoutControls: {
-                    fillToContainer: true,
-                    primaryColor: '#ff6b6b',
-                    autoPlay: true,
-                    mute: false
-                }
-            });
-
-            playerElement.poster = video.thumbnail;
-            const source = document.createElement('source');
-            source.src = video.videoUrl;
-            source.type = 'video/mp4';
-            playerElement.innerHTML = '';
-            playerElement.appendChild(source);
-            playerElement.load();
-
-            // Show fullscreen player
-            fullscreenPlayer.style.display = 'block';
-            document.body.style.overflow = 'hidden';
-        }
-
-        // Close fullscreen player
-        document.getElementById('closePlayer').addEventListener('click', () => {
-            document.getElementById('fullscreenPlayer').style.display = 'none';
-            document.body.style.overflow = 'auto';
-            if (fluidPlayer) fluidPlayer.pause();
-        });
-
-        // Search functionality
-        document.getElementById('searchButton').addEventListener('click', searchVideos);
-        document.getElementById('searchInput').addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') searchVideos();
-        });
 
         function searchVideos() {
-            const query = document.getElementById('searchInput').value.trim().toLowerCase();
-            if (!query) return;
-            
-            const results = allVideos.filter(video => 
-                video.title.toLowerCase().includes(query) || 
-                video.description.toLowerCase().includes(query)
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const videoGrid = document.getElementById('videoGrid');
+            videoGrid.innerHTML = '';
+
+            const filteredVideos = videosData.filter(video => 
+                video.title.toLowerCase().includes(searchTerm) ||
+                video.channel.toLowerCase().includes(searchTerm) ||
+                video.description.toLowerCase().includes(searchTerm)
             );
-            
-            document.querySelector('.hero-section').innerHTML = `
-                <h1>Search Results for "${query}"</h1>
-                <p>${results.length} videos found</p>
-            `;
-            
-            displayVideos(results, 'trendingVideos');
-            document.getElementById('recentVideos').innerHTML = '';
+
+            if (filteredVideos.length > 0) {
+                filteredVideos.forEach(video => {
+                    const videoCard = createVideoCard(video);
+                    videoGrid.appendChild(videoCard);
+                });
+            } else {
+                videoGrid.innerHTML = '<p class="no-videos">No videos found matching your search.</p>';
+            }
         }
 
-        // Load videos on page load
-        document.addEventListener('DOMContentLoaded', loadVideos);
+        // Load videos when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            // Small delay to ensure videos-data.html is loaded
+            setTimeout(loadVideos, 100);
+        });
+
+        // Handle Enter key in search
+        document.getElementById('searchInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                searchVideos();
+            }
+        });
     </script>
 </body>
 </html>
