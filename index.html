@@ -1,72 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Xshiver - Video Streaming</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>xShiver Streaming</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.fluidplayer.com/v3/current/fluidplayer.min.js"></script>
 </head>
 <body>
-    <header class="header">
-        <div class="container">
-            <h1 class="logo">Xshiver</h1>
-            <p class="tagline">Stream Your Favorite Videos</p>
-        </div>
-    </header>
+  <h1 style="text-align:center; padding: 20px;">xShiver Streaming 🍿</h1>
+  <div class="container" id="videoGrid"></div>
 
-    <main class="main">
-        <div class="container">
-            <section class="video-grid" id="videoGrid">
-                <!-- Videos will be loaded dynamically from videos.js -->
-            </section>
-        </div>
-    </main>
+  <div id="playerContainer">
+    <video id="my-video" controls></video>
+  </div>
 
-    <footer class="footer">
-        <div class="container">
-            <p>&copy; 2025 Xshiver. All rights reserved.</p>
-        </div>
-    </footer>
-
-    <script src="videos.js"></script>
-    <script>
-        // Load videos dynamically
-        function loadVideos() {
-            const videoGrid = document.getElementById('videoGrid');
-            
-            if (typeof videos === 'undefined') {
-                videoGrid.innerHTML = '<p class="error">Failed to load videos. Please check videos.js file.</p>';
-                return;
-            }
-
-            videos.forEach((video) => {
-                const videoCard = document.createElement('div');
-                videoCard.className = 'video-card';
-                videoCard.onclick = () => openVideo(video.id);
-                
-                videoCard.innerHTML = `
-                    <div class="thumbnail-container">
-                        <img src="${video.thumbnail}" alt="${video.title}" class="thumbnail">
-                        <div class="play-overlay">
-                            <div class="play-button">▶</div>
-                        </div>
-                    </div>
-                    <div class="video-info">
-                        <h3 class="video-title">${video.title}</h3>
-                        <p class="video-duration">${video.duration}</p>
-                    </div>
-                `;
-                
-                videoGrid.appendChild(videoCard);
-            });
-        }
-
-        function openVideo(videoId) {
-            window.location.href = `video.html?id=${videoId}`;
-        }
-
-        // Load videos when page loads
-        document.addEventListener('DOMContentLoaded', loadVideos);
-    </script>
+  <script src="player.js"></script>
 </body>
 </html>
