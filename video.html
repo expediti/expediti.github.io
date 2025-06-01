@@ -26,6 +26,9 @@
                         <div id="vimeoContainer" style="display: none;">
                             <!-- Vimeo embed will be inserted here -->
                         </div>
+                        <div id="embedContainer" style="display: none;">
+                            <!-- External embed (PixelDrain) will be inserted here -->
+                        </div>
                     </div>
                     <div class="video-details">
                         <h1 class="current-video-title" id="currentVideoTitle">Loading...</h1>
@@ -61,36 +64,42 @@
         function initializePlayer(currentVideo) {
             const videoPlayer = document.getElementById('videoPlayer');
             const vimeoContainer = document.getElementById('vimeoContainer');
+            const embedContainer = document.getElementById('embedContainer');
+            
+            // Hide all containers first
+            videoPlayer.style.display = 'none';
+            vimeoContainer.style.display = 'none';
+            embedContainer.style.display = 'none';
             
             if (currentVideo.type === 'vimeo') {
-                // Hide regular video player and show Vimeo container
-                videoPlayer.style.display = 'none';
                 vimeoContainer.style.display = 'block';
-                
-                // Insert Vimeo embed code
                 vimeoContainer.innerHTML = currentVideo.vimeoEmbed;
                 
-                // Load Vimeo player script if not already loaded
                 if (!document.querySelector('script[src*="player.vimeo.com"]')) {
                     const script = document.createElement('script');
                     script.src = 'https://player.vimeo.com/api/player.js';
                     document.head.appendChild(script);
                 }
                 
-                // Destroy Fluid Player instance if it exists
                 if (fluidPlayerInstance) {
                     fluidPlayerInstance.destroy();
                     fluidPlayerInstance = null;
                 }
-            } else {
-                // Hide Vimeo container and show regular video player
-                vimeoContainer.style.display = 'none';
+            } 
+            else if (currentVideo.embedCode) {
+                // Handle embedded content (PixelDrain)
+                embedContainer.style.display = 'block';
+                embedContainer.innerHTML = currentVideo.embedCode;
+                
+                if (fluidPlayerInstance) {
+                    fluidPlayerInstance.destroy();
+                    fluidPlayerInstance = null;
+                }
+            }
+            else {
+                // Regular MP4 video with Fluid Player
                 videoPlayer.style.display = 'block';
                 
-                // Clear Vimeo container
-                vimeoContainer.innerHTML = '';
-                
-                // Initialize Fluid Player for MP4 videos
                 if (fluidPlayerInstance) {
                     fluidPlayerInstance.destroy();
                 }
@@ -122,7 +131,6 @@
                     }
                 });
 
-                // Set video source
                 videoPlayer.src = currentVideo.videoUrl;
             }
         }
@@ -144,19 +152,16 @@
                 return;
             }
 
-            // Update page title and video info
             document.title = `${currentVideo.title} - Xshiver`;
             document.getElementById('currentVideoTitle').textContent = currentVideo.title;
             document.getElementById('videoMeta').textContent = `Duration: ${currentVideo.duration}`;
 
-            // Initialize Player (Fluid Player for MP4, Vimeo embed for Vimeo)
             initializePlayer(currentVideo);
         }
 
         function loadSuggestions() {
             const suggestionsList = document.getElementById('suggestionsList');
             
-            // Get random suggestions (excluding current video)
             const suggestions = videos
                 .filter(video => video.id !== currentVideoId)
                 .sort(() => Math.random() - 0.5)
@@ -185,7 +190,6 @@
             window.location.href = `video.html?id=${videoId}`;
         }
 
-        // Initialize page
         document.addEventListener('DOMContentLoaded', function() {
             if (typeof videos === 'undefined') {
                 document.getElementById('currentVideoTitle').textContent = 'Error loading videos';
