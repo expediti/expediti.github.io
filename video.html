@@ -18,11 +18,14 @@
         <div class="container">
             <div class="video-layout">
                 <div class="video-player-section">
-                    <div class="video-container">
-                        <video id="videoPlayer" class="video-player" controls>
+                    <div class="video-container" id="videoContainer">
+                        <video id="videoPlayer" class="video-player" controls style="display: none;">
                             <source src="" type="video/mp4">
                             Your browser does not support the video tag.
                         </video>
+                        <div id="vimeoContainer" style="display: none;">
+                            <!-- Vimeo embed will be inserted here -->
+                        </div>
                     </div>
                     <div class="video-details">
                         <h1 class="current-video-title" id="currentVideoTitle">Loading...</h1>
@@ -55,41 +58,73 @@
             return videos.find(video => video.id === id);
         }
 
-        function initializePlayer(videoUrl) {
-            if (fluidPlayerInstance) {
-                fluidPlayerInstance.destroy();
-            }
-
-            fluidPlayerInstance = fluidPlayer('videoPlayer', {
-                layoutControls: {
-                    fillToContainer: true,
-                    primaryColor: '#ff6b6b',
-                    playButtonShowing: true,
-                    playPauseAnimation: true,
-                    mute: {
-                        text: 'Mute'
-                    },
-                    subtitlesEnabled: false,
-                    keyboardControl: true,
-                    layout: 'default',
-                    allowDownload: false,
-                    allowTheatre: true,
-                    logo: {
-                        imageUrl: null,
-                        position: 'top-right',
-                        clickUrl: null,
-                        opacity: 0.8,
-                        mouseOverImageUrl: null,
-                        imageMargin: '2px',
-                        hideWithControls: false,
-                        showOverAds: false
-                    }
-                }
-            });
-
-            // Set video source
+        function initializePlayer(currentVideo) {
             const videoPlayer = document.getElementById('videoPlayer');
-            videoPlayer.src = videoUrl;
+            const vimeoContainer = document.getElementById('vimeoContainer');
+            
+            if (currentVideo.type === 'vimeo') {
+                // Hide regular video player and show Vimeo container
+                videoPlayer.style.display = 'none';
+                vimeoContainer.style.display = 'block';
+                
+                // Insert Vimeo embed code
+                vimeoContainer.innerHTML = currentVideo.vimeoEmbed;
+                
+                // Load Vimeo player script if not already loaded
+                if (!document.querySelector('script[src*="player.vimeo.com"]')) {
+                    const script = document.createElement('script');
+                    script.src = 'https://player.vimeo.com/api/player.js';
+                    document.head.appendChild(script);
+                }
+                
+                // Destroy Fluid Player instance if it exists
+                if (fluidPlayerInstance) {
+                    fluidPlayerInstance.destroy();
+                    fluidPlayerInstance = null;
+                }
+            } else {
+                // Hide Vimeo container and show regular video player
+                vimeoContainer.style.display = 'none';
+                videoPlayer.style.display = 'block';
+                
+                // Clear Vimeo container
+                vimeoContainer.innerHTML = '';
+                
+                // Initialize Fluid Player for MP4 videos
+                if (fluidPlayerInstance) {
+                    fluidPlayerInstance.destroy();
+                }
+
+                fluidPlayerInstance = fluidPlayer('videoPlayer', {
+                    layoutControls: {
+                        fillToContainer: true,
+                        primaryColor: '#ff4444',
+                        playButtonShowing: true,
+                        playPauseAnimation: true,
+                        mute: {
+                            text: 'Mute'
+                        },
+                        subtitlesEnabled: false,
+                        keyboardControl: true,
+                        layout: 'default',
+                        allowDownload: false,
+                        allowTheatre: true,
+                        logo: {
+                            imageUrl: null,
+                            position: 'top-right',
+                            clickUrl: null,
+                            opacity: 0.8,
+                            mouseOverImageUrl: null,
+                            imageMargin: '2px',
+                            hideWithControls: false,
+                            showOverAds: false
+                        }
+                    }
+                });
+
+                // Set video source
+                videoPlayer.src = currentVideo.videoUrl;
+            }
         }
 
         function loadCurrentVideo() {
@@ -114,8 +149,8 @@
             document.getElementById('currentVideoTitle').textContent = currentVideo.title;
             document.getElementById('videoMeta').textContent = `Duration: ${currentVideo.duration}`;
 
-            // Initialize Fluid Player
-            initializePlayer(currentVideo.videoUrl);
+            // Initialize Player (Fluid Player for MP4, Vimeo embed for Vimeo)
+            initializePlayer(currentVideo);
         }
 
         function loadSuggestions() {
