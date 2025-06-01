@@ -9,7 +9,7 @@ const videos = [
         videoUrl: "https://pixeldrain.com/api/file/LSevn5uJ",
         duration: "10:34",
         type: "mp4",
-        embedCode: '<iframe src="https://pixeldrain.com/u/LSevn5uJ?embed" style="border: none; width: 100%; height: 100%; border-radius: 8px;" allowfullscreen></iframe>'
+        embedCode: 'https://pixeldrain.com/api/file/LSevn5uJ'
     },
     // ... rest of your video objects remain the same
     {
