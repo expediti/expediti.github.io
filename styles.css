@@ -274,7 +274,8 @@ body {
     height: 100%;
 }
 
-#vimeoContainer {
+#vimeoContainer,
+#embedContainer {
     position: absolute;
     top: 0;
     left: 0;
@@ -282,13 +283,18 @@ body {
     height: 100%;
 }
 
-#vimeoContainer > div {
+#vimeoContainer > div,
+#embedContainer > div {
     width: 100% !important;
     height: 100% !important;
 }
 
-#vimeoContainer iframe {
-    border-radius: 0 !important;
+#vimeoContainer iframe,
+#embedContainer iframe {
+    border: none;
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
 }
 
 .video-details {
@@ -388,6 +394,23 @@ body {
     margin: 2rem 0;
 }
 
+/* Fluid Player custom styles */
+.fluid_video_wrapper {
+    border-radius: 0 !important;
+}
+
+.fluid_controls_container {
+    background: linear-gradient(transparent, rgba(0,0,0,0.8)) !important;
+}
+
+.fluid_button {
+    transition: all 0.3s ease !important;
+}
+
+.fluid_button:hover {
+    transform: scale(1.05) !important;
+}
+
 /* Responsive design */
 @media (max-width: 768px) {
     .container {
@@ -442,21 +465,4 @@ body {
         width: 100%;
         height: 100px;
     }
-}
-
-/* Fluid Player custom styles */
-.fluid_video_wrapper {
-    border-radius: 0 !important;
-}
-
-.fluid_controls_container {
-    background: linear-gradient(transparent, rgba(0,0,0,0.8)) !important;
-}
-
-.fluid_button {
-    transition: all 0.3s ease !important;
-}
-
-.fluid_button:hover {
-    transform: scale(1.05) !important;
 }
