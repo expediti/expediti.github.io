@@ -6,7 +6,7 @@ const videos = [
         id: "1",
         title: "Beautiful Nature Documentary - Forest Landscapes",
         thumbnail: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
-        videoUrl: "https://pixeldrain.com/u/LSevn5uJ",
+        videoUrl: "<video controls playsinline style="max-width: 100%; max-height: 100%;"><source src="https://pixeldrain.com/api/file/LSevn5uJ" type="video/mp4" /></video>",
         duration: "10:34",
         type: "mp4"
     },
