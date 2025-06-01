@@ -3,410 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Xshiver - Video Streaming Platform</title>
-    <style>
-        /* Complete inline CSS */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: #0f0f23;
-            color: #ffffff;
-            line-height: 1.6;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        /* Header Styles */
-        .header {
-            background: linear-gradient(135deg, #1a1a2e, #16213e);
-            padding: 1rem 0;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        .header .container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-        }
-
-        .logo h1 {
-            color: #ff6b6b;
-            font-size: 2rem;
-            font-weight: bold;
-            text-shadow: 0 0 10px rgba(255, 107, 107, 0.5);
-        }
-
-        .nav ul {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-        }
-
-        .nav a {
-            color: #ffffff;
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-        }
-
-        .nav a:hover {
-            color: #ff6b6b;
-            background: rgba(255, 107, 107, 0.1);
-            transform: translateY(-2px);
-        }
-
-        .search-bar {
-            display: flex;
-            gap: 0.5rem;
-            align-items: center;
-        }
-
-        .search-bar input {
-            padding: 0.8rem 1rem;
-            border: none;
-            border-radius: 25px;
-            background: rgba(255, 255, 255, 0.1);
-            color: #ffffff;
-            width: 300px;
-            font-size: 1rem;
-            backdrop-filter: blur(10px);
-        }
-
-        .search-bar input::placeholder {
-            color: rgba(255, 255, 255, 0.7);
-        }
-
-        .search-bar button {
-            padding: 0.8rem 1rem;
-            border: none;
-            border-radius: 25px;
-            background: #ff6b6b;
-            color: white;
-            cursor: pointer;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-        }
-
-        .search-bar button:hover {
-            background: #ff5252;
-            transform: scale(1.05);
-        }
-
-        /* Main Content */
-        .main-content {
-            min-height: calc(100vh - 140px);
-            padding: 2rem 0;
-        }
-
-        .hero-section {
-            text-align: center;
-            padding: 3rem 0;
-            background: linear-gradient(135deg, rgba(255, 107, 107, 0.1), rgba(74, 144, 226, 0.1));
-            border-radius: 20px;
-            margin-bottom: 3rem;
-            backdrop-filter: blur(10px);
-        }
-
-        .hero-section h2 {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            background: linear-gradient(135deg, #ff6b6b, #4a90e2);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .hero-section p {
-            font-size: 1.2rem;
-            color: rgba(255, 255, 255, 0.8);
-        }
-
-        .videos-section h3 {
-            font-size: 2rem;
-            margin-bottom: 2rem;
-            color: #ff6b6b;
-            text-align: center;
-        }
-
-        /* Video Grid */
-        .video-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 2rem;
-            margin-bottom: 3rem;
-        }
-
-        .video-card {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 15px;
-            overflow: hidden;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .video-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(255, 107, 107, 0.3);
-            border-color: rgba(255, 107, 107, 0.5);
-        }
-
-        .video-thumbnail {
-            position: relative;
-            width: 100%;
-            height: 180px;
-            overflow: hidden;
-        }
-
-        .video-thumbnail img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.3s ease;
-        }
-
-        .video-card:hover .video-thumbnail img {
-            transform: scale(1.05);
-        }
-
-        .video-duration {
-            position: absolute;
-            bottom: 8px;
-            right: 8px;
-            background: rgba(0, 0, 0, 0.8);
-            color: white;
-            padding: 0.2rem 0.5rem;
-            border-radius: 4px;
-            font-size: 0.8rem;
-            font-weight: bold;
-        }
-
-        .video-info {
-            padding: 1rem;
-        }
-
-        .video-title {
-            font-size: 1.1rem;
-            font-weight: bold;
-            margin-bottom: 0.5rem;
-            color: #ffffff;
-            line-height: 1.4;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-        }
-
-        .video-channel {
-            color: #ff6b6b;
-            font-weight: 500;
-            margin-bottom: 0.5rem;
-        }
-
-        .video-meta {
-            display: flex;
-            justify-content: space-between;
-            color: rgba(255, 255, 255, 0.7);
-            font-size: 0.9rem;
-        }
-
-        .no-videos {
-            text-align: center;
-            color: rgba(255, 255, 255, 0.7);
-            font-size: 1.2rem;
-            padding: 3rem;
-            grid-column: 1 / -1;
-        }
-
-        /* Footer */
-        .footer {
-            background: #1a1a2e;
-            padding: 2rem 0;
-            text-align: center;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .footer p {
-            color: rgba(255, 255, 255, 0.7);
-        }
-
-        /* Video Modal */
-        .video-modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.9);
-            backdrop-filter: blur(10px);
-        }
-
-        .video-modal-content {
-            position: relative;
-            background-color: #1a1a2e;
-            margin: 2% auto;
-            padding: 20px;
-            border-radius: 15px;
-            width: 90%;
-            max-width: 1000px;
-            max-height: 90vh;
-            overflow-y: auto;
-        }
-
-        .close-button {
-            color: #ff6b6b;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-            cursor: pointer;
-            background: none;
-            border: none;
-            padding: 0;
-            margin: 0 0 20px 0;
-        }
-
-        .close-button:hover {
-            color: #ff5252;
-        }
-
-        .modal-video-player {
-            width: 100%;
-            height: 500px;
-            border-radius: 10px;
-            background: #000;
-            margin-bottom: 20px;
-        }
-
-        .modal-video-info h2 {
-            color: #ffffff;
-            margin-bottom: 10px;
-        }
-
-        .modal-video-info p {
-            color: rgba(255, 255, 255, 0.8);
-            margin-bottom: 8px;
-        }
-
-        .modal-video-description {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 15px;
-            border-radius: 10px;
-            margin-top: 15px;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .header .container {
-                flex-direction: column;
-                gap: 1rem;
-            }
-            
-            .nav ul {
-                gap: 1rem;
-            }
-            
-            .search-bar input {
-                width: 250px;
-            }
-            
-            .hero-section h2 {
-                font-size: 2rem;
-            }
-            
-            .video-grid {
-                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-                gap: 1rem;
-            }
-            
-            .modal-video-player {
-                height: 250px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .search-bar input {
-                width: 200px;
-            }
-            
-            .video-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
+    <title>Xshiver - Video Streaming</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <header class="header">
         <div class="container">
-            <div class="logo">
-                <h1>Xshiver</h1>
-            </div>
-            <nav class="nav">
-                <ul>
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#trending">Trending</a></li>
-                    <li><a href="#subscriptions">Subscriptions</a></li>
-                    <li><a href="#library">Library</a></li>
-                </ul>
-            </nav>
-            <div class="search-bar">
-                <input type="text" placeholder="Search videos..." id="searchInput">
-                <button onclick="searchVideos()">🔍</button>
-            </div>
+            <h1 class="logo">Xshiver</h1>
+            <p class="tagline">Stream Your Favorite Videos</p>
         </div>
     </header>
 
-    <main class="main-content">
+    <main class="main">
         <div class="container">
-            <section class="hero-section">
-                <h2>Welcome to Xshiver</h2>
-                <p>Discover amazing videos from creators around the world</p>
-            </section>
-
-            <section class="videos-section">
-                <h3>Latest Videos</h3>
-                <div class="video-grid" id="videoGrid">
-                    <!-- Videos will be loaded here dynamically -->
-                </div>
+            <section class="video-grid" id="videoGrid">
+                <!-- Videos will be loaded dynamically from videos.js -->
             </section>
         </div>
     </main>
-
-    <!-- Video Modal -->
-    <div id="videoModal" class="video-modal">
-        <div class="video-modal-content">
-            <button class="close-button" onclick="closeVideoModal()">&times;</button>
-            <video id="modalVideoPlayer" class="modal-video-player" controls>
-                <source src="" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
-            <div class="modal-video-info">
-                <h2 id="modalVideoTitle">Video Title</h2>
-                <p><strong>Channel:</strong> <span id="modalVideoChannel">Channel Name</span></p>
-                <p><strong>Views:</strong> <span id="modalVideoViews">0 views</span></p>
-                <p><strong>Uploaded:</strong> <span id="modalVideoDate">Date</span></p>
-                <div class="modal-video-description">
-                    <p id="modalVideoDescription">Video description...</p>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <footer class="footer">
         <div class="container">
@@ -414,207 +28,45 @@
         </div>
     </footer>
 
+    <script src="videos.js"></script>
     <script>
-        // Video data (embedded directly)
-        const videosData = [
-            {
-                id: "video1",
-                title: "Big Buck Bunny - Short Film",
-                thumbnail: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/BigBuckBunny.jpg",
-                videoUrl: "https://vimeo.com/1089376422/b3600a2efd",
-                channel: "Blender Foundation",
-                views: "2.1M",
-                uploadDate: "2 days ago",
-                duration: "10:34",
-                description: "Big Buck Bunny is a short computer-animated comedy film by the Blender Institute, part of the Blender Foundation."
-            },
-            {
-                id: "video2",
-                title: "Elephant Dream - Animation",
-                thumbnail: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/ElephantsDream.jpg",
-                videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
-                channel: "Orange Open Movie Project",
-                views: "1.5M",
-                uploadDate: "1 week ago",
-                duration: "10:53",
-                description: "Elephant's Dream is the world's first open movie, made entirely with open source graphics software."
-            },
-            {
-                id: "video3",
-                title: "For Bigger Blazes",
-                thumbnail: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/ForBiggerBlazes.jpg",
-                videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
-                channel: "Google Sample Videos",
-                views: "890K",
-                uploadDate: "3 days ago",
-                duration: "15:11",
-                description: "A sample video showcasing high-quality streaming technology and video compression."
-            },
-            {
-                id: "video4",
-                title: "Sintel - Fantasy Short",
-                thumbnail: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/Sintel.jpg",
-                videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4",
-                channel: "Blender Institute",
-                views: "3.2M",
-                uploadDate: "5 days ago",
-                duration: "14:48",
-                description: "Sintel is an independently produced short film, initiated by the Blender Foundation as a means to further improve and validate the open-source 3D creation suite."
-            },
-            {
-                id: "video5",
-                title: "Tears of Steel - Sci-Fi",
-                thumbnail: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/TearsOfSteel.jpg",
-                videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4",
-                channel: "Mango Open Movie Project",
-                views: "1.8M",
-                uploadDate: "1 day ago",
-                duration: "12:14",
-                description: "Tears of Steel was realized with crowd-funding by users of the open source 3D creation tool Blender."
-            },
-            {
-                id: "video6",
-                title: "What Car? - Comedy",
-                thumbnail: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/WhatCarCanYouGetForAGrand.jpg",
-                videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WhatCarCanYouGetForAGrand.mp4",
-                channel: "Sample Channel",
-                views: "650K",
-                uploadDate: "6 days ago",
-                duration: "11:32",
-                description: "A humorous take on car shopping and automotive adventures."
-            }
-        ];
-
-        // Create video card
-        function createVideoCard(video) {
-            const card = document.createElement('div');
-            card.className = 'video-card';
-            card.onclick = () => openVideo(video);
-
-            card.innerHTML = `
-                <div class="video-thumbnail">
-                    <img src="${video.thumbnail}" alt="${video.title}" 
-                         onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIwIiBoZWlnaHQ9IjE4MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjMzMzIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzk5OSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPk5vIFRodW1ibmFpbDwvdGV4dD48L3N2Zz4='">
-                    <div class="video-duration">${video.duration}</div>
-                </div>
-                <div class="video-info">
-                    <h4 class="video-title">${video.title}</h4>
-                    <p class="video-channel">${video.channel}</p>
-                    <div class="video-meta">
-                        <span class="views">${video.views} views</span>
-                        <span class="upload-date">${video.uploadDate}</span>
-                    </div>
-                </div>
-            `;
-
-            return card;
-        }
-
-        // Open video in modal
-        function openVideo(video) {
-            const modal = document.getElementById('videoModal');
-            const videoPlayer = document.getElementById('modalVideoPlayer');
-            
-            // Set video source
-            videoPlayer.src = video.videoUrl;
-            
-            // Update modal content
-            document.getElementById('modalVideoTitle').textContent = video.title;
-            document.getElementById('modalVideoChannel').textContent = video.channel;
-            document.getElementById('modalVideoViews').textContent = video.views + ' views';
-            document.getElementById('modalVideoDate').textContent = video.uploadDate;
-            document.getElementById('modalVideoDescription').textContent = video.description;
-            
-            // Show modal
-            modal.style.display = 'block';
-            
-            // Auto play video
-            videoPlayer.play().catch(e => console.log('Auto-play prevented by browser'));
-        }
-
-        // Close video modal
-        function closeVideoModal() {
-            const modal = document.getElementById('videoModal');
-            const videoPlayer = document.getElementById('modalVideoPlayer');
-            
-            // Stop video
-            videoPlayer.pause();
-            videoPlayer.src = '';
-            
-            // Hide modal
-            modal.style.display = 'none';
-        }
-
-        // Close modal when clicking outside of it
-        window.onclick = function(event) {
-            const modal = document.getElementById('videoModal');
-            if (event.target === modal) {
-                closeVideoModal();
-            }
-        }
-
-        // Close modal with Escape key
-        document.addEventListener('keydown', function(event) {
-            if (event.key === 'Escape') {
-                closeVideoModal();
-            }
-        });
-
-        // Load videos
+        // Load videos dynamically
         function loadVideos() {
             const videoGrid = document.getElementById('videoGrid');
-            videoGrid.innerHTML = '';
-
-            if (videosData && videosData.length > 0) {
-                videosData.forEach(video => {
-                    const videoCard = createVideoCard(video);
-                    videoGrid.appendChild(videoCard);
-                });
-            } else {
-                videoGrid.innerHTML = '<p class="no-videos">No videos available.</p>';
-            }
-        }
-
-        // Search videos
-        function searchVideos() {
-            const searchTerm = document.getElementById('searchInput').value.toLowerCase().trim();
-            const videoGrid = document.getElementById('videoGrid');
-            videoGrid.innerHTML = '';
-
-            if (!searchTerm) {
-                loadVideos();
+            
+            if (typeof videos === 'undefined') {
+                videoGrid.innerHTML = '<p class="error">Failed to load videos. Please check videos.js file.</p>';
                 return;
             }
 
-            const filteredVideos = videosData.filter(video => 
-                video.title.toLowerCase().includes(searchTerm) ||
-                video.channel.toLowerCase().includes(searchTerm) ||
-                video.description.toLowerCase().includes(searchTerm)
-            );
-
-            if (filteredVideos.length > 0) {
-                filteredVideos.forEach(video => {
-                    const videoCard = createVideoCard(video);
-                    videoGrid.appendChild(videoCard);
-                });
-            } else {
-                videoGrid.innerHTML = '<p class="no-videos">No videos found matching your search.</p>';
-            }
+            videos.forEach((video) => {
+                const videoCard = document.createElement('div');
+                videoCard.className = 'video-card';
+                videoCard.onclick = () => openVideo(video.id);
+                
+                videoCard.innerHTML = `
+                    <div class="thumbnail-container">
+                        <img src="${video.thumbnail}" alt="${video.title}" class="thumbnail">
+                        <div class="play-overlay">
+                            <div class="play-button">▶</div>
+                        </div>
+                    </div>
+                    <div class="video-info">
+                        <h3 class="video-title">${video.title}</h3>
+                        <p class="video-duration">${video.duration}</p>
+                    </div>
+                `;
+                
+                videoGrid.appendChild(videoCard);
+            });
         }
 
-        // Handle Enter key in search
-        document.getElementById('searchInput').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                searchVideos();
-            }
-        });
+        function openVideo(videoId) {
+            window.location.href = `video.html?id=${videoId}`;
+        }
 
         // Load videos when page loads
-        document.addEventListener('DOMContentLoaded', function() {
-            loadVideos();
-        });
-
-        console.log('🚀 Xshiver loaded successfully with', videosData.length, 'videos');
+        document.addEventListener('DOMContentLoaded', loadVideos);
     </script>
 </body>
 </html>
