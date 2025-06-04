@@ -1,4 +1,352 @@
-<script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>xShiver Streaming</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #1a1b23;
+      color: #ffffff;
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+    }
+
+    /* Header */
+    .header {
+      background: #1e1f28;
+      padding: 15px 20px;
+      border-bottom: 1px solid #2a2b35;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .header-content {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #ff6b6b, #4ecdc4);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      flex-shrink: 0;
+    }
+
+    .search-container {
+      flex: 1;
+      max-width: 500px;
+      position: relative;
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 12px 45px 12px 20px;
+      background: #2a2b35;
+      border: 1px solid #3a3b45;
+      border-radius: 25px;
+      color: #ffffff;
+      font-size: 16px;
+      outline: none;
+      transition: all 0.3s ease;
+    }
+
+    .search-input:focus {
+      border-color: #4ecdc4;
+      box-shadow: 0 0 0 3px rgba(78, 205, 196, 0.1);
+    }
+
+    .search-icon {
+      position: absolute;
+      right: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #8a8b95;
+      cursor: pointer;
+    }
+
+    .get-pro {
+      background: linear-gradient(135deg, #ff6b6b, #ff8e8e);
+      color: white;
+      padding: 10px 20px;
+      border-radius: 20px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: transform 0.2s ease;
+      flex-shrink: 0;
+    }
+
+    .get-pro:hover {
+      transform: scale(1.05);
+    }
+
+    /* Categories */
+    .categories {
+      background: #1e1f28;
+      border-bottom: 1px solid #2a2b35;
+      overflow-x: auto;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+
+    .categories::-webkit-scrollbar {
+      display: none;
+    }
+
+    .categories-list {
+      display: flex;
+      padding: 15px 20px;
+      gap: 30px;
+      min-width: max-content;
+    }
+
+    .category {
+      color: #8a8b95;
+      text-decoration: none;
+      font-weight: 500;
+      white-space: nowrap;
+      padding: 8px 0;
+      border-bottom: 2px solid transparent;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .category.active {
+      color: #ffffff;
+      border-bottom-color: #4ecdc4;
+    }
+
+    .category:hover {
+      color: #ffffff;
+    }
+
+    /* Video Grid */
+    .main-content {
+      padding: 30px 20px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 20px;
+    }
+
+    .video-card {
+      background: #2a2b35;
+      border-radius: 12px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+      border: 1px solid #3a3b45;
+    }
+
+    .video-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+      border-color: #4a4b55;
+    }
+
+    .video-thumbnail {
+      position: relative;
+      aspect-ratio: 16/9;
+      overflow: hidden;
+    }
+
+    .video-thumbnail img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+
+    .video-card:hover .video-thumbnail img {
+      transform: scale(1.05);
+    }
+
+    .video-duration {
+      position: absolute;
+      bottom: 8px;
+      right: 8px;
+      background: rgba(0, 0, 0, 0.8);
+      color: white;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .video-info {
+      padding: 15px;
+    }
+
+    .video-category {
+      color: #8a8b95;
+      font-size: 12px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 5px;
+    }
+
+    .video-title {
+      color: #ffffff;
+      font-size: 16px;
+      font-weight: 600;
+      line-height: 1.3;
+      margin: 0;
+    }
+
+    /* Player Modal */
+    #playerContainer {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.95);
+      backdrop-filter: blur(20px);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      padding: 20px;
+      animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    #my-video {
+      max-width: 100%;
+      max-height: 100%;
+      border-radius: 12px;
+      box-shadow: 0 25px 80px rgba(0, 0, 0, 0.6);
+    }
+
+    /* Mobile Responsive */
+    @media (max-width: 768px) {
+      .header-content {
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      .search-container {
+        order: 2;
+        max-width: none;
+      }
+
+      .logo {
+        font-size: 1.5rem;
+      }
+
+      .categories-list {
+        padding: 15px;
+        gap: 20px;
+      }
+
+      .video-grid {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 15px;
+      }
+
+      .main-content {
+        padding: 20px 15px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .header {
+        padding: 12px 15px;
+      }
+
+      .video-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+
+      .video-card {
+        border-radius: 8px;
+      }
+
+      .categories-list {
+        gap: 15px;
+      }
+    }
+
+    /* Touch optimizations */
+    @media (hover: none) and (pointer: coarse) {
+      .video-card:hover {
+        transform: none;
+      }
+      
+      .video-card:active {
+        transform: scale(0.98);
+      }
+    }
+  </style>
+  <script src="https://cdn.fluidplayer.com/v3/current/fluidplayer.min.js"></script>
+</head>
+<body>
+  <!-- Header -->
+  <div class="header">
+    <div class="header-content">
+      <div class="logo"> XShiver</div>
+      <div class="search-container">
+        <input type="text" class="search-input" placeholder="Search for clips" id="searchInput">
+        <div class="search-icon">🔍</div>
+      </div>
+      <a href="#" class="get-pro">Get Pro</a>
+    </div>
+  </div>
+
+  <!-- Categories -->
+  <div class="categories">
+    <div class="categories-list">
+      <a href="#" class="category active" data-category="all">Trending</a>
+      <a href="#" class="category" data-category="movies">Most Viewed</a>
+      <a href="#" class="category" data-category="series">Viral</a>
+      <a href="#" class="category" data-category="comedy">Indian</a>
+      <a href="#" class="category" data-category="action">Xshiver pick</a>
+      <a href="#" class="category" data-category="drama">MMS</a>
+      <a href="#" class="category" data-category="horror">Big Bobs</a>
+      <a href="#" class="category" data-category="documentary">Big Ass</a>
+      <a href="#" class="category" data-category="anime">Cute Girl</a>
+    
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <div class="video-grid" id="videoGrid"></div>
+  </div>
+
+  <!-- Video Player Modal -->
+  <div id="playerContainer">
+    <video id="my-video" controls></video>
+  </div>
+
+  <script>
     let allVideos = [];
     let currentCategory = 'all';
     let isVideoPlaying = false; // Track video playback state
@@ -150,3 +498,5 @@
       }
     };
   </script>
+</body>
+</html>
