@@ -311,7 +311,7 @@
   <!-- Header -->
   <div class="header">
     <div class="header-content">
-      <div class="logo"> XShiver</div>
+      <div class="logo">XShiver</div>
       <div class="search-container">
         <input type="text" class="search-input" placeholder="Search for clips" id="searchInput">
         <div class="search-icon">🔍</div>
@@ -332,7 +332,6 @@
       <a href="#" class="category" data-category="horror">Big Bobs</a>
       <a href="#" class="category" data-category="documentary">Big Ass</a>
       <a href="#" class="category" data-category="anime">Cute Girl</a>
-    
     </div>
   </div>
 
@@ -349,43 +348,56 @@
   <script>
     let allVideos = [];
     let currentCategory = 'all';
-    let isVideoPlaying = false; // Track video playback state
+    let isVideoPlaying = false;
+    let fluidPlayerInstance = null;
 
     // Enhanced video data with categories and durations
     const videoData = [
       {
         "title": "Indian Girl viral",
         "thumbnail": "https://files.catbox.moe/jkpyvz.png",
-        "url": "https://files.catbox.moe/sjftxq.mp4"
+        "url": "https://files.catbox.moe/sjftxq.mp4",
+        "category": "indian",
+        "duration": "2:30"
       },
       {
         "title": "Bhabhi In heat",
         "thumbnail": "https://files.catbox.moe/qr6l56.png",
-        "url": "https://files.catbox.moe/4mamfo.mp4"
+        "url": "https://files.catbox.moe/4mamfo.mp4",
+        "category": "indian",
+        "duration": "3:15"
       },
       {
         "title": "Cute girl big boobs",
         "thumbnail": "https://files.catbox.moe/qq912z.png",
-        "url": "https://files.catbox.moe/nqquuv.mp4"
+        "url": "https://files.catbox.moe/nqquuv.mp4",
+        "category": "cute",
+        "duration": "1:45"
       }
     ];
 
-    // Try to fetch from videos.json, fallback to embedded data
-    fetch('videos.json')
-      .then(res => res.json())
-      .then(data => {
-        allVideos = data.map(video => ({
-          ...video,
-          category: video.category || 'movies',
-          duration: video.duration || '2:00'
-        }));
-        renderVideos();
-      })
-      .catch(() => {
-        // Fallback to embedded data if videos.json doesn't exist
-        allVideos = videoData;
-        renderVideos();
-      });
+    // Initialize the player and load videos
+    document.addEventListener('DOMContentLoaded', function() {
+      // Try to fetch from videos.json, fallback to embedded data
+      fetch('videos.json')
+        .then(res => res.json())
+        .then(data => {
+          allVideos = data.map(video => ({
+            ...video,
+            category: video.category || 'movies',
+            duration: video.duration || '2:00'
+          }));
+          renderVideos();
+        })
+        .catch(() => {
+          // Fallback to embedded data if videos.json doesn't exist
+          allVideos = videoData;
+          renderVideos();
+        });
+
+      // Initialize event listeners
+      initEventListeners();
+    });
 
     function renderVideos() {
       const grid = document.getElementById('videoGrid');
@@ -408,95 +420,122 @@
             <h3 class="video-title">${video.title}</h3>
           </div>
         `;
-        card.onclick = () => playVideo(video.url);
+        card.addEventListener('click', () => playVideo(video.url));
         grid.appendChild(card);
       });
     }
 
     function playVideo(url) {
       const container = document.getElementById('playerContainer');
+      const videoElement = document.getElementById('my-video');
+      
+      // Destroy previous player instance if exists
+      if (fluidPlayerInstance) {
+        fluidPlayerInstance.destroy();
+      }
+      
       container.style.display = 'flex';
-      document.getElementById('my-video').src = url;
-      fluidPlayer("my-video", { layoutControls: { fillToContainer: true } });
+      videoElement.src = url;
+      
+      // Initialize Fluid Player
+      fluidPlayerInstance = fluidPlayer("my-video", {
+        layoutControls: {
+          fillToContainer: true,
+          primaryColor: "#4ecdc4",
+          playbackRateEnabled: true,
+          allowTheatre: true,
+          autoPlay: true
+        }
+      });
       
       // Push state to history when video plays
       history.pushState({ videoPlaying: true }, '');
       isVideoPlaying = true;
+      
+      // Prevent scrolling when video is playing
+      document.body.style.overflow = 'hidden';
     }
-
-    // Handle back button press
-    window.addEventListener('popstate', function(event) {
-      if (isVideoPlaying) {
-        closeVideoPlayer();
-        // Push another state to prevent exiting
-        if (event.state && event.state.videoPlaying) {
-          history.pushState(null, '', window.location.pathname);
-        }
-      }
-    });
 
     function closeVideoPlayer() {
       const container = document.getElementById('playerContainer');
+      const videoElement = document.getElementById('my-video');
+      
       container.style.display = 'none';
-      const video = document.getElementById('my-video');
-      video.pause();
-      video.src = '';
+      videoElement.pause();
+      videoElement.src = '';
+      
+      // Destroy Fluid Player instance
+      if (fluidPlayerInstance) {
+        fluidPlayerInstance.destroy();
+        fluidPlayerInstance = null;
+      }
+      
       isVideoPlaying = false;
+      document.body.style.overflow = '';
     }
 
-    // Category filtering
-    document.querySelectorAll('.category').forEach(category => {
-      category.addEventListener('click', (e) => {
-        e.preventDefault();
-        
-        // Update active category
-        document.querySelectorAll('.category').forEach(c => c.classList.remove('active'));
-        category.classList.add('active');
-        
-        // Update current category and render
-        currentCategory = category.dataset.category;
-        renderVideos();
-      });
-    });
-
-    // Search functionality
-    document.getElementById('searchInput').addEventListener('input', (e) => {
-      const searchTerm = e.target.value.toLowerCase();
-      const filteredVideos = allVideos.filter(video => 
-        video.title.toLowerCase().includes(searchTerm)
-      );
-      
-      const grid = document.getElementById('videoGrid');
-      grid.innerHTML = '';
-
-      filteredVideos.forEach(video => {
-        const card = document.createElement('div');
-        card.className = 'video-card';
-        card.innerHTML = `
-          <div class="video-thumbnail">
-            <img src="${video.thumbnail}" alt="${video.title}" loading="lazy">
-            <div class="video-duration">${video.duration}</div>
-          </div>
-          <div class="video-info">
-            <div class="video-category">${video.category.toUpperCase()}</div>
-            <h3 class="video-title">${video.title}</h3>
-          </div>
-        `;
-        card.onclick = () => playVideo(video.url);
-        grid.appendChild(card);
-      });
-    });
-
-    // Close player modal
-    document.getElementById('playerContainer').onclick = function(e) {
-      if (e.target === this) {
-        closeVideoPlayer();
-        // Update history when closing manually
-        if (window.history.state && window.history.state.videoPlaying) {
-          history.back();
+    function initEventListeners() {
+      // Handle back button press
+      window.addEventListener('popstate', function(event) {
+        if (isVideoPlaying) {
+          closeVideoPlayer();
+          if (event.state && event.state.videoPlaying) {
+            history.pushState(null, '', window.location.pathname);
+          }
         }
-      }
-    };
+      });
+
+      // Category filtering
+      document.querySelectorAll('.category').forEach(category => {
+        category.addEventListener('click', (e) => {
+          e.preventDefault();
+          
+          document.querySelectorAll('.category').forEach(c => c.classList.remove('active'));
+          category.classList.add('active');
+          
+          currentCategory = category.dataset.category;
+          renderVideos();
+        });
+      });
+
+      // Search functionality
+      document.getElementById('searchInput').addEventListener('input', (e) => {
+        const searchTerm = e.target.value.toLowerCase();
+        const filteredVideos = allVideos.filter(video => 
+          video.title.toLowerCase().includes(searchTerm)
+        );
+        
+        const grid = document.getElementById('videoGrid');
+        grid.innerHTML = '';
+
+        filteredVideos.forEach(video => {
+          const card = document.createElement('div');
+          card.className = 'video-card';
+          card.innerHTML = `
+            <div class="video-thumbnail">
+              <img src="${video.thumbnail}" alt="${video.title}" loading="lazy">
+              <div class="video-duration">${video.duration}</div>
+            </div>
+            <div class="video-info">
+              <div class="video-category">${video.category.toUpperCase()}</div>
+              <h3 class="video-title">${video.title}</h3>
+            </div>
+          `;
+          card.addEventListener('click', () => playVideo(video.url));
+          grid.appendChild(card);
+        });
+      });
+
+      // Close player modal
+      document.getElementById('playerContainer').addEventListener('click', function(e) {
+        if (e.target === this) {
+          closeVideoPlayer();
+          if (window.history.state && window.history.state.videoPlaying) {
+            history.back();
+          }
+        }
+      });
+    }
   </script>
 </body>
 </html>
