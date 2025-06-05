@@ -40,22 +40,42 @@
 
     /* Header */
     .header {
-      background: #1e1f28;
-      padding: 15px 20px;
-      border-bottom: 1px solid #2a2b35;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-    }
+  background: linear-gradient(135deg, #0f172a, #1e3a8a); /* Deep blue gradient */
+  padding: 20px 30px;
+  border-bottom: 2px solid #3b82f6; /* Vibrant blue accent */
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
+  transition: background 0.3s ease-in-out;
+}
 
-    .header-content {
-      max-width: 1400px;
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 20px;
-    }
+.header:hover {
+  background: linear-gradient(135deg, #1e3a8a, #2563eb); /* Lighter blue on hover */
+}
+
+.header-content {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 25px;
+}
+
+.header-content h1, 
+.header-content a {
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 1.2rem;
+  transition: color 0.3s;
+}
+
+.header-content a:hover {
+  color: #93c5fd; /* Soft blue hover effect */
+}
+
 
     .logo {
   font-size: 1.8rem;
