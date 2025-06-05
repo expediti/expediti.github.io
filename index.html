@@ -159,14 +159,17 @@
       transform: scale(1.05);
     }
 
+
+    
     /* Categories */
-    .categories {
-  background: linear-gradient(135deg, #1e1f28 0%, #2a2b35 100%);
-  border-bottom: 1px solid #3a3b45;
+    /* Categories */
+.categories {
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+  border-bottom: 1px solid #334155;
   overflow-x: auto;
   scrollbar-width: none;
   -ms-overflow-style: none;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
 .categories::-webkit-scrollbar {
@@ -175,60 +178,70 @@
 
 .categories-list {
   display: flex;
-  padding: 15px 20px;
-  gap: 30px;
+  padding: 15px 25px;
+  gap: 24px;
   min-width: max-content;
 }
 
+/* Individual Category */
 .category {
-  color: #8a8b95;
+  color: #94a3b8;
   text-decoration: none;
   font-weight: 600;
   white-space: nowrap;
-  padding: 8px 12px;
-  border-radius: 20px;
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  padding: 10px 16px;
+  border-radius: 24px;
+  transition: all 0.35s ease;
   position: relative;
   transform: translateY(0);
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0);
+  font-size: 14px;
+  background: transparent;
+  border: 1px solid transparent;
 }
 
+/* Underline Hover Effect */
 .category::before {
   content: '';
   position: absolute;
-  bottom: 0;
+  bottom: 6px;
   left: 50%;
   width: 0;
   height: 2px;
-  background: #4ecdc4;
+  background: #3b82f6; /* Blue accent */
   transition: all 0.3s ease;
   transform: translateX(-50%);
 }
 
+/* Hover State */
 .category:hover {
   color: #ffffff;
-  transform: translateY(-3px);
-  box-shadow: 0 5px 15px rgba(78, 205, 196, 0.2);
-  background: rgba(78, 205, 196, 0.1);
+  transform: translateY(-2px);
+  background: rgba(59, 130, 246, 0.1); /* Blue background glow */
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.25);
 }
 
 .category:hover::before {
   width: 60%;
 }
 
+/* Active State */
 .category.active {
   color: #ffffff;
-  background: rgba(78, 205, 196, 0.2);
-  transform: translateY(-3px);
-  box-shadow: 0 5px 15px rgba(78, 205, 196, 0.3);
-  animation: pulse 2s infinite;
+  background: linear-gradient(90deg, #1e40af, #2563eb);
+  box-shadow: 0 4px 16px rgba(59, 130, 246, 0.4);
+  transform: translateY(-2px);
+  border: 1px solid #60a5fa;
 }
 
 .category.active::before {
-  width: 80%;
+  width: 70%;
   background: #ffffff;
 }
 
+
+
+
+    
 @keyframes pulse {
   0% {
     box-shadow: 0 0 0 0 rgba(78, 205, 196, 0.4);
