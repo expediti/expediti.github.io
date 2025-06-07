@@ -19,13 +19,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>XShiver Exclusives</title>
 
-  <style>
+
+
+
+
+
+  
+<style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
     * {
       margin: 0;
       padding: 0;
-      box-sizing: border lid;
+      box-sizing: border-box;
     }
 
     body {
@@ -709,60 +715,18 @@
       0% { transform: translate(0, 0); }
       100% { transform: translate(-50px, -50px); }
     }
-
-    /* Suggestion Feature Styles */
-    .player-wrapper {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      max-width: 800px;
-      width: 100%;
-    }
-
-    #suggestions {
-      margin-top: 20px;
-      width: 100%;
-    }
-
-    .suggestion-list {
-      display: flex;
-      overflow-x: auto;
-      gap: 20px;
-      padding: 10px 0;
-    }
-
-    .suggestion-item {
-      flex: 0 0 auto;
-      width: 200px;
-      background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
-      border-radius: 10px;
-      overflow: hidden;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-
-    .suggestion-item:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-    }
-
-    .suggestion-thumbnail img {
-      width: 100%;
-      height: 120px;
-      object-fit: cover;
-    }
-
-    .suggestion-info {
-      padding: 10px;
-    }
-
-    .suggestion-title {
-      font-size: 14px;
-      color: #f1f5f9;
-      margin: 0;
-    }
   </style>
 
+
+
+
+
+      
+
+  
+
+
+  
   <script src="https://cdn.fluidplayer.com/v3/current/fluidplayer.min.js"></script>
 </head>
 <body>
@@ -773,7 +737,11 @@
       <div class="search-container">
         <input type="text" class="search-input" placeholder="Search for clips" id="searchInput">
         <div class="search-icon">🔍</div>
+       
       </div>
+        <!--
+      <a href="#" class="get-pro">Website Under Construction</a>
+         -->
     </div>
   </div>
 
@@ -797,15 +765,9 @@
     <div class="video-grid" id="videoGrid"></div>
   </div>
 
-  <!-- Video Player Modal with Suggestions -->
+  <!-- Video Player Modal -->
   <div id="playerContainer">
-    <div class="player-wrapper">
-      <video id="my-video" controls></video>
-      <div id="suggestions">
-        <h2>Suggested Videos</h2>
-        <div id="suggestion-list" class="suggestion-list"></div>
-      </div>
-    </div>
+    <video id="my-video" controls></video>
   </div>
 
   <script>
@@ -816,6 +778,8 @@
 
     // Enhanced video data with categories and durations
     const videoData = [
+        
+      
       {
         "title": "Cute girl sexy view",
         "thumbnail": "https://files.catbox.moe/cu9hz8.png",
@@ -918,6 +882,7 @@
 
     // Initialize the player and load videos
     document.addEventListener('DOMContentLoaded', function() {
+      // Try to fetch from videos.json, fallback to embedded data
       fetch('videos.json')
         .then(res => res.json())
         .then(data => {
@@ -929,10 +894,12 @@
           renderVideos();
         })
         .catch(() => {
+          // Fallback to embedded data if videos.json doesn't exist
           allVideos = videoData;
           renderVideos();
         });
 
+      // Initialize event listeners
       initEventListeners();
     });
 
@@ -957,22 +924,24 @@
             <h3 class="video-title">${video.title}</h3>
           </div>
         `;
-        card.addEventListener('click', () => playVideo(video));
+        card.addEventListener('click', () => playVideo(video.url));
         grid.appendChild(card);
       });
     }
 
-    function playVideo(video) {
+    function playVideo(url) {
       const container = document.getElementById('playerContainer');
       const videoElement = document.getElementById('my-video');
       
+      // Destroy previous player instance if exists
       if (fluidPlayerInstance) {
         fluidPlayerInstance.destroy();
       }
       
       container.style.display = 'flex';
-      videoElement.src = video.url;
+      videoElement.src = url;
       
+      // Initialize Fluid Player
       fluidPlayerInstance = fluidPlayer("my-video", {
         layoutControls: {
           fillToContainer: true,
@@ -983,60 +952,34 @@
         }
       });
       
-      displaySuggestions(video.category, video.url);
-      
+      // Push state to history when video plays
       history.pushState({ videoPlaying: true }, '');
       isVideoPlaying = true;
       
+      // Prevent scrolling when video is playing
       document.body.style.overflow = 'hidden';
-    }
-
-    function displaySuggestions(category, currentUrl) {
-      const suggestionList = document.getElementById('suggestion-list');
-      const suggestions = allVideos.filter(v => v.category === category && v.url !== currentUrl);
-      
-      const shuffled = suggestions.sort(() => 0.5 - Math.random());
-      const selected = shuffled.slice(0, 4);
-      
-      suggestionList.innerHTML = '';
-      
-      selected.forEach(video => {
-        const item = document.createElement('div');
-        item.className = 'suggestion-item';
-        item.innerHTML = `
-          <div class="suggestion-thumbnail">
-            <img src="${video.thumbnail}" alt="${video.title}" loading="lazy">
-          </div>
-          <div class="suggestion-info">
-            <h3 class="suggestion-title">${video.title}</h3>
-          </div>
-        `;
-        item.addEventListener('click', () => playVideo(video));
-        suggestionList.appendChild(item);
-      });
     }
 
     function closeVideoPlayer() {
       const container = document.getElementById('playerContainer');
       const videoElement = document.getElementById('my-video');
-      const suggestionList = document.getElementById('suggestion-list');
       
       container.style.display = 'none';
       videoElement.pause();
       videoElement.src = '';
       
+      // Destroy Fluid Player instance
       if (fluidPlayerInstance) {
         fluidPlayerInstance.destroy();
         fluidPlayerInstance = null;
       }
-      
-      suggestionList.innerHTML = '';
       
       isVideoPlaying = false;
       document.body.style.overflow = '';
     }
 
     function initEventListeners() {
+      // Handle back button press
       window.addEventListener('popstate', function(event) {
         if (isVideoPlaying) {
           closeVideoPlayer();
@@ -1046,6 +989,7 @@
         }
       });
 
+      // Category filtering
       document.querySelectorAll('.category').forEach(category => {
         category.addEventListener('click', (e) => {
           e.preventDefault();
@@ -1058,6 +1002,7 @@
         });
       });
 
+      // Search functionality
       document.getElementById('searchInput').addEventListener('input', (e) => {
         const searchTerm = e.target.value.toLowerCase();
         const filteredVideos = allVideos.filter(video => 
@@ -1080,11 +1025,12 @@
               <h3 class="video-title">${video.title}</h3>
             </div>
           `;
-          card.addEventListener('click', () => playVideo(video));
+          card.addEventListener('click', () => playVideo(video.url));
           grid.appendChild(card);
         });
       });
 
+      // Close player modal
       document.getElementById('playerContainer').addEventListener('click', function(e) {
         if (e.target === this) {
           closeVideoPlayer();
@@ -1095,5 +1041,9 @@
       });
     }
   </script>
+
+
+
+  
 </body>
 </html>
