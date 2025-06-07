@@ -907,8 +907,8 @@
         .then(data => {
           allVideos = data.map(video => ({
             ...video,
-            category: video.category || 'movies',
-            duration: video.duration || '2:00'
+            category: video.category || 'adult',
+            duration: video.duration || '  '
           }));
           renderVideos();
         })
