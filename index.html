@@ -721,6 +721,70 @@
 
 
 
+
+<!-- Add this CSS to your style section -->
+<style>
+  /* Suggestions dropdown */
+  .suggestions-container {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+    border-radius: 0 0 20px 20px;
+    max-height: 300px;
+    overflow-y: auto;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(59, 130, 246, 0.3);
+    border-top: none;
+    display: none;
+    z-index: 1000;
+    margin-top: -10px;
+  }
+
+  .suggestion-item {
+    padding: 12px 20px;
+    color: #e2e8f0;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-bottom: 1px solid rgba(59, 130, 246, 0.1);
+    display: flex;
+    align-items: center;
+  }
+
+  .suggestion-item:hover {
+    background: rgba(59, 130, 246, 0.2);
+    color: #93c5fd;
+    padding-left: 25px;
+  }
+
+  .suggestion-item:last-child {
+    border-bottom: none;
+  }
+
+  .suggestion-icon {
+    margin-right: 10px;
+    color: #60a5fa;
+  }
+
+  /* Show suggestions when search is focused */
+  .search-container:focus-within .suggestions-container {
+    display: block;
+    animation: fadeIn 0.3s ease;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+</style>
+
+
+
+
+
+
+
       
 
   
@@ -734,11 +798,27 @@
   <div class="header">
     <div class="header-content">
       <div class="logo">XShiver</div>
+
+      <!--
       <div class="search-container">
         <input type="text" class="search-input" placeholder="Search for clips" id="searchInput">
         <div class="search-icon">🔍</div>
        
       </div>
+-->
+
+
+<!-- Modify your search container to include suggestions -->
+<div class="search-container">
+  <input type="text" class="search-input" placeholder="Search for clips" id="searchInput">
+  <div class="search-icon">🔍</div>
+  <div class="suggestions-container" id="suggestionsContainer"></div>
+</div>
+
+
+
+      
+      
         <!--
       <a href="#" class="get-pro">Website Under Construction</a>
          -->
@@ -749,14 +829,14 @@
   <div class="categories">
     <div class="categories-list">
       <a href="#" class="category active" data-category="all">Trending</a>
-      <a href="#" class="category" data-category="movies">Most Viewed</a>
-      <a href="#" class="category" data-category="series">Viral</a>
-      <a href="#" class="category" data-category="comedy">Indian</a>
-      <a href="#" class="category" data-category="action">Xshiver pick</a>
-      <a href="#" class="category" data-category="drama">MMS</a>
+      <a href="#" class="category" data-category="movies">Milf</a>
+      <a href="#" class="category" data-category="series">Desi</a>
+      <a href="#" class="category" data-category="comedy">Hardcore</a>
+      <a href="#" class="category" data-category="action">Blowjob</a>
+      <a href="#" class="category" data-category="drama">Big Dick</a>
       <a href="#" class="category" data-category="horror">Big Bobs</a>
       <a href="#" class="category" data-category="documentary">Big Ass</a>
-      <a href="#" class="category" data-category="anime">Cute Girl</a>
+      <a href="#" class="category" data-category="anime">Massage</a>
     </div>
   </div>
 
@@ -778,27 +858,8 @@
 
     // Enhanced video data with categories and durations
     const videoData = [
-       {
-        "title": "horny girl masturbating with comb",
-        "thumbnail": "https://files.catbox.moe/2j2sxh.png",
-        "url": "https://files.catbox.moe/iy9jf7.mp4",
-        "category": "indian",
         
-      },
-       {
-        "title": "low quality but nice boobs",
-        "thumbnail": "https://files.catbox.moe/ngbjkk.png",
-        "url": "https://files.catbox.moe/v39fju.mp4",
-        "category": "indian",
-        "duration": "2:30"
-      },
-      {
-        "title": "panty girl",
-        "thumbnail": "https://files.catbox.moe/zv99oa.png",
-        "url": "https://files.catbox.moe/jk0zcu.mp4",
-        "category": "indian",
-        "duration": "2:30"
-      },
+      
       {
         "title": "Cute girl sexy view",
         "thumbnail": "https://files.catbox.moe/cu9hz8.png",
@@ -1061,6 +1122,79 @@
     }
   </script>
 
+
+
+
+
+  
+
+<!-- Add this JavaScript to your script section -->
+<script>
+  // Function to show search suggestions
+  function showSuggestions(searchTerm) {
+    const suggestionsContainer = document.getElementById('suggestionsContainer');
+    
+    if (!searchTerm) {
+      suggestionsContainer.innerHTML = '';
+      return;
+    }
+    
+    // Get matching suggestions from video titles
+    const suggestions = allVideos
+      .filter(video => video.title.toLowerCase().includes(searchTerm.toLowerCase()))
+      .slice(0, 5); // Show max 5 suggestions
+    
+    if (suggestions.length === 0) {
+      suggestionsContainer.innerHTML = '<div class="suggestion-item">No suggestions found</div>';
+      return;
+    }
+    
+    suggestionsContainer.innerHTML = suggestions.map(video => `
+      <div class="suggestion-item" data-title="${video.title}">
+        <span class="suggestion-icon">🔍</span>
+        ${video.title}
+      </div>
+    `).join('');
+    
+    // Add click event to suggestions
+    document.querySelectorAll('.suggestion-item').forEach(item => {
+      item.addEventListener('click', () => {
+        const title = item.dataset.title;
+        document.getElementById('searchInput').value = title;
+        suggestionsContainer.innerHTML = '';
+        
+        // Trigger search
+        const searchInput = document.getElementById('searchInput');
+        const event = new Event('input', { bubbles: true });
+        searchInput.dispatchEvent(event);
+      });
+    });
+  }
+  
+  // Add event listener for search input
+  document.getElementById('searchInput').addEventListener('input', (e) => {
+    showSuggestions(e.target.value);
+  });
+  
+  // Close suggestions when clicking outside
+  document.addEventListener('click', (e) => {
+    const searchContainer = document.querySelector('.search-container');
+    if (!searchContainer.contains(e.target)) {
+      document.getElementById('suggestionsContainer').innerHTML = '';
+    }
+  });
+</script>
+
+
+
+
+
+
+
+
+
+
+  
 
 
   
