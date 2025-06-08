@@ -3,7 +3,7 @@
   <!-- Homepage (highest priority) -->
   <url>
     <loc>https://xshiver.site/</loc>
-    <lastmod>2025-6-08</lastmod>  <!-- Update with today's date -->
+    <lastmod>2025-06-08</lastmod>  <!-- Update with today's date -->
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
