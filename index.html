@@ -1,22 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-R6X1NC4RY8"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-R6X1NC4RY8');
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-R6X1NC4RY8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-R6X1NC4RY8');
+
   </script>
   
-  <meta name="google-site-verification" content="OrCev24C7R5w-fhzuf5DvNIMFR2EJJ86iIENfG6Knok" />
+<meta name="google-site-verification" content="OrCev24C7R5w-fhzuf5DvNIMFR2EJJ86iIENfG6Knok" />
+  
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>XShiver Exclusives</title>
-  <script src="https://cdn.fluidplayer.com/v3/current/fluidplayer.min.js"></script>
+
+
+
+
+
+
   
-  <style>
+<style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
     * {
@@ -35,141 +44,690 @@
       overflow-x: hidden;
     }
 
-    /* Video Player and Suggestions Panel */
-    .video-player-wrapper {
+    /* Animated background particles */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at 20% 30%, rgba(59, 130, 246, 0.05) 0%, transparent 50%),
+                  radial-gradient(circle at 80% 70%, rgba(147, 197, 253, 0.03) 0%, transparent 50%),
+                  radial-gradient(circle at 50% 90%, rgba(30, 64, 175, 0.04) 0%, transparent 50%);
+      z-index: -1;
+      animation: backgroundPulse 8s ease-in-out infinite alternate;
+    }
+
+    @keyframes backgroundPulse {
+      0% { opacity: 0.3; }
+      100% { opacity: 0.7; }
+    }
+
+    /* Header */
+    .header {
+      background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 50%, #2563eb 100%);
+      padding: 20px 30px;
+      border-bottom: 3px solid transparent;
+      border-image: linear-gradient(90deg, #3b82f6, #60a5fa, #93c5fd) 1;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 8px 32px rgba(59, 130, 246, 0.25), 0 4px 16px rgba(0, 0, 0, 0.4);
+      transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      backdrop-filter: blur(20px);
+    }
+
+    .header:hover {
+      background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 50%, #3b82f6 100%);
+      box-shadow: 0 12px 40px rgba(59, 130, 246, 0.4), 0 6px 20px rgba(0, 0, 0, 0.5);
+      transform: translateY(-2px);
+    }
+
+    .header-content {
+      max-width: 1400px;
+      margin: 0 auto;
       display: flex;
-      gap: 20px;
-      max-width: 1600px;
-      width: 95%;
+      align-items: center;
+      justify-content: space-between;
+      gap: 25px;
+    }
+
+    .header-content h1, 
+    .header-content a {
+      color: #ffffff;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1.2rem;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .header-content a:hover {
+      color: #93c5fd;
+      text-shadow: 0 0 10px rgba(147, 197, 253, 0.5);
+      transform: translateY(-1px);
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #4facfe 0%, #00f2fe 50%, #60a5fa 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      flex-shrink: 0;
+      position: relative;
+      animation: logoGlow 3s ease-in-out infinite alternate;
+    }
+
+    @keyframes logoGlow {
+      0% { filter: drop-shadow(0 0 5px rgba(79, 172, 254, 0.3)); }
+      100% { filter: drop-shadow(0 0 15px rgba(79, 172, 254, 0.6)); }
+    }
+
+    .search-container {
+      flex: 1;
+      max-width: 500px;
+      position: relative;
+      transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .search-container:hover {
+      transform: scale(1.02);
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 14px 50px 14px 20px;
+      background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+      border: 2px solid transparent;
+      border-radius: 50px;
+      color: #ffffff;
+      font-size: 16px;
+      outline: none;
+      box-shadow: inset 0 0 10px rgba(59, 130, 246, 0.15), 0 4px 15px rgba(0, 0, 0, 0.2);
+      transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      position: relative;
+    }
+
+    .search-input::placeholder {
+      color: #9ca3af;
+      font-style: italic;
+      transition: all 0.3s ease;
+    }
+
+    .search-input:focus {
+      border-color: #3b82f6;
+      box-shadow: 0 0 20px rgba(59, 130, 246, 0.6), inset 0 0 10px rgba(59, 130, 246, 0.2);
+      background: linear-gradient(135deg, #1e40af 0%, #2563eb 100%);
+      transform: scale(1.02);
+    }
+
+    .search-input:focus::placeholder {
+      color: #e0f2fe;
+      transform: translateX(5px);
+    }
+
+    .search-icon {
+      position: absolute;
+      right: 18px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #93c5fd;
+      font-size: 18px;
+      pointer-events: none;
+      transition: all 0.3s ease;
+      animation: iconPulse 2s ease-in-out infinite;
+    }
+
+    @keyframes iconPulse {
+      0%, 100% { transform: translateY(-50%) scale(1); }
+      50% { transform: translateY(-50%) scale(1.1); }
+    }
+
+    .get-pro {
+      background: linear-gradient(135deg, #ff6b6b 0%, #ff8e8e 50%, #ffa8a8 100%);
+      color: white;
+      padding: 12px 24px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      flex-shrink: 0;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+    }
+
+    .get-pro::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+      transition: left 0.6s ease;
+    }
+
+    .get-pro:hover {
+      transform: scale(1.08) translateY(-2px);
+      box-shadow: 0 8px 25px rgba(255, 107, 107, 0.5);
+    }
+
+    .get-pro:hover::before {
+      left: 100%;
+    }
+
+    /* Categories */
+    .categories {
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+      border-bottom: 2px solid transparent;
+      border-image: linear-gradient(90deg, #3b82f6, #60a5fa) 1;
+      overflow-x: auto;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      position: relative;
+    }
+
+    .categories::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(90deg, 
+        rgba(59, 130, 246, 0.05) 0%, 
+        rgba(147, 197, 253, 0.03) 50%, 
+        rgba(59, 130, 246, 0.05) 100%);
+      animation: categoryShimmer 4s ease-in-out infinite;
+    }
+
+    @keyframes categoryShimmer {
+      0%, 100% { opacity: 0.3; }
+      50% { opacity: 0.6; }
+    }
+
+    .categories::-webkit-scrollbar {
+      display: none;
+    }
+
+    .categories-list {
+      display: flex;
+      padding: 20px 25px;
+      gap: 28px;
+      min-width: max-content;
+      position: relative;
+      z-index: 2;
+    }
+
+    .category {
+      color: #94a3b8;
+      text-decoration: none;
+      font-weight: 600;
+      white-space: nowrap;
+      padding: 12px 20px;
+      border-radius: 30px;
+      transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      position: relative;
+      transform: translateY(0);
+      font-size: 14px;
+      background: rgba(30, 41, 59, 0.5);
+      border: 1px solid rgba(59, 130, 246, 0.2);
+      backdrop-filter: blur(10px);
+      overflow: hidden;
+    }
+
+    .category::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      width: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #3b82f6, #60a5fa);
+      transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      transform: translateX(-50%);
+      border-radius: 2px;
+    }
+
+    .category::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.1), transparent);
+      transition: left 0.6s ease;
+    }
+
+    .category:hover {
+      color: #ffffff;
+      transform: translateY(-3px) scale(1.05);
+      background: rgba(59, 130, 246, 0.2);
+      box-shadow: 0 8px 25px rgba(59, 130, 246, 0.3);
+      border-color: #60a5fa;
+    }
+
+    .category:hover::before {
+      width: 80%;
+    }
+
+    .category:hover::after {
+      left: 100%;
+    }
+
+    .category.active {
+      color: #ffffff;
+      background: linear-gradient(135deg, #1e40af 0%, #2563eb 50%, #3b82f6 100%);
+      box-shadow: 0 8px 30px rgba(59, 130, 246, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+      transform: translateY(-3px) scale(1.05);
+      border: 1px solid #60a5fa;
+      animation: activeGlow 2s ease-in-out infinite alternate;
+    }
+
+    @keyframes activeGlow {
+      0% { box-shadow: 0 8px 30px rgba(59, 130, 246, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2); }
+      100% { box-shadow: 0 12px 40px rgba(59, 130, 246, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.3); }
+    }
+
+    .category.active::before {
+      width: 90%;
+      background: #ffffff;
+      height: 4px;
+    }
+
+    /* Main Content and Grid */
+    .main-content {
+      padding: 40px 20px;
+      max-width: 1400px;
       margin: 0 auto;
       position: relative;
     }
 
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 30px;
+      animation: gridFadeIn 0.8s ease-out;
+    }
+
+    @keyframes gridFadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Video Card */
+    .video-card {
+      background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+      border-radius: 20px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      position: relative;
+      border: 1px solid rgba(59, 130, 246, 0.2);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(10px);
+    }
+
+    .video-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(135deg, 
+        rgba(59, 130, 246, 0.05) 0%, 
+        rgba(147, 197, 253, 0.02) 50%, 
+        rgba(59, 130, 246, 0.05) 100%);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      border-radius: 20px;
+    }
+
+    .video-card:hover {
+      transform: translateY(-8px) scale(1.02);
+      border-color: #3b82f6;
+      box-shadow: 0 20px 40px rgba(59, 130, 246, 0.3), 0 8px 20px rgba(0, 0, 0, 0.4);
+    }
+
+    .video-card:hover::before {
+      opacity: 1;
+    }
+
+    /* Thumbnail */
+    .video-thumbnail {
+      position: relative;
+      aspect-ratio: 16/9;
+      overflow: hidden;
+    }
+
+    .video-thumbnail::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(45deg, 
+        rgba(59, 130, 246, 0.1) 0%, 
+        transparent 50%, 
+        rgba(147, 197, 253, 0.1) 100%);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+
+    .video-card:hover .video-thumbnail::after {
+      opacity: 1;
+    }
+
+    .video-thumbnail img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      filter: brightness(0.9);
+    }
+
+    .video-card:hover .video-thumbnail img {
+      transform: scale(1.1) rotate(1deg);
+      filter: brightness(1.1) saturate(1.2);
+    }
+
+    /* Video Duration */
+    .video-duration {
+      position: absolute;
+      bottom: 12px;
+      right: 12px;
+      background: linear-gradient(135deg, rgba(30, 41, 59, 0.9), rgba(51, 65, 85, 0.9));
+      color: #e0f2fe;
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: bold;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(59, 130, 246, 0.3);
+      transition: all 0.3s ease;
+    }
+
+    .video-card:hover .video-duration {
+      background: linear-gradient(135deg, rgba(59, 130, 246, 0.9), rgba(37, 99, 235, 0.9));
+      transform: scale(1.05);
+      box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
+    }
+
+    /* Video Info */
+    .video-info {
+      padding: 20px 18px 22px;
+      background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+      position: relative;
+    }
+
+    .video-info::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, #3b82f6, transparent);
+    }
+
+    /* Category */
+    .video-category {
+      color: #60a5fa;
+      font-size: 13px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+      position: relative;
+      display: inline-block;
+      padding: 4px 8px;
+      background: rgba(59, 130, 246, 0.1);
+      border-radius: 12px;
+      transition: all 0.3s ease;
+    }
+
+    .video-card:hover .video-category {
+      color: #93c5fd;
+      background: rgba(59, 130, 246, 0.2);
+      transform: translateX(5px);
+    }
+
+    /* Title */
+    .video-title {
+      color: #f1f5f9;
+      font-size: 18px;
+      font-weight: 600;
+      line-height: 1.4;
+      margin: 0;
+      transition: all 0.4s ease;
+      position: relative;
+    }
+
+    .video-card:hover .video-title {
+      color: #93c5fd;
+      text-shadow: 0 0 10px rgba(147, 197, 253, 0.3);
+      transform: translateY(-2px);
+    }
+
+    /* Player Modal */
+    #playerContainer {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(135deg, rgba(0, 0, 0, 0.95), rgba(15, 23, 42, 0.95));
+      backdrop-filter: blur(25px);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      padding: 20px;
+      animation: modalFadeIn 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    @keyframes modalFadeIn {
+      from { 
+        opacity: 0; 
+        transform: scale(0.9);
+      }
+      to { 
+        opacity: 1; 
+        transform: scale(1);
+      }
+    }
+
     #my-video {
-      flex: 1;
-      max-width: 70%;
-      max-height: 80vh;
+      max-width: 100%;
+      max-height: 100%;
       border-radius: 16px;
       box-shadow: 0 30px 80px rgba(59, 130, 246, 0.4), 0 15px 40px rgba(0, 0, 0, 0.6);
       border: 2px solid rgba(59, 130, 246, 0.3);
       animation: videoGlow 3s ease-in-out infinite alternate;
     }
 
-    .suggestions-panel {
-      width: 30%;
-      max-height: 80vh;
-      overflow-y: auto;
-      padding: 15px;
-      background: rgba(30, 41, 59, 0.95);
-      border-radius: 16px;
-      border: 1px solid rgba(59, 130, 246, 0.2);
-      backdrop-filter: blur(10px);
+    @keyframes videoGlow {
+      0% { box-shadow: 0 30px 80px rgba(59, 130, 246, 0.3), 0 15px 40px rgba(0, 0, 0, 0.6); }
+      100% { box-shadow: 0 40px 100px rgba(59, 130, 246, 0.5), 0 20px 50px rgba(0, 0, 0, 0.7); }
     }
 
-    .suggestions-title {
-      color: #f1f5f9;
-      font-size: 1.2rem;
-      margin-bottom: 15px;
-      padding-bottom: 10px;
-      border-bottom: 1px solid rgba(59, 130, 246, 0.3);
-    }
-
-    .suggestions-list {
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-    }
-
-    .suggestion-card {
-      display: flex;
-      gap: 10px;
-      padding: 10px;
-      background: rgba(30, 41, 59, 0.5);
-      border-radius: 12px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      border: 1px solid rgba(59, 130, 246, 0.1);
-    }
-
-    .suggestion-card:hover {
-      background: rgba(59, 130, 246, 0.2);
-      transform: translateX(5px);
-      border-color: rgba(59, 130, 246, 0.3);
-    }
-
-    .suggestion-thumbnail {
-      width: 120px;
-      height: 68px;
-      border-radius: 8px;
+    /* Romantic/Sexy Hover Effects */
+    .video-card {
       overflow: hidden;
-      flex-shrink: 0;
-      position: relative;
     }
 
-    .suggestion-thumbnail img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .suggestion-info {
-      flex: 1;
-      min-width: 0;
-    }
-
-    .suggestion-title {
-      color: #f1f5f9;
-      font-size: 0.9rem;
-      margin-bottom: 5px;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .suggestion-category {
-      color: #60a5fa;
-      font-size: 0.8rem;
-      text-transform: uppercase;
-    }
-
-    .suggestion-duration {
+    .video-card::after {
+      content: '';
       position: absolute;
-      bottom: 5px;
-      right: 5px;
-      background: rgba(0, 0, 0, 0.8);
-      color: #fff;
-      padding: 2px 6px;
-      border-radius: 4px;
-      font-size: 0.8rem;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(45deg, 
+        transparent 40%, 
+        rgba(147, 197, 253, 0.1) 50%, 
+        transparent 60%);
+      transform: rotate(45deg);
+      transition: all 0.6s ease;
+      opacity: 0;
     }
 
-    /* Mobile Responsive Updates */
-    @media (max-width: 1024px) {
-      .video-player-wrapper {
+    .video-card:hover::after {
+      animation: shimmer 1.5s ease-in-out;
+      opacity: 1;
+    }
+
+    @keyframes shimmer {
+      0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+      100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+    }
+
+    /* Seductive animations for categories */
+    .category {
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Pulsing effect for video cards */
+    .video-card:hover {
+      animation: seductivePulse 2s ease-in-out infinite;
+    }
+
+    @keyframes seductivePulse {
+      0%, 100% { 
+        box-shadow: 0 20px 40px rgba(59, 130, 246, 0.3), 0 8px 20px rgba(0, 0, 0, 0.4);
+      }
+      50% { 
+        box-shadow: 0 25px 50px rgba(59, 130, 246, 0.4), 0 10px 25px rgba(0, 0, 0, 0.5);
+      }
+    }
+
+    /* Mobile Responsive */
+    @media (max-width: 768px) {
+      .header-content {
         flex-direction: column;
+        gap: 15px;
       }
 
-      #my-video {
-        max-width: 100%;
+      .search-container {
+        order: 2;
+        max-width: none;
       }
 
-      .suggestions-panel {
-        width: 100%;
-        max-height: 300px;
+      .logo {
+        font-size: 1.6rem;
+      }
+
+      .categories-list {
+        padding: 18px;
+        gap: 22px;
+      }
+
+      .video-grid {
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 20px;
+      }
+
+      .main-content {
+        padding: 25px 15px;
+      }
+
+      .video-card:hover {
+        transform: translateY(-4px) scale(1.01);
       }
     }
 
     @media (max-width: 480px) {
-      .suggestion-thumbnail {
-        width: 100px;
-        height: 56px;
+      .header {
+        padding: 15px;
       }
 
-      .suggestion-title {
-        font-size: 0.8rem;
+      .video-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+      }
+
+      .video-card {
+        border-radius: 12px;
+      }
+
+      .categories-list {
+        gap: 18px;
+      }
+
+      .video-card:hover {
+        transform: translateY(-2px);
       }
     }
+
+    /* Touch optimizations */
+    @media (hover: none) and (pointer: coarse) {
+      .video-card:hover {
+        transform: none;
+        animation: none;
+      }
+      
+      .video-card:active {
+        transform: scale(0.98);
+      }
+
+      .category:hover {
+        transform: translateY(-1px);
+      }
+    }
+
+    /* Additional romantic animations */
+    @keyframes heartbeat {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+
+    .get-pro:hover {
+      animation: heartbeat 1s ease-in-out infinite;
+    }
+
+    /* Floating particles effect */
+    .main-content::before {
+      content: '';
+      position: absolute;
+      top: -50px;
+      left: -50px;
+      width: calc(100% + 100px);
+      height: calc(100% + 100px);
+      background-image: 
+        radial-gradient(circle at 25% 25%, rgba(59, 130, 246, 0.1) 1px, transparent 1px),
+        radial-gradient(circle at 75% 75%, rgba(147, 197, 253, 0.08) 1px, transparent 1px);
+      background-size: 50px 50px, 30px 30px;
+      animation: floatingParticles 20s linear infinite;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    @keyframes floatingParticles {
+      0% { transform: translate(0, 0); }
+      100% { transform: translate(-50px, -50px); }
+    }
   </style>
+
+
+
+
+
+      
+
+  
+
+
+  
+  <script src="https://cdn.fluidplayer.com/v3/current/fluidplayer.min.js"></script>
 </head>
 <body>
   <!-- Header -->
@@ -179,7 +737,11 @@
       <div class="search-container">
         <input type="text" class="search-input" placeholder="Search for clips" id="searchInput">
         <div class="search-icon">🔍</div>
+       
       </div>
+        <!--
+      <a href="#" class="get-pro">Website Under Construction</a>
+         -->
     </div>
   </div>
 
@@ -205,13 +767,7 @@
 
   <!-- Video Player Modal -->
   <div id="playerContainer">
-    <div class="video-player-wrapper">
-      <video id="my-video" controls></video>
-      <div class="suggestions-panel">
-        <h3 class="suggestions-title">Suggested Videos</h3>
-        <div class="suggestions-list"></div>
-      </div>
-    </div>
+    <video id="my-video" controls></video>
   </div>
 
   <script>
@@ -220,13 +776,113 @@
     let isVideoPlaying = false;
     let fluidPlayerInstance = null;
 
-    // Your existing video data
+    // Enhanced video data with categories and durations
     const videoData = [
-      // ... your existing video data array ...
+        
+      
+      {
+        "title": "Cute girl sexy view",
+        "thumbnail": "https://files.catbox.moe/cu9hz8.png",
+        "url": "https://files.catbox.moe/tu9q1g.mp4",
+        "category": "indian",
+        "duration": "2:30"
+      },
+      {
+        "title": "huge sexy boobs japanese woman",
+        "thumbnail": "https://files.catbox.moe/d7a4fa.png",
+        "url": "https://files.catbox.moe/9iqrh3.mp4",
+        "category": "Japanese",
+        "duration": "1:00:30"
+      },
+      {
+        "title": "lucky boy",
+        "thumbnail": "https://files.catbox.moe/8f0o5k.png",
+        "url": "https://files.catbox.moe/qvknxs.mp4",
+        "category": "asian",
+        "duration": "2:30"
+      },
+      {
+        "title": "huge seexy tits japanese tied and fucked",
+        "thumbnail": "https://files.catbox.moe/uhrp6d.png",
+        "url": "https://files.catbox.moe/m47ya4.mp4",
+        "category": "japanese",
+        "duration": "29:30"
+      },
+      {
+        "title": "japanese womans are crazy hott",
+        "thumbnail": "https://files.catbox.moe/d7a4fa.png",
+        "url": "https://files.catbox.moe/hgk1hy.mp4",
+        "category": "japanese",
+        "duration": "25:30"
+      },
+      {
+        "title": "Cute girl sexy view",
+        "thumbnail": "https://files.catbox.moe/ydba07.png",
+        "url": "https://files.catbox.moe/fqnsje.mp4",
+        "category": "indian",
+        "duration": "2:30"
+      },
+      {
+        "title": "Beautifull girl fucked hard",
+        "thumbnail": "https://files.catbox.moe/oatqk5.png",
+        "url": "https://files.catbox.moe/tt3gwe.mp4",
+        "category": "indian",
+        "duration": "2:30"
+      },
+      {
+        "title": "Village girl round boobs",
+        "thumbnail": "https://files.catbox.moe/tii5vk.png",
+        "url": "https://files.catbox.moe/qkewb3.mp4",
+        "category": "indian",
+        "duration": "2:30"
+      },
+      {
+        "title": "nice pussy girl masturbating",
+        "thumbnail": "https://files.catbox.moe/k5fijm.png",
+        "url": "https://files.catbox.moe/ns5ld9.mp4",
+        "category": "indian",
+        "duration": "2:30"
+      },
+      {
+        "title": "Chubby girl big boobs",
+        "thumbnail": "https://files.catbox.moe/b4vluu.png",
+        "url": "https://files.catbox.moe/yg7ppt.mp4",
+        "category": "indian",
+        "duration": "2:30"
+      },
+      {
+        "title": "huge boobs bouncing",
+        "thumbnail": "https://files.catbox.moe/zu96vj.png",
+        "url": "https://files.catbox.moe/0f6nsp.mp4",
+        "category": "indian",
+        "duration": "2:30"
+      },
+      {
+        "title": "Indian Girl viral",
+        "thumbnail": "https://files.catbox.moe/jkpyvz.png",
+        "url": "https://files.catbox.moe/sjftxq.mp4",
+        "category": "indian",
+        "duration": "2:30"
+      },
+      {
+        "title": "Bhabhi In heat",
+        "thumbnail": "https://files.catbox.moe/qr6l56.png",
+        "url": "https://files.catbox.moe/4mamfo.mp4",
+        "category": "indian",
+        "duration": "3:15"
+      },
+      {
+        "title": "Cute girl big boobs",
+        "thumbnail": "https://files.catbox.moe/qq912z.png",
+        "url": "https://files.catbox.moe/nqquuv.mp4",
+        "category": "cute",
+        "duration": "1:45"
+      }
     ];
 
     // Initialize the player and load videos
     document.addEventListener('DOMContentLoaded', function() {
+      // Try to fetch from videos.json, fallback to embedded data
       fetch('videos.json')
         .then(res => res.json())
         .then(data => {
@@ -238,10 +894,12 @@
           renderVideos();
         })
         .catch(() => {
+          // Fallback to embedded data if videos.json doesn't exist
           allVideos = videoData;
           renderVideos();
         });
 
+      // Initialize event listeners
       initEventListeners();
     });
 
@@ -271,44 +929,11 @@
       });
     }
 
-    function renderSuggestions(currentVideo) {
-      const suggestionsContainer = document.querySelector('.suggestions-list');
-      suggestionsContainer.innerHTML = '';
-      
-      const suggestions = allVideos
-        .filter(video => video.url !== currentVideo.url)
-        .sort(() => Math.random() - 0.5)
-        .slice(0, 8);
-      
-      suggestions.forEach(video => {
-        const suggestionCard = document.createElement('div');
-        suggestionCard.className = 'suggestion-card';
-        suggestionCard.innerHTML = `
-          <div class="suggestion-thumbnail">
-            <img src="${video.thumbnail}" alt="${video.title}" loading="lazy">
-            <div class="suggestion-duration">${video.duration}</div>
-          </div>
-          <div class="suggestion-info">
-            <div class="suggestion-title">${video.title}</div>
-            <div class="suggestion-category">${video.category}</div>
-          </div>
-        `;
-        
-        suggestionCard.addEventListener('click', () => {
-          playVideo(video.url);
-          renderSuggestions(video);
-        });
-        
-        suggestionsContainer.appendChild(suggestionCard);
-      });
-    }
-
     function playVideo(url) {
       const container = document.getElementById('playerContainer');
       const videoElement = document.getElementById('my-video');
       
-      const currentVideo = allVideos.find(video => video.url === url);
-      
+      // Destroy previous player instance if exists
       if (fluidPlayerInstance) {
         fluidPlayerInstance.destroy();
       }
@@ -316,6 +941,7 @@
       container.style.display = 'flex';
       videoElement.src = url;
       
+      // Initialize Fluid Player
       fluidPlayerInstance = fluidPlayer("my-video", {
         layoutControls: {
           fillToContainer: true,
@@ -326,11 +952,11 @@
         }
       });
       
-      renderSuggestions(currentVideo);
-      
+      // Push state to history when video plays
       history.pushState({ videoPlaying: true }, '');
       isVideoPlaying = true;
       
+      // Prevent scrolling when video is playing
       document.body.style.overflow = 'hidden';
     }
 
@@ -342,6 +968,7 @@
       videoElement.pause();
       videoElement.src = '';
       
+      // Destroy Fluid Player instance
       if (fluidPlayerInstance) {
         fluidPlayerInstance.destroy();
         fluidPlayerInstance = null;
@@ -352,6 +979,7 @@
     }
 
     function initEventListeners() {
+      // Handle back button press
       window.addEventListener('popstate', function(event) {
         if (isVideoPlaying) {
           closeVideoPlayer();
@@ -361,6 +989,7 @@
         }
       });
 
+      // Category filtering
       document.querySelectorAll('.category').forEach(category => {
         category.addEventListener('click', (e) => {
           e.preventDefault();
@@ -373,6 +1002,7 @@
         });
       });
 
+      // Search functionality
       document.getElementById('searchInput').addEventListener('input', (e) => {
         const searchTerm = e.target.value.toLowerCase();
         const filteredVideos = allVideos.filter(video => 
@@ -400,6 +1030,7 @@
         });
       });
 
+      // Close player modal
       document.getElementById('playerContainer').addEventListener('click', function(e) {
         if (e.target === this) {
           closeVideoPlayer();
@@ -410,5 +1041,9 @@
       });
     }
   </script>
+
+
+
+  
 </body>
-</html> 
+</html>
