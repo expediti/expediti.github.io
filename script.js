@@ -1,47 +1,33 @@
-const videoList = document.getElementById("video-list");
-const searchInput = document.getElementById("search");
+// Assume fetchVideos, renderCategories, getUniqueCategories, and loadVideos are already defined
 
-// Function to fetch videos from videos.json
-async function fetchVideos() {
-  try {
-    const response = await fetch("videos.json");
-    if (!response.ok) throw new Error("Failed to load videos");
-    return await response.json();
-  } catch (error) {
-    console.error(error);
-    return [];
-  }
+// Function to load videos into the video reel
+function loadVideoReel(videos) {
+    const reel = document.getElementById("video-reel");
+    reel.innerHTML = "";
+    const reelVideos = getRandomVideos(videos, 10); // Select 10 random videos
+    reelVideos.forEach(video => {
+        const videoLink = document.createElement("a");
+        videoLink.href = `video.html?url=${encodeURIComponent(video.url)}&title=${encodeURIComponent(video.title)}&category=${encodeURIComponent(video.category)}&duration=${encodeURIComponent(video.duration)}`;
+        videoLink.className = "video-card";
+        videoLink.innerHTML = `
+            <img src="${video.thumbnail}" alt="${video.title}">
+            <h4>${video.title}</h4>
+            <small>${video.duration}</small>
+        `;
+        reel.appendChild(videoLink);
+    });
 }
 
-// Load videos into the video list
-function loadVideos(videosToLoad) {
-  videoList.innerHTML = "";
-  videosToLoad.forEach(video => {
-    const videoLink = document.createElement("a");
-    videoLink.href = `video.html?url=${encodeURIComponent(video.url)}&title=${encodeURIComponent(video.title)}&category=${encodeURIComponent(video.category)}&duration=${encodeURIComponent(video.duration)}`;
-    videoLink.className = "video-card";
-    videoLink.innerHTML = `
-      <img src="${video.thumbnail}" alt="${video.title}">
-      <h4>${video.title}</h4>
-      <small>${video.duration}</small>
-    `;
-    videoList.appendChild(videoLink);
-  });
+// Function to get random videos
+function getRandomVideos(videos, count) {
+    const shuffled = [...videos].sort(() => 0.5 - Math.random());
+    return shuffled.slice(0, count);
 }
 
-// Search functionality
-searchInput.addEventListener("input", async (e) => {
-  const searchTerm = e.target.value.toLowerCase();
-  const videos = await fetchVideos();
-  const filteredVideos = videos.filter(video =>
-    video.title.toLowerCase().includes(searchTerm) ||
-    video.category.toLowerCase().includes(searchTerm)
-  );
-  loadVideos(filteredVideos);
-});
-
-// Initialize the page with all videos
+// Initialize the page
 (async () => {
-  const videos = await fetchVideos();
-  loadVideos(videos);
+    const videos = await fetchVideos();
+    renderCategories(getUniqueCategories(videos));
+    loadVideos(videos);
+    loadVideoReel(videos); // Load the video reel
 })();
