@@ -208,7 +208,7 @@ main {
 
 .video-card img {
     width: 100%;
-    height: 120px;
+    height: 200px;
     object-fit: cover;
     border-radius: 5px;
 }
