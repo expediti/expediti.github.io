@@ -62,7 +62,7 @@ header {
 
 .nav-links {
     display: flex;
-    gap: 1.5rem;  /* Space between links */
+    gap: 0.5rem;  /* Space between links */
     justify-content: center;  /* Center the links */
 }
 
