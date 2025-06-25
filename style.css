@@ -76,16 +76,6 @@ header {
     transition: all 0.3s ease;
 }
 
-.nav-links a:hover {
-    background-color: #1a3a8a;  /* Lighter gray on hover */
-    color: #000;  /* Black text on hover */
-}
-
-/* Optional: Style for active link */
-.nav-links a:active,
-.nav-links a:focus {
-    background-color: #dee2e6;  /* Slightly darker gray */
-}
 
 
 
