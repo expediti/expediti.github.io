@@ -54,6 +54,38 @@ header {
 
 
 
+/* Navigation menu */
+.nav-menu{
+display:flex;
+align-items:center;
+gap:16px;
+flex:1;
+justify-content:flex-end;
+}
+.nav-links{
+display:flex;
+gap:clamp(12px,2vw,16px);
+}
+.nav-links a{
+text-decoration:none;
+color:var(--text-light);
+font-weight:600;
+font-size:clamp(14px,1.8vw,16px);
+padding:6px 10px;
+border-radius:6px;
+transition:background .3s,transform .3s;
+}
+.nav-links a:hover{
+background:#3b82f6;
+transform:scale(1.05);
+}
+
+
+
+
+
+
+
 
 
 .search-container {
