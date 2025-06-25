@@ -54,26 +54,53 @@ header {
 
 
 
-/* Navigation menu */
+/* Navigation menu - Mobile First Approach */
 .nav-menu {
-    background-color: #1a3a8a;  /* Light gray background */
+    background-color: #1a3a8a;
     padding: 1rem;
+    position: relative;
+    overflow: hidden; /* Prevents content from overflowing */
 }
 
 .nav-links {
     display: flex;
-    gap: 0.1rem;  /* Space between links */
-    justify-content: center;  /* Center the links */
+    flex-wrap: wrap; /* Allows items to wrap on small screens */
+    gap: 0.5rem; /* Increased gap for better spacing */
+    justify-content: center;
+    padding: 0;
+    margin: 0;
+    list-style: none;
 }
 
 .nav-links a {
-    color:#FFF;  /* Dark gray text */
+    color: #FFF;
     text-decoration: none;
     font-family: Arial, sans-serif;
-    font-size: 1.1rem;
-    padding: 0.5rem 1rem;
+    font-size: clamp(0.9rem, 3vw, 1.1rem); /* Responsive font size */
+    padding: 0.5rem 0.8rem; /* Reduced padding for mobile */
     border-radius: 6px;
     transition: all 0.3s ease;
+    white-space: nowrap; /* Prevents text wrapping */
+}
+
+/* Mobile-specific styles */
+@media (max-width: 768px) {
+    .nav-menu {
+        padding: 0.5rem;
+    }
+    
+    .nav-links {
+        gap: 0.3rem; /* Smaller gap on mobile */
+        justify-content: flex-start; /* Align left on mobile */
+        overflow-x: auto; /* Allows horizontal scrolling if needed */
+        -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+        padding-bottom: 0.5rem; /* Space for scrollbar */
+    }
+    
+    .nav-links a {
+        padding: 0.5rem 0.7rem;
+        font-size: 0.9rem;
+    }
 }
 
 
