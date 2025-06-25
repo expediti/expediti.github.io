@@ -62,12 +62,12 @@ header {
 
 .nav-links {
     display: flex;
-    gap: 0.5rem;  /* Space between links */
+    gap: 0.1rem;  /* Space between links */
     justify-content: center;  /* Center the links */
 }
 
 .nav-links a {
-    color: #333;  /* Dark gray text */
+    color:#FFF;  /* Dark gray text */
     text-decoration: none;
     font-family: Arial, sans-serif;
     font-size: 1.1rem;
