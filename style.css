@@ -55,29 +55,36 @@ header {
 
 
 /* Navigation menu */
-.nav-menu{
-display:flex;
-align-items:center;
-gap:16px;
-flex:1;
-justify-content:flex-end;
+.nav-menu {
+    background-color: #f8f9fa;  /* Light gray background */
+    padding: 1rem;
 }
-.nav-links{
-display:flex;
-gap:clamp(12px,2vw,16px);
+
+.nav-links {
+    display: flex;
+    gap: 1.5rem;  /* Space between links */
+    justify-content: center;  /* Center the links */
 }
-.nav-links a{
-text-decoration:none;
-color:var(--text-light);
-font-weight:600;
-font-size:clamp(14px,1.8vw,16px);
-padding:6px 10px;
-border-radius:6px;
-transition:background .3s,transform .3s;
+
+.nav-links a {
+    color: #333;  /* Dark gray text */
+    text-decoration: none;
+    font-family: Arial, sans-serif;
+    font-size: 1.1rem;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    transition: all 0.3s ease;
 }
-.nav-links a:hover{
-background:#3b82f6;
-transform:scale(1.05);
+
+.nav-links a:hover {
+    background-color: #e9ecef;  /* Lighter gray on hover */
+    color: #000;  /* Black text on hover */
+}
+
+/* Optional: Style for active link */
+.nav-links a:active,
+.nav-links a:focus {
+    background-color: #dee2e6;  /* Slightly darker gray */
 }
 
 
