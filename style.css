@@ -42,12 +42,19 @@ header {
 .logo-link {
     display: flex;
     align-items: center;
+    text-decoration: none;
 }
 
 .logo {
     height: 40px; /* Adjust based on your logo size */
     width: auto;
+    max-width: 150px; /* Optional: prevents logo from getting too wide */
     object-fit: contain;
+    transition: opacity 0.3s ease; /* Smooth hover effect */
+}
+
+.logo-link:hover .logo {
+    opacity: 0.8; /* Optional: slight fade on hover */
 }
 
 
