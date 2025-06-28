@@ -44,38 +44,6 @@ searchInput.addEventListener("input", async (e) => {
 
 
 
-
-
-
-
-
-document.addEventListener('DOMContentLoaded', () => {
-    const menuToggle = document.querySelector('.menu-toggle');
-    const navMenu = document.querySelector('.nav-menu');
-    menuToggle.addEventListener('click', () => {
-        navMenu.classList.toggle('active');
-        const icon = menuToggle.querySelector('i');
-        if (navMenu.classList.contains('active')) {
-            icon.classList.remove('fa-bars');
-            icon.classList.add('fa-times');
-        } else {
-            icon.classList.remove('fa-times');
-            icon.classList.add('fa-bars');
-        }
-    });
-});
-
-
-
-
-
-
-
-
-
-
-
-
 // Initialize the page with all videos
 (async () => {
   const videos = await fetchVideos();
