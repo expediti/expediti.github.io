@@ -39,6 +39,104 @@ header {
 
 
 
+
+
+
+
+
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    position: relative;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+}
+
+.menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: white; /* Adjust based on your header background */
+}
+
+.download-icon {
+    color: white; /* Adjust based on your header background */
+    font-size: 1.5rem;
+    margin-right: 1rem;
+}
+
+.nav-menu {
+    display: flex;
+    justify-content: center;
+}
+
+.nav-links {
+    display: flex;
+    gap: 1rem;
+}
+
+@media (max-width: 768px) {
+    .menu-toggle {
+        display: block;
+    }
+    .nav-menu {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: #fff; /* Adjust background as needed */
+        box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+    .nav-menu.active {
+        display: block;
+    }
+    .nav-links {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 1rem;
+    }
+    .nav-links a {
+        padding: 0.5rem 0;
+        width: 100%;
+        text-align: center;
+        color: #333; /* Adjust text color as needed */
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* Download Icon Container */
 .download-icon {
     background: transparent; /* Remove background */
