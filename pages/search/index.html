@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="search-title">Search Results - Xshiver</title>
+    <meta name="description" id="search-description" content="Search adult videos on Xshiver">
+    <meta name="keywords" content="adult video search, porn search, xshiver search">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="../../assets/css/main.css">
+    <link rel="stylesheet" href="../../assets/css/search.css">
+    <link rel="stylesheet" href="../../assets/css/filters.css">
+    <link rel="stylesheet" href="../../assets/css/responsive.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <a href="../../index.html">
+                        <img src="../../assets/images/logo-xshiver.png" alt="Xshiver" class="logo">
+                        <span class="logo-text">XSHIVER</span>
+                    </a>
+                </div>
+                
+                <div class="nav-search">
+                    <div class="search-container">
+                        <input type="text" placeholder="Search videos, categories, tags..." class="search-input" id="main-search-input">
+                        <button class="search-btn" onclick="performSearch()">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <circle cx="11" cy="11" r="8"></circle>
+                                <path d="21 21l-4.35-4.35"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="nav-links">
+                    <a href="../../index.html" class="nav-link">Home</a>
+                    <a href="../categories/" class="nav-link">Categories</a>
+                    <a href="../content/trending.html" class="nav-link">Trending</a>
+                    <a href="advanced.html" class="nav-link">Advanced Search</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Breadcrumb -->
+    <nav class="breadcrumb">
+        <div class="container">
+            <ol class="breadcrumb-list">
+                <li class="breadcrumb-item">
+                    <a href="../../index.html">Home</a>
+                </li>
+                <li class="breadcrumb-item active">
+                    Search Results
+                </li>
+            </ol>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="search-main">
+        <div class="container">
+            <!-- Search Header -->
+            <section class="search-header">
+                <h1 class="search-title">
+                    Search Results for "<span id="search-query-display">Loading...</span>"
+                </h1>
+                
+                <div class="search-meta">
+                    <div class="search-info">
+                        <span id="search-results-count">0</span> results found
+                        <span class="search-time">in <span id="search-time">0.00</span>s</span>
+                    </div>
+                    
+                    <div class="search-actions">
+                        <button class="btn-save-search" id="save-search-btn">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>
+                            </svg>
+                            Save Search
+                        </button>
+                        
+                        <button class="btn-clear-search" onclick="clearSearch()">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <line x1="18" y1="6" x2="6" y2="18"/>
+                                <line x1="6" y1="6" x2="18" y2="18"/>
+                            </svg>
+                            Clear
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Search Suggestions (if no results) -->
+            <section class="search-suggestions hidden" id="search-suggestions">
+                <h3>Did you mean?</h3>
+                <div class="suggestions-list" id="suggestions-list">
+                    <!-- Suggestions will be populated by JavaScript -->
+                </div>
+            </section>
+
+            <!-- Search Filters -->
+            <section class="search-filters">
+                <div class="filters-container">
+                    <div class="filter-tabs">
+                        <button class="filter-tab active" data-type="videos">
+                            Videos (<span id="video-count">0</span>)
+                        </button>
+                        <button class="filter-tab" data-type="categories">
+                            Categories (<span id="category-count">0</span>)
+                        </button>
+                        <button class="filter-tab" data-type="tags">
+                            Tags (<span id="tag-count">0</span>)
+                        </button>
+                    </div>
+                    
+                    <div class="filter-controls">
+                        <select id="search-sort" class="filter-select">
+                            <option value="relevance">Most Relevant</option>
+                            <option value="newest">Newest First</option>
+                            <option value="oldest">Oldest First</option>
+                            <option value="most-viewed">Most Viewed</option>
+                            <option value="highest-rated">Highest Rated</option>
+                        </select>
+                        
+                        <button class="filter-toggle" id="advanced-filter-toggle">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <polygon points="22,3 2,3 10,12.46 10,19 14,21 14,12.46"/>
+                            </svg>
+                            Filters
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Search Results -->
+            <section class="search-results">
+                <div class="results-layout">
+                    <!-- Advanced Filters Sidebar -->
+                    <aside class="search-sidebar hidden" id="search-sidebar">
+                        <div class="sidebar-header">
+                            <h3>Advanced Filters</h3>
+                            <button class="sidebar-close" onclick="toggleSearchSidebar()">×</button>
+                        </div>
+                        
+                        <div class="sidebar-content">
+                            <!-- Duration Filter -->
+                            <div class="filter-section">
+                                <h4>Duration</h4>
+                                <div class="filter-options">
+                                    <label class="filter-checkbox">
+                                        <input type="checkbox" name="duration" value="short">
+                                        <span class="checkmark"></span>
+                                        Under 10 minutes
+                                    </label>
+                                    <label class="filter-checkbox">
+                                        <input type="checkbox" name="duration" value="medium">
+                                        <span class="checkmark"></span>
+                                        10-30 minutes
+                                    </label>
+                                    <label class="filter-checkbox">
+                                        <input type="checkbox" name="duration" value="long">
+                                        <span class="checkmark"></span>
+                                        Over 30 minutes
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <!-- Quality Filter -->
+                            <div class="filter-section">
+                                <h4>Quality</h4>
+                                <div class="filter-options">
+                                    <label class="filter-checkbox">
+                                        <input type="checkbox" name="quality" value="4k">
+                                        <span class="checkmark"></span>
+                                        4K Ultra HD
+                                    </label>
+                                    <label class="filter-checkbox">
+                                        <input type="checkbox" name="quality" value="1080p">
+                                        <span class="checkmark"></span>
+                                        1080p Full HD
+                                    </label>
+                                    <label class="filter-checkbox">
+                                        <input type="checkbox" name="quality" value="720p">
+                                        <span class="checkmark"></span>
+                                        720p HD
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <!-- Category Filter -->
+                            <div class="filter-section">
+                                <h4>Categories</h4>
+                                <div class="category-filters" id="category-filter-list">
+                                    <!-- Categories will be populated dynamically -->
+                                </div>
+                            </div>
+                            
+                            <!-- Rating Filter -->
+                            <div class="filter-section">
+                                <h4>Minimum Rating</h4>
+                                <div class="rating-filter">
+                                    <input type="range" id="rating-slider" min="1" max="5" step="0.5" value="1">
+                                    <div class="rating-display">
+                                        <span id="rating-display-value">1.0</span>+ stars
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="filter-actions">
+                                <button class="btn-clear-filters" onclick="clearSearchFilters()">Clear All</button>
+                                <button class="btn-apply-filters" onclick="applySearchFilters()">Apply Filters</button>
+                            </div>
+                        </div>
+                    </aside>
+
+                    <!-- Results Content -->
+                    <div class="results-content">
+                        <!-- Video Results -->
+                        <div class="results-section active" id="video-results">
+                            <div class="results-grid" id="video-results-grid">
+                                <!-- Video results will be populated by JavaScript -->
+                            </div>
+                        </div>
+                        
+                        <!-- Category Results -->
+                        <div class="results-section hidden" id="category-results">
+                            <div class="category-results-grid" id="category-results-grid">
+                                <!-- Category results will be populated by JavaScript -->
+                            </div>
+                        </div>
+                        
+                        <!-- Tag Results -->
+                        <div class="results-section hidden" id="tag-results">
+                            <div class="tag-results-grid" id="tag-results-grid">
+                                <!-- Tag results will be populated by JavaScript -->
+                            </div>
+                        </div>
+                        
+                        <!-- No Results -->
+                        <div class="no-results hidden" id="no-search-results">
+                            <div class="no-results-icon">🔍</div>
+                            <h3>No results found</h3>
+                            <p>Try different keywords or check your spelling</p>
+                            
+                            <div class="no-results-suggestions">
+                                <h4>Search suggestions:</h4>
+                                <div class="suggested-searches">
+                                    <button class="suggestion-btn" onclick="searchFor('amateur')">amateur</button>
+                                    <button class="suggestion-btn" onclick="searchFor('professional')">professional</button>
+                                    <button class="suggestion-btn" onclick="searchFor('milf')">milf</button>
+                                    <button class="suggestion-btn" onclick="searchFor('teen 18+')">teen 18+</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Loading State -->
+                        <div class="search-loading hidden" id="search-loading">
+                            <div class="loading-spinner"></div>
+                            <p>Searching...</p>
+                        </div>
+                        
+                        <!-- Pagination -->
+                        <div class="search-pagination" id="search-pagination">
+                            <!-- Pagination will be generated by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Related Searches -->
+            <section class="related-searches">
+                <h3>Related Searches</h3>
+                <div class="related-searches-list" id="related-searches-list">
+                    <!-- Related searches will be populated by JavaScript -->
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <img src="../../assets/images/logo-xshiver.png" alt="Xshiver" class="footer-logo">
+                    <span class="footer-brand-text">XSHIVER</span>
+                    <p class="footer-description">Premium adult entertainment search</p>
+                </div>
+                
+                <div class="footer-links">
+                    <div class="link-group">
+                        <h4>Search</h4>
+                        <a href="advanced.html">Advanced Search</a>
+                        <a href="../categories/">Browse Categories</a>
+                        <a href="../content/trending.html">Trending</a>
+                        <a href="../content/new-releases.html">New Releases</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 Xshiver.site - All rights reserved. Adults only (18+).</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="../../assets/js/age-verification.js"></script>
+    <script src="../../assets/js/video-database.js"></script>
+    <script src="../../assets/js/search-engine.js"></script>
+    <script src="../../assets/js/filter-system.js"></script>
+    <script src="../../assets/js/pagination.js"></script>
+</body>
+</html>
