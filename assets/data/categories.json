@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "name": "Amateur",
+    "slug": "amateur",
+    "description": "Real people sharing authentic intimate moments with genuine passion and chemistry.",
+    "thumbnail": "amateur-category.jpg",
+    "video_count": 1250,
+    "featured": true
+  },
+  {
+    "id": 2,
+    "name": "Professional",
+    "slug": "professional",
+    "description": "High-quality studio productions featuring professional performers and cinematic quality.",
+    "thumbnail": "professional-category.jpg",
+    "video_count": 890,
+    "featured": true
+  },
+  {
+    "id": 3,
+    "name": "MILF",
+    "slug": "milf",
+    "description": "Experienced and mature women showcasing sophistication and sensuality.",
+    "thumbnail": "milf-category.jpg",
+    "video_count": 675,
+    "featured": true
+  },
+  {
+    "id": 4,
+    "name": "Teen (18+)",
+    "slug": "teen",
+    "description": "Young adult performers (18+) with youthful energy and playful scenarios.",
+    "thumbnail": "teen-category.jpg",
+    "video_count": 1420,
+    "featured": true
+  },
+  {
+    "id": 5,
+    "name": "Hardcore",
+    "slug": "hardcore",
+    "description": "Intense and passionate adult performances with high energy and excitement.",
+    "thumbnail": "hardcore-category.jpg",
+    "video_count": 980,
+    "featured": false
+  },
+  {
+    "id": 6,
+    "name": "Lesbian",
+    "slug": "lesbian",
+    "description": "Women-loving-women content featuring intimate connections and chemistry.",
+    "thumbnail": "lesbian-category.jpg",
+    "video_count": 720,
+    "featured": false
+  },
+  {
+    "id": 7,
+    "name": "Anal",
+    "slug": "anal",
+    "description": "Specialized adult content focusing on anal performances and techniques.",
+    "thumbnail": "anal-category.jpg",
+    "video_count": 565,
+    "featured": false
+  },
+  {
+    "id": 8,
+    "name": "Blowjob",
+    "slug": "blowjob",
+    "description": "Oral performance content featuring skilled and passionate displays.",
+    "thumbnail": "blowjob-category.jpg",
+    "video_count": 820,
+    "featured": false
+  },
+  {
+    "id": 9,
+    "name": "Threesome",
+    "slug": "threesome",
+    "description": "Group encounter content featuring multiple participants and shared experiences.",
+    "thumbnail": "threesome-category.jpg",
+    "video_count": 340,
+    "featured": false
+  },
+  {
+    "id": 10,
+    "name": "Solo",
+    "slug": "solo",
+    "description": "Individual performances showcasing personal expression and self-exploration.",
+    "thumbnail": "solo-category.jpg",
+    "video_count": 950,
+    "featured": false
+  }
+]
