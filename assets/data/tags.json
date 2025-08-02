@@ -1,0 +1,322 @@
+[
+  {
+    "id": 1,
+    "name": "hd",
+    "category": "quality",
+    "description": "High Definition video quality",
+    "video_count": 2847,
+    "trending": true
+  },
+  {
+    "id": 2,
+    "name": "4k",
+    "category": "quality", 
+    "description": "Ultra High Definition 4K quality",
+    "video_count": 892,
+    "trending": true
+  },
+  {
+    "id": 3,
+    "name": "amateur",
+    "category": "style",
+    "description": "Real amateur content",
+    "video_count": 1653,
+    "trending": false
+  },
+  {
+    "id": 4,
+    "name": "professional",
+    "category": "style",
+    "description": "Professional studio productions",
+    "video_count": 1234,
+    "trending": false
+  },
+  {
+    "id": 5,
+    "name": "milf",
+    "category": "age",
+    "description": "Mature women content",
+    "video_count": 987,
+    "trending": true
+  },
+  {
+    "id": 6,
+    "name": "teen",
+    "category": "age",
+    "description": "Young adult performers (18+)",
+    "video_count": 1576,
+    "trending": true
+  },
+  {
+    "id": 7,
+    "name": "blonde",
+    "category": "appearance",
+    "description": "Blonde performers",
+    "video_count": 1290,
+    "trending": false
+  },
+  {
+    "id": 8,
+    "name": "brunette",
+    "category": "appearance",
+    "description": "Brunette performers",
+    "video_count": 1156,
+    "trending": false
+  },
+  {
+    "id": 9,
+    "name": "big-tits",
+    "category": "appearance",
+    "description": "Large breast content",
+    "video_count": 1045,
+    "trending": true
+  },
+  {
+    "id": 10,
+    "name": "anal",
+    "category": "activity",
+    "description": "Anal content",
+    "video_count": 768,
+    "trending": false
+  },
+  {
+    "id": 11,
+    "name": "oral",
+    "category": "activity",
+    "description": "Oral content",
+    "video_count": 1345,
+    "trending": true
+  },
+  {
+    "id": 12,
+    "name": "hardcore",
+    "category": "intensity",
+    "description": "Intense adult content",
+    "video_count": 923,
+    "trending": false
+  },
+  {
+    "id": 13,
+    "name": "lesbian",
+    "category": "orientation",
+    "description": "Woman-on-woman content",
+    "video_count": 654,
+    "trending": false
+  },
+  {
+    "id": 14,
+    "name": "threesome",
+    "category": "participants",
+    "description": "Three participant content",
+    "video_count": 432,
+    "trending": true
+  },
+  {
+    "id": 15,
+    "name": "solo",
+    "category": "participants",
+    "description": "Single performer content",
+    "video_count": 876,
+    "trending": false
+  },
+  {
+    "id": 16,
+    "name": "couple",
+    "category": "participants",
+    "description": "Two participant content",
+    "video_count": 1234,
+    "trending": false
+  },
+  {
+    "id": 17,
+    "name": "creampie",
+    "category": "activity",
+    "description": "Internal completion content",
+    "video_count": 567,
+    "trending": true
+  },
+  {
+    "id": 18,
+    "name": "facial",
+    "category": "activity",
+    "description": "Facial completion content",
+    "video_count": 643,
+    "trending": false
+  },
+  {
+    "id": 19,
+    "name": "cumshot",
+    "category": "activity",
+    "description": "Completion shots",
+    "video_count": 798,
+    "trending": false
+  },
+  {
+    "id": 20,
+    "name": "pov",
+    "category": "perspective",
+    "description": "Point of view content",
+    "video_count": 567,
+    "trending": true
+  },
+  {
+    "id": 21,
+    "name": "bdsm",
+    "category": "kink",
+    "description": "Bondage and discipline content",
+    "video_count": 234,
+    "trending": false
+  },
+  {
+    "id": 22,
+    "name": "fetish",
+    "category": "kink",
+    "description": "Fetish content",
+    "video_count": 345,
+    "trending": false
+  },
+  {
+    "id": 23,
+    "name": "feet",
+    "category": "fetish",
+    "description": "Foot fetish content",
+    "video_count": 178,
+    "trending": false
+  },
+  {
+    "id": 24,
+    "name": "stockings",
+    "category": "clothing",
+    "description": "Stockings and hosiery",
+    "video_count": 289,
+    "trending": false
+  },
+  {
+    "id": 25,
+    "name": "lingerie",
+    "category": "clothing",
+    "description": "Lingerie content",
+    "video_count": 456,
+    "trending": false
+  },
+  {
+    "id": 26,
+    "name": "outdoor",
+    "category": "location",
+    "description": "Outdoor content",
+    "video_count": 234,
+    "trending": false
+  },
+  {
+    "id": 27,
+    "name": "public",
+    "category": "location",
+    "description": "Public location content",
+    "video_count": 189,
+    "trending": true
+  },
+  {
+    "id": 28,
+    "name": "car",
+    "category": "location",
+    "description": "Vehicle content",
+    "video_count": 123,
+    "trending": false
+  },
+  {
+    "id": 29,
+    "name": "shower",
+    "category": "location",
+    "description": "Shower and bathroom content",
+    "video_count": 234,
+    "trending": false
+  },
+  {
+    "id": 30,
+    "name": "massage",
+    "category": "activity",
+    "description": "Massage content",
+    "video_count": 178,
+    "trending": false
+  },
+  {
+    "id": 31,
+    "name": "interracial",
+    "category": "diversity",
+    "description": "Interracial content",
+    "video_count": 567,
+    "trending": true
+  },
+  {
+    "id": 32,
+    "name": "asian",
+    "category": "ethnicity",
+    "description": "Asian performers",
+    "video_count": 489,
+    "trending": false
+  },
+  {
+    "id": 33,
+    "name": "latina",
+    "category": "ethnicity",
+    "description": "Latina performers",
+    "video_count": 345,
+    "trending": false
+  },
+  {
+    "id": 34,
+    "name": "ebony",
+    "category": "ethnicity",
+    "description": "Black performers",
+    "video_count": 423,
+    "trending": false
+  },
+  {
+    "id": 35,
+    "name": "redhead",
+    "category": "appearance",
+    "description": "Red-haired performers",
+    "video_count": 234,
+    "trending": false
+  },
+  {
+    "id": 36,
+    "name": "tattoo",
+    "category": "appearance",
+    "description": "Tattooed performers",
+    "video_count": 345,
+    "trending": false
+  },
+  {
+    "id": 37,
+    "name": "piercing",
+    "category": "appearance",
+    "description": "Pierced performers",
+    "video_count": 189,
+    "trending": false
+  },
+  {
+    "id": 38,
+    "name": "glasses",
+    "category": "appearance",
+    "description": "Performers wearing glasses",
+    "video_count": 156,
+    "trending": false
+  },
+  {
+    "id": 39,
+    "name": "college",
+    "category": "theme",
+    "description": "College-themed content",
+    "video_count": 234,
+    "trending": true
+  },
+  {
+    "id": 40,
+    "name": "office",
+    "category": "theme",
+    "description": "Office-themed content",
+    "video_count": 178,
+    "trending": false
+  }
+]
