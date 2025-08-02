@@ -1,0 +1,376 @@
+/* ===== ADAPTIVE STREAMING STYLES ===== */
+
+/* Quality indicators */
+.quality-indicator {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(0, 0, 0, 0.8);
+    color: var(--xshiver-blue);
+    padding: 4px 8px;
+    border-radius: var(--radius-sm);
+    font-size: 0.8rem;
+    font-weight: bold;
+    z-index: 20;
+    backdrop-filter: blur(10px);
+}
+
+.quality-indicator.auto {
+    background: rgba(74, 144, 226, 0.8);
+    color: white;
+}
+
+/* Adaptive streaming status */
+.streaming-status {
+    position: absolute;
+    bottom: 60px;
+    left: 20px;
+    background: rgba(0, 0, 0, 0.7);
+    color: var(--silver-text);
+    padding: 8px 12px;
+    border-radius: var(--radius-md);
+    font-size: 0.85rem;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all var(--transition-normal);
+    z-index: 15;
+}
+
+.streaming-status.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.streaming-status.buffering {
+    border-left: 3px solid #ff6b6b;
+}
+
+.streaming-status.adapting {
+    border-left: 3px solid var(--xshiver-blue);
+}
+
+.streaming-status.optimal {
+    border-left: 3px solid var(--success-green);
+}
+
+/* Buffer health indicator */
+.buffer-health {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    width: 100px;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 2px;
+    overflow: hidden;
+    opacity: 0.7;
+}
+
+.buffer-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #ff6b6b, #ffa500, var(--success-green));
+    transition: width 0.3s ease;
+    border-radius: 2px;
+}
+
+/* Connection quality indicator */
+.connection-indicator {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.8rem;
+}
+
+.connection-bars {
+    display: flex;
+    align-items: flex-end;
+    gap: 1px;
+    height: 12px;
+}
+
+.connection-bar {
+    width: 2px;
+    background: rgba(255, 255, 255, 0.3);
+    transition: background-color var(--transition-fast);
+}
+
+.connection-bar.active {
+    background: var(--xshiver-blue);
+}
+
+.connection-bar:nth-child(1) { height: 25%; }
+.connection-bar:nth-child(2) { height: 50%; }
+.connection-bar:nth-child(3) { height: 75%; }
+.connection-bar:nth-child(4) { height: 100%; }
+
+/* Adaptive quality menu enhancements */
+.quality-menu {
+    min-width: 140px;
+}
+
+.quality-option {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.quality-badge {
+    font-size: 0.7rem;
+    padding: 2px 4px;
+    border-radius: 2px;
+    background: rgba(255, 255, 255, 0.1);
+    color: #aaa;
+}
+
+.quality-badge.recommended {
+    background: var(--xshiver-blue);
+    color: white;
+}
+
+.quality-badge.unavailable {
+    background: #ff6b6b;
+    color: white;
+}
+
+/* Performance warning overlay */
+.performance-warning {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(255, 107, 107, 0.9);
+    color: white;
+    padding: 20px 30px;
+    border-radius: var(--radius-lg);
+    text-align: center;
+    z-index: 25;
+    backdrop-filter: blur(10px);
+    opacity: 0;
+    visibility: hidden;
+    transition: all var(--transition-normal);
+}
+
+.performance-warning.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.performance-warning h3 {
+    margin-bottom: 10px;
+    font-size: 1.1rem;
+}
+
+.performance-warning p {
+    margin-bottom: 15px;
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+.performance-warning .actions {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.performance-warning button {
+    padding: 8px 16px;
+    border: none;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: var(--transition-fast);
+}
+
+.performance-warning .btn-accept {
+    background: var(--xshiver-blue);
+    color: white;
+}
+
+.performance-warning .btn-decline {
+    background: transparent;
+    color: white;
+    border: 1px solid white;
+}
+
+/* Data saver mode */
+.data-saver-indicator {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: rgba(255, 165, 0, 0.9);
+    color: white;
+    padding: 4px 8px;
+    border-radius: var(--radius-sm);
+    font-size: 0.7rem;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    z-index: 20;
+}
+
+.data-saver-icon {
+    width: 12px;
+    height: 12px;
+}
+
+/* Adaptive streaming analytics */
+.streaming-debug {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    background: rgba(0, 0, 0, 0.8);
+    color: var(--silver-text);
+    padding: 10px;
+    border-radius: var(--radius-md);
+    font-size: 0.7rem;
+    font-family: monospace;
+    min-width: 200px;
+    opacity: 0;
+    visibility: hidden;
+    transition: all var(--transition-normal);
+    z-index: 25;
+}
+
+.streaming-debug.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.streaming-debug .debug-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 4px;
+}
+
+.streaming-debug .debug-label {
+    color: #aaa;
+}
+
+.streaming-debug .debug-value {
+    color: var(--xshiver-blue);
+    font-weight: bold;
+}
+
+/* Quality change animation */
+@keyframes qualityChange {
+    0% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.3;
+        transform: scale(0.95);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.video-element.quality-changing {
+    animation: qualityChange 0.8s ease-in-out;
+}
+
+/* Mobile specific adaptations */
+@media (max-width: 768px) {
+    .quality-indicator {
+        top: 5px;
+        right: 5px;
+        font-size: 0.7rem;
+        padding: 2px 6px;
+    }
+    
+    .streaming-status {
+        bottom: 80px;
+        left: 10px;
+        right: 10px;
+        font-size: 0.8rem;
+    }
+    
+    .buffer-health {
+        width: 80px;
+        bottom: 15px;
+        left: 15px;
+    }
+    
+    .streaming-debug {
+        bottom: 5px;
+        right: 5px;
+        left: 5px;
+        min-width: unset;
+        font-size: 0.65rem;
+    }
+    
+    .performance-warning {
+        left: 10px;
+        right: 10px;
+        transform: translateY(-50%);
+        padding: 15px 20px;
+    }
+    
+    .performance-warning .actions {
+        flex-direction: column;
+    }
+}
+
+/* Touch device optimizations */
+@media (hover: none) and (pointer: coarse) {
+    .quality-indicator {
+        padding: 6px 10px;
+        font-size: 0.8rem;
+    }
+    
+    .streaming-status {
+        padding: 10px 15px;
+        font-size: 0.9rem;
+    }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+    .quality-indicator,
+    .streaming-status,
+    .performance-warning,
+    .streaming-debug {
+        border: 2px solid var(--xshiver-blue);
+        background: var(--midnight-black);
+    }
+    
+    .connection-bar.active {
+        background: #fff;
+    }
+}
+
+/* Reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+    .quality-indicator,
+    .streaming-status,
+    .performance-warning,
+    .buffer-fill,
+    .connection-bar {
+        transition: none;
+    }
+    
+    .video-element.quality-changing {
+        animation: none;
+    }
+}
+
+/* Save data preference handling */
+@media (prefers-reduced-data: reduce) {
+    .data-saver-indicator {
+        display: flex;
+    }
+}
+
+/* Network-based styling */
+.slow-connection .quality-indicator {
+    background: rgba(255, 107, 107, 0.8);
+    color: white;
+}
+
+.slow-connection .quality-indicator::after {
+    content: " (SLOW)";
+    font-size: 0.6rem;
+}
