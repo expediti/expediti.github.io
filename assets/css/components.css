@@ -1,0 +1,109 @@
+/* Reusable Components for Xshiver Platform */
+
+/* Button Components */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-md) var(--spacing-lg);
+    border: none;
+    border-radius: var(--radius-md);
+    font-family: var(--font-primary);
+    font-size: 1rem;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all var(--transition-normal);
+    position: relative;
+    overflow: hidden;
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left var(--transition-slow);
+}
+
+.btn:hover::before {
+    left: 100%;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--xshiver-blue), var(--xshiver-accent));
+    color: white;
+    box-shadow: var(--shadow-md);
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, var(--xshiver-accent), var(--electric-blue));
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+}
+
+.btn-secondary {
+    background: transparent;
+    color: var(--xshiver-blue);
+    border: 2px solid var(--xshiver-blue);
+}
+
+.btn-secondary:hover {
+    background: var(--xshiver-blue);
+    color: white;
+    transform: translateY(-2px);
+}
+
+.btn-outline {
+    background: transparent;
+    color: var(--silver-text);
+    border: 1px solid var(--silver-text);
+}
+
+.btn-outline:hover {
+    background: var(--silver-text);
+    color: var(--xshiver-dark);
+}
+
+.btn-danger {
+    background: linear-gradient(135deg, var(--danger-red), #ff3742);
+    color: white;
+}
+
+.btn-danger:hover {
+    background: linear-gradient(135deg, #ff3742, var(--danger-red));
+    transform: translateY(-2px);
+}
+
+.btn-success {
+    background: linear-gradient(135deg, var(--success-green), #26d65a);
+    color: white;
+}
+
+.btn-success:hover {
+    background: linear-gradient(135deg, #26d65a, var(--success-green));
+    transform: translateY(-2px);
+}
+
+/* Button Sizes */
+.btn-sm {
+    padding: var(--spacing-sm) var(--spacing-md);
+    font-size: 0.9rem;
+}
+
+.btn-lg {
+    padding: var(--spacing-lg) var(--spacing-xl);
+    font-size: 1.1rem;
+}
+
+.btn-xl {
+    padding: var(--spacing-xl) var(--spacing-xxl);
+    font-size: 1.2rem;
+}
+
+/* Icon Components */
+.icon {
