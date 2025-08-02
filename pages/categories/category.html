@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="category-title">Category - Xshiver</title>
+    <meta name="description" id="category-description" content="Browse adult videos in this category on Xshiver">
+    <meta name="keywords" id="category-keywords" content="adult videos, streaming, category">
+    
+    <!-- Dynamic Open Graph Meta Tags -->
+    <meta property="og:title" id="og-category-title" content="">
+    <meta property="og:description" id="og-category-description" content="">
+    <meta property="og:image" id="og-category-image" content="">
+    <meta property="og:url" id="og-category-url" content="">
+    
+    <!-- Schema.org Markup -->
+    <script type="application/ld+json" id="category-schema">
+    {
+      "@context": "https://schema.org",
+      "@type": "CollectionPage",
+      "name": "",
+      "description": "",
+      "url": "",
+      "mainEntity": {
+        "@type": "VideoGallery",
+        "name": ""
+      }
+    }
+    </script>
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="../../assets/css/main.css">
+    <link rel="stylesheet" href="../../assets/css/categories.css">
+    <link rel="stylesheet" href="../../assets/css/filters.css">
+    <link rel="stylesheet" href="../../assets/css/responsive.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <a href="../../index.html">
+                        <img src="../../assets/images/logo-xshiver.png" alt="Xshiver" class="logo">
+                        <span class="logo-text">XSHIVER</span>
+                    </a>
+                </div>
+                
+                <div class="nav-search">
+                    <div class="search-container">
+                        <input type="text" placeholder="Search in this category..." class="search-input" id="category-search">
+                        <button class="search-btn" onclick="searchInCategory()">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <circle cx="11" cy="11" r="8"></circle>
+                                <path d="21 21l-4.35-4.35"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="nav-links">
+                    <a href="../../index.html" class="nav-link">Home</a>
+                    <a href="index.html" class="nav-link">Categories</a>
+                    <a href="../content/trending.html" class="nav-link">Trending</a>
+                    <a href="../content/new-releases.html" class="nav-link">New</a>
+                </div>
+                
+                <button class="mobile-menu-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Breadcrumb -->
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+        <div class="container">
+            <ol class="breadcrumb-list">
+                <li class="breadcrumb-item">
+                    <a href="../../index.html">Home</a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a href="index.html">Categories</a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page" id="breadcrumb-category">
+                    Category
+                </li>
+            </ol>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="category-main">
+        <div class="container">
+            <!-- Category Header -->
+            <section class="category-header">
+                <div class="category-hero">
+                    <div class="category-background" id="category-background">
+                        <div class="category-overlay"></div>
+                    </div>
+                    
+                    <div class="category-info">
+                        <div class="category-icon" id="category-icon">
+                            🎬
+                        </div>
+                        
+                        <div class="category-details">
+                            <h1 class="category-name" id="category-name">Loading...</h1>
+                            <p class="category-description" id="category-desc">Loading category description...</p>
+                            
+                            <div class="category-stats">
+                                <div class="stat">
+                                    <span class="stat-number" id="category-video-count">0</span>
+                                    <span class="stat-label">Videos</span>
+                                </div>
+                                <div class="stat">
+                                    <span class="stat-number" id="category-views">0</span>
+                                    <span class="stat-label">Total Views</span>
+                                </div>
+                                <div class="stat">
+                                    <span class="stat-number" id="category-rating">0</span>
+                                    <span class="stat-label">Avg Rating</span>
+                                </div>
+                                <div class="stat">
+                                    <span class="stat-number" id="category-duration">0</span>
+                                    <span class="stat-label">Avg Duration</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="category-actions">
+                            <button class="btn-primary" onclick="playRandomVideo()">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
+                                    <polygon points="5,3 19,12 5,21"></polygon>
+                                </svg>
+                                Play Random
+                            </button>
+                            
+                            <button class="btn-secondary" onclick="toggleCategoryBookmark()">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                    <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>
+                                </svg>
+                                Bookmark Category
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Filters and Controls -->
+            <section class="category-controls">
+                <div class="controls-bar">
+                    <div class="controls-left">
+                        <div class="results-info">
+                            <span id="results-count">Loading...</span> videos found
+                        </div>
+                    </div>
+                    
+                    <div class="controls-right">
+                        <div class="control-group">
+                            <label for="sort-videos">Sort by:</label>
+                            <select id="sort-videos" class="control-select">
+                                <option value="newest">Newest First</option>
+                                <option value="oldest">Oldest First</option>
+                                <option value="most-viewed">Most Viewed</option>
+                                <option value="highest-rated">Highest Rated</option>
+                                <option value="longest">Longest</option>
+                                <option value="shortest">Shortest</option>
+                            </select>
+                        </div>
+                        
+                        <div class="control-group">
+                            <label for="per-page">Show:</label>
+                            <select id="per-page" class="control-select">
+                                <option value="20">20 per page</option>
+                                <option value="40">40 per page</option>
+                                <option value="60">60 per page</option>
+                                <option value="100">100 per page</option>
+                            </select>
+                        </div>
+                        
+                        <button class="control-btn" id="toggle-filters" onclick="toggleSidebar()">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <polygon points="22,3 2,3 10,12.46 10,19 14,21 14,12.46"/>
+                            </svg>
+                            Filters
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Main Content Area -->
+            <div class="category-content">
+                <!-- Sidebar Filters -->
+                <aside class="filters-sidebar" id="filters-sidebar">
+                    <div class="sidebar-header">
+                        <h3>Refine Results</h3>
+                        <button class="sidebar-close" onclick="toggleSidebar()">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <line x1="18" y1="6" x2="6" y2="18"/>
+                                <line x1="6" y1="6" x2="18" y2="18"/>
+                            </svg>
+                        </button>
+                    </div>
+                    
+                    <div class="sidebar-content">
+                        <!-- Duration Filter -->
+                        <div class="filter-group">
+                            <h4 class="filter-title">Duration</h4>
+                            <div class="filter-options">
+                                <label class="filter-option">
+                                    <input type="checkbox" name="duration" value="short">
+                                    <span class="filter-checkmark"></span>
+                                    Under 10 minutes
+                                </label>
+                                <label class="filter-option">
+                                    <input type="checkbox" name="duration" value="medium">
+                                    <span class="filter-checkmark"></span>
+                                    10-30 minutes
+                                </label>
+                                <label class="filter-option">
+                                    <input type="checkbox" name="duration" value="long">
+                                    <span class="filter-checkmark"></span>
+                                    Over 30 minutes
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <!-- Quality Filter -->
+                        <div class="filter-group">
+                            <h4 class="filter-title">Quality</h4>
+                            <div class="filter-options">
+                                <label class="filter-option">
+                                    <input type="checkbox" name="quality" value="4k">
+                                    <span class="filter-checkmark"></span>
+                                    4K Ultra HD
+                                </label>
+                                <label class="filter-option">
+                                    <input type="checkbox" name="quality" value="1080p">
+                                    <span class="filter-checkmark"></span>
+                                    1080p HD
+                                </label>
+                                <label class="filter-option">
+                                    <input type="checkbox" name="quality" value="720p">
+                                    <span class="filter-checkmark"></span>
+                                    720p HD
+                                </label>
+                                <label class="filter-option">
+                                    <input type="checkbox" name="quality" value="480p">
+                                    <span class="filter-checkmark"></span>
+                                    480p SD
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <!-- Upload Date Filter -->
+                        <div class="filter-group">
+                            <h4 class="filter-title">Upload Date</h4>
+                            <div class="filter-options">
+                                <label class="filter-option">
+                                    <input type="radio" name="upload-date" value="today">
+                                    <span class="filter-radio"></span>
+                                    Today
+                                </label>
+                                <label class="filter-option">
+                                    <input type="radio" name="upload-date" value="week">
+                                    <span class="filter-radio"></span>
+                                    This Week
+                                </label>
+                                <label class="filter-option">
+                                    <input type="radio" name="upload-date" value="month">
+                                    <span class="filter-radio"></span>
+                                    This Month
+                                </label>
+                                <label class="filter-option">
+                                    <input type="radio" name="upload-date" value="all" checked>
+                                    <span class="filter-radio"></span>
+                                    All Time
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <!-- Rating Filter -->
+                        <div class="filter-group">
+                            <h4 class="filter-title">Minimum Rating</h4>
+                            <div class="rating-slider">
+                                <input type="range" id="rating-range" min="1" max="5" value="1" step="0.5">
+                                <div class="rating-display">
+                                    <span id="rating-value">1.0</span>+ stars
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Tags Filter -->
+                        <div class="filter-group">
+                            <h4 class="filter-title">Popular Tags</h4>
+                            <div class="tags-filter" id="popular-tags">
+                                <!-- Popular tags will be loaded dynamically -->
+                            </div>
+                        </div>
+                        
+                        <!-- Filter Actions -->
+                        <div class="filter-actions">
+                            <button class="btn-clear-filters" onclick="clearAllFilters()">
+                                Clear All Filters
+                            </button>
+                            <button class="btn-apply-filters" onclick="applyFilters()">
+                                Apply Filters
+                            </button>
+                        </div>
+                    </div>
+                </aside>
+
+                <!-- Videos Grid -->
+                <section class="videos-section">
+                    <!-- Loading State -->
+                    <div class="loading-state" id="loading-state">
+                        <div class="loading-spinner"></div>
+                        <p>Loading videos...</p>
+                    </div>
+                    
+                    <!-- Videos Grid -->
+                    <div class="videos-grid" id="videos-grid">
+                        <!-- Videos will be loaded dynamically -->
+                    </div>
+                    
+                    <!-- No Results State -->
+                    <div class="no-results hidden" id="no-results">
+                        <div class="no-results-icon">🔍</div>
+                        <h3>No videos found</h3>
+                        <p>Try adjusting your filters or search terms</p>
+                        <button class="btn-primary" onclick="clearAllFilters()">
+                            Clear Filters
+                        </button>
+                    </div>
+                    
+                    <!-- Pagination -->
+                    <div class="pagination-container" id="pagination-container">
+                        <nav class="pagination" aria-label="Video pagination">
+                            <button class="pagination-btn pagination-prev" id="prev-page" disabled>
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                    <polyline points="15,18 9,12 15,6"></polyline>
+                                </svg>
+                                Previous
+                            </button>
+                            
+                            <div class="pagination-numbers" id="pagination-numbers">
+                                <!-- Page numbers will be generated dynamically -->
+                            </div>
+                            
+                            <button class="pagination-btn pagination-next" id="next-page">
+                                Next
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                    <polyline points="9,18 15,12 9,6"></polyline>
+                                </svg>
+                            </button>
+                        </nav>
+                        
+                        <div class="pagination-info">
+                            Showing <span id="showing-start">1</span>-<span id="showing-end">20</span> 
+                            of <span id="total-results">0</span> videos
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Related Categories -->
+            <section class="related-categories">
+                <h2 class="section-title">Related Categories</h2>
+                <div class="related-categories-grid" id="related-categories">
+                    <!-- Related categories will be loaded dynamically -->
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <img src="../../assets/images/logo-xshiver.png" alt="Xshiver" class="footer-logo">
+                    <span class="footer-brand-text">XSHIVER</span>
+                    <p class="footer-description">Premium adult entertainment platform</p>
+                </div>
+                
+                <div class="footer-links">
+                    <div class="link-group">
+                        <h4>Categories</h4>
+                        <a href="category.html?cat=amateur">Amateur</a>
+                        <a href="category.html?cat=professional">Professional</a>
+                        <a href="category.html?cat=milf">MILF</a>
+                        <a href="category.html?cat=teen">Teen (18+)</a>
+                    </div>
+                    
+                    <div class="link-group">
+                        <h4>Browse</h4>
+                        <a href="../content/trending.html">Trending</a>
+                        <a href="../content/new-releases.html">New</a>
+                        <a href="../content/top-rated.html">Top Rated</a>
+                        <a href="index.html">All Categories</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 Xshiver.site - All rights reserved. Adults only (18+).</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="../../assets/js/age-verification.js"></script>
+    <script src="../../assets/js/video-database.js"></script>
+    <script src="../../assets/js/category-manager.js"></script>
+    <script src="../../assets/js/filter-system.js"></script>
+    <script src="../../assets/js/pagination.js"></script>
+    <script src="../../assets/js/content-loader.js"></script>
+</body>
+</html>
