@@ -1,154 +1,302 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-R6X1NC4RY8"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-R6X1NC4RY8');
-</script>
-
-<!--
-    <meta name="google-site-verification" content="OrCev24C7R5w-fhzuf5DvNIMFR2EJJ86iIENfG6Knok" />   --> 
-  
-<meta name="google-site-verification" content="4hXemlDNz6wM6ogWk7-AxxZicpKVABb3MqQi1ZrqA0E" /> 
-
-
-
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Xshiver Exclusive </title>
-    <link rel="stylesheet" href="style.css">
-
-
+    <title>Xshiver - Premium Adult Video Streaming | 18+ Only</title>
+    <meta name="description" content="Xshiver - Stream premium adult videos in HD. Professional content across all categories. 18+ only. Free access to thousands of videos.">
+    <meta name="keywords" content="adult videos, streaming, HD porn, free adult content, 18+, premium videos">
+    <meta name="author" content="Xshiver">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Xshiver - Premium Adult Video Streaming">
+    <meta property="og:description" content="Stream premium adult videos in HD. 18+ only.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://xshiver.site">
+    <meta property="og:site_name" content="Xshiver">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Xshiver - Premium Adult Video Streaming">
+    <meta name="twitter:description" content="Stream premium adult videos in HD. 18+ only.">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="assets/images/logo-xshiver.png">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/components.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="assets/css/main.css" as="style">
+    <link rel="preload" href="assets/js/age-verification.js" as="script">
 </head>
 <body>
-
-
-
-  
-    <header>
-        <div class="header-container">
-         
-         <!-- <a href="index.html" class="logo-link">
-    <img src="thumbs/logo.png" alt="Xshiver" class="logo">
-</a> -->
-          
-            <h1>Xshiver</h1> 
-          
-          <!--<h2>More Content Soon...</h2>-->
-            <div class="search-container">
-                <input type="text" id="search" placeholder="Search videos...">
+    <!-- Age Verification Modal -->
+    <div id="age-verification" class="age-modal active">
+        <div class="age-content">
+            <div class="age-logo">
+                <img src="assets/images/logo-xshiver.png" alt="Xshiver Logo" class="logo-image">
+                <h1 class="brand-name">XSHIVER</h1>
+            </div>
+            
+            <div class="age-warning">
+                <h2>🔞 Adult Content Warning</h2>
+                <p class="warning-text">This website contains sexually explicit material and is intended solely for adults.</p>
+                <p class="age-requirement">You must be <strong>18 years or older</strong> to access this content.</p>
+                <p class="legal-notice">By entering, you agree that you are an adult and accept full responsibility for your access.</p>
+            </div>
+            
+            <div class="age-buttons">
+                <button onclick="verifyAge(true)" class="btn-enter">
+                    <span>✓ I am 18+ years old</span>
+                    <small>Enter Site</small>
+                </button>
+                <button onclick="verifyAge(false)" class="btn-exit">
+                    <span>✗ I am under 18</span>
+                    <small>Leave Site</small>
+                </button>
+            </div>
+            
+            <div class="age-footer">
+                <p>Xshiver.site - Premium Adult Entertainment</p>
             </div>
         </div>
+    </div>
 
+    <!-- Main Site Content (Hidden until age verification) -->
+    <div id="main-content" class="main-content hidden">
+        <!-- Header Navigation -->
+        <header class="site-header">
+            <nav class="main-nav">
+                <div class="nav-container">
+                    <!-- Logo and Brand -->
+                    <div class="nav-brand">
+                        <img src="assets/images/logo-xshiver.png" alt="Xshiver" class="nav-logo">
+                        <span class="brand-text">XSHIVER</span>
+                    </div>
+                    
+                    <!-- Desktop Navigation -->
+                    <div class="nav-links desktop-nav">
+                        <a href="#home" class="nav-link active">Home</a>
+                        <a href="#categories" class="nav-link">Categories</a>
+                        <a href="#trending" class="nav-link">Trending</a>
+                        <a href="#new" class="nav-link">New</a>
+                        <a href="#top-rated" class="nav-link">Top Rated</a>
+                    </div>
+                    
+                    <!-- Search Bar -->
+                    <div class="nav-search">
+                        <input type="text" placeholder="Search videos..." class="search-input" id="search-input">
+                        <button class="search-btn" id="search-btn">🔍</button>
+                    </div>
+                    
+                    <!-- Mobile Menu Toggle -->
+                    <button class="mobile-menu-btn" id="mobile-menu-btn">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                </div>
+                
+                <!-- Mobile Navigation -->
+                <div class="mobile-nav hidden" id="mobile-nav">
+                    <a href="#home" class="mobile-nav-link">Home</a>
+                    <a href="#categories" class="mobile-nav-link">Categories</a>
+                    <a href="#trending" class="mobile-nav-link">Trending</a>
+                    <a href="#new" class="mobile-nav-link">New</a>
+                    <a href="#top-rated" class="mobile-nav-link">Top Rated</a>
+                </div>
+            </nav>
+        </header>
 
-
-
-
-<!-- Add this in the <head> section if not already present for app download notification
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-
-<!-- Add this in your header for app download notification 
-<header>
-    <div class="header-container">
-        <!-- Your existing header content 
-        <a href="#" class="download-icon" title="Download App">
-    <i class="fas fa-download"></i>
-</a>
-    </div>-->
-</header>
-
-<!--
-      
-
-<nav class="nav-menu" aria-label="Main navigation">
-<div class="nav-links">
-<a href="#home">Home</a>
-<a href="#MILF">MILF</a>
-<a href="#Japanese">Japanese </a>
-  <a href="#indian">Indian</a>
-<a href="#Blowjob">Blowjob</a>
-<a href="#Big BOObs">Big Boobs </a>
-  <a href="#Pussy">Pussy</a>
-<a href="?&category=Big%20Ass">Big Ass</a>
-
-  
-</div>
-
-      
-    </header>>-->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  
-    <main>
-        <section class="video-section">
-            <h3>Videos Loading...</h3>
-            <div class="video-list" id="video-list"></div>
+        <!-- Hero Section -->
+        <section class="hero-section" id="home">
+            <div class="hero-overlay">
+                <div class="hero-content">
+                    <div class="hero-brand">
+                        <img src="assets/images/logo-xshiver.png" alt="Xshiver" class="hero-logo">
+                        <h1 class="hero-title">XSHIVER</h1>
+                    </div>
+                    
+                    <div class="hero-text">
+                        <h2 class="hero-subtitle">Experience Premium Entertainment</h2>
+                        <p class="hero-description">Unleash Your Desires • Stream Without Limits • HD Quality</p>
+                        <p class="hero-stats">Join 10M+ viewers • 50,000+ premium videos • Updated daily</p>
+                    </div>
+                    
+                    <div class="hero-cta">
+                        <button class="btn-primary" onclick="scrollToSection('categories')">
+                            🎬 Start Watching
+                        </button>
+                        <button class="btn-secondary" onclick="scrollToSection('trending')">
+                            🔥 Explore Trending
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Animated Background -->
+            <div class="hero-background">
+                <div class="floating-particles">
+                    <div class="particle"></div>
+                    <div class="particle"></div>
+                    <div class="particle"></div>
+                    <div class="particle"></div>
+                    <div class="particle"></div>
+                </div>
+            </div>
         </section>
-    </main>
 
-    <footer>
-        <p>&copy; 2025 Xshiver. All rights reserved.</p>
-    </footer>
+        <!-- Quick Categories Section -->
+        <section class="quick-categories" id="categories">
+            <div class="container">
+                <h2 class="section-title">🎭 Explore Categories</h2>
+                <p class="section-subtitle">Discover content tailored to your preferences</p>
+                
+                <div class="categories-grid">
+                    <div class="category-card" data-category="amateur">
+                        <div class="category-icon">👥</div>
+                        <h3>Amateur</h3>
+                        <p>Real people, authentic content</p>
+                        <span class="video-count">2,847 videos</span>
+                    </div>
+                    
+                    <div class="category-card" data-category="professional">
+                        <div class="category-icon">🎬</div>
+                        <h3>Professional</h3>
+                        <p>High-quality productions</p>
+                        <span class="video-count">3,521 videos</span>
+                    </div>
+                    
+                    <div class="category-card featured" data-category="milf">
+                        <div class="category-icon">👩</div>
+                        <h3>MILF</h3>
+                        <p>Mature and experienced</p>
+                        <span class="video-count">1,892 videos</span>
+                        <div class="featured-badge">Popular</div>
+                    </div>
+                    
+                    <div class="category-card" data-category="teen">
+                        <div class="category-icon">👧</div>
+                        <h3>Teen (18+)</h3>
+                        <p>Young adults only</p>
+                        <span class="video-count">4,156 videos</span>
+                    </div>
+                    
+                    <div class="category-card" data-category="hardcore">
+                        <div class="category-icon">🔥</div>
+                        <h3>Hardcore</h3>
+                        <p>Intense adult content</p>
+                        <span class="video-count">2,234 videos</span>
+                    </div>
+                    
+                    <div class="category-card" data-category="lesbian">
+                        <div class="category-icon">👩‍❤️‍👩</div>
+                        <h3>Lesbian</h3>
+                        <p>Women loving women</p>
+                        <span class="video-count">1,678 videos</span>
+                    </div>
+                </div>
+                
+                <div class="view-all-categories">
+                    <button class="btn-outline" onclick="showAllCategories()">
+                        View All 20+ Categories →
+                    </button>
+                </div>
+            </div>
+        </section>
 
-    <script src="script.js"></script>
-  
+        <!-- Trending Section -->
+        <section class="trending-section" id="trending">
+            <div class="container">
+                <h2 class="section-title">🔥 Trending Now</h2>
+                <p class="section-subtitle">Most watched videos this week</p>
+                
+                <div class="video-grid" id="trending-videos">
+                    <!-- Placeholder video cards - will be populated by JavaScript -->
+                    <div class="video-card placeholder">
+                        <div class="video-thumbnail">
+                            <div class="thumbnail-placeholder"></div>
+                            <div class="video-duration">12:34</div>
+                            <div class="video-quality">HD</div>
+                        </div>
+                        <div class="video-info">
+                            <h4 class="video-title">Loading trending videos...</h4>
+                            <div class="video-stats">
+                                <span class="views">•••• views</span>
+                                <span class="rating">★ •.•</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- More placeholder cards -->
+                    <div class="video-card placeholder">
+                        <div class="video-thumbnail">
+                            <div class="thumbnail-placeholder"></div>
+                            <div class="video-duration">08:21</div>
+                            <div class="video-quality">4K</div>
+                        </div>
+                        <div class="video-info">
+                            <h4 class="video-title">Loading...</h4>
+                            <div class="video-stats">
+                                <span class="views">•••• views</span>
+                                <span class="rating">★ •.•</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
+        <!-- Footer -->
+        <footer class="site-footer">
+            <div class="container">
+                <div class="footer-content">
+                    <div class="footer-brand">
+                        <img src="assets/images/logo-xshiver.png" alt="Xshiver" class="footer-logo">
+                        <span class="footer-brand-text">XSHIVER</span>
+                        <p class="footer-tagline">Premium Adult Entertainment</p>
+                    </div>
+                    
+                    <div class="footer-links">
+                        <div class="footer-column">
+                            <h4>Categories</h4>
+                            <a href="#amateur">Amateur</a>
+                            <a href="#professional">Professional</a>
+                            <a href="#milf">MILF</a>
+                            <a href="#teen">Teen (18+)</a>
+                        </div>
+                        
+                        <div class="footer-column">
+                            <h4>Browse</h4>
+                            <a href="#trending">Trending</a>
+                            <a href="#new">New Videos</a>
+                            <a href="#top-rated">Top Rated</a>
+                            <a href="#most-watched">Most Watched</a>
+                        </div>
+                        
+                        <div class="footer-column">
+                            <h4>Legal</h4>
+                            <a href="pages/legal/terms.html">Terms of Service</a>
+                            <a href="pages/legal/privacy.html">Privacy Policy</a>
+                            <a href="pages/legal/2257.html">2257 Compliance</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="footer-bottom">
+                    <p>&copy; 2025 Xshiver.site - All rights reserved. 18+ Adult Content Only.</p>
+                    <p class="age-disclaimer">All models are 18 years of age or older.</p>
+                </div>
+            </div>
+        </footer>
+    </div>
 
-
-
-
-
-
-
-
-<script>
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', function() {
-    navigator.serviceWorker.register('/sw.js')
-      .then(function(registration) {
-        console.log('ServiceWorker registration successful');
-      })
-      .catch(function(err) {
-        console.log('ServiceWorker registration failed: ', err);
-      });
-  });
-}
-</script>
-
-
-
-
-
-
-  
-
-  
+    <!-- Loading Scripts -->
+    <script src="assets/js/age-verification.js"></script>
+    <script src="assets/js/main.js"></script>
 </body>
-</html>    
-
+</html>
