@@ -608,7 +608,8 @@ body {
     margin-bottom: var(--spacing-xxl);
 }
 
-/* Categories Grid - Updated with Image Support */
+/* ========== UPDATED CATEGORIES SECTION - BACKGROUND IMAGE STYLE ========== */
+/* Categories Grid */
 .categories-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -627,22 +628,36 @@ body {
     transform: translateY(-5px);
 }
 
-/* Enhanced Category Card with Images */
+/* Category Card with Background Image */
 .category-card {
-    background: linear-gradient(135deg, var(--xshiver-secondary), var(--deep-navy));
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     border-radius: var(--radius-lg);
     overflow: hidden;
     cursor: pointer;
     transition: all var(--transition-normal);
     border: 1px solid rgba(74, 144, 226, 0.3);
     position: relative;
-    height: 350px;
-    display: flex;
-    flex-direction: column;
+    height: 300px;
     box-shadow: var(--shadow-md);
 }
 
-/* Hover effects using your existing animations */
+/* Dark overlay for text readability */
+.category-overlay {
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.6), rgba(15, 15, 26, 0.8));
+    padding: var(--spacing-xl);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    transition: all var(--transition-normal);
+}
+
+/* Hover effects */
 .category-card::before {
     content: '';
     position: absolute;
@@ -650,7 +665,7 @@ body {
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(74, 144, 226, 0.1), transparent);
+    background: linear-gradient(90deg, transparent, rgba(74, 144, 226, 0.2), transparent);
     transition: left var(--transition-slow);
     z-index: 1;
 }
@@ -660,85 +675,53 @@ body {
 }
 
 .category-card:hover {
-    transform: translateY(-5px);
+    transform: translateY(-5px) scale(1.02);
     box-shadow: var(--shadow-xl);
     border-color: var(--xshiver-blue);
 }
 
-/* Category Image Section */
-.category-image {
-    height: 180px;
-    overflow: hidden;
-    position: relative;
-    background: linear-gradient(45deg, var(--deep-navy), var(--xshiver-dark));
+.category-card:hover .category-overlay {
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.4), rgba(15, 15, 26, 0.7));
 }
 
-.category-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform var(--transition-normal);
-}
-
-.category-card:hover .category-image img {
-    transform: scale(1.05);
-}
-
-/* Image overlay effect using your color scheme */
-.category-image::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(180deg, transparent 0%, rgba(15, 15, 26, 0.3) 100%);
-    pointer-events: none;
-}
-
-/* Category Content */
-.category-content {
-    padding: var(--spacing-xl);
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    position: relative;
-    z-index: 2;
-    text-align: center;
-}
-
-/* Category Icon using your existing styles */
+/* Category Icon */
 .category-icon {
     font-size: 3rem;
     margin-bottom: var(--spacing-md);
-    filter: drop-shadow(0 0 10px var(--xshiver-blue));
+    filter: drop-shadow(0 0 15px var(--xshiver-blue));
+    z-index: 2;
+    position: relative;
 }
 
 /* Category Title */
 .category-card h3 {
-    font-size: 1.5rem;
-    color: var(--xshiver-blue);
+    font-size: 1.8rem;
+    color: white;
     margin-bottom: var(--spacing-sm);
     font-weight: bold;
-    transition: color var(--transition-fast);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+    z-index: 2;
+    position: relative;
+    transition: all var(--transition-fast);
 }
 
 .category-card:hover h3 {
-    color: var(--xshiver-accent);
-    text-shadow: 0 0 20px var(--xshiver-blue);
+    color: var(--xshiver-blue);
+    text-shadow: 0 0 20px var(--xshiver-blue), 2px 2px 4px rgba(0, 0, 0, 0.8);
 }
 
 /* Category Description */
 .category-card p {
-    color: var(--silver-text);
+    color: rgba(255, 255, 255, 0.9);
     margin-bottom: var(--spacing-md);
-    line-height: 1.5;
-    opacity: 0.9;
-    flex-grow: 1;
+    line-height: 1.4;
+    font-size: 1rem;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+    z-index: 2;
+    position: relative;
 }
 
-/* Video Count Badge using your design system */
+/* Video Count Badge */
 .video-count {
     background: linear-gradient(135deg, var(--xshiver-blue), var(--xshiver-accent));
     color: white;
@@ -746,30 +729,29 @@ body {
     border-radius: var(--radius-xl);
     font-size: 0.9rem;
     font-weight: bold;
-    align-self: center;
-    box-shadow: var(--shadow-sm);
+    box-shadow: 0 4px 15px rgba(74, 144, 226, 0.4);
     transition: all var(--transition-normal);
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    display: inline-block;
+    z-index: 2;
+    position: relative;
 }
 
 .category-card:hover .video-count {
     background: linear-gradient(135deg, var(--xshiver-accent), var(--electric-blue));
-    box-shadow: var(--shadow-md);
+    box-shadow: 0 6px 20px rgba(74, 144, 226, 0.6);
     transform: translateY(-2px);
 }
 
 /* Featured Category Enhancement */
 .category-card.featured {
     border: 2px solid var(--gold-accent);
-    background: linear-gradient(135deg, var(--xshiver-secondary), rgba(255, 215, 0, 0.1));
 }
 
 .featured-badge {
     position: absolute;
-    top: 10px;
-    right: 10px;
+    top: 15px;
+    right: 15px;
     background: var(--gold-accent);
     color: var(--midnight-black);
     padding: var(--spacing-xs) var(--spacing-sm);
@@ -777,32 +759,9 @@ body {
     font-size: 0.8rem;
     font-weight: bold;
     z-index: 3;
+    box-shadow: 0 2px 8px rgba(255, 215, 0, 0.4);
 }
-
-/* Different category variations using your color scheme */
-.category-card[data-category="amateur"] {
-    border-left: 4px solid var(--xshiver-blue);
-}
-
-.category-card[data-category="professional"] {
-    border-left: 4px solid var(--xshiver-accent);
-}
-
-.category-card[data-category="milf"] {
-    border-left: 4px solid var(--gold-accent);
-}
-
-.category-card[data-category="teen"] {
-    border-left: 4px solid var(--xshiver-light-blue);
-}
-
-.category-card[data-category="hardcore"] {
-    border-left: 4px solid var(--electric-blue);
-}
-
-.category-card[data-category="lesbian"] {
-    border-left: 4px solid var(--xshiver-accent);
-}
+/* ========== END OF UPDATED CATEGORIES SECTION ========== */
 
 .view-all-categories {
     text-align: center;
@@ -1002,7 +961,7 @@ body {
     color: var(--danger-red);
 }
 
-/* Responsive Design for Categories */
+/* Responsive Design */
 @media (max-width: 768px) {
     .categories-grid {
         grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -1010,14 +969,10 @@ body {
     }
     
     .category-card {
-        height: 300px;
+        height: 250px;
     }
     
-    .category-image {
-        height: 140px;
-    }
-    
-    .category-content {
+    .category-overlay {
         padding: var(--spacing-lg);
     }
     
@@ -1027,7 +982,7 @@ body {
     }
     
     .category-card h3 {
-        font-size: 1.3rem;
+        font-size: 1.5rem;
     }
     
     .hero-cta {
@@ -1051,11 +1006,7 @@ body {
     }
     
     .category-card {
-        height: 280px;
-    }
-    
-    .category-image {
-        height: 120px;
+        height: 220px;
     }
     
     .nav-search {
