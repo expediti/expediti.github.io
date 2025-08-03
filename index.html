@@ -3,346 +3,121 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Xshiver - Premium Adult Video Streaming | 18+ Only</title>
-    <meta name="description" content="Xshiver - Stream premium adult videos in HD. Professional content across all categories. 18+ only. Free access to thousands of videos.">
-    <meta name="keywords" content="adult videos, streaming, HD porn, free adult content, 18+, premium videos">
-    <meta name="author" content="Xshiver">
-    <meta name="robots" content="index, follow">
-    
-    <!-- Open Graph Meta Tags -->
-    <meta property="og:title" content="Xshiver - Premium Adult Video Streaming">
-    <meta property="og:description" content="Stream premium adult videos in HD. 18+ only.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://xshiver.site">
-    <meta property="og:site_name" content="Xshiver">
-    
-    <!-- Twitter Card Meta Tags -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Xshiver - Premium Adult Video Streaming">
-    <meta name="twitter:description" content="Stream premium adult videos in HD. 18+ only.">
-    
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" href="assets/images/logo-xshiver.png">
-    
-    <!-- Stylesheets -->
-    <link rel="stylesheet" href="assets/css/main.css">
-    <link rel="stylesheet" href="assets/css/components.css">
-    <link rel="stylesheet" href="assets/css/responsive.css">
-    
-    <!-- Preload critical resources -->
-    <link rel="preload" href="assets/css/main.css" as="style">
-    <link rel="preload" href="assets/js/age-verification.js" as="script">
+    <title>FitScan - Health Assessment Tools</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-    <!-- Age Verification Modal -->
-    <div id="age-verification" class="age-modal active">
-        <div class="age-content">
-            <div class="age-logo">
-                <img src="assets/images/logo-xshiver.png" alt="Xshiver Logo" class="logo-image">
-                <h1 class="brand-name">XSHIVER</h1>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <i class="fas fa-heartbeat"></i>
+                <span>FitScan</span>
             </div>
-            
-            <div class="age-warning">
-                <h2>🔞 Adult Content Warning</h2>
-                <p class="warning-text">This website contains sexually explicit material and is intended solely for adults.</p>
-                <p class="age-requirement">You must be <strong>18 years or older</strong> to access this content.</p>
-                <p class="legal-notice">By entering, you agree that you are an adult and accept full responsibility for your access.</p>
-            </div>
-            
-            <div class="age-buttons">
-                <button onclick="verifyAge(true)" class="btn-enter">
-                    <span>✓ I am 18+ years old</span>
-                    <small>Enter Site</small>
-                </button>
-                <button onclick="verifyAge(false)" class="btn-exit">
-                    <span>✗ I am under 18</span>
-                    <small>Leave Site</small>
-                </button>
-            </div>
-            
-            <div class="age-footer">
-                <p>Xshiver.site - Premium Adult Entertainment</p>
+            <div class="menu-toggle">
+                <i class="fas fa-bars"></i>
             </div>
         </div>
-    </div>
+    </header>
 
-    <!-- Main Site Content (Hidden until age verification) -->
-    <div id="main-content" class="main-content hidden">
-        <!-- Header Navigation -->
-        <header class="site-header">
-            <nav class="main-nav">
-                <div class="nav-container">
-                    <!-- Logo and Brand -->
-                    <div class="nav-brand">
-                        <img src="assets/images/logo-xshiver.png" alt="Xshiver" class="nav-logo">
-                        <span class="brand-text">XSHIVER</span>
-                    </div>
-                    
-                    <!-- Desktop Navigation -->
-                    <div class="nav-links desktop-nav">
-                        <a href="#home" class="nav-link active">Home</a>
-                        <a href="#categories" class="nav-link">Categories</a>
-                        <a href="#trending" class="nav-link">Trending</a>
-
-                        <!--
-                        <a href="#new" class="nav-link">New</a>
-                        <a href="#top-rated" class="nav-link">Top Rated</a>
-                    </div>
-                        -->
-                    
-                    <!-- Search Bar -->
-                    <div class="nav-search">
-                        <input type="text" placeholder="Search videos..." class="search-input" id="search-input">
-                        <button class="search-btn" id="search-btn">🔍</button>
-                    </div>
-                    
-                    <!-- Mobile Menu Toggle -->
-                    <button class="mobile-menu-btn" id="mobile-menu-btn">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </button>
-                </div>
-                
-                <!-- Mobile Navigation -->
-                <div class="mobile-nav hidden" id="mobile-nav">
-                    <a href="#home" class="mobile-nav-link">Home</a>
-                    <a href="#categories" class="mobile-nav-link">Categories</a>
-                    <a href="#trending" class="mobile-nav-link">Trending</a>
-                    <a href="#new" class="mobile-nav-link">New</a>
-                    <a href="#top-rated" class="mobile-nav-link">Top Rated</a>
-
-                    
-                </div>
-            </nav>
-        </header>
-
-        <!-- Hero Section 
-        <section class="hero-section" id="home">
-            <div class="hero-overlay">
-                <div class="hero-content">
-                    <div class="hero-brand">
-                        <img src="assets/images/logo-xshiver.png" alt="Xshiver" class="hero-logo">
-                        <h1 class="hero-title">XSHIVER</h1>
-                    </div>
-                    
-                    <div class="hero-text">
-                        <h2 class="hero-subtitle">Experience Premium Entertainment</h2>
-                        <p class="hero-description">Unleash Your Desires • Stream Without Limits • HD Quality</p>
-                        <p class="hero-stats">Join 10M+ viewers • 50,000+ premium videos • Updated daily</p>
-                    </div>
-                    
-                    <div class="hero-cta">
-                        <button class="btn-primary" onclick="scrollToSection('categories')">
-                            🎬 Start Watching
-                        </button>
-                        <button class="btn-secondary" onclick="scrollToSection('trending')">
-                            🔥 Explore Trending
-                        </button>
-                    </div>
-                </div>
-            </div> -->
-            
-            <!-- Animated Background -->
-            <div class="hero-background">
-                <div class="floating-particles">
-                    <div class="particle"></div>
-                    <div class="particle"></div>
-                    <div class="particle"></div>
-                    <div class="particle"></div>
-                    <div class="particle"></div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Quick Categories Section -->
-        <section class="quick-categories" id="categories">
-            <div class="container">
-                <h2 class="section-title">🎭 Explore Categories</h2>
-                <p class="section-subtitle">Discover content tailored to your preferences</p>
-
-
-                <a href="pages/categories/category.html" class="category-link">
-                <div class="categories-grid">
-                    <div class="category-card" data-category="amateur">
-                        <div class="category-icon">👥</div>
-                        <h3>Amateur</h3>
-                        <p>Real people, authentic content</p>
-                        <span class="video-count">2,847 videos</span>
-                      </div>
-                        </a>           
-
-
-
-
-                 <a href="pages/categories/index.html" class="category-link">
-                    <div class="category-card" data-category="professional">
-                        <div class="category-icon">🎬</div>
-                        <h3>Professional</h3>
-                        <p>High-quality productions</p>
-                        <span class="video-count">3,521 videos</span>
-                    </div>
-                     </a> 
-
-                
-                
-                    <a href="pages/categories/index.html" class="category-link">
-                    <div class="category-card featured" data-category="milf">
-                        <div class="category-icon">👩</div>
-                        <h3>MILF</h3>
-                        <p>Mature and experienced</p>
-                        <span class="video-count">1,892 videos</span>
-                        <div class="featured-badge">Popular</div>
-                    </div>
-                     </a>
-
-
-                <a href="pages/categories/index.html" class="category-link">
-                    <div class="category-card" data-category="teen">
-                        <div class="category-icon">👧</div>
-                        <h3>Teen (18+)</h3>
-                        <p>Young adults only</p>
-                        <span class="video-count">4,156 videos</span>
-                    </div>
-                    </a>
-
-
-
-                    
-                    <a href="pages/categories/index.html" class="category-link">
-                    <div class="category-card" data-category="hardcore">
-                        <div class="category-icon">🔥</div>
-                        <h3>Hardcore</h3>
-                        <p>Intense adult content</p>
-                        <span class="video-count">2,234 videos</span>
-                    </div>
-                      </a>
-
-
-                
-                    <a href="pages/categories/index.html" class="category-link">
-                    <div class="category-card" data-category="lesbian">
-                        <div class="category-icon">👩‍❤️‍👩</div>
-                        <h3>Lesbian</h3>
-                        <p>Women loving women</p>
-                        <span class="video-count">1,678 videos</span>
-                    </div>
-                </div>
-                 </a>
-
-
-            <a href="pages/categories/index.html" class="category-link">
-                <div class="view-all-categories">
-                    <button class="btn-outline" onclick="showAllCategories()">
-                        View All 20+ Categories →
-                    </button>
-                </div>
-                </a>
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Description -->
+            <div class="description">
+                <p>Every health assessment tool you need, at your fingertips. 
+                All are 100% FREE and easy to use! Check symptoms, assess risks, 
+                monitor health with just a few clicks.</p>
             </div>
 
+            <!-- Category Tags -->
+            <div class="category-tags">
+                <button class="tag active" data-category="all">All</button>
+                <button class="tag" data-category="respiratory">Respiratory</button>
+                <button class="tag" data-category="mental">Mental Health</button>
+                <button class="tag" data-category="cardiovascular">Heart</button>
+                <button class="tag" data-category="symptoms">Symptoms</button>
+                <button class="tag" data-category="chronic">Chronic</button>
+            </div>
 
-    
-        </section>
-
-        <!-- Trending Section -->
-        <section class="trending-section" id="trending">
-            <div class="container">
-                <h2 class="section-title">🔥 Trending Now</h2>
-                <p class="section-subtitle">Most watched videos this week</p>
-                
-                <div class="video-grid" id="trending-videos">
-
-
-                    
-                    <!-- Placeholder video cards - will be populated by JavaScript -->
-                    <div class="video-card placeholder">
-                        <div class="video-thumbnail">
-                            <div class="thumbnail-placeholder"></div>
-                            <div class="video-duration">12:34</div>
-                            <div class="video-quality">HD</div>
-                        </div>
-                        <div class="video-info">
-                            <h4 class="video-title">Loading trending videos...</h4>
-                            <div class="video-stats">
-                                <span class="views">•••• views</span>
-                                <span class="rating">★ •.•</span>
-                            </div>
-                        </div>
+            <!-- Health Tools Grid -->
+            <div class="tools-grid" id="toolsGrid">
+                <!-- COVID-19 Assessment -->
+                <div class="tool-card" data-category="respiratory">
+                    <div class="tool-icon">
+                        <i class="fas fa-virus" style="color: #e74c3c;"></i>
                     </div>
+                    <h3>COVID-19 Risk Assessment</h3>
+                    <p>Assess your COVID-19 risk based on symptoms and exposure history.</p>
+                </div>
 
-                    
-                    
-                    <!-- More placeholder cards -->
-                    <div class="video-card placeholder">
-                        <div class="video-thumbnail">
-                            <div class="thumbnail-placeholder"></div>
-                            <div class="video-duration">08:21</div>
-                            <div class="video-quality">4K</div>
-                        </div>
-                        <div class="video-info">
-                            <h4 class="video-title">Loading...</h4>
-                            <div class="video-stats">
-                                <span class="views">•••• views</span>
-                                <span class="rating">★ •.•</span>
-                            </div>
-                        </div>
+                <!-- Anxiety Assessment -->
+                <div class="tool-card" data-category="mental">
+                    <div class="tool-icon">
+                        <i class="fas fa-brain" style="color: #9b59b6;"></i>
                     </div>
+                    <h3>Anxiety Level Check</h3>
+                    <p>Evaluate your anxiety levels with this comprehensive assessment.</p>
+                </div>
+
+                <!-- Asthma Assessment -->
+                <div class="tool-card" data-category="respiratory">
+                    <div class="tool-icon">
+                        <i class="fas fa-lungs" style="color: #3498db;"></i>
+                    </div>
+                    <h3>Asthma Risk Checker</h3>
+                    <p>Check your asthma symptoms and breathing difficulties.</p>
+                </div>
+
+                <!-- Heart Health -->
+                <div class="tool-card" data-category="cardiovascular">
+                    <div class="tool-icon">
+                        <i class="fas fa-heartbeat" style="color: #e74c3c;"></i>
+                    </div>
+                    <h3>Heart Health Assessment</h3>
+                    <p>Evaluate your cardiovascular health and identify potential risks.</p>
+                </div>
+
+                <!-- Depression Screening -->
+                <div class="tool-card" data-category="mental">
+                    <div class="tool-icon">
+                        <i class="fas fa-sad-tear" style="color: #34495e;"></i>
+                    </div>
+                    <h3>Depression Screening</h3>
+                    <p>Screen for depression symptoms with this validated questionnaire.</p>
+                </div>
+
+                <!-- Diabetes Risk -->
+                <div class="tool-card" data-category="chronic">
+                    <div class="tool-icon">
+                        <i class="fas fa-tint" style="color: #f39c12;"></i>
+                    </div>
+                    <h3>Diabetes Risk Calculator</h3>
+                    <p>Calculate your risk of developing type 2 diabetes.</p>
+                </div>
+
+                <!-- Stress Level -->
+                <div class="tool-card" data-category="mental">
+                    <div class="tool-icon">
+                        <i class="fas fa-exclamation-triangle" style="color: #e67e22;"></i>
+                    </div>
+                    <h3>Stress Level Assessment</h3>
+                    <p>Measure your current stress levels and get personalized advice.</p>
+                </div>
+
+                <!-- Sleep Quality -->
+                <div class="tool-card" data-category="symptoms">
+                    <div class="tool-icon">
+                        <i class="fas fa-bed" style="color: #2c3e50;"></i>
+                    </div>
+                    <h3>Sleep Quality Check</h3>
+                    <p>Assess your sleep quality and identify sleep-related issues.</p>
                 </div>
             </div>
-        </section>
+        </div>
+    </main>
 
-
-
-
-
-        
-
-        <!-- Footer -->
-        <footer class="site-footer">
-            <div class="container">
-                <div class="footer-content">
-                    <div class="footer-brand">
-                        <img src="assets/images/logo-xshiver.png" alt="Xshiver" class="footer-logo">
-                        <span class="footer-brand-text">XSHIVER</span>
-                        <p class="footer-tagline">Premium Adult Entertainment</p>
-                    </div>
-                    
-                    <div class="footer-links">
-                        <div class="footer-column">
-                            <h4>Categories</h4>
-                            <a href="#amateur">Amateur</a>
-                            <a href="#professional">Professional</a>
-                            <a href="#milf">MILF</a>
-                            <a href="#teen">Teen (18+)</a>
-                        </div>
-                        
-                        <div class="footer-column">
-                            <h4>Browse</h4>
-                            <a href="#trending">Trending</a>
-                            <a href="#new">New Videos</a>
-                            <a href="#top-rated">Top Rated</a>
-                            <a href="#most-watched">Most Watched</a>
-                        </div>
-                        
-                        <div class="footer-column">
-                            <h4>Legal</h4>
-                            <a href="pages/legal/terms.html">Terms of Service</a>
-                            <a href="pages/legal/privacy.html">Privacy Policy</a>
-                            <a href="pages/legal/2257.html">2257 Compliance</a>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="footer-bottom">
-                    <p>&copy; 2025 Xshiver.site - All rights reserved. 18+ Adult Content Only.</p>
-                    <p class="age-disclaimer">All models are 18 years of age or older.</p>
-                </div>
-            </div>
-        </footer>
-    </div>
-
-    <!-- Loading Scripts -->
-    <script src="assets/js/age-verification.js"></script>
-    <script src="assets/js/main.js"></script>
+    <script src="js/main.js"></script>
 </body>
 </html>
