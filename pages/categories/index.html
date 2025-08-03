@@ -80,7 +80,7 @@
     </header>
 
     <!-- Breadcrumb Navigation -->
-    <nav class="breadcrumb-nav">
+    <nav class="breadcrumb">
         <div class="container">
             <ol class="breadcrumb-list">
                 <li class="breadcrumb-item">
@@ -97,48 +97,44 @@
     <main class="main-content">
         <div class="container">
             <!-- Page Header -->
-            <section class="page-header-section">
-                <div class="page-header-content">
+            <section class="page-header">
+                <div class="header-content">
                     <h1 class="page-title">Browse Categories</h1>
                     <p class="page-subtitle">Discover thousands of premium adult videos organized by your favorite categories</p>
-                    
-                    <!-- Stats Row -->
-                    <div class="stats-row">
-                        <div class="stat-item">
+                    <div class="page-stats">
+                        <div class="stat">
                             <span class="stat-number" id="total-categories">15</span>
-                            <span class="stat-label">CATEGORIES</span>
+                            <span class="stat-label">Categories</span>
                         </div>
-                        <div class="stat-item">
+                        <div class="stat">
                             <span class="stat-number" id="total-videos">10,247</span>
-                            <span class="stat-label">VIDEOS</span>
+                            <span class="stat-label">Videos</span>
                         </div>
-                        <div class="stat-item">
+                        <div class="stat">
                             <span class="stat-number">4K</span>
-                            <span class="stat-label">QUALITY</span>
+                            <span class="stat-label">Quality</span>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <!-- Control Bar -->
-            <section class="control-bar">
-                <div class="control-bar-left">
-                    <div class="sort-control">
-                        <label for="sort-select" class="control-label">Sort by:</label>
-                        <select id="sort-select" class="sort-select">
+            <!-- Category Filters -->
+            <section class="category-filters">
+                <div class="filter-bar">
+                    <div class="filter-group">
+                        <label for="sort-select" class="filter-label">Sort by:</label>
+                        <select id="sort-select" class="filter-select">
                             <option value="popular">Most Popular</option>
                             <option value="alphabetical">A-Z</option>
                             <option value="newest">Newest First</option>
                             <option value="most-videos">Most Videos</option>
                         </select>
                     </div>
-                </div>
-                
-                <div class="control-bar-center">
-                    <div class="view-controls">
-                        <span class="control-label">View:</span>
-                        <div class="view-toggle-group">
-                            <button class="view-toggle-btn active" data-view="grid">
+                    
+                    <div class="filter-group">
+                        <label for="view-toggle" class="filter-label">View:</label>
+                        <div class="view-toggle" id="view-toggle">
+                            <button class="view-btn active" data-view="grid">
                                 <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
                                     <rect x="3" y="3" width="7" height="7"/>
                                     <rect x="14" y="3" width="7" height="7"/>
@@ -146,7 +142,7 @@
                                     <rect x="14" y="14" width="7" height="7"/>
                                 </svg>
                             </button>
-                            <button class="view-toggle-btn" data-view="list">
+                            <button class="view-btn" data-view="list">
                                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
                                     <line x1="8" y1="6" x2="21" y2="6"/>
                                     <line x1="8" y1="12" x2="21" y2="12"/>
@@ -158,41 +154,196 @@
                             </button>
                         </div>
                     </div>
-                </div>
-                
-                <div class="control-bar-right">
-                    <button class="advanced-filters-btn" id="advanced-filters-btn">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                            <polygon points="22,3 2,3 10,12.46 10,19 14,21 14,12.46"/>
-                        </svg>
-                        Advanced Filters
-                    </button>
+                    
+                    <div class="filter-group">
+                        <button class="filter-btn" id="advanced-filters-btn">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <polygon points="22,3 2,3 10,12.46 10,19 14,21 14,12.46"/>
+                            </svg>
+                            Advanced Filters
+                        </button>
+                    </div>
                 </div>
             </section>
 
             <!-- Featured Categories -->
-            <section class="featured-section">
+            <section class="featured-categories">
                 <h2 class="section-title">🔥 Popular Categories</h2>
                 <div class="categories-grid featured-grid" id="featured-categories">
-                    <!-- Featured categories will be loaded here -->
+                    <!-- Amateur Category -->
+                    <a href="category.html?cat=amateur" class="category-link">
+                        <div class="category-card featured">
+                            <div class="category-background" style="background-image: url('../../assets/images/categories/amateur-bg.jpg');"></div>
+                            <div class="category-overlay"></div>
+                            <div class="category-content">
+                                <div class="category-header">
+                                    <div class="category-icon">👥</div>
+                                    <div class="category-badge trending">Popular</div>
+                                </div>
+                                <div class="category-body">
+                                    <h3 class="category-title">Amateur</h3>
+                                    <p class="category-description">Real people, authentic content from everyday couples and individuals</p>
+                                </div>
+                                <div class="category-footer">
+                                    <div class="category-stats">
+                                        <div class="category-stat">
+                                            <span class="category-stat-number">2,847</span>
+                                            <span class="category-stat-label">Videos</span>
+                                        </div>
+                                    </div>
+                                    <button class="category-action">Explore</button>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Professional Category -->
+                    <a href="category.html?cat=professional" class="category-link">
+                        <div class="category-card">
+                            <div class="category-background" style="background-image: url('../../assets/images/categories/professional-bg.jpg');"></div>
+                            <div class="category-overlay"></div>
+                            <div class="category-content">
+                                <div class="category-header">
+                                    <div class="category-icon">🎬</div>
+                                    <div class="category-badge">HD</div>
+                                </div>
+                                <div class="category-body">
+                                    <h3 class="category-title">Professional</h3>
+                                    <p class="category-description">High-quality studio productions with professional performers</p>
+                                </div>
+                                <div class="category-footer">
+                                    <div class="category-stats">
+                                        <div class="category-stat">
+                                            <span class="category-stat-number">3,521</span>
+                                            <span class="category-stat-label">Videos</span>
+                                        </div>
+                                    </div>
+                                    <button class="category-action">Explore</button>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- MILF Category -->
+                    <a href="category.html?cat=milf" class="category-link">
+                        <div class="category-card">
+                            <div class="category-background" style="background-image: url('../../assets/images/categories/milf-bg.jpg');"></div>
+                            <div class="category-overlay"></div>
+                            <div class="category-content">
+                                <div class="category-header">
+                                    <div class="category-icon">👩</div>
+                                    <div class="category-badge new">New</div>
+                                </div>
+                                <div class="category-body">
+                                    <h3 class="category-title">MILF</h3>
+                                    <p class="category-description">Mature and experienced women in premium content</p>
+                                </div>
+                                <div class="category-footer">
+                                    <div class="category-stats">
+                                        <div class="category-stat">
+                                            <span class="category-stat-number">1,892</span>
+                                            <span class="category-stat-label">Videos</span>
+                                        </div>
+                                    </div>
+                                    <button class="category-action">Explore</button>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
                 </div>
             </section>
 
             <!-- All Categories -->
-            <section class="all-categories-section">
+            <section class="all-categories">
                 <h2 class="section-title">All Categories</h2>
                 <div class="categories-container">
                     <div class="categories-grid" id="all-categories" data-view="grid">
-                        <!-- All categories will be loaded here -->
+                        <!-- Teen Category -->
+                        <a href="category.html?cat=teen" class="category-link">
+                            <div class="category-card">
+                                <div class="category-background" style="background-image: url('../../assets/images/categories/teen-bg.jpg');"></div>
+                                <div class="category-overlay"></div>
+                                <div class="category-content">
+                                    <div class="category-header">
+                                        <div class="category-icon">👧</div>
+                                    </div>
+                                    <div class="category-body">
+                                        <h3 class="category-title">Teen (18+)</h3>
+                                        <p class="category-description">Young adults 18+ in premium content</p>
+                                    </div>
+                                    <div class="category-footer">
+                                        <div class="category-stats">
+                                            <div class="category-stat">
+                                                <span class="category-stat-number">4,156</span>
+                                                <span class="category-stat-label">Videos</span>
+                                            </div>
+                                        </div>
+                                        <button class="category-action">Explore</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+
+                        <!-- Hardcore Category -->
+                        <a href="category.html?cat=hardcore" class="category-link">
+                            <div class="category-card">
+                                <div class="category-background" style="background-image: url('../../assets/images/categories/hardcore-bg.jpg');"></div>
+                                <div class="category-overlay"></div>
+                                <div class="category-content">
+                                    <div class="category-header">
+                                        <div class="category-icon">🔥</div>
+                                    </div>
+                                    <div class="category-body">
+                                        <h3 class="category-title">Hardcore</h3>
+                                        <p class="category-description">Intense adult content for mature audiences</p>
+                                    </div>
+                                    <div class="category-footer">
+                                        <div class="category-stats">
+                                            <div class="category-stat">
+                                                <span class="category-stat-number">2,234</span>
+                                                <span class="category-stat-label">Videos</span>
+                                            </div>
+                                        </div>
+                                        <button class="category-action">Explore</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+
+                        <!-- Lesbian Category -->
+                        <a href="category.html?cat=lesbian" class="category-link">
+                            <div class="category-card">
+                                <div class="category-background" style="background-image: url('../../assets/images/categories/lesbian-bg.jpg');"></div>
+                                <div class="category-overlay"></div>
+                                <div class="category-content">
+                                    <div class="category-header">
+                                        <div class="category-icon">👩‍❤️‍👩</div>
+                                    </div>
+                                    <div class="category-body">
+                                        <h3 class="category-title">Lesbian</h3>
+                                        <p class="category-description">Women loving women in premium content</p>
+                                    </div>
+                                    <div class="category-footer">
+                                        <div class="category-stats">
+                                            <div class="category-stat">
+                                                <span class="category-stat-number">1,678</span>
+                                                <span class="category-stat-label">Videos</span>
+                                            </div>
+                                        </div>
+                                        <button class="category-action">Explore</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
                     </div>
                     
                     <div class="categories-list hidden" id="categories-list">
-                        <!-- List view will be loaded here -->
+                        <!-- List view will be populated by JavaScript -->
                     </div>
                 </div>
                 
                 <!-- Load More Button -->
-                <div class="load-more-container">
+                <div class="load-more-section">
                     <button class="btn-load-more" id="load-more-categories">
                         Load More Categories
                     </button>
@@ -200,38 +351,38 @@
             </section>
 
             <!-- Category Statistics -->
-            <section class="stats-section">
+            <section class="category-stats">
                 <h2 class="section-title">Category Statistics</h2>
                 <div class="stats-grid">
                     <div class="stat-card">
-                        <div class="stat-card-icon">📈</div>
-                        <div class="stat-card-content">
-                            <span class="stat-card-value" id="trending-count">8</span>
-                            <span class="stat-card-label">Trending Categories</span>
+                        <div class="stat-icon">📈</div>
+                        <div class="stat-info">
+                            <span class="stat-value" id="trending-count">8</span>
+                            <span class="stat-name">Trending Categories</span>
                         </div>
                     </div>
                     
                     <div class="stat-card">
-                        <div class="stat-card-icon">🆕</div>
-                        <div class="stat-card-content">
-                            <span class="stat-card-value" id="new-categories">3</span>
-                            <span class="stat-card-label">New This Week</span>
+                        <div class="stat-icon">🆕</div>
+                        <div class="stat-info">
+                            <span class="stat-value" id="new-categories">3</span>
+                            <span class="stat-name">New This Week</span>
                         </div>
                     </div>
                     
                     <div class="stat-card">
-                        <div class="stat-card-icon">⭐</div>
-                        <div class="stat-card-content">
-                            <span class="stat-card-value" id="top-rated-categories">12</span>
-                            <span class="stat-card-label">Top Rated</span>
+                        <div class="stat-icon">⭐</div>
+                        <div class="stat-info">
+                            <span class="stat-value" id="top-rated-categories">12</span>
+                            <span class="stat-name">Top Rated</span>
                         </div>
                     </div>
                     
                     <div class="stat-card">
-                        <div class="stat-card-icon">🎬</div>
-                        <div class="stat-card-content">
-                            <span class="stat-card-value" id="professional-count">5,420</span>
-                            <span class="stat-card-label">Professional Videos</span>
+                        <div class="stat-icon">🎬</div>
+                        <div class="stat-info">
+                            <span class="stat-value" id="professional-count">5,420</span>
+                            <span class="stat-name">Professional Videos</span>
                         </div>
                     </div>
                 </div>
