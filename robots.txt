@@ -1,0 +1,35 @@
+# Xshiver Platform - Robots.txt
+# Phase 7: Deployment & Optimization
+
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://yourusername.github.io/xshiver-platform/sitemap.xml
+
+# Disallow sensitive areas
+Disallow: /admin/
+Disallow: /api/
+Disallow: /*.json$
+Disallow: /assets/data/
+Disallow: /deploy/
+Disallow: /optimization/
+
+# Adult content compliance
+# Crawl delay for adult content sites
+Crawl-delay: 10
+
+# Block specific bots that don't respect adult content
+User-agent: ia_archiver
+Disallow: /
+
+User-agent: Wayback
+Disallow: /
+
+# Allow important pages for SEO
+Allow: /assets/css/
+Allow: /assets/js/
+Allow: /assets/images/
+Allow: /pages/
+Allow: /manifest.json
+Allow: /sw.js
