@@ -608,7 +608,7 @@ body {
     margin-bottom: var(--spacing-xxl);
 }
 
-/* Categories Grid */
+/* Categories Grid - Updated with Image Support */
 .categories-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -616,18 +616,33 @@ body {
     margin-bottom: var(--spacing-xxl);
 }
 
+.category-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    transition: transform var(--transition-normal);
+}
+
+.category-link:hover {
+    transform: translateY(-5px);
+}
+
+/* Enhanced Category Card with Images */
 .category-card {
     background: linear-gradient(135deg, var(--xshiver-secondary), var(--deep-navy));
-    padding: var(--spacing-xl);
     border-radius: var(--radius-lg);
-    text-align: center;
+    overflow: hidden;
     cursor: pointer;
     transition: all var(--transition-normal);
     border: 1px solid rgba(74, 144, 226, 0.3);
     position: relative;
-    overflow: hidden;
+    height: 350px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: var(--shadow-md);
 }
 
+/* Hover effects using your existing animations */
 .category-card::before {
     content: '';
     position: absolute;
@@ -637,6 +652,7 @@ body {
     height: 100%;
     background: linear-gradient(90deg, transparent, rgba(74, 144, 226, 0.1), transparent);
     transition: left var(--transition-slow);
+    z-index: 1;
 }
 
 .category-card:hover::before {
@@ -649,6 +665,102 @@ body {
     border-color: var(--xshiver-blue);
 }
 
+/* Category Image Section */
+.category-image {
+    height: 180px;
+    overflow: hidden;
+    position: relative;
+    background: linear-gradient(45deg, var(--deep-navy), var(--xshiver-dark));
+}
+
+.category-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform var(--transition-normal);
+}
+
+.category-card:hover .category-image img {
+    transform: scale(1.05);
+}
+
+/* Image overlay effect using your color scheme */
+.category-image::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(180deg, transparent 0%, rgba(15, 15, 26, 0.3) 100%);
+    pointer-events: none;
+}
+
+/* Category Content */
+.category-content {
+    padding: var(--spacing-xl);
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    z-index: 2;
+    text-align: center;
+}
+
+/* Category Icon using your existing styles */
+.category-icon {
+    font-size: 3rem;
+    margin-bottom: var(--spacing-md);
+    filter: drop-shadow(0 0 10px var(--xshiver-blue));
+}
+
+/* Category Title */
+.category-card h3 {
+    font-size: 1.5rem;
+    color: var(--xshiver-blue);
+    margin-bottom: var(--spacing-sm);
+    font-weight: bold;
+    transition: color var(--transition-fast);
+}
+
+.category-card:hover h3 {
+    color: var(--xshiver-accent);
+    text-shadow: 0 0 20px var(--xshiver-blue);
+}
+
+/* Category Description */
+.category-card p {
+    color: var(--silver-text);
+    margin-bottom: var(--spacing-md);
+    line-height: 1.5;
+    opacity: 0.9;
+    flex-grow: 1;
+}
+
+/* Video Count Badge using your design system */
+.video-count {
+    background: linear-gradient(135deg, var(--xshiver-blue), var(--xshiver-accent));
+    color: white;
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-radius: var(--radius-xl);
+    font-size: 0.9rem;
+    font-weight: bold;
+    align-self: center;
+    box-shadow: var(--shadow-sm);
+    transition: all var(--transition-normal);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    display: inline-block;
+}
+
+.category-card:hover .video-count {
+    background: linear-gradient(135deg, var(--xshiver-accent), var(--electric-blue));
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+}
+
+/* Featured Category Enhancement */
 .category-card.featured {
     border: 2px solid var(--gold-accent);
     background: linear-gradient(135deg, var(--xshiver-secondary), rgba(255, 215, 0, 0.1));
@@ -664,28 +776,32 @@ body {
     border-radius: var(--radius-sm);
     font-size: 0.8rem;
     font-weight: bold;
+    z-index: 3;
 }
 
-.category-icon {
-    font-size: 3rem;
-    margin-bottom: var(--spacing-md);
+/* Different category variations using your color scheme */
+.category-card[data-category="amateur"] {
+    border-left: 4px solid var(--xshiver-blue);
 }
 
-.category-card h3 {
-    font-size: 1.5rem;
-    color: var(--xshiver-blue);
-    margin-bottom: var(--spacing-sm);
+.category-card[data-category="professional"] {
+    border-left: 4px solid var(--xshiver-accent);
 }
 
-.category-card p {
-    color: #aaa;
-    margin-bottom: var(--spacing-md);
+.category-card[data-category="milf"] {
+    border-left: 4px solid var(--gold-accent);
 }
 
-.video-count {
-    color: var(--xshiver-accent);
-    font-weight: bold;
-    font-size: 0.9rem;
+.category-card[data-category="teen"] {
+    border-left: 4px solid var(--xshiver-light-blue);
+}
+
+.category-card[data-category="hardcore"] {
+    border-left: 4px solid var(--electric-blue);
+}
+
+.category-card[data-category="lesbian"] {
+    border-left: 4px solid var(--xshiver-accent);
 }
 
 .view-all-categories {
@@ -884,4 +1000,77 @@ body {
     margin-top: var(--spacing-sm);
     font-weight: bold;
     color: var(--danger-red);
+}
+
+/* Responsive Design for Categories */
+@media (max-width: 768px) {
+    .categories-grid {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: var(--spacing-lg);
+    }
+    
+    .category-card {
+        height: 300px;
+    }
+    
+    .category-image {
+        height: 140px;
+    }
+    
+    .category-content {
+        padding: var(--spacing-lg);
+    }
+    
+    .category-icon {
+        font-size: 2.5rem;
+        margin-bottom: var(--spacing-sm);
+    }
+    
+    .category-card h3 {
+        font-size: 1.3rem;
+    }
+    
+    .hero-cta {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .desktop-nav {
+        display: none;
+    }
+    
+    .mobile-menu-btn {
+        display: flex;
+    }
+}
+
+@media (max-width: 480px) {
+    .categories-grid {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-md);
+    }
+    
+    .category-card {
+        height: 280px;
+    }
+    
+    .category-image {
+        height: 120px;
+    }
+    
+    .nav-search {
+        width: 200px;
+    }
+    
+    .search-input {
+        width: 150px;
+    }
+    
+    .hero-title {
+        font-size: 2.5rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 1.5rem;
+    }
 }
