@@ -365,6 +365,462 @@ class ContentManager {
             await this.simulateProcessingStage(contentId, stage);
         }
         
-        // Move to pending review
+                // Move to pending review
         await this.moveToModerationQueue(contentId);
-        this.proces
+        this.processingVideos.delete(contentId);
+    }
+    
+    async simulateProcessingStage(contentId, stage) {
+        const processing = this.processingVideos.get(contentId);
+        if (!processing) return;
+        
+        processing.stage = stage.name;
+        processing.progress = 0;
+        
+        // Simulate progress
+        const progressInterval = setInterval(() => {
+            processing.progress += Math.random() * 20;
+            if (processing.progress >= 100) {
+                processing.progress = 100;
+                clearInterval(progressInterval);
+            }
+            
+            this.updateProcessingUI(contentId, processing);
+        }, 200);
+        
+        await new Promise(resolve => setTimeout(resolve, stage.duration));
+        clearInterval(progressInterval);
+        
+        processing.progress = 100;
+        this.updateProcessingUI(contentId, processing);
+    }
+    
+    async moveToModerationQueue(contentId) {
+        this.moderationQueue.push({
+            id: contentId,
+            queuedAt: new Date().toISOString(),
+            priority: 'normal'
+        });
+        
+        // Update content status
+        await this.updateContentStatus(contentId, this.statuses.PENDING_REVIEW);
+        
+        // Notify moderators
+        this.notifyModerators(contentId);
+    }
+    
+    setupModerationTools() {
+        // Auto-moderation rules
+        this.autoModerationRules = [
+            {
+                name: 'inappropriate_content',
+                enabled: true,
+                action: 'flag',
+                confidence: 0.8
+            },
+            {
+                name: 'spam_detection',
+                enabled: true,
+                action: 'reject',
+                confidence: 0.9
+            }
+        ];
+        
+        // Setup moderation interface
+        this.setupModerationInterface();
+    }
+    
+    setupModerationInterface() {
+        const moderationPanel = document.getElementById('moderation-panel');
+        if (moderationPanel) {
+            this.renderModerationQueue();
+        }
+    }
+    
+    renderModerationQueue() {
+        const container = document.getElementById('moderation-queue');
+        if (!container) return;
+        
+        if (this.moderationQueue.length === 0) {
+            container.innerHTML = '<p class="no-items">No items in moderation queue</p>';
+            return;
+        }
+        
+        const queueHTML = this.moderationQueue.map(item => `
+            <div class="moderation-item" data-content-id="${item.id}">
+                <div class="item-preview">
+                    <video class="preview-video" src="/api/content/${item.id}/preview" controls></video>
+                </div>
+                <div class="item-details">
+                    <h4>Content ID: ${item.id}</h4>
+                    <p>Queued: ${this.formatRelativeTime(item.queuedAt)}</p>
+                    <p>Priority: ${item.priority}</p>
+                </div>
+                <div class="moderation-actions">
+                    <button class="btn-success" onclick="contentManager.approveContent('${item.id}')">
+                        Approve
+                    </button>
+                    <button class="btn-danger" onclick="contentManager.rejectContent('${item.id}')">
+                        Reject
+                    </button>
+                    <button class="btn-secondary" onclick="contentManager.flagContent('${item.id}')">
+                        Flag for Review
+                    </button>
+                </div>
+            </div>
+        `).join('');
+        
+        container.innerHTML = queueHTML;
+    }
+    
+    async approveContent(contentId) {
+        try {
+            await this.updateContentStatus(contentId, this.statuses.APPROVED);
+            this.removeFromModerationQueue(contentId);
+            
+            // Auto-publish if configured
+            const autoPublish = await this.getContentSetting('auto_publish_approved');
+            if (autoPublish) {
+                await this.publishContent(contentId);
+            }
+            
+            this.showNotification('Content approved successfully', 'success');
+            
+        } catch (error) {
+            console.error('Error approving content:', error);
+            this.showNotification('Failed to approve content', 'error');
+        }
+    }
+    
+    async rejectContent(contentId, reason) {
+        try {
+            await this.updateContentStatus(contentId, this.statuses.REJECTED);
+            this.removeFromModerationQueue(contentId);
+            
+            // Send rejection notification
+            await this.sendRejectionNotification(contentId, reason);
+            
+            this.showNotification('Content rejected', 'success');
+            
+        } catch (error) {
+            console.error('Error rejecting content:', error);
+            this.showNotification('Failed to reject content', 'error');
+        }
+    }
+    
+    async publishContent(contentId) {
+        try {
+            await this.updateContentStatus(contentId, this.statuses.PUBLISHED);
+            
+            // Update search index
+            await this.updateSearchIndex(contentId);
+            
+            // Generate social media posts
+            await this.generateSocialPosts(contentId);
+            
+            // Send publication notification
+            await this.sendPublicationNotification(contentId);
+            
+            this.showNotification('Content published successfully', 'success');
+            
+        } catch (error) {
+            console.error('Error publishing content:', error);
+            this.showNotification('Failed to publish content', 'error');
+        }
+    }
+    
+    setupContentAnalytics() {
+        this.analyticsData = {
+            uploadTrends: [],
+            categoryDistribution: {},
+            qualityMetrics: {},
+            moderationStats: {}
+        };
+        
+        // Load analytics data
+        this.loadContentAnalytics();
+    }
+    
+    async loadContentAnalytics() {
+        try {
+            const response = await fetch('/api/analytics/content', {
+                headers: {
+                    'Authorization': `Bearer ${window.authSystem.getToken()}`
+                }
+            });
+            
+            if (response.ok) {
+                this.analyticsData = await response.json();
+                this.updateAnalyticsUI();
+            }
+            
+        } catch (error) {
+            console.error('Error loading content analytics:', error);
+        }
+    }
+    
+    updateAnalyticsUI() {
+        // Update upload trends chart
+        this.updateUploadTrendsChart();
+        
+        // Update category distribution
+        this.updateCategoryChart();
+        
+        // Update quality metrics
+        this.updateQualityMetrics();
+    }
+    
+    // UI Update Methods
+    
+    updateUploadUI() {
+        const container = document.getElementById('upload-queue');
+        if (!container) return;
+        
+        if (this.uploadQueue.length === 0) {
+            container.innerHTML = '<p class="no-uploads">No uploads in queue</p>';
+            return;
+        }
+        
+        const uploadsHTML = this.uploadQueue.map(upload => `
+            <div class="upload-item ${upload.status}" data-upload-id="${upload.id}">
+                <div class="upload-thumbnail">
+                    ${upload.thumbnails.length > 0 ? 
+                        `<img src="${upload.thumbnails[0].url}" alt="Thumbnail">` : 
+                        '<div class="no-thumbnail">📹</div>'
+                    }
+                </div>
+                <div class="upload-details">
+                    <h4>${upload.file.name}</h4>
+                    <p>${this.formatBytes(upload.file.size)} • ${this.formatDuration(upload.metadata.duration)}</p>
+                    <div class="upload-status">
+                        ${this.getUploadStatusText(upload)}
+                    </div>
+                    ${upload.status === 'uploading' ? `
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: ${upload.progress}%"></div>
+                        </div>
+                        <div class="progress-text">${Math.round(upload.progress)}%</div>
+                    ` : ''}
+                </div>
+                <div class="upload-actions">
+                    ${upload.status === 'queued' ? `
+                        <button class="btn-sm btn-danger" onclick="contentManager.cancelUpload('${upload.id}')">
+                            Cancel
+                        </button>
+                    ` : ''}
+                    ${upload.status === 'completed' ? `
+                        <button class="btn-sm btn-primary" onclick="contentManager.editContent('${upload.contentId}')">
+                            Edit
+                        </button>
+                    ` : ''}
+                </div>
+            </div>
+        `).join('');
+        
+        container.innerHTML = uploadsHTML;
+    }
+    
+    updateUploadProgress(uploadItem) {
+        const element = document.querySelector(`[data-upload-id="${uploadItem.id}"] .progress-fill`);
+        if (element) {
+            element.style.width = `${uploadItem.progress}%`;
+        }
+        
+        const progressText = document.querySelector(`[data-upload-id="${uploadItem.id}"] .progress-text`);
+        if (progressText) {
+            progressText.textContent = `${Math.round(uploadItem.progress)}%`;
+        }
+    }
+    
+    updateProcessingUI(contentId, processing) {
+        const element = document.querySelector(`[data-content-id="${contentId}"] .processing-stage`);
+        if (element) {
+            element.textContent = `${processing.stage}: ${Math.round(processing.progress)}%`;
+        }
+    }
+    
+    getUploadStatusText(upload) {
+        switch (upload.status) {
+            case 'queued':
+                return 'Waiting in queue...';
+            case 'uploading':
+                return 'Uploading...';
+            case 'completed':
+                return 'Upload complete';
+            case 'failed':
+                return `Failed: ${upload.error}`;
+            default:
+                return upload.status;
+        }
+    }
+    
+    // Content Management API Methods
+    
+    async updateContentStatus(contentId, status) {
+        const response = await fetch(`/api/content/${contentId}/status`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${window.authSystem.getToken()}`
+            },
+            body: JSON.stringify({ status })
+        });
+        
+        if (!response.ok) {
+            throw new Error('Failed to update content status');
+        }
+        
+        return await response.json();
+    }
+    
+    async getContentSetting(key) {
+        try {
+            const response = await fetch(`/api/settings/content/${key}`, {
+                headers: {
+                    'Authorization': `Bearer ${window.authSystem.getToken()}`
+                }
+            });
+            
+            if (response.ok) {
+                const result = await response.json();
+                return result.value;
+            }
+        } catch (error) {
+            console.error('Error getting content setting:', error);
+        }
+        
+        return false; // Default value
+    }
+    
+    async sendRejectionNotification(contentId, reason) {
+        await fetch('/api/notifications/content-rejection', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${window.authSystem.getToken()}`
+            },
+            body: JSON.stringify({
+                contentId,
+                reason: reason || 'Content did not meet community guidelines'
+            })
+        });
+    }
+    
+    async sendPublicationNotification(contentId) {
+        await fetch('/api/notifications/content-published', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${window.authSystem.getToken()}`
+            },
+            body: JSON.stringify({ contentId })
+        });
+    }
+    
+    // Utility Methods
+    
+    generateUploadId() {
+        return 'upload_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+    }
+    
+    formatBytes(bytes) {
+        if (bytes === 0) return '0 Bytes';
+        const k = 1024;
+        const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+        const i = Math.floor(Math.log(bytes) / Math.log(k));
+        return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+    }
+    
+    formatDuration(seconds) {
+        const hours = Math.floor(seconds / 3600);
+        const minutes = Math.floor((seconds % 3600) / 60);
+        const remainingSeconds = Math.floor(seconds % 60);
+        
+        if (hours > 0) {
+            return `${hours}:${minutes.toString().padStart(2, '0')}:${remainingSeconds.toString().padStart(2, '0')}`;
+        }
+        return `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`;
+    }
+    
+    formatRelativeTime(dateString) {
+        const date = new Date(dateString);
+        const now = new Date();
+        const diffTime = Math.abs(now - date);
+        const diffMinutes = Math.floor(diffTime / (1000 * 60));
+        
+        if (diffMinutes < 1) return 'Just now';
+        if (diffMinutes < 60) return `${diffMinutes} minutes ago`;
+        if (diffMinutes < 1440) return `${Math.floor(diffMinutes / 60)} hours ago`;
+        return `${Math.floor(diffMinutes / 1440)} days ago`;
+    }
+    
+    removeFromModerationQueue(contentId) {
+        this.moderationQueue = this.moderationQueue.filter(item => item.id !== contentId);
+        this.renderModerationQueue();
+    }
+    
+    notifyModerators(contentId) {
+        // Send notification to moderators
+        if (window.notificationSystem) {
+            window.notificationSystem.sendNotification({
+                type: 'moderation_required',
+                contentId: contentId,
+                recipients: ['moderators']
+            });
+        }
+    }
+    
+    showUploadError(message) {
+        this.showNotification(message, 'error');
+    }
+    
+    showNotification(message, type = 'info') {
+        const notification = document.createElement('div');
+        notification.className = `notification notification-${type}`;
+        notification.textContent = message;
+        
+        document.body.appendChild(notification);
+        
+        setTimeout(() => {
+            notification.classList.add('fade-out');
+        }, 5000);
+        
+        setTimeout(() => {
+            if (notification.parentNode) {
+                notification.parentNode.removeChild(notification);
+            }
+        }, 5500);
+    }
+    
+    // Public API
+    
+    cancelUpload(uploadId) {
+        const index = this.uploadQueue.findIndex(item => item.id === uploadId);
+        if (index !== -1) {
+            this.uploadQueue.splice(index, 1);
+            this.updateUploadUI();
+        }
+    }
+    
+    getUploadProgress(uploadId) {
+        const upload = this.uploadQueue.find(item => item.id === uploadId);
+        return upload ? upload.progress : 0;
+    }
+    
+    getModerationQueue() {
+        return [...this.moderationQueue];
+    }
+    
+    // Cleanup
+    destroy() {
+        this.uploadQueue = [];
+        this.processingVideos.clear();
+        this.moderationQueue = [];
+        
+        console.log('📊 Content Manager destroyed');
+    }
+}
+
+// Global content manager instance
+window.contentManager = new ContentManager();
+
