@@ -43,29 +43,19 @@
     </div>
 
     <!-- Header -->
-    <header class="header">
-        <nav class="navbar">
+    <header class="site-header">
+        <nav class="main-nav">
             <div class="nav-container">
-                <div class="nav-logo">
+                <!-- Logo and Brand -->
+                <div class="nav-brand">
                     <a href="../../index.html">
-                        <img src="../../assets/images/logo-xshiver.png" alt="Xshiver" class="logo">
-                        <span class="logo-text">XSHIVER</span>
+                        <img src="../../assets/images/logo-xshiver.png" alt="Xshiver" class="nav-logo">
+                        <span class="brand-text">XSHIVER</span>
                     </a>
                 </div>
                 
-                <div class="nav-search">
-                    <div class="search-container">
-                        <input type="text" placeholder="Search categories or videos..." class="search-input" id="header-search">
-                        <button class="search-btn" onclick="performHeaderSearch()">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                <circle cx="11" cy="11" r="8"></circle>
-                                <path d="21 21l-4.35-4.35"></path>
-                            </svg>
-                        </button>
-                    </div>
-                </div>
-                
-                <div class="nav-links">
+                <!-- Desktop Navigation -->
+                <div class="nav-links desktop-nav">
                     <a href="../../index.html" class="nav-link">Home</a>
                     <a href="#" class="nav-link active">Categories</a>
                     <a href="../content/trending.html" class="nav-link">Trending</a>
@@ -73,7 +63,14 @@
                     <a href="../content/top-rated.html" class="nav-link">Top Rated</a>
                 </div>
                 
-                <button class="mobile-menu-toggle" id="mobile-menu-toggle">
+                <!-- Search Bar -->
+                <div class="nav-search">
+                    <input type="text" placeholder="Search categories or videos..." class="search-input" id="header-search">
+                    <button class="search-btn" onclick="performHeaderSearch()">🔍</button>
+                </div>
+                
+                <!-- Mobile Menu Toggle -->
+                <button class="mobile-menu-btn" id="mobile-menu-toggle">
                     <span></span>
                     <span></span>
                     <span></span>
@@ -83,7 +80,7 @@
     </header>
 
     <!-- Breadcrumb Navigation -->
-    <nav class="breadcrumb" aria-label="Breadcrumb">
+    <nav class="breadcrumb-nav">
         <div class="container">
             <ol class="breadcrumb-list">
                 <li class="breadcrumb-item">
@@ -97,47 +94,51 @@
     </nav>
 
     <!-- Main Content -->
-    <main class="categories-main">
+    <main class="main-content">
         <div class="container">
             <!-- Page Header -->
-            <section class="page-header">
-                <div class="header-content">
+            <section class="page-header-section">
+                <div class="page-header-content">
                     <h1 class="page-title">Browse Categories</h1>
                     <p class="page-subtitle">Discover thousands of premium adult videos organized by your favorite categories</p>
-                    <div class="page-stats">
-                        <div class="stat">
+                    
+                    <!-- Stats Row -->
+                    <div class="stats-row">
+                        <div class="stat-item">
                             <span class="stat-number" id="total-categories">15</span>
-                            <span class="stat-label">Categories</span>
+                            <span class="stat-label">CATEGORIES</span>
                         </div>
-                        <div class="stat">
+                        <div class="stat-item">
                             <span class="stat-number" id="total-videos">10,247</span>
-                            <span class="stat-label">Videos</span>
+                            <span class="stat-label">VIDEOS</span>
                         </div>
-                        <div class="stat">
+                        <div class="stat-item">
                             <span class="stat-number">4K</span>
-                            <span class="stat-label">Quality</span>
+                            <span class="stat-label">QUALITY</span>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <!-- Category Filters -->
-            <section class="category-filters">
-                <div class="filter-bar">
-                    <div class="filter-group">
-                        <label for="sort-select" class="filter-label">Sort by:</label>
-                        <select id="sort-select" class="filter-select">
+            <!-- Control Bar -->
+            <section class="control-bar">
+                <div class="control-bar-left">
+                    <div class="sort-control">
+                        <label for="sort-select" class="control-label">Sort by:</label>
+                        <select id="sort-select" class="sort-select">
                             <option value="popular">Most Popular</option>
                             <option value="alphabetical">A-Z</option>
                             <option value="newest">Newest First</option>
                             <option value="most-videos">Most Videos</option>
                         </select>
                     </div>
-                    
-                    <div class="filter-group">
-                        <label for="view-toggle" class="filter-label">View:</label>
-                        <div class="view-toggle" id="view-toggle">
-                            <button class="view-btn active" data-view="grid">
+                </div>
+                
+                <div class="control-bar-center">
+                    <div class="view-controls">
+                        <span class="control-label">View:</span>
+                        <div class="view-toggle-group">
+                            <button class="view-toggle-btn active" data-view="grid">
                                 <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
                                     <rect x="3" y="3" width="7" height="7"/>
                                     <rect x="14" y="3" width="7" height="7"/>
@@ -145,7 +146,7 @@
                                     <rect x="14" y="14" width="7" height="7"/>
                                 </svg>
                             </button>
-                            <button class="view-btn" data-view="list">
+                            <button class="view-toggle-btn" data-view="list">
                                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
                                     <line x1="8" y1="6" x2="21" y2="6"/>
                                     <line x1="8" y1="12" x2="21" y2="12"/>
@@ -157,20 +158,20 @@
                             </button>
                         </div>
                     </div>
-                    
-                    <div class="filter-group">
-                        <button class="filter-btn" id="advanced-filters-btn">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                <polygon points="22,3 2,3 10,12.46 10,19 14,21 14,12.46"/>
-                            </svg>
-                            Advanced Filters
-                        </button>
-                    </div>
+                </div>
+                
+                <div class="control-bar-right">
+                    <button class="advanced-filters-btn" id="advanced-filters-btn">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <polygon points="22,3 2,3 10,12.46 10,19 14,21 14,12.46"/>
+                        </svg>
+                        Advanced Filters
+                    </button>
                 </div>
             </section>
 
             <!-- Featured Categories -->
-            <section class="featured-categories">
+            <section class="featured-section">
                 <h2 class="section-title">🔥 Popular Categories</h2>
                 <div class="categories-grid featured-grid" id="featured-categories">
                     <!-- Featured categories will be loaded here -->
@@ -178,7 +179,7 @@
             </section>
 
             <!-- All Categories -->
-            <section class="all-categories">
+            <section class="all-categories-section">
                 <h2 class="section-title">All Categories</h2>
                 <div class="categories-container">
                     <div class="categories-grid" id="all-categories" data-view="grid">
@@ -191,7 +192,7 @@
                 </div>
                 
                 <!-- Load More Button -->
-                <div class="load-more-section">
+                <div class="load-more-container">
                     <button class="btn-load-more" id="load-more-categories">
                         Load More Categories
                     </button>
@@ -199,38 +200,38 @@
             </section>
 
             <!-- Category Statistics -->
-            <section class="category-stats">
+            <section class="stats-section">
                 <h2 class="section-title">Category Statistics</h2>
                 <div class="stats-grid">
                     <div class="stat-card">
-                        <div class="stat-icon">📈</div>
-                        <div class="stat-info">
-                            <span class="stat-value" id="trending-count">8</span>
-                            <span class="stat-name">Trending Categories</span>
+                        <div class="stat-card-icon">📈</div>
+                        <div class="stat-card-content">
+                            <span class="stat-card-value" id="trending-count">8</span>
+                            <span class="stat-card-label">Trending Categories</span>
                         </div>
                     </div>
                     
                     <div class="stat-card">
-                        <div class="stat-icon">🆕</div>
-                        <div class="stat-info">
-                            <span class="stat-value" id="new-categories">3</span>
-                            <span class="stat-name">New This Week</span>
+                        <div class="stat-card-icon">🆕</div>
+                        <div class="stat-card-content">
+                            <span class="stat-card-value" id="new-categories">3</span>
+                            <span class="stat-card-label">New This Week</span>
                         </div>
                     </div>
                     
                     <div class="stat-card">
-                        <div class="stat-icon">⭐</div>
-                        <div class="stat-info">
-                            <span class="stat-value" id="top-rated-categories">12</span>
-                            <span class="stat-name">Top Rated</span>
+                        <div class="stat-card-icon">⭐</div>
+                        <div class="stat-card-content">
+                            <span class="stat-card-value" id="top-rated-categories">12</span>
+                            <span class="stat-card-label">Top Rated</span>
                         </div>
                     </div>
                     
                     <div class="stat-card">
-                        <div class="stat-icon">🎬</div>
-                        <div class="stat-info">
-                            <span class="stat-value" id="professional-count">5,420</span>
-                            <span class="stat-name">Professional Videos</span>
+                        <div class="stat-card-icon">🎬</div>
+                        <div class="stat-card-content">
+                            <span class="stat-card-value" id="professional-count">5,420</span>
+                            <span class="stat-card-label">Professional Videos</span>
                         </div>
                     </div>
                 </div>
@@ -239,84 +240,84 @@
     </main>
 
     <!-- Advanced Filters Modal -->
-    <div class="modal" id="advanced-filters-modal">
+    <div class="modal-overlay" id="advanced-filters-modal">
         <div class="modal-backdrop"></div>
-        <div class="modal-content">
+        <div class="modal-container">
             <div class="modal-header">
-                <h3>Advanced Category Filters</h3>
-                <button class="modal-close" onclick="closeAdvancedFilters()">&times;</button>
+                <h3 class="modal-title">Advanced Category Filters</h3>
+                <button class="modal-close-btn" onclick="closeAdvancedFilters()">&times;</button>
             </div>
             
             <div class="modal-body">
-                <form class="advanced-filters-form" id="advanced-filters-form">
-                    <div class="filter-section">
-                        <h4>Content Type</h4>
-                        <div class="checkbox-group">
-                            <label class="checkbox-label">
+                <form class="filters-form" id="advanced-filters-form">
+                    <div class="filter-group">
+                        <h4 class="filter-group-title">Content Type</h4>
+                        <div class="checkbox-list">
+                            <label class="checkbox-item">
                                 <input type="checkbox" name="content-type" value="amateur">
-                                <span class="checkbox-custom"></span>
-                                Amateur Content
+                                <span class="checkbox-mark"></span>
+                                <span class="checkbox-text">Amateur Content</span>
                             </label>
-                            <label class="checkbox-label">
+                            <label class="checkbox-item">
                                 <input type="checkbox" name="content-type" value="professional">
-                                <span class="checkbox-custom"></span>
-                                Professional Content
+                                <span class="checkbox-mark"></span>
+                                <span class="checkbox-text">Professional Content</span>
                             </label>
-                            <label class="checkbox-label">
+                            <label class="checkbox-item">
                                 <input type="checkbox" name="content-type" value="hd">
-                                <span class="checkbox-custom"></span>
-                                HD Quality
+                                <span class="checkbox-mark"></span>
+                                <span class="checkbox-text">HD Quality</span>
                             </label>
-                            <label class="checkbox-label">
+                            <label class="checkbox-item">
                                 <input type="checkbox" name="content-type" value="4k">
-                                <span class="checkbox-custom"></span>
-                                4K Quality
+                                <span class="checkbox-mark"></span>
+                                <span class="checkbox-text">4K Quality</span>
                             </label>
                         </div>
                     </div>
                     
-                    <div class="filter-section">
-                        <h4>Video Count</h4>
-                        <div class="range-filter">
-                            <label for="video-count-range">Minimum videos in category:</label>
-                            <input type="range" id="video-count-range" min="10" max="1000" value="50" step="10">
-                            <span class="range-value" id="video-count-value">50+ videos</span>
+                    <div class="filter-group">
+                        <h4 class="filter-group-title">Video Count</h4>
+                        <div class="range-control">
+                            <label for="video-count-range" class="range-label">Minimum videos in category:</label>
+                            <input type="range" id="video-count-range" class="range-slider" min="10" max="1000" value="50" step="10">
+                            <span class="range-display" id="video-count-value">50+ videos</span>
                         </div>
                     </div>
                     
-                    <div class="filter-section">
-                        <h4>Popularity</h4>
-                        <div class="radio-group">
-                            <label class="radio-label">
+                    <div class="filter-group">
+                        <h4 class="filter-group-title">Popularity</h4>
+                        <div class="radio-list">
+                            <label class="radio-item">
                                 <input type="radio" name="popularity" value="all" checked>
-                                <span class="radio-custom"></span>
-                                All Categories
+                                <span class="radio-mark"></span>
+                                <span class="radio-text">All Categories</span>
                             </label>
-                            <label class="radio-label">
+                            <label class="radio-item">
                                 <input type="radio" name="popularity" value="trending">
-                                <span class="radio-custom"></span>
-                                Trending Only
+                                <span class="radio-mark"></span>
+                                <span class="radio-text">Trending Only</span>
                             </label>
-                            <label class="radio-label">
+                            <label class="radio-item">
                                 <input type="radio" name="popularity" value="popular">
-                                <span class="radio-custom"></span>
-                                Most Popular
+                                <span class="radio-mark"></span>
+                                <span class="radio-text">Most Popular</span>
                             </label>
                         </div>
                     </div>
                     
-                    <div class="filter-section">
-                        <h4>Age Range</h4>
-                        <div class="checkbox-group">
-                            <label class="checkbox-label">
+                    <div class="filter-group">
+                        <h4 class="filter-group-title">Age Range</h4>
+                        <div class="checkbox-list">
+                            <label class="checkbox-item">
                                 <input type="checkbox" name="age-range" value="teen">
-                                <span class="checkbox-custom"></span>
-                                Teen (18+)
+                                <span class="checkbox-mark"></span>
+                                <span class="checkbox-text">Teen (18+)</span>
                             </label>
-                            <label class="checkbox-label">
+                            <label class="checkbox-item">
                                 <input type="checkbox" name="age-range" value="milf">
-                                <span class="checkbox-custom"></span>
-                                MILF (Mature)
+                                <span class="checkbox-mark"></span>
+                                <span class="checkbox-text">MILF (Mature)</span>
                             </label>
                         </div>
                     </div>
@@ -331,17 +332,17 @@
     </div>
 
     <!-- Footer -->
-    <footer class="footer">
+    <footer class="site-footer">
         <div class="container">
             <div class="footer-content">
                 <div class="footer-brand">
                     <img src="../../assets/images/logo-xshiver.png" alt="Xshiver" class="footer-logo">
                     <span class="footer-brand-text">XSHIVER</span>
-                    <p class="footer-description">Premium adult entertainment platform with thousands of categories and videos.</p>
+                    <p class="footer-tagline">Premium adult entertainment platform with thousands of categories and videos.</p>
                 </div>
                 
                 <div class="footer-links">
-                    <div class="link-group">
+                    <div class="footer-column">
                         <h4>Browse</h4>
                         <a href="category.html?cat=amateur">Amateur</a>
                         <a href="category.html?cat=professional">Professional</a>
@@ -349,7 +350,7 @@
                         <a href="category.html?cat=teen">Teen (18+)</a>
                     </div>
                     
-                    <div class="link-group">
+                    <div class="footer-column">
                         <h4>Content</h4>
                         <a href="../content/trending.html">Trending</a>
                         <a href="../content/new-releases.html">New Releases</a>
@@ -357,7 +358,7 @@
                         <a href="../search/">Search</a>
                     </div>
                     
-                    <div class="link-group">
+                    <div class="footer-column">
                         <h4>Support</h4>
                         <a href="#">Help Center</a>
                         <a href="#">Contact Us</a>
@@ -369,7 +370,7 @@
             
             <div class="footer-bottom">
                 <p>&copy; 2025 Xshiver.site - All rights reserved. Adults only (18+).</p>
-                <p class="disclaimer">All models were 18+ at time of photography. Content for adults only.</p>
+                <p class="age-disclaimer">All models were 18+ at time of photography. Content for adults only.</p>
             </div>
         </div>
     </footer>
