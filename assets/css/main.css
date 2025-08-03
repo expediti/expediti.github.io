@@ -785,102 +785,254 @@ body {
     transform: translateY(-2px);
 }
 
+
+/* ========== UPDATED TRENDING SECTION - BACKGROUND IMAGE VIDEOS ========== */
+
 /* Video Grid */
 .video-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: var(--spacing-xl);
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
+/* Video Link */
+.video-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    transition: transform var(--transition-normal);
+}
+
+.video-link:hover {
+    transform: translateY(-8px);
+}
+
+/* Video Card with Background Image */
 .video-card {
-    background: var(--xshiver-secondary);
     border-radius: var(--radius-lg);
     overflow: hidden;
     cursor: pointer;
     transition: all var(--transition-normal);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(74, 144, 226, 0.3);
+    position: relative;
+    height: 250px;
+    box-shadow: var(--shadow-md);
 }
 
-.video-card:hover {
-    transform: translateY(-5px);
-    box-shadow: var(--shadow-lg);
-    border-color: var(--xshiver-blue);
+/* Background Images for Each Video */
+.video-card[data-video="trending1"]::before {
+    background-image: url('assets/images/videos/video1-thumb.jpg');
 }
 
+.video-card[data-video="trending2"]::before {
+    background-image: url('assets/images/videos/video2-thumb.jpg');
+}
+
+.video-card[data-video="trending3"]::before {
+    background-image: url('assets/images/videos/video3-thumb.jpg');
+}
+
+.video-card[data-video="trending4"]::before {
+    background-image: url('assets/images/videos/video4-thumb.jpg');
+}
+
+/* Background Image as Pseudo Element */
+.video-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: 1;
+    transition: transform var(--transition-normal);
+}
+
+.video-card:hover::before {
+    transform: scale(1.05);
+}
+
+/* Video Thumbnail Container */
 .video-thumbnail {
     position: relative;
     width: 100%;
-    height: 200px;
-    background: linear-gradient(45deg, var(--deep-navy), var(--xshiver-dark));
+    height: 100%;
     overflow: hidden;
 }
 
-.thumbnail-placeholder {
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(45deg, var(--deep-navy), var(--xshiver-secondary));
+/* Play Overlay */
+.play-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.3), rgba(15, 15, 26, 0.5));
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #666;
-    font-size: 0.9rem;
+    z-index: 2;
+    opacity: 0;
+    transition: all var(--transition-normal);
+}
+
+.video-card:hover .play-overlay {
+    opacity: 1;
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.5), rgba(15, 15, 26, 0.7));
+}
+
+/* Play Button */
+.play-button {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, var(--xshiver-blue), var(--xshiver-accent));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    color: white;
+    box-shadow: 0 8px 25px rgba(74, 144, 226, 0.4);
+    transition: all var(--transition-normal);
+    margin-left: 4px; /* Optical alignment for play icon */
+}
+
+.video-card:hover .play-button {
+    transform: scale(1.1);
+    box-shadow: 0 12px 35px rgba(74, 144, 226, 0.6);
+    background: linear-gradient(135deg, var(--xshiver-accent), var(--electric-blue));
+}
+
+/* Video Duration Badge */
+.video-duration {
+    position: absolute;
+    bottom: 12px;
+    right: 12px;
+    background: rgba(0, 0, 0, 0.9);
+    color: white;
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-radius: var(--radius-sm);
+    font-size: 0.85rem;
+    font-weight: bold;
+    z-index: 3;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(4px);
+}
+
+/* Video Quality Badge */
+.video-quality {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background: linear-gradient(135deg, var(--xshiver-blue), var(--xshiver-accent));
+    color: white;
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-radius: var(--radius-sm);
+    font-size: 0.75rem;
+    font-weight: bold;
+    z-index: 3;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 2px 8px rgba(74, 144, 226, 0.3);
+}
+
+/* Hover Effects */
+.video-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: var(--shadow-xl);
+    border-color: var(--xshiver-blue);
+}
+
+/* Shimmer Effect on Hover */
+.video-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(74, 144, 226, 0.2), transparent);
+    transition: left var(--transition-slow);
+    z-index: 2;
+    pointer-events: none;
+}
+
+.video-card:hover::after {
+    left: 100%;
+}
+
+/* Loading State (if you want to keep placeholders) */
+.video-card.placeholder .video-thumbnail {
+    background: linear-gradient(45deg, var(--deep-navy), var(--xshiver-secondary));
     animation: pulse 2s ease-in-out infinite;
 }
 
-@keyframes pulse {
-    0%, 100% { opacity: 0.6; }
-    50% { opacity: 1; }
+.video-card.placeholder .play-overlay {
+    opacity: 1;
+    background: rgba(15, 15, 26, 0.8);
 }
 
-.video-duration {
-    position: absolute;
-    bottom: 8px;
-    right: 8px;
-    background: rgba(0, 0, 0, 0.8);
-    color: white;
-    padding: 2px 6px;
-    border-radius: var(--radius-sm);
-    font-size: 0.8rem;
+.video-card.placeholder .play-button {
+    background: var(--xshiver-secondary);
+    box-shadow: none;
 }
 
-.video-quality {
-    position: absolute;
-    top: 8px;
-    left: 8px;
-    background: var(--xshiver-blue);
-    color: white;
-    padding: 2px 6px;
-    border-radius: var(--radius-sm);
-    font-size: 0.7rem;
-    font-weight: bold;
+/* Responsive Design for Videos */
+@media (max-width: 768px) {
+    .video-grid {
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: var(--spacing-lg);
+    }
+    
+    .video-card {
+        height: 220px;
+    }
+    
+    .play-button {
+        width: 60px;
+        height: 60px;
+        font-size: 1.5rem;
+    }
 }
 
-.video-info {
-    padding: var(--spacing-md);
+@media (max-width: 480px) {
+    .video-grid {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: var(--spacing-md);
+    }
+    
+    .video-card {
+        height: 200px;
+    }
+    
+    .play-button {
+        width: 50px;
+        height: 50px;
+        font-size: 1.2rem;
+    }
+    
+    .video-duration {
+        font-size: 0.8rem;
+        padding: 2px 6px;
+    }
+    
+    .video-quality {
+        font-size: 0.7rem;
+        padding: 2px 6px;
+    }
 }
 
-.video-title {
-    color: var(--silver-text);
-    font-size: 1rem;
-    margin-bottom: var(--spacing-sm);
-    line-height: 1.4;
-}
+/* ========== END OF UPDATED TRENDING SECTION ========== */
 
-.video-stats {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 0.8rem;
-    color: #aaa;
-}
 
-.views {
-    color: var(--xshiver-accent);
-}
 
-.rating {
-    color: var(--gold-accent);
-}
+
+
 
 /* Footer */
 .site-footer {
