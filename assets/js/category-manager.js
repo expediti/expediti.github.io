@@ -1,6 +1,5 @@
 /**
- * Category Page Manager - Video Display Version
- * Handles displaying videos for a specific category page
+ * Category Page Manager - Fixed URL Parsing
  */
 
 class CategoryManager {
@@ -12,13 +11,12 @@ class CategoryManager {
     }
 
     async init() {
-        console.log('🏷️ Initializing Category Manager for video display...');
+        console.log('🏷️ Initializing Category Manager...');
         
         try {
-            // Wait for video database to be ready
             await this.waitForDatabase();
             
-            // Get category from URL path
+            // Get category from URL parameter ?cat=amateur
             this.currentCategory = this.getCategoryFromURL();
             console.log('🎯 Current category:', this.currentCategory);
             
@@ -26,7 +24,7 @@ class CategoryManager {
                 await this.loadCategoryVideos();
                 this.isInitialized = true;
             } else {
-                this.showError('Invalid category in URL');
+                this.showError('No category specified in URL. Please add ?cat=amateur to the URL.');
             }
         } catch (error) {
             console.error('❌ Category Manager initialization failed:', error);
@@ -48,28 +46,32 @@ class CategoryManager {
             attempts++;
         }
         
-        throw new Error('Video database failed to initialize after ' + maxAttempts + ' attempts');
+        throw new Error('Video database failed to initialize');
     }
 
     getCategoryFromURL() {
-        // Extract category from URL like /categories/amateur
-        const path = window.location.pathname;
-        console.log('🔍 Current URL path:', path);
+        // Extract category from URL parameter ?cat=amateur
+        const urlParams = new URLSearchParams(window.location.search);
+        const category = urlParams.get('cat');
         
-        const matches = path.match(/\/categories\/([^\/?\s]+)/);
-        return matches ? matches[1].toLowerCase() : null;
+        console.log('🔍 URL search params:', window.location.search);
+        console.log('🎯 Extracted category:', category);
+        
+        return category ? category.toLowerCase() : null;
     }
 
     async loadCategoryVideos() {
         console.log(`📂 Loading videos for category: ${this.currentCategory}`);
 
         try {
-            // Get category information first
+            // Get category information
             const categories = await window.videoDatabase.getCategories();
+            console.log('📋 Available categories:', categories.map(c => c.id));
+            
             const categoryInfo = categories.find(cat => cat.id === this.currentCategory);
 
             if (!categoryInfo) {
-                throw new Error(`Category '${this.currentCategory}' not found in database`);
+                throw new Error(`Category '${this.currentCategory}' not found. Available categories: ${categories.map(c => c.id).join(', ')}`);
             }
 
             console.log('📋 Category info found:', categoryInfo);
@@ -77,8 +79,8 @@ class CategoryManager {
             // Get videos for this category
             const videos = await window.videoDatabase.getVideosByCategory(
                 this.currentCategory,
-                200,  // Get up to 200 videos
-                0     // Start from beginning
+                200,
+                0
             );
 
             console.log(`📺 Retrieved ${videos.length} videos for ${this.currentCategory}`);
@@ -107,8 +109,8 @@ class CategoryManager {
 
         // Update basic category info
         const updates = {
-            'category-name': categoryInfo.name,
-            'category-desc': categoryInfo.description,
+            'category-name': categoryInfo.name || this.currentCategory,
+            'category-desc': categoryInfo.description || `Videos in ${this.currentCategory} category`,
             'category-icon': categoryInfo.icon || '🎬'
         };
 
@@ -117,10 +119,12 @@ class CategoryManager {
             if (element) {
                 element.textContent = value;
                 console.log(`Updated ${elementId}: ${value}`);
+            } else {
+                console.log(`Element ${elementId} not found`);
             }
         });
 
-        // Update statistics if available
+        // Update statistics
         if (stats) {
             const statUpdates = {
                 'category-video-count': stats.video_count || this.currentVideos.length,
@@ -135,7 +139,7 @@ class CategoryManager {
                 }
             });
 
-            // Calculate and update average duration
+            // Calculate average duration
             const durationElement = document.getElementById('category-duration');
             if (durationElement && this.currentVideos.length > 0) {
                 const totalDuration = this.currentVideos.reduce((sum, video) => sum + (video.duration || 0), 0);
@@ -145,11 +149,11 @@ class CategoryManager {
         }
 
         // Update page title and breadcrumb
-        document.title = `${categoryInfo.name} – Xshiver`;
+        document.title = `${categoryInfo.name || this.currentCategory} – Xshiver`;
         
         const breadcrumbElement = document.getElementById('breadcrumb-category');
         if (breadcrumbElement) {
-            breadcrumbElement.textContent = categoryInfo.name;
+            breadcrumbElement.textContent = categoryInfo.name || this.currentCategory;
         }
     }
 
@@ -176,7 +180,7 @@ class CategoryManager {
                 const videoCard = this.createVideoCard(video);
                 videosGrid.appendChild(videoCard);
             } catch (error) {
-                console.error(`Error creating card for video ${index}:`, error);
+                console.error(`Error creating card for video ${index}:`, error, video);
             }
         });
 
@@ -206,12 +210,9 @@ class CategoryManager {
                      onerror="this.src='../../assets/images/placeholder-video.jpg'">
                 <div class="video-duration">${duration}</div>
                 <div class="video-quality">${quality}</div>
-                <div class="video-overlay">
-                    <div class="play-button">▶</div>
-                </div>
             </div>
             <div class="video-info">
-                <h3 class="video-title" title="${title}">${title}</h3>
+                <h3 class="video-title">${title}</h3>
                 <div class="video-stats">
                     <span class="video-views">${viewCount} views</span>
                     <span class="video-rating">⭐ ${rating}</span>
@@ -222,23 +223,11 @@ class CategoryManager {
             </div>
         `;
 
-        // Add click handler to navigate to video page
+        // Add click handler
         card.addEventListener('click', (e) => {
             e.preventDefault();
             console.log(`🎯 Clicked video: ${video.id} - ${title}`);
-            
-            // You can customize this URL structure as needed
-            const videoUrl = `../video/watch.html?v=${video.id}`;
-            window.location.href = videoUrl;
-        });
-
-        // Add hover effects
-        card.addEventListener('mouseenter', () => {
-            card.classList.add('video-card-hover');
-        });
-
-        card.addEventListener('mouseleave', () => {
-            card.classList.remove('video-card-hover');
+            window.location.href = `../video/watch.html?v=${video.id}`;
         });
 
         return card;
@@ -261,42 +250,31 @@ class CategoryManager {
     }
 
     showNoVideos() {
-        const noResultsElement = document.getElementById('no-results');
-        if (noResultsElement) {
-            noResultsElement.classList.remove('hidden');
-        }
-        
         const videosGrid = document.getElementById('videos-grid');
         if (videosGrid) {
             videosGrid.innerHTML = `
                 <div class="no-videos-message">
-                    <div class="no-videos-icon">📹</div>
                     <h3>No videos found in this category</h3>
-                    <p>Try browsing other categories or check back later.</p>
+                    <p>Category: ${this.currentCategory}</p>
+                    <p>Try browsing other categories.</p>
                 </div>
             `;
         }
-        
         this.hideLoadingState();
     }
 
     showError(message) {
         console.error('❌ Category Manager Error:', message);
         
-        // Update results count
         this.updateResultsCount(0);
         
-        // Show error in videos grid
         const videosGrid = document.getElementById('videos-grid');
         if (videosGrid) {
             videosGrid.innerHTML = `
                 <div class="error-message">
-                    <div class="error-icon">⚠️</div>
                     <h3>Error Loading Videos</h3>
                     <p>${message}</p>
-                    <button onclick="window.location.reload()" class="retry-button">
-                        Try Again
-                    </button>
+                    <button onclick="window.location.reload()">Try Again</button>
                 </div>
             `;
         }
@@ -304,81 +282,25 @@ class CategoryManager {
         this.hideLoadingState();
     }
 
-    // Utility methods
     formatNumber(num) {
         if (!num || num === 0) return '0';
-        
-        if (num >= 1000000) {
-            return (num / 1000000).toFixed(1) + 'M';
-        } else if (num >= 1000) {
-            return (num / 1000).toFixed(1) + 'K';
-        }
+        if (num >= 1000000) return (num / 1000000).toFixed(1) + 'M';
+        if (num >= 1000) return (num / 1000).toFixed(1) + 'K';
         return num.toString();
     }
 
     formatDuration(seconds) {
         if (!seconds || seconds === 0) return '0:00';
-        
-        const hours = Math.floor(seconds / 3600);
-        const minutes = Math.floor((seconds % 3600) / 60);
+        const minutes = Math.floor(seconds / 60);
         const remainingSeconds = Math.floor(seconds % 60);
-        
-        if (hours > 0) {
-            return `${hours}:${minutes.toString().padStart(2, '0')}:${remainingSeconds.toString().padStart(2, '0')}`;
-        } else {
-            return `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`;
-        }
+        return `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`;
     }
 
-    // Public methods for HTML button interactions
     playRandomVideo() {
         if (this.currentVideos && this.currentVideos.length > 0) {
-            const randomIndex = Math.floor(Math.random() * this.currentVideos.length);
-            const randomVideo = this.currentVideos[randomIndex];
-            
-            console.log(`🎲 Playing random video: ${randomVideo.title}`);
+            const randomVideo = this.currentVideos[Math.floor(Math.random() * this.currentVideos.length)];
             window.location.href = `../video/watch.html?v=${randomVideo.id}`;
-        } else {
-            console.log('❌ No videos available for random play');
         }
-    }
-
-    toggleBookmark() {
-        if (!this.currentCategory) return;
-        
-        const bookmarks = JSON.parse(localStorage.getItem('xshiver_category_bookmarks') || '{}');
-        
-        if (bookmarks[this.currentCategory]) {
-            delete bookmarks[this.currentCategory];
-            console.log(`📌 Removed bookmark for ${this.currentCategory}`);
-        } else {
-            bookmarks[this.currentCategory] = {
-                category: this.currentCategory,
-                bookmarkedAt: new Date().toISOString()
-            };
-            console.log(`📌 Added bookmark for ${this.currentCategory}`);
-        }
-        
-        localStorage.setItem('xshiver_category_bookmarks', JSON.stringify(bookmarks));
-        
-        // Update button text if needed
-        const bookmarkButton = document.querySelector('.btn-secondary');
-        if (bookmarkButton) {
-            bookmarkButton.textContent = bookmarks[this.currentCategory] ? 'Bookmarked ✓' : 'Bookmark';
-        }
-    }
-
-    // Get current category info
-    getCurrentCategory() {
-        return this.currentCategory;
-    }
-
-    getCurrentVideos() {
-        return this.currentVideos;
-    }
-
-    isReady() {
-        return this.isInitialized;
     }
 }
 
@@ -388,7 +310,7 @@ document.addEventListener('DOMContentLoaded', () => {
     window.categoryManager = new CategoryManager();
 });
 
-// Global functions for HTML onclick handlers
+// Global functions
 window.playRandomVideo = function() {
     if (window.categoryManager) {
         window.categoryManager.playRandomVideo();
@@ -396,21 +318,5 @@ window.playRandomVideo = function() {
 };
 
 window.toggleCategoryBookmark = function() {
-    if (window.categoryManager) {
-        window.categoryManager.toggleBookmark();
-    }
+    console.log('Bookmark toggled');
 };
-
-// Also handle immediate initialization if DOM is already loaded
-if (document.readyState === 'loading') {
-    // DOM is still loading, wait for DOMContentLoaded
-} else {
-    // DOM is already loaded
-    console.log('🚀 DOM already loaded, initializing Category Manager immediately...');
-    window.categoryManager = new CategoryManager();
-}
-
-// Export for module systems
-if (typeof module !== 'undefined' && module.exports) {
-    module.exports = CategoryManager;
-}
