@@ -361,21 +361,26 @@ class CategoryManager {
         return card;
     }
 
-    navigateToVideo(videoId) {
-        // Determine the correct path based on current location
-        const currentPath = window.location.pathname;
-        let videoPath;
-        
-        if (currentPath.includes('/categories/')) {
-            // From categories folder to video folder
-            videoPath = `../video/video.html?id=${videoId}`;
-        } else {
-            // Fallback path
-            videoPath = `../../video/video.html?id=${videoId}`;
+    /*━━━━━━━━━━ INLINE PLAYER ━━━━━━━━━━*/
+    async openVideoInline(videoId) {
+        // Create the player once, then reuse it
+        if (!this.inlinePlayer) {
+            document.getElementById('inline-player-section').style.display = 'block';
+            this.inlinePlayer = new XshiverVideoPlayer('xshiver-player');
         }
-        
-        console.log(`🔗 Navigating to: ${videoPath}`);
-        window.location.href = videoPath;
+        try {
+            await this.inlinePlayer.loadVideo(videoId);
+           // built-in method
+            // Smooth-scroll to the player
+            document.getElementById('inline-player-section')
+                    .scrollIntoView({ behavior: 'smooth', block: 'start' });
+        } catch (err) {
+            console.error('Inline-player load failed:', err);
+        }
+    }
+
+    navigateToVideo(videoId) {
+        this.openVideoInline(videoId);
     }
 
     updateResultsCount() {
@@ -510,7 +515,7 @@ class CategoryManager {
                     <div class="no-results-icon">📹</div>
                     <h3>No videos found</h3>
                     <p>No videos available in the "${this.capitalize(this.currentCategory)}" category.</p>
-                    <p>Try browsing other categories or check back later.</p>
+                    <p>Try Browse other categories or check back later.</p>
                     <a href="../index.html" class="btn-primary">Browse All Categories</a>
                 </div>
             `;
