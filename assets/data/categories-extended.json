@@ -1,5 +1,29 @@
 [
   
+  
+  {
+    "id": 1,
+    "name": "Amateur",
+    "slug": "amateur",
+    "description": "Real people sharing authentic intimate moments with genuine passion and chemistry.",
+    "icon": "👥",
+    "background_image": "amateur.jpg",
+    "thumbnail": "amateur.jpg",
+    "featured": true,
+    "trending": false,
+    "new": false,
+    "tags": ["amateur", "real", "homemade", "authentic", "couple"],
+    "subcategories": ["Couple", "Solo", "Webcam", "Homemade"],
+    "seo_title": "Amateur Adult Videos - Real People, Real Passion | Xshiver",
+    "seo_description": "Watch authentic amateur adult videos featuring real couples and individuals sharing intimate moments. Genuine passion and chemistry in every video.",
+    "color_theme": "#FF6B6B",
+    "video_count": 1247,
+    "total_views": 2840391,
+    "average_rating": 4.3,
+    "latest_upload": "2025-08-01T10:30:00Z"
+  },
+  
+  
   {
     "id": 2,
     "name": "Professional",
