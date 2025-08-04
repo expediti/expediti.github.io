@@ -2,74 +2,65 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <title id="category-title">Category – Xshiver</title>
 
-    <!-- Primary Meta -->
-    <meta name="description" id="category-description"
-          content="Browse adult videos in this category on Xshiver">
-    <meta name="keywords" id="category-keywords"
-          content="adult videos, streaming, category">
+    <!-- SEO META -->
+    <meta name="description" id="category-description" content="Watch videos in this category on Xshiver">
+    <meta name="keywords"    id="category-keywords"    content="adult videos, category">
 
-    <!-- Dynamic Open-Graph -->
-    <meta property="og:title"        id="og-category-title"       content="">
-    <meta property="og:description"  id="og-category-description" content="">
-    <meta property="og:image"        id="og-category-image"       content="">
-    <meta property="og:url"          id="og-category-url"         content="">
+    <!-- Open Graph -->
+    <meta property="og:title"       id="og-category-title"       content="">
+    <meta property="og:description" id="og-category-description" content="">
+    <meta property="og:image"       id="og-category-image"       content="">
+    <meta property="og:url"         id="og-category-url"         content="">
 
     <!-- Schema -->
     <script type="application/ld+json" id="category-schema">
     {
-      "@context": "https://schema.org",
-      "@type":   "CollectionPage",
-      "name":        "",
-      "description": "",
-      "url":         "",
-      "mainEntity":  { "@type": "VideoGallery", "name": "" }
+      "@context":"https://schema.org",
+      "@type":"CollectionPage",
+      "name":"",
+      "description":"",
+      "url":"",
+      "mainEntity":{"@type":"VideoGallery","name":""}
     }
     </script>
 
     <!-- Styles -->
-    <link rel="stylesheet" href="../../assets/css/main.css">
-    <link rel="stylesheet" href="../../assets/css/categories.css">
-    <link rel="stylesheet" href="../../assets/css/filters.css">
-    <link rel="stylesheet" href="../../assets/css/responsive.css">
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="stylesheet" href="../assets/css/category-single.css"> <!-- page-specific -->
+    <link rel="stylesheet" href="../assets/css/filters.css">
+    <link rel="stylesheet" href="../assets/css/responsive.css">
 </head>
 <body>
 
-<!-- ───────────────────── Header ───────────────────── -->
+<!-- ╔════════════ HEADER ════════════╗ -->
 <header class="header">
     <nav class="navbar">
-        <div class="nav-container">
-            <!-- Brand -->
-            <a href="../../index.html" class="nav-logo">
-                <img src="../../assets/images/logo-xshiver.png"
-                     alt="Xshiver" class="logo">
+        <div class="nav-container container">
+            <a href="../index.html" class="nav-logo">
+                <img src="../assets/images/logo-xshiver.png" alt="Xshiver" class="logo">
                 <span class="logo-text">XSHIVER</span>
             </a>
 
-            <!-- Search -->
             <div class="nav-search">
-                <input type="text" id="category-search"
-                       placeholder="Search in this category…" class="search-input">
+                <input type="text" id="category-search" placeholder="Search in this category…" class="search-input">
                 <button class="search-btn" onclick="searchInCategory()">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
-                         stroke="currentColor">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
                         <circle cx="11" cy="11" r="8"></circle>
                         <path d="M21 21l-4.35-4.35"></path>
                     </svg>
                 </button>
             </div>
 
-            <!-- Menu -->
             <div class="nav-links">
-                <a href="../../index.html"                 class="nav-link">Home</a>
-                <a href="index.html"                      class="nav-link">Categories</a>
-                <a href="../content/trending.html"        class="nav-link">Trending</a>
-                <a href="../content/new-releases.html"    class="nav-link">New</a>
+                <a href="../index.html"               class="nav-link">Home</a>
+                <a href="index.html"                  class="nav-link">Categories</a>
+                <a href="../content/trending.html"    class="nav-link">Trending</a>
+                <a href="../content/new-releases.html"class="nav-link">New</a>
             </div>
 
-            <!-- Mobile Toggle -->
             <button class="mobile-menu-toggle" aria-label="Toggle menu">
                 <span></span><span></span><span></span>
             </button>
@@ -77,40 +68,35 @@
     </nav>
 </header>
 
-<!-- ────────────────── Breadcrumb ─────────────────── -->
+<!-- ╔════════════ BREADCRUMB ════════════╗ -->
 <nav class="breadcrumb" aria-label="Breadcrumb">
     <div class="container">
         <ol class="breadcrumb-list">
-            <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+            <li class="breadcrumb-item"><a href="../index.html">Home</a></li>
             <li class="breadcrumb-item"><a href="index.html">Categories</a></li>
-            <li class="breadcrumb-item active" id="breadcrumb-category"
-                aria-current="page">Category</li>
+            <li class="breadcrumb-item active" id="breadcrumb-category" aria-current="page">Category</li>
         </ol>
     </div>
 </nav>
 
-<!-- ──────────────────── Main ─────────────────────── -->
+<!-- ╔════════════ MAIN ════════════╗ -->
 <main class="category-main">
     <div class="container">
 
-        <!-- ── Category Hero ────────────────────────── -->
+        <!-- ─── Hero banner ─── -->
         <section class="category-header">
             <div class="category-hero">
 
-                <!-- Background -->
                 <div id="category-background" class="category-background">
                     <div class="category-overlay"></div>
                 </div>
 
-                <!-- Info & Actions -->
                 <div class="category-info">
                     <span id="category-icon" class="category-icon">🎬</span>
 
                     <div class="category-details">
                         <h1 id="category-name"  class="category-name">Loading…</h1>
-                        <p  id="category-desc"  class="category-description">
-                            Loading category description…
-                        </p>
+                        <p  id="category-desc"  class="category-description">Loading category description…</p>
 
                         <!-- Stats -->
                         <div class="category-stats">
@@ -133,17 +119,16 @@
                         </div>
                     </div>
 
-                    <!-- Action Buttons -->
+                    <!-- Action buttons -->
                     <div class="category-actions">
-                        <button class="btn-primary" onclick="playRandomVideo()">
+                        <button class="btn-primary"   onclick="playRandomVideo()">
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
                                 <polygon points="5,3 19,12 5,21"></polygon>
                             </svg>
                             Play Random
                         </button>
                         <button class="btn-secondary" onclick="toggleCategoryBookmark()">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
-                                 stroke="currentColor">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
                                 <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>
                             </svg>
                             Bookmark
@@ -153,10 +138,9 @@
             </div>
         </section>
 
-        <!-- ── Controls Bar ─────────────────────────── -->
+        <!-- ─── Controls bar ─── -->
         <section class="category-controls">
             <div class="controls-bar">
-
                 <div class="results-info">
                     <strong id="results-count">0</strong>&nbsp;videos found
                 </div>
@@ -184,10 +168,8 @@
                         </select>
                     </div>
 
-                    <button id="toggle-filters" class="control-btn"
-                            onclick="toggleSidebar()">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
-                             stroke="currentColor">
+                    <button id="toggle-filters" class="control-btn" onclick="toggleSidebar()">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
                             <polygon points="22,3 2,3 10,12.46 10,19 14,21 14,12.46"/>
                         </svg>
                         Filters
@@ -196,16 +178,14 @@
             </div>
         </section>
 
-        <!-- ── Content Grid + Sidebar ────────────────── -->
+        <!-- ─── Main grid + sidebar ─── -->
         <div class="category-content">
 
             <!-- Sidebar -->
             <aside id="filters-sidebar" class="filters-sidebar">
                 <div class="sidebar-header">
                     <h3>Refine Results</h3>
-                    <button class="sidebar-close" onclick="toggleSidebar()">
-                        ✕
-                    </button>
+                    <button class="sidebar-close" onclick="toggleSidebar()">✕</button>
                 </div>
 
                 <div class="sidebar-content">
@@ -213,32 +193,26 @@
                     <div class="filter-group">
                         <h4 class="filter-title">Duration</h4>
                         <label class="filter-option">
-                            <input type="checkbox" name="duration" value="short">
-                            <span class="filter-checkmark"></span>
-                            Under 10 min
+                            <input type="checkbox" name="duration" value="short"><span class="filter-checkmark"></span>Under 10 min
                         </label>
                         <label class="filter-option">
-                            <input type="checkbox" name="duration" value="medium">
-                            <span class="filter-checkmark"></span>
-                            10–30 min
+                            <input type="checkbox" name="duration" value="medium"><span class="filter-checkmark"></span>10–30 min
                         </label>
                         <label class="filter-option">
-                            <input type="checkbox" name="duration" value="long">
-                            <span class="filter-checkmark"></span>
-                            Over 30 min
+                            <input type="checkbox" name="duration" value="long"><span class="filter-checkmark"></span>Over 30 min
                         </label>
                     </div>
 
                     <!-- Quality -->
                     <div class="filter-group">
                         <h4 class="filter-title">Quality</h4>
-                        <label class="filter-option"><input type="checkbox" value="4k">4 K</label>
-                        <label class="filter-option"><input type="checkbox" value="1080p">1080 p</label>
-                        <label class="filter-option"><input type="checkbox" value="720p">720 p</label>
-                        <label class="filter-option"><input type="checkbox" value="480p">480 p</label>
+                        <label class="filter-option"><input type="checkbox" value="4k"><span class="filter-checkmark"></span>4 K</label>
+                        <label class="filter-option"><input type="checkbox" value="1080p"><span class="filter-checkmark"></span>1080 p</label>
+                        <label class="filter-option"><input type="checkbox" value="720p"><span class="filter-checkmark"></span>720 p</label>
+                        <label class="filter-option"><input type="checkbox" value="480p"><span class="filter-checkmark"></span>480 p</label>
                     </div>
 
-                    <!-- Rating Slider -->
+                    <!-- Rating -->
                     <div class="filter-group">
                         <h4 class="filter-title">Minimum Rating</h4>
                         <input type="range" id="rating-range" min="1" max="5" value="1" step="0.5">
@@ -253,14 +227,14 @@
                 </div>
             </aside>
 
-            <!-- Videos Grid -->
+            <!-- Videos -->
             <section class="videos-section">
                 <div id="loading-state" class="loading-state">
                     <div class="loading-spinner"></div>
                     <p>Loading videos…</p>
                 </div>
 
-                <div id="videos-grid" class="videos-grid"></div>
+                <div id="videos-grid" class="videos-grid"><!-- videos injected dynamically --></div>
 
                 <div id="no-results" class="no-results hidden">
                     <div class="no-results-icon">🔍</div>
@@ -271,29 +245,28 @@
                 <!-- Pagination -->
                 <nav id="pagination-container" class="pagination-container" aria-label="Pagination">
                     <button id="prev-page" class="pagination-btn" disabled>◀ Prev</button>
-                    <div id="pagination-numbers" class="pagination-numbers"></div>
+                    <div  id="pagination-numbers" class="pagination-numbers"></div>
                     <button id="next-page" class="pagination-btn">Next ▶</button>
                 </nav>
                 <div class="pagination-info">
-                    Showing <span id="showing-start">1</span>-<span id="showing-end">20</span> of
-                    <span id="total-results">0</span>
+                    Showing <span id="showing-start">1</span>-<span id="showing-end">20</span> of <span id="total-results">0</span>
                 </div>
             </section>
         </div>
 
-        <!-- ── Related Categories ───────────────────── -->
+        <!-- Related categories -->
         <section class="related-categories">
             <h2 class="section-title">Related Categories</h2>
-            <div id="related-categories" class="categories-grid featured-grid"></div>
+            <div id="related-categories" class="categories-grid featured-grid"><!-- cards injected here --></div>
         </section>
     </div>
 </main>
 
-<!-- ───────────────────── Footer ──────────────────── -->
+<!-- ╔════════════ FOOTER ════════════╗ -->
 <footer class="footer">
     <div class="container footer-flex">
         <div class="footer-brand">
-            <img src="../../assets/images/logo-xshiver.png" alt="Xshiver" class="footer-logo">
+            <img src="../assets/images/logo-xshiver.png" alt="Xshiver" class="footer-logo">
             <span class="footer-brand-text">XSHIVER</span>
             <p class="footer-description">Premium adult entertainment platform</p>
         </div>
@@ -304,7 +277,7 @@
                 <a href="category.html?cat=amateur">Amateur</a>
                 <a href="category.html?cat=professional">Professional</a>
                 <a href="category.html?cat=milf">MILF</a>
-                <a href="category.html?cat=teen">Teen (18+)</a>
+                <a href="category.html?cat=teen">Teen&nbsp;(18+)</a>
             </div>
             <div class="link-group">
                 <h4>Browse</h4>
@@ -320,12 +293,12 @@
     </div>
 </footer>
 
-<!-- Scripts -->
-<script src="../../assets/js/age-verification.js"></script>
-<script src="../../assets/js/video-database.js"></script>
-<script src="../../assets/js/category-manager.js"></script>
-<script src="../../assets/js/filter-system.js"></script>
-<script src="../../assets/js/pagination.js"></script>
-<script src="../../assets/js/content-loader.js"></script>
+<!-- ╔════════════ SCRIPTS ════════════╗ -->
+<script src="../assets/js/age-verification.js"></script>
+<script src="../assets/js/video-database.js"></script>
+<script src="../assets/js/category-manager.js"></script>
+<script src="../assets/js/filter-system.js"></script>
+<script src="../assets/js/pagination.js"></script>
+<script src="../assets/js/content-loader.js"></script>
 </body>
 </html>
