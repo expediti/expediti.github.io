@@ -83,19 +83,31 @@ ul{list-style:none;}
 }
 .video-loading.hidden{opacity:0;pointer-events:none;}
 
-/* 6)  Control overlay */
-.video-controls-overlay{
-    position:absolute;inset:0;
-    display:flex;flex-direction:column;justify-content:space-between;
-    padding:var(--space-4);
-    background:linear-gradient(to bottom,
-        rgba(0,0,0,.7) 0%,
-        rgba(0,0,0,0) 30%,
-        rgba(0,0,0,0) 70%,
-        rgba(0,0,0,.8) 100%);
-    opacity:0;transition:opacity var(--tr-mid);
-    pointer-events:none;       /* base overlay is inert */
-}
+
+
+
+
+
+-.video-controls-overlay{
+-    position:absolute;inset:0;
+-    /* … */
+-    opacity:0;transition:opacity var(--tr-mid);
+-    pointer-events:none;       /*  ←  KILLS all clicks inside  */
+-}
++.video-controls-overlay{
++    position:absolute;inset:0;
++    /* … */
++    opacity:0;transition:opacity var(--tr-mid);
++    pointer-events:auto;       /*  ←  allow buttons to work   */
++}
+
+
+
+
+
+
+
+
 .xshiver-player:hover .video-controls-overlay,
 .video-controls-overlay.show{opacity:1;}
 .video-controls-overlay *{pointer-events:auto;}
