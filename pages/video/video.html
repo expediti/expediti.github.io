@@ -6,104 +6,60 @@
 <title id="video-title">Watch Video – Xshiver</title>
 <meta name="description" id="video-description" content="Watch premium adult videos on Xshiver">
 
-<!-- Open Graph -->
-<meta property="og:type" content="video.other">
+<!---- Open Graph -->
+<meta property="og:type"        content="video.other">
 <meta property="og:title"       id="og-title"       content="">
 <meta property="og:description" id="og-description" content="">
 <meta property="og:video:url"   id="og-video"       content="">
 <meta property="og:image"       id="og-thumbnail"   content="">
-<meta property="og:site_name" content="Xshiver">
+<meta property="og:site_name"   content="Xshiver">
 
-<!-- Schema -->
+<!---- JSON-LD stub (filled by JS) -->
 <script type="application/ld+json" id="video-schema">
 { "@context":"https://schema.org", "@type":"VideoObject" }
 </script>
 
-<!-- Styles -->
+<!---- Styles -->
 <link rel="stylesheet" href="../../assets/css/main.css">
 <link rel="stylesheet" href="../../assets/css/video-player.css">
 </head>
 
 <body>
-<!----- Header 
-<header class="header video-header">
-    <nav class="navbar">
-        <div class="nav-container">
-            <div class="nav-logo">
-                <a href="../../index.html">
-                    <img src="../../assets/images/logo-xshiver.png" alt="Xshiver" class="logo">
-                    <span class="logo-text">XSHIVER</span>
-                </a>
-            </div>
 
-            <div class="video-nav-info">
-                <span class="back-btn" onclick="goBack()">
-                    <svg width="20" height="20" viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-                    Back
-                </span>
-            </div>
-
-            <div class="video-actions">
-                <button class="action-btn" id="bookmark-btn" title="Bookmark"><svg width="20" height="20" viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg></button>
-                <button class="action-btn" id="share-btn"    title="Share"><svg width="20" height="20" viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button>
-                <button class="action-btn" id="theater-mode-btn" title="Theater"><svg width="20" height="20" viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M7 10h4v4H7z"/></svg></button>
-            </div>
-        </div>
-    </nav>
-</header> ----->
-
-<!----- Main ----->
+<!---- ▸▸ MAIN -->
 <main class="video-main">
 
-<!-- Player -->
 <section class="video-player-section">
 <div class="video-player-container" id="video-container">
 
+    <!---- █████ VIDEO + CONTROLS █████ -->
     <div class="xshiver-player" id="xshiver-player">
+
+        <!-- video element -->
         <video id="main-video" class="video-element" preload="metadata" playsinline webkit-playsinline>
             <source id="video-source" src="" type="video/mp4">
             <p>Your browser does not support the video tag.</p>
         </video>
 
-        <!-- Loading -->
+        <!-- loading overlay -->
         <div class="video-loading" id="video-loading">
-            <div class="loading-spinner"></div><p>Loading video…</p>
+            <div class="loading-spinner"></div>
+            <p>Loading video …</p>
         </div>
 
-        <!-- Controls -->
+        <!-- controls overlay (now fixed to bottom) -->
         <div class="video-controls-overlay" id="controls-overlay">
 
-            <!-- Big play -->
-            <button class="big-play-btn" id="big-play-btn">
-                <svg width="60" height="60" viewBox="0 0 24 24" fill="white"><polygon points="5,3 19,12 5,21"/></svg>
+            <!-- big-play in centre -->
+            <button class="big-play-btn" id="big-play-btn" aria-label="Play">
+                <svg width="60" height="60" viewBox="0 0 24 24" fill="white">
+                    <polygon points="5,3 19,12 5,21"/>
+                </svg>
             </button>
 
-            
-
-            <!-- Top bar-->
-            <div class="controls-top">
-                <div class="video-title-overlay"><h1 id="current-video-title">Loading…</h1></div> 
-
-
-                
-
-                <div class="quality-selector">
-                    <button class="quality-btn" id="quality-btn">
-                        <span id="current-quality">Auto</span>
-                        <svg width="16" height="16" viewBox="0 0 24 24"><polyline points="6,9 12,15 18,9"/></svg>
-                    </button>
-                    <div class="quality-menu hidden" id="quality-menu">
-                        <div class="quality-option" data-quality="auto">Auto</div>
-                        <div class="quality-option" data-quality="4k">4K</div>
-                        <div class="quality-option" data-quality="1080p">1080p</div>
-                        <div class="quality-option" data-quality="720p">720p</div>
-                        <div class="quality-option" data-quality="480p">480p</div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Bottom bar -->
+            <!-- bottom bar -->
             <div class="controls-bottom">
+                <!-- progress -->
                 <div class="progress-container">
                     <div class="progress-bar" id="progress-bar">
                         <div class="progress-filled" id="progress-filled"></div>
@@ -112,15 +68,20 @@
                     </div>
                 </div>
 
+                <!-- button row -->
                 <div class="controls-row">
+
+                    <!-- left block -->
                     <div class="controls-left">
-                        <button class="control-btn" id="play-pause-btn">
+                        <!-- play / pause -->
+                        <button class="control-btn" id="play-pause-btn" aria-label="Play / Pause">
                             <svg class="play-icon"  width="20" height="20" viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
                             <svg class="pause-icon hidden" width="20" height="20" viewBox="0 0 24 24"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
                         </button>
 
+                        <!-- volume -->
                         <div class="volume-container">
-                            <button class="control-btn" id="volume-btn">
+                            <button class="control-btn" id="volume-btn" aria-label="Mute / Unmute">
                                 <svg class="volume-high"  width="20" height="20" viewBox="0 0 24 24"><polygon points="11,5 6,9 2,9 2,15 6,15 11,19"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
                                 <svg class="volume-muted hidden" width="20" height="20" viewBox="0 0 24 24"><polygon points="11,5 6,9 2,9 2,15 6,15 11,19"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
                             </button>
@@ -132,24 +93,32 @@
                             </div>
                         </div>
 
-                        <div class="time-display"><span id="current-time">0:00</span><span>/</span><span id="duration-time">0:00</span></div>
+                        <!-- time -->
+                        <div class="time-display">
+                            <span id="current-time">0:00</span><span>/</span><span id="duration-time">0:00</span>
+                        </div>
                     </div>
 
+                    <!-- right block -->
                     <div class="controls-right">
-                        <button class="control-btn" id="speed-btn" title="Speed"><span id="speed-text">1x</span></button>
+                        <button class="control-btn" id="speed-btn" title="Playback speed"><span id="speed-text">1x</span></button>
+                        <button class="control-btn" id="quality-btn" title="Quality">
+                            <span id="current-quality">Auto</span>
+                        </button>
                         <button class="control-btn" id="cast-btn"  title="Cast">
                             <svg width="20" height="20" viewBox="0 0 24 24"><rect x="2" y="16" width="6" height="6" rx="1"/><path d="M2 12a4 4 0 0 1 4 4M2 8a8 8 0 0 1 8 8"/><path d="M21 4H3a1 1 0 0 0-1 1v6h2V6h16v12h-4v2h4a1 1 0 0 0 1-1V5a1 1 0 0 0-1-1z"/></svg>
                         </button>
-                        <button class="control-btn" id="fullscreen-btn">
+                        <button class="control-btn" id="fullscreen-btn" title="Fullscreen">
                             <svg class="expand-icon"   width="20" height="20" viewBox="0 0 24 24"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg>
                             <svg class="compress-icon hidden" width="20" height="20" viewBox="0 0 24 24"><path d="M8 3v3a2 2 0 0 1-2 2H3M18 3v3a2 2 0 0 0 2 2h3M8 21v-3a2 2 0 0 1-2-2H3M18 21v-3a2 2 0 0 0 2-2h3"/></svg>
                         </button>
                     </div>
                 </div>
-            </div>
-        </div>
+            </div><!-- /controls-bottom -->
 
-        <!-- Speed menu -->
+        </div><!-- /overlay -->
+
+        <!-- speed dropdown -->
         <div class="speed-menu hidden" id="speed-menu">
             <div class="speed-option" data-speed="0.5">0.5x</div>
             <div class="speed-option" data-speed="0.75">0.75x</div>
@@ -158,75 +127,53 @@
             <div class="speed-option" data-speed="1.5">1.5x</div>
             <div class="speed-option" data-speed="2">2x</div>
         </div>
-    </div>
+    </div><!-- /xshiver-player -->
 
-    <!-- Info below player -->
+    <!---- █████ TITLE + META (below player) █████ -->
     <div class="video-info-section">
+
+        <h1 id="current-video-title" class="video-page-title">Loading …</h1>
+
         <div class="video-details">
             <div class="video-meta">
                 <div class="video-stats">
-                    <span id="video-views">Loading…</span><span>•</span>
-                    <span id="upload-date">Loading…</span><span>•</span>
-                    
-                   <!--  <span id="video-duration">Loading…</span>  -->
-                    
+                    <span id="video-views">Loading …</span><span>•</span>
+                    <span id="upload-date">Loading …</span>
                 </div>
+
                 <div class="video-rating">
                     <div class="rating-stars" id="rating-stars">
-                        <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">☆</span>
-                        <span class="rating-text" id="rating-text"> </span>
+                        <span class="star">☆</span><span class="star">☆</span><span class="star">☆</span><span class="star">☆</span><span class="star">☆</span>
+                        <span class="rating-text" id="rating-text"></span>
                     </div>
                 </div>
             </div>
-
- <!-- Top bar 
-            <div class="controls-top">
-                <div class="video-title-overlay"><h1 id="current-video-title">Loading…</h1></div> -->
-
-
-
-            <!--
-            <div class="video-description">
-                <h2>Description</h2>
-                <p id="video-description-text">Loading…</p>
-                <div class="video-tags" id="video-tags"></div>
-            </div> -->
         </div>
-    </div>
+    </div><!-- /info-section -->
 
 </div>
 </section>
 
-<!-- Sidebar -->
+<!---- RELATED SIDEBAR -->
 <aside class="related-videos-sidebar">
     <h3 class="sidebar-title">Related Videos</h3>
     <div class="related-videos-list" id="related-videos">
         <div class="related-video-card placeholder">
-            <div class="related-thumbnail"><div class="placeholder-thumb"></div><span class="related-duration">--:--</span></div>
-            <div class="related-info"><h4 class="related-title">Loading…</h4><p class="related-views">— views</p></div>
+            <div class="related-thumbnail">
+                <div class="placeholder-thumb"></div>
+                <span class="related-duration">--:--</span>
+            </div>
+            <div class="related-info">
+                <h4 class="related-title">Loading …</h4>
+                <p  class="related-views">— views</p>
+            </div>
         </div>
     </div>
 </aside>
 
-</main>
+</main><!-- /main -->
 
-<!-- Share Modal 
-<div class="modal" id="share-modal">
-  <div class="modal-content">
-    <div class="modal-header"><h3>Share Video</h3><button class="modal-close" onclick="closeShareModal()">×</button></div>
-    <div class="modal-body">
-      <div class="share-options">
-        <button class="share-btn" onclick="shareToTwitter()"><span class="share-icon">🐦</span><span>Twitter</span></button>
-        <button class="share-btn" onclick="shareToFacebook()"><span class="share-icon">📘</span><span>Facebook</span></button>
-        <button class="share-btn" onclick="shareToReddit()"><span class="share-icon">🤖</span><span>Reddit</span></button>
-        <button class="share-btn" onclick="copyVideoLink()"><span class="share-icon">🔗</span><span>Copy Link</span></button>
-      </div>
-      <div class="share-link"><input type="text" id="video-link" readonly></div>
-    </div>
-  </div>
-</div> -->
-
-<!-- Scripts -->
+<!---- Scripts -->
 <script src="../../assets/js/video-database.js"></script>
 <script src="../../assets/js/catbox-integration.js"></script>
 <script src="../../assets/js/adaptive-streaming.js"></script>
