@@ -331,7 +331,7 @@ class ContentLoader {
             <div class="video-card" onclick="navigateToVideo(${video.id})">
                 <div class="video-thumbnail">
                     <img src="${video.catbox_thumbnail_url}" alt="${video.title}" loading="lazy"
-                        onerror="this.src='../../assets/images/placeholder-thumbnail.jpg'">
+                         onerror="this.src='../../assets/images/placeholder-thumbnail.jpg'">
                     <div class="video-overlay">
                         <button class="play-btn">
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
@@ -549,25 +549,10 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // Global functions
-/**
- * Navigates to a video, using an inline player if available on the current page,
- * or falling back to a full page navigation otherwise.
- * @param {string} videoId The ID of the video to navigate to.
- */
 function navigateToVideo(videoId) {
-    if (window.categoryManager && window.categoryManager.openVideoInline) {
-        // Use inline player when we’re on a category page
-        window.categoryManager.openVideoInline(videoId);
-    } else {
-        // Fallback for pages that don’t have the inline player
-        window.location.href = `../watch/video.html?id=${videoId}`;
-    }
+    window.location.href = `../watch/video.html?id=${videoId}`;
 }
 
-/**
- * Navigates to a specific category page.
- * @param {string} categorySlug The slug of the category to navigate to.
- */
 function navigateToCategory(categorySlug) {
     window.location.href = `category.html?cat=${categorySlug}`;
 }
