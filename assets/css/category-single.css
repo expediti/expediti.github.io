@@ -60,7 +60,14 @@ input:checked+span{background:var(--xshiver-blue);border-color:var(--xshiver-blu
 .btn-clear-filters{background:var(--xshiver-secondary);color:var(--silver-text);}
 .btn-apply-filters{background:var(--xshiver-blue);color:#fff;}
 
-/* ─── ENHANCED VIDEOS GRID & VIDEO CONTAINERS ─── */
+
+
+
+
+
+
+
+/* ─── ENHANCED VIDEOS GRID & VIDEO CONTAINERS ─── 
 .videos-grid{
   display:grid;
   grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
@@ -68,7 +75,9 @@ input:checked+span{background:var(--xshiver-blue);border-color:var(--xshiver-blu
   padding:var(--md) 0;
 }
 
-/* ─── VIDEO CONTAINER BOXES ─── */
+
+
+/* ─── VIDEO CONTAINER BOXES ─── 
 .video-item{
   background:var(--card-dark);
   border:1px solid var(--xshiver-secondary);
@@ -83,9 +92,69 @@ input:checked+span{background:var(--xshiver-blue);border-color:var(--xshiver-blu
   transform:translateY(-4px);
   box-shadow:0 8px 25px rgba(74,144,226,0.15);
   border-color:var(--xshiver-blue);
+} */
+
+
+
+
+
+
+
+
+
+
+
+/* ─── ENHANCED VIDEOS GRID & VIDEO CONTAINERS ─── */
+.videos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-auto-flow: row; /* Fill horizontally first, then move to next row */
+  gap: var(--lg);
+  padding: var(--md) 0;
+  width: 100%; /* Ensure full width usage */
 }
 
-/* ─── THUMBNAIL CONTAINER & FITTING ─── */
+/* ─── VIDEO CONTAINER BOXES ─── */
+.video-item {
+  background: var(--card-dark);
+  border: 1px solid var(--xshiver-secondary);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  transition: transform var(--normal), box-shadow var(--normal);
+  position: relative;
+  cursor: pointer;
+  width: 100%; /* Fill the entire grid cell width */
+  height: 100%; /* Fill the entire grid cell height */
+  min-height: 320px; /* Minimum height for consistent appearance */
+}
+
+.video-item:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 25px rgba(74,144,226,0.15);
+  border-color: var(--xshiver-blue);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ─── THUMBNAIL CONTAINER & FITTING ───  
 .video-thumbnail-container{
   position:relative;
   width:100%;
@@ -97,14 +166,63 @@ input:checked+span{background:var(--xshiver-blue);border-color:var(--xshiver-blu
 .video-thumbnail{
   width:100%;
   height:100%;
-  object-fit:cover; /* Ensures thumbnail fits perfectly without distortion */
+  object-fit:cover;                                             /* Ensures thumbnail fits perfectly without distortion   
   object-position:center;
   transition:transform var(--normal);
 }
 
 .video-item:hover .video-thumbnail{
   transform:scale(1.05);
+}  */
+
+
+
+
+
+
+
+/* ─── THUMBNAIL CONTAINER & FITTING ───  */
+.video-thumbnail-container {
+  position: relative;
+  width: 100%;
+  /* Use padding-top to define aspect ratio based on --thumbnail-ratio variable */
+  padding-top: var(--thumbnail-ratio, 56.25%); /* default 16:9 ratio */
+  overflow: hidden;
+  background: var(--xshiver-dark);
+  height: 0; /* needed for padding-top trick */
 }
+
+.video-thumbnail {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;           /* Ensures thumbnail fits perfectly without distortion */
+  object-position: center;
+  transition: transform var(--normal);
+}
+
+.video-item:hover .video-thumbnail {
+  transform: scale(1.05);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /* ─── VIDEO DURATION OVERLAY ─── */
 .video-duration{
