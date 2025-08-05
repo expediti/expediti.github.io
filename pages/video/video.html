@@ -22,7 +22,6 @@
 <!-- Styles -->
 <link rel="stylesheet" href="../../assets/css/main.css">
 <link rel="stylesheet" href="../../assets/css/video-player.css">
-<link rel="stylesheet" href="../../assets/css/category.css">
 </head>
 
 <body>
@@ -79,9 +78,14 @@
                 <svg width="60" height="60" viewBox="0 0 24 24" fill="white"><polygon points="5,3 19,12 5,21"/></svg>
             </button>
 
+            
+
             <!-- Top bar-->
             <div class="controls-top">
-                <div class="video-title-overlay"><h1 id="current-video-title">Loading…</h1></div>
+                <div class="video-title-overlay"><h1 id="current-video-title">Loading…</h1></div> 
+
+
+                
 
                 <div class="quality-selector">
                     <button class="quality-btn" id="quality-btn">
@@ -162,7 +166,10 @@
             <div class="video-meta">
                 <div class="video-stats">
                     <span id="video-views">Loading…</span><span>•</span>
-                    <span id="upload-date">Loading…</span>
+                    <span id="upload-date">Loading…</span><span>•</span>
+                    
+                   <!--  <span id="video-duration">Loading…</span>  -->
+                    
                 </div>
                 <div class="video-rating">
                     <div class="rating-stars" id="rating-stars">
@@ -171,103 +178,40 @@
                     </div>
                 </div>
             </div>
+
+ <!-- Top bar 
+            <div class="controls-top">
+                <div class="video-title-overlay"><h1 id="current-video-title">Loading…</h1></div> -->
+
+
+
+            <!--
+            <div class="video-description">
+                <h2>Description</h2>
+                <p id="video-description-text">Loading…</p>
+                <div class="video-tags" id="video-tags"></div>
+            </div> -->
         </div>
     </div>
 
 </div>
 </section>
 
-<!-- UPDATED: Related Videos Section with Horizontal Grid Layout -->
-<section class="related-videos-section">
-    <div class="category-content">
-        <div class="videos-main">
-            <h3 class="section-title">Related Videos</h3>
-            
-            <!-- Videos Grid Container -->
-            <div class="videos-grid" id="related-videos">
-                <!-- Video Item 1 -->
-                <div class="video-item" data-video-id="1">
-                    <img src="../../assets/images/placeholder-thumb.jpg" alt="Video Thumbnail" class="video-thumbnail">
-                    <div class="video-duration">20:34</div>
-                    <div class="video-info">
-                        <h4 class="video-title">Sample Video Title 1</h4>
-                        <p class="video-views">1.2M views</p>
-                    </div>
-                </div>
-
-                <!-- Video Item 2 -->
-                <div class="video-item" data-video-id="2">
-                    <img src="../../assets/images/placeholder-thumb.jpg" alt="Video Thumbnail" class="video-thumbnail">
-                    <div class="video-duration">15:42</div>
-                    <div class="video-info">
-                        <h4 class="video-title">Sample Video Title 2</h4>
-                        <p class="video-views">856K views</p>
-                    </div>
-                </div>
-
-                <!-- Video Item 3 -->
-                <div class="video-item" data-video-id="3">
-                    <img src="../../assets/images/placeholder-thumb.jpg" alt="Video Thumbnail" class="video-thumbnail">
-                    <div class="video-duration">12:18</div>
-                    <div class="video-info">
-                        <h4 class="video-title">Sample Video Title 3</h4>
-                        <p class="video-views">2.3M views</p>
-                    </div>
-                </div>
-
-                <!-- Video Item 4 -->
-                <div class="video-item" data-video-id="4">
-                    <img src="../../assets/images/placeholder-thumb.jpg" alt="Video Thumbnail" class="video-thumbnail">
-                    <div class="video-duration">18:55</div>
-                    <div class="video-info">
-                        <h4 class="video-title">Sample Video Title 4</h4>
-                        <p class="video-views">634K views</p>
-                    </div>
-                </div>
-
-                <!-- Video Item 5 -->
-                <div class="video-item" data-video-id="5">
-                    <img src="../../assets/images/placeholder-thumb.jpg" alt="Video Thumbnail" class="video-thumbnail">
-                    <div class="video-duration">25:11</div>
-                    <div class="video-info">
-                        <h4 class="video-title">Sample Video Title 5</h4>
-                        <p class="video-views">1.8M views</p>
-                    </div>
-                </div>
-
-                <!-- Video Item 6 -->
-                <div class="video-item" data-video-id="6">
-                    <img src="../../assets/images/placeholder-thumb.jpg" alt="Video Thumbnail" class="video-thumbnail">
-                    <div class="video-duration">14:33</div>
-                    <div class="video-info">
-                        <h4 class="video-title">Sample Video Title 6</h4>
-                        <p class="video-views">923K views</p>
-                    </div>
-                </div>
-
-                <!-- Loading State (for dynamic content) -->
-                <div class="loading-state" id="videos-loading" style="display: none;">
-                    <div class="loading-spinner"></div>
-                    <p>Loading more videos...</p>
-                </div>
-            </div>
-
-            <!-- Pagination -->
-            <div class="pagination-container" id="pagination">
-                <button class="pagination-btn" id="prev-page" disabled>← Previous</button>
-                <div class="pagination-info">
-                    <span>Page <span id="current-page">1</span> of <span id="total-pages">5</span></span>
-                </div>
-                <button class="pagination-btn" id="next-page">Next →</button>
-            </div>
+<!-- Sidebar -->
+<aside class="related-videos-sidebar">
+    <h3 class="sidebar-title">Related Videos</h3>
+    <div class="related-videos-list" id="related-videos">
+        <div class="related-video-card placeholder">
+            <div class="related-thumbnail"><div class="placeholder-thumb"></div><span class="related-duration">--:--</span></div>
+            <div class="related-info"><h4 class="related-title">Loading…</h4><p class="related-views">— views</p></div>
         </div>
     </div>
-</section>
+</aside>
 
 </main>
 
-<!-- Share Modal -->
-<div class="modal" id="share-modal" style="display: none;">
+<!-- Share Modal 
+<div class="modal" id="share-modal">
   <div class="modal-content">
     <div class="modal-header"><h3>Share Video</h3><button class="modal-close" onclick="closeShareModal()">×</button></div>
     <div class="modal-body">
@@ -280,7 +224,7 @@
       <div class="share-link"><input type="text" id="video-link" readonly></div>
     </div>
   </div>
-</div>
+</div> -->
 
 <!-- Scripts -->
 <script src="../../assets/js/video-database.js"></script>
@@ -288,40 +232,5 @@
 <script src="../../assets/js/adaptive-streaming.js"></script>
 <script src="../../assets/js/chromecast-support.js"></script>
 <script src="../../assets/js/video-player.js"></script>
-
-<!-- Additional Script for Related Videos Grid -->
-<script>
-// Function to handle video thumbnail clicks
-document.addEventListener('DOMContentLoaded', function() {
-    const videoItems = document.querySelectorAll('.video-item');
-    
-    videoItems.forEach(item => {
-        item.addEventListener('click', function() {
-            const videoId = this.getAttribute('data-video-id');
-            // Add your video loading logic here
-            console.log('Loading video:', videoId);
-        });
-    });
-    
-    // Pagination handlers
-    const prevBtn = document.getElementById('prev-page');
-    const nextBtn = document.getElementById('next-page');
-    
-    if (prevBtn) {
-        prevBtn.addEventListener('click', function() {
-            // Add pagination logic
-            console.log('Previous page');
-        });
-    }
-    
-    if (nextBtn) {
-        nextBtn.addEventListener('click', function() {
-            // Add pagination logic
-            console.log('Next page');
-        });
-    }
-});
-</script>
-
 </body>
 </html>
