@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -174,94 +173,12 @@
                             <option value="shortest">Shortest</option>
                         </select>
                     </div>
-
-                    <!--  <div class="control-group">
-                        <label for="per-page">Show:</label>
-                        <select id="per-page" class="control-select">
-                            <option value="20">20</option>
-                            <option value="40">40</option>
-                            <option value="60">60</option>
-                            <option value="100">100</option>
-                        </select>
-                    </div>
-
-                    <button id="toggle-filters" class="control-btn"
-                            onclick="toggleSidebar()">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
-                             stroke="currentColor">
-                            <polygon points="22,3 2,3 10,12.46 10,19 14,21 14,12.46"/>
-                        </svg>
-                        Filters
-                    </button>
-                </div> -->
+                </div>
             </div>
         </section>
 
         <!-- ── Content Grid + Sidebar ────────────────── -->
         <div class="category-content">
-            
-
-            <!-- Sidebar 
-            <aside id="filters-sidebar" class="filters-sidebar">
-                <div class="sidebar-header">
-                    <h3>Refine Results</h3>
-                    <button class="sidebar-close" onclick="toggleSidebar()">
-                        ✕
-                    </button>
-                </div>
-
-                <div class="sidebar-content">
-            
-                    <!-- Duration 
-                    <div class="filter-group">
-                        <h4 class="filter-title">Duration</h4>
-                        <label class="filter-option">
-                            <input type="checkbox" name="duration" value="short">
-                            <span class="filter-checkmark"></span>
-                            Under 10 min
-                        </label>
-                        <label class="filter-option">
-                            <input type="checkbox" name="duration" value="medium">
-                            <span class="filter-checkmark"></span>
-                            10–30 min
-                        </label>
-                        <label class="filter-option">
-                            <input type="checkbox" name="duration" value="long">
-                            <span class="filter-checkmark"></span>
-                            Over 30 min
-                        </label>
-                    </div>
-
-                    <!-- Quality 
-                    <div class="filter-group">
-                        <h4 class="filter-title">Quality</h4>
-                        <label class="filter-option"><input type="checkbox" value="4k">4 K</label>
-                        <label class="filter-option"><input type="checkbox" value="1080p">1080 p</label>
-                        <label class="filter-option"><input type="checkbox" value="720p">720 p</label>
-                        <label class="filter-option"><input type="checkbox" value="480p">480 p</label>
-                    </div>
-
-                    <!-- Rating Slider 
-                    <div class="filter-group">
-                        <h4 class="filter-title">Minimum Rating</h4>
-                        <input type="range" id="rating-range" min="1" max="5" value="1" step="0.5">
-                        <span id="rating-value">1.0</span>+ stars
-                    </div>
-
-                    <!-- Actions 
-                    <div class="filter-actions">
-                        <button class="btn-clear-filters" onclick="clearAllFilters()">Clear</button>
-                        <button class="btn-apply-filters" onclick="applyFilters()">Apply</button>
-                    </div>
-                </div>
-            </aside>  -->
-
-
-
-
-
-
-
 
             <!-- Videos Grid -->
             <section class="videos-section">
@@ -270,7 +187,60 @@
                     <p>Loading videos…</p>
                 </div>
 
-                <div id="videos-grid" class="videos-grid"></div>
+                <!-- ENHANCED VIDEOS GRID WITH PROPER THUMBNAIL CONTAINERS -->
+                <div id="videos-grid" class="videos-grid">
+                    
+                    <!-- SAMPLE VIDEO ITEM STRUCTURE (Remove this when implementing dynamic loading) -->
+                    <article class="video-item" onclick="playVideo('sample1')">
+                        <div class="video-thumbnail-container">
+                            <img src="path/to/thumbnail1.jpg" 
+                                 alt="Sample Video 1" 
+                                 class="video-thumbnail"
+                                 loading="lazy">
+                            <div class="video-quality">1080P</div>
+                            <div class="video-duration">20:34</div>
+                        </div>
+                        <div class="video-info">
+                            <h3 class="video-title">Sample Video Title</h3>
+                            <div class="video-meta">
+                                <span class="video-views">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                        <circle cx="12" cy="12" r="3"></circle>
+                                    </svg>
+                                    12.5K views
+                                </span>
+                                <span class="video-date">2 days ago</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- SAMPLE VIDEO ITEM 2 -->
+                    <article class="video-item" onclick="playVideo('sample2')">
+                        <div class="video-thumbnail-container">
+                            <img src="path/to/thumbnail2.jpg" 
+                                 alt="Sample Video 2" 
+                                 class="video-thumbnail"
+                                 loading="lazy">
+                            <div class="video-quality">720P</div>
+                            <div class="video-duration">15:22</div>
+                        </div>
+                        <div class="video-info">
+                            <h3 class="video-title">Another Sample Video with Longer Title</h3>
+                            <div class="video-meta">
+                                <span class="video-views">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                        <circle cx="12" cy="12" r="3"></circle>
+                                    </svg>
+                                    8.9K views
+                                </span>
+                                <span class="video-date">1 week ago</span>
+                            </div>
+                        </div>
+                    </article>
+
+                </div>
 
                 <div id="no-results" class="no-results hidden">
                     <div class="no-results-icon">🔍</div>
@@ -290,12 +260,6 @@
                 </div>
             </section>
         </div>
-
-        <!-- ── Related Categories ───────────────────── 
-        <section class="related-categories">
-            <h2 class="section-title">Related Categories</h2>
-            <div id="related-categories" class="categories-grid featured-grid"></div>
-        </section>-->
     </div>
 </main>
 
@@ -307,24 +271,7 @@
             <span class="footer-brand-text">XSHIVER</span>
             <p class="footer-description">Premium adult entertainment platform</p>
         </div>
-
-       <!--  <div class="footer-links">
-            <div class="link-group">
-                <h4>Categories</h4>
-                <a href="category.html?cat=amateur">Amateur</a>
-                <a href="category.html?cat=professional">Professional</a>
-                <a href="category.html?cat=milf">MILF</a>
-                <a href="category.html?cat=teen">Teen (18+)</a>
-            </div>
-            <div class="link-group">
-                <h4>Browse</h4>
-                <a href="../content/trending.html">Trending</a>
-                <a href="../content/new-releases.html">New</a>
-                <a href="../content/top-rated.html">Top Rated</a>
-                <a href="index.html">All Categories</a>
-            </div>
-        </div>
-    </div> -->
+    </div>
     <div class="footer-bottom">
         &copy; 2025 Xshiver.site – Adults Only (18+)
     </div> 
@@ -338,11 +285,75 @@
 <script src="../../assets/js/pagination.js"></script>
 <script src="../../assets/js/content-loader.js"></script>
 
+<!-- ENHANCED VIDEO LOADING SCRIPT -->
+<script>
+// Enhanced video item creation function for your JavaScript files
+function createVideoItem(video) {
+    return `
+        <article class="video-item" onclick="playVideo('${video.id}')" data-video-id="${video.id}">
+            <div class="video-thumbnail-container">
+                <img src="${video.thumbnail}" 
+                     alt="${video.title}" 
+                     class="video-thumbnail"
+                     loading="lazy"
+                     onerror="this.src='../../assets/images/placeholder-thumbnail.jpg'">
+                <div class="video-quality">${video.quality || '720P'}</div>
+                <div class="video-duration">${video.duration}</div>
+            </div>
+            <div class="video-info">
+                <h3 class="video-title">${video.title}</h3>
+                <div class="video-meta">
+                    <span class="video-views">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                            <circle cx="12" cy="12" r="3"></circle>
+                        </svg>
+                        ${formatViews(video.views)} views
+                    </span>
+                    <span class="video-date">${formatDate(video.uploadDate)}</span>
+                </div>
+            </div>
+        </article>
+    `;
+}
 
+// Helper function to format views
+function formatViews(views) {
+    if (views >= 1000000) return (views / 1000000).toFixed(1) + 'M';
+    if (views >= 1000) return (views / 1000).toFixed(1) + 'K';
+    return views.toString();
+}
 
-
-
-
+// Helper function to format dates
+function formatDate(dateString) {
+    const date = new Date(dateString);
+    const now = new Date();
+    const diffTime = Math.abs(now - date);
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
     
+    if (diffDays === 1) return '1 day ago';
+    if (diffDays < 7) return `${diffDays} days ago`;
+    if (diffDays < 30) return `${Math.floor(diffDays / 7)} weeks ago`;
+    if (diffDays < 365) return `${Math.floor(diffDays / 30)} months ago`;
+    return `${Math.floor(diffDays / 365)} years ago`;
+}
+
+// Function to load videos into grid (integrate this with your existing JavaScript)
+function loadVideosIntoGrid(videos) {
+    const videosGrid = document.getElementById('videos-grid');
+    const loadingState = document.getElementById('loading-state');
+    
+    // Hide loading state
+    loadingState.style.display = 'none';
+    
+    // Clear existing content
+    videosGrid.innerHTML = '';
+    
+    // Add video items
+    videos.forEach(video => {
+        videosGrid.innerHTML += createVideoItem(video);
+    });
+}
+</script>
 </body>
 </html>
