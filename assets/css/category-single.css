@@ -1,17 +1,14 @@
 /* =======================================================
-   XSHIVER – SINGLE CATEGORY PAGE (category.html)
-   UPDATED 2025-08-05
-   – Improved responsive grid
-   – Better thumbnail fallback
+   XSHIVER – SINGLE CATEGORY PAGE  (category.html)
    ======================================================= */
 
-/* ========== 1. COLOUR / SIZE TOKENS (unchanged) ========== */
+/* reuse same variables block if main.css does not already hold them */
 :root{
-  --midnight-black:#0a0a0f;  --xshiver-dark:#1a1a2e;
-  --xshiver-blue:#4a90e2;    --xshiver-accent:#5ba3f5;
+  --midnight-black:#0a0a0f; --xshiver-dark:#1a1a2e;
+  --xshiver-blue:#4a90e2;   --xshiver-accent:#5ba3f5;
   --xshiver-secondary:#2a2a3e; --card-dark:#1e1e2e;
-  --silver-text:#e0e0e0;     --gray-text:#a0a0a0;
-  --deep-navy:#0f0f1a;       --gold-accent:#ffd700;
+  --silver-text:#e0e0e0;    --gray-text:#a0a0a0;
+  --deep-navy:#0f0f1a;      --gold-accent:#ffd700;
   --success-green:#28a745;
 
   --xs:.25rem; --sm:.5rem; --md:1rem; --lg:1.5rem; --xl:2rem;
@@ -19,42 +16,76 @@
   --fast:.2s ease; --normal:.3s ease;
 }
 
-/* ========== 2. HERO, CONTROLS & SIDEBAR (unchanged) ========== */
-/* … all your existing styles up to “VIDEOS GRID” kept as-is … */
+/* ─── hero banner ─── */
+.category-header{position:relative;}
+.category-hero{position:relative;padding:var(--xl) 0;display:flex;flex-direction:column;align-items:center;justify-content:center;}
+.category-background{position:absolute;inset:0;background:linear-gradient(135deg,var(--xshiver-dark),var(--deep-navy));background-size:cover;}
+.category-overlay{position:absolute;inset:0;background:rgba(0,0,0,.55);}
+.category-info{position:relative;z-index:1;text-align:center;max-width:650px;}
+.category-icon{font-size:3.5rem;margin-bottom:var(--sm);}
+.category-name{font-size:2.2rem;color:var(--silver-text);margin:0;}
+.category-description{color:var(--gray-text);margin:.5rem 0 var(--md);}
+.category-stats{display:flex;flex-wrap:wrap;justify-content:center;gap:var(--lg);margin-bottom:var(--lg);}
+.stat-number{font-size:1.6rem;font-weight:700;color:var(--xshiver-blue);}
+.stat-label{font-size:.7rem;color:var(--gray-text);text-transform:uppercase;}
 
-/* ============================================================
-   3. ENHANCED VIDEO GRID
-   – True masonry-style grid using auto-fit
-   – Gap matches --lg token
-   ============================================================ */
+/* ─── action buttons under hero ─── */
+.category-actions{display:flex;flex-wrap:wrap;gap:var(--md);justify-content:center;margin-top:var(--lg);}
+.btn-primary,.btn-secondary{display:flex;align-items:center;gap:.4rem;font-weight:600;padding:.6rem 1.2rem;border-radius:var(--r-md);cursor:pointer;transition:var(--fast);}
+.btn-primary{background:var(--xshiver-blue);color:#fff;border:none;}
+.btn-primary:hover{background:var(--xshiver-accent);}
+.btn-secondary{background:transparent;color:var(--xshiver-blue);border:1px solid var(--xshiver-blue);}
+.btn-secondary:hover{background:var(--xshiver-blue);color:#fff;}
+
+/* ─── controls bar ─── */
+.category-controls{background:var(--card-dark);border-bottom:1px solid var(--xshiver-secondary);}
+.controls-bar{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:var(--lg);padding:var(--md) 0;}
+.control-group{display:flex;align-items:center;gap:.35rem;}
+.control-select{background:var(--xshiver-secondary);color:var(--silver-text);border:none;border-radius:var(--r-sm);padding:.35rem .7rem;}
+.control-btn{background:transparent;color:var(--xshiver-blue);border:1px solid var(--xshiver-blue);padding:.35rem .8rem;border-radius:var(--r-md);cursor:pointer;transition:var(--fast);}
+.control-btn:hover{background:var(--xshiver-blue);color:#fff;}
+
+/* ─── grid + sticky sidebar ─── */
+.category-content{display:grid;grid-template-columns:300px 1fr;gap:var(--lg);}
+.filters-sidebar{background:var(--card-dark);border:1px solid var(--xshiver-secondary);border-radius:var(--r-md);padding:var(--md);height:max-content;position:sticky;top:var(--lg);}
+.sidebar-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:var(--md);}
+.sidebar-close{background:none;border:none;font-size:1.2rem;color:var(--silver-text);cursor:pointer;}
+.filter-title{font-size:1rem;margin:.8rem 0 .4rem;color:var(--silver-text);}
+.filter-option{display:flex;align-items:center;gap:.4rem;font-size:.9rem;color:var(--gray-text);margin-bottom:.3rem;}
+.filter-checkmark,.filter-radio{width:14px;height:14px;display:inline-block;border:1px solid var(--gray-text);border-radius:2px;}
+input[type="radio"]+span.filter-radio{border-radius:50%;}
+input:checked+span{background:var(--xshiver-blue);border-color:var(--xshiver-blue);}
+.filter-actions{display:flex;gap:var(--sm);margin-top:var(--md);}
+.btn-clear-filters,.btn-apply-filters{flex:1;font-weight:600;padding:.5rem 0;border:none;border-radius:var(--r-sm);cursor:pointer;}
+.btn-clear-filters{background:var(--xshiver-secondary);color:var(--silver-text);}
+.btn-apply-filters{background:var(--xshiver-blue);color:#fff;}
+
+/* ─── ENHANCED VIDEOS GRID & VIDEO CONTAINERS ─── */
 .videos-grid{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
   gap:var(--lg);
-  margin-top:var(--md);
+  padding:var(--md) 0;
 }
 
-/* ============================================================
-   4. VIDEO CARD CONTAINER
-   ============================================================ */
+/* ─── VIDEO CONTAINER BOXES ─── */
 .video-item{
   background:var(--card-dark);
   border:1px solid var(--xshiver-secondary);
   border-radius:var(--r-lg);
   overflow:hidden;
+  transition:transform var(--normal), box-shadow var(--normal);
   position:relative;
   cursor:pointer;
-  transition:transform var(--normal), box-shadow var(--normal);
 }
+
 .video-item:hover{
   transform:translateY(-4px);
-  box-shadow:0 8px 25px rgba(74,144,226,.15);
+  box-shadow:0 8px 25px rgba(74,144,226,0.15);
   border-color:var(--xshiver-blue);
 }
 
-/* ============================================================
-   5. THUMBNAIL WRAPPER + SKELETON PLACEHOLDER
-   ============================================================ */
+/* ─── THUMBNAIL CONTAINER & FITTING ─── */
 .video-thumbnail-container{
   position:relative;
   width:100%;
@@ -63,97 +94,150 @@
   background:var(--xshiver-dark);
 }
 
-/* skeleton shimmer while image is loading */
-.video-thumbnail-container::before{
-  content:'';
-  position:absolute;
-  inset:0;
-  background:linear-gradient(100deg,rgba(255,255,255,.05) 0%,rgba(255,255,255,.15) 50%,rgba(255,255,255,.05) 100%);
-  background-size:200% 100%;
-  animation:thumbShimmer 1.4s infinite;
-}
-@keyframes thumbShimmer{
-  0%{background-position:200% 0;}
-  100%{background-position:-200% 0;}
-}
-
-/* actual img */
 .video-thumbnail{
   width:100%;
   height:100%;
-  object-fit:cover;
+  object-fit:cover; /* Ensures thumbnail fits perfectly without distortion */
   object-position:center;
-  opacity:0;                 /* start invisible */
-  transition:opacity .4s ease, transform var(--normal);
+  transition:transform var(--normal);
 }
+
 .video-item:hover .video-thumbnail{
   transform:scale(1.05);
 }
 
-/* reveal image when JS adds .loaded */
-.video-thumbnail.loaded{
-  opacity:1;
-}
-.video-thumbnail.loaded + .placeholder-overlay{
-  display:none;
-}
-
-/* ============================================================
-   6. DURATION & QUALITY BADGES
-   ============================================================ */
-.video-duration,
-.video-quality{
+/* ─── VIDEO DURATION OVERLAY ─── */
+.video-duration{
   position:absolute;
-  font-size:.75rem;
-  font-weight:600;
+  bottom:8px;
+  right:8px;
+  background:rgba(0,0,0,0.85);
+  color:var(--silver-text);
   padding:4px 8px;
   border-radius:var(--r-sm);
+  font-size:0.75rem;
+  font-weight:600;
   backdrop-filter:blur(4px);
 }
-.video-duration{
-  bottom:8px; right:8px;
-  background:rgba(0,0,0,.85);
-  color:var(--silver-text);
-}
-.video-quality{
-  top:8px; left:8px;
-  background:var(--xshiver-blue);
-  color:#fff;
+
+/* ─── VIDEO INFO SECTION ─── */
+.video-info{
+  padding:var(--md);
 }
 
-/* ============================================================
-   7. VIDEO INFO
-   ============================================================ */
-.video-info{padding:var(--md);}
 .video-title{
   color:var(--silver-text);
   font-size:1rem;
   font-weight:600;
-  line-height:1.3;
   margin:0 0 var(--xs);
+  line-height:1.3;
   display:-webkit-box;
   -webkit-line-clamp:2;
   -webkit-box-orient:vertical;
   overflow:hidden;
 }
+
 .video-meta{
   display:flex;
   justify-content:space-between;
+  align-items:center;
   color:var(--gray-text);
-  font-size:.8rem;
+  font-size:0.8rem;
+  margin-top:var(--xs);
 }
 
-/* ============================================================
-   8. RESPONSIVE TWEAKS
-   ============================================================ */
+.video-views{
+  display:flex;
+  align-items:center;
+  gap:4px;
+}
+
+.video-date{
+  color:var(--gray-text);
+}
+
+/* ─── QUALITY BADGE ─── */
+.video-quality{
+  position:absolute;
+  top:8px;
+  left:8px;
+  background:var(--xshiver-blue);
+  color:white;
+  padding:2px 6px;
+  border-radius:var(--r-sm);
+  font-size:0.7rem;
+  font-weight:600;
+}
+
+/* ─── LOADING & PAGINATION ─── */
+.loading-state{display:flex;flex-direction:column;align-items:center;gap:var(--md);padding:var(--xl) 0;}
+.loading-spinner{width:32px;height:32px;border:4px solid rgba(74,144,226,.3);border-top-color:var(--xshiver-blue);border-radius:50%;animation:spin 1s linear infinite;}
+@keyframes spin{to{transform:rotate(360deg);}}
+.pagination-container{display:flex;justify-content:center;align-items:center;gap:var(--sm);margin:var(--lg) 0;}
+.pagination-btn{background:var(--xshiver-secondary);color:var(--silver-text);border:none;padding:.4rem .9rem;border-radius:var(--r-sm);cursor:pointer;}
+.pagination-btn:not([disabled]):hover{background:var(--xshiver-blue);color:#fff;}
+.pagination-btn[disabled]{opacity:.3;cursor:not-allowed;}
+.pagination-info{text-align:center;color:var(--gray-text);font-size:.9rem;}
+
+/* ─── RESPONSIVE DESIGN ─── */
+@media(max-width:1200px){
+  .videos-grid{
+    grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
+  }
+}
+
 @media(max-width:992px){
-  .videos-grid{grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:var(--md);}
-  .video-thumbnail-container{height:160px;}
+  .category-content{grid-template-columns:1fr;}
+  .filters-sidebar{position:fixed;inset:0 0 0 auto;width:280px;transform:translateX(100%);transition:transform var(--normal);z-index:1000;}
+  .filters-sidebar.active{transform:none;}
+  
+  .videos-grid{
+    grid-template-columns:repeat(auto-fill,minmax(240px,1fr));
+    gap:var(--md);
+  }
 }
+
 @media(max-width:768px){
-  .videos-grid{gap:var(--sm);}
+  .controls-bar{flex-direction:column;align-items:flex-start;}
+  
+  .videos-grid{
+    grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
+    gap:var(--sm);
+  }
+  
+  .video-thumbnail-container{
+    height:160px;
+  }
 }
+
 @media(max-width:480px){
-  .videos-grid{grid-template-columns:1fr;}
-  .video-thumbnail-container{height:200px;}
+  .videos-grid{
+    grid-template-columns:1fr;
+    gap:var(--md);
+  }
+  
+  .video-thumbnail-container{
+    height:200px;
+  }
+  
+  .video-info{
+    padding:var(--sm);
+  }
+}
+
+/* ─── ALTERNATIVE THUMBNAIL FITTING OPTIONS ─── */
+/* Use this class if you want NO CROPPING (black bars may appear) */
+.video-thumbnail-contain{
+  object-fit:contain;
+  background:var(--midnight-black);
+}
+
+/* Use this class if you want to FILL container (may crop content) */
+.video-thumbnail-fill{
+  object-fit:fill;
+}
+
+/* Use this class for ORIGINAL aspect ratio (may overflow) */
+.video-thumbnail-scale{
+  object-fit:scale-down;
 }
