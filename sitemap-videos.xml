@@ -4,13 +4,13 @@
 
     <!-- Video 1: Premium Adult Content -->
     <url>
-        <loc>https://yourusername.github.io/xshiver-platform/pages/watch/video.html?id=1</loc>
+        <loc>https://xshiver.site/xshiver-platform/pages/video/video.html?id=1</loc>
         <video:video>
-            <video:thumbnail_loc>https://yourusername.github.io/xshiver-platform/assets/images/thumbnails/video-1-thumb.jpg</video:thumbnail_loc>
+            <video:thumbnail_loc>https://xshiver.site/xshiver-platform/assets/images/thumbnails/video-1-thumb.jpg</video:thumbnail_loc>
             <video:title>Premium Adult Entertainment - Exclusive HD Content</video:title>
             <video:description>High-quality adult entertainment video featuring professional production and stunning visuals. Perfect for mature audiences seeking premium content.</video:description>
-            <video:content_loc>https://yourusername.github.io/xshiver-platform/assets/videos/premium-content-1.mp4</video:content_loc>
-            <video:player_loc>https://yourusername.github.io/xshiver-platform/pages/watch/video.html?id=1</video:player_loc>
+            <video:content_loc>https://xshiver.site/xshiver-platform/assets/videos/premium-content-1.mp4</video:content_loc>
+            <video:player_loc>https://xshiver.site/xshiver-platform/pages/watch/video.html?id=1</video:player_loc>
             <video:duration>1800</video:duration>
             <video:expiration_date>2026-08-06T14:19:00+05:30</video:expiration_date>
             <video:rating>4.8</video:rating>
@@ -18,7 +18,7 @@
             <video:publication_date>2025-08-01T10:00:00+05:30</video:publication_date>
             <video:family_friendly>no</video:family_friendly>
             <video:restriction relationship="deny">US</video:restriction>
-            <video:gallery_loc>https://yourusername.github.io/xshiver-platform/pages/browse/categories.html?cat=premium</video:gallery_loc>
+            <video:gallery_loc>https://xshiver.site/xshiver-platform/pages/browse/categories.html?cat=premium</video:gallery_loc>
             <video:tag>adult</video:tag>
             <video:tag>premium</video:tag>
             <video:tag>hd</video:tag>
@@ -29,13 +29,13 @@
 
     <!-- Video 2: Featured Adult Content -->
     <url>
-        <loc>https://yourusername.github.io/xshiver-platform/pages/watch/video.html?id=2</loc>
+        <loc>https://xshiver.site/xshiver-platform/pages/watch/video.html?id=2</loc>
         <video:video>
-            <video:thumbnail_loc>https://yourusername.github.io/xshiver-platform/assets/images/thumbnails/video-2-thumb.jpg</video:thumbnail_loc>
+            <video:thumbnail_loc>https://xshiver.site/xshiver-platform/assets/images/thumbnails/video-2-thumb.jpg</video:thumbnail_loc>
             <video:title>Featured Adult Video - Professional Production</video:title>
             <video:description>Featured adult entertainment content with professional cinematography and high production values. Exclusive to Xshiver platform.</video:description>
-            <video:content_loc>https://yourusername.github.io/xshiver-platform/assets/videos/featured-content-2.mp4</video:content_loc>
-            <video:player_loc>https://yourusername.github.io/xshiver-platform/pages/watch/video.html?id=2</video:player_loc>
+            <video:content_loc>https://xshiver.site/xshiver-platform/assets/videos/featured-content-2.mp4</video:content_loc>
+            <video:player_loc>https://xshiver.site/xshiver-platform/pages/watch/video.html?id=2</video:player_loc>
             <video:duration>2400</video:duration>
             <video:rating>4.9</video:rating>
             <video:view_count>89000</video:view_count>
@@ -50,13 +50,13 @@
 
     <!-- Video 3: Popular Adult Content -->
     <url>
-        <loc>https://yourusername.github.io/xshiver-platform/pages/watch/video.html?id=3</loc>
+        <loc>https://xshiver.site/xshiver-platform/pages/watch/video.html?id=3</loc>
         <video:video>
-            <video:thumbnail_loc>https://yourusername.github.io/xshiver-platform/assets/images/thumbnails/video-3-thumb.jpg</video:thumbnail_loc>
+            <video:thumbnail_loc>https://xshiver.site/xshiver-platform/assets/images/thumbnails/video-3-thumb.jpg</video:thumbnail_loc>
             <video:title>Popular Adult Entertainment - Trending Content</video:title>
             <video:description>Currently trending adult entertainment video with high viewer engagement and ratings. Part of our popular content collection.</video:description>
-            <video:content_loc>https://yourusername.github.io/xshiver-platform/assets/videos/popular-content-3.mp4</video:content_loc>
-            <video:player_loc>https://yourusername.github.io/xshiver-platform/pages/watch/video.html?id=3</video:player_loc>
+            <video:content_loc>https://xshiver.site/xshiver-platform/assets/videos/popular-content-3.mp4</video:content_loc>
+            <video:player_loc>https://xshiver.site/xshiver-platform/pages/watch/video.html?id=3</video:player_loc>
             <video:duration>1200</video:duration>
             <video:rating>4.7</video:rating>
             <video:view_count>256000</video:view_count>
