@@ -4,19 +4,19 @@
 
     <!-- Homepage Images -->
     <url>
-        <loc>https://yourusername.github.io/xshiver-platform/</loc>
+        <loc>https://xshiver.site/xshiver-platform/</loc>
         <image:image>
-            <image:loc>https://yourusername.github.io/xshiver-platform/assets/images/logo.png</image:loc>
+            <image:lochttps://xshiver.site/xshiver-platform/assets/images/logo.png</image:loc>
             <image:caption>Xshiver Adult Video Streaming Platform Logo</image:caption>
             <image:title>Xshiver Logo - Premium Adult Entertainment</image:title>
         </image:image>
         <image:image>
-            <image:loc>https://yourusername.github.io/xshiver-platform/assets/images/hero-image.jpg</image:loc>
+            <image:loc>https://xshiver.site/xshiver-platform/assets/images/hero-image.jpg</image:loc>
             <image:caption>Premium adult entertainment streaming platform hero image</image:caption>
             <image:title>Xshiver Platform Hero Image</image:title>
         </image:image>
         <image:image>
-            <image:loc>https://yourusername.github.io/xshiver-platform/assets/images/featured-1.jpg</image:loc>
+            <image:loc>https://xshiver.site/xshiver-platform/assets/images/featured-1.jpg</image:loc>
             <image:caption>Featured adult content thumbnail image</image:caption>
             <image:title>Featured Adult Content Preview</image:title>
         </image:image>
@@ -24,18 +24,18 @@
 
     <!-- Video Thumbnails -->
     <url>
-        <loc>https://yourusername.github.io/xshiver-platform/pages/watch/video.html?id=1</loc>
+        <loc>https://xshiver.site/xshiver-platform/pages/watch/video.html?id=1</loc>
         <image:image>
-            <image:loc>https://yourusername.github.io/xshiver-platform/assets/images/thumbnails/video-1-thumb.jpg</image:loc>
+            <image:loc>https://xshiver.site/xshiver-platform/assets/images/thumbnails/video-1-thumb.jpg</image:loc>
             <image:caption>Premium HD adult entertainment video thumbnail</image:caption>
             <image:title>Premium Adult Video Thumbnail</image:title>
         </image:image>
     </url>
 
     <url>
-        <loc>https://yourusername.github.io/xshiver-platform/pages/watch/video.html?id=2</loc>
+        <loc>https://xshiver.site/xshiver-platform/pages/watch/video.html?id=2</loc>
         <image:image>
-            <image:loc>https://yourusername.github.io/xshiver-platform/assets/images/thumbnails/video-2-thumb.jpg</image:loc>
+            <image:loc>https://xshiver.site/xshiver-platform/assets/images/thumbnails/video-2-thumb.jpg</image:loc>
             <image:caption>Featured professional adult content thumbnail</image:caption>
             <image:title>Featured Adult Content Thumbnail</image:title>
         </image:image>
@@ -43,14 +43,14 @@
 
     <!-- Browse Page Images -->
     <url>
-        <loc>https://yourusername.github.io/xshiver-platform/pages/browse/index.html</loc>
+        <loc>https://xshiver.site/xshiver-platform/pages/browse/index.html</loc>
         <image:image>
-            <image:loc>https://yourusername.github.io/xshiver-platform/assets/images/browse-banner.jpg</image:loc>
+            <image:loc>https://xshiver.site/xshiver-platform/assets/images/browse-banner.jpg</image:loc>
             <image:caption>Browse adult video content banner image</image:caption>
             <image:title>Browse Videos Banner</image:title>
         </image:image>
         <image:image>
-            <image:loc>https://yourusername.github.io/xshiver-platform/assets/images/category-icons/premium.png</image:loc>
+            <image:loc>https://xshiver.site/xshiver-platform/assets/images/category-icons/premium.png</image:loc>
             <image:caption>Premium category icon for adult content</image:caption>
             <image:title>Premium Category Icon</image:title>
         </image:image>
@@ -58,14 +58,14 @@
 
     <!-- Icons and Assets -->
     <url>
-        <loc>https://yourusername.github.io/xshiver-platform/</loc>
+        <loc>https://xshiver.site/xshiver-platform/</loc>
         <image:image>
-            <image:loc>https://yourusername.github.io/xshiver-platform/assets/images/icon-192x192.png</image:loc>
+            <image:loc>https://xshiver.site/xshiver-platform/assets/images/icon-192x192.png</image:loc>
             <image:caption>Xshiver PWA app icon 192x192</image:caption>
             <image:title>Xshiver App Icon</image:title>
         </image:image>
         <image:image>
-            <image:loc>https://yourusername.github.io/xshiver-platform/assets/images/apple-touch-icon.png</image:loc>
+            <image:loc>https://xshiver.site/xshiver-platform/assets/images/apple-touch-icon.png</image:loc>
             <image:caption>Apple touch icon for Xshiver platform</image:caption>
             <image:title>Apple Touch Icon</image:title>
         </image:image>
