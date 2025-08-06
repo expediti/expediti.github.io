@@ -460,7 +460,7 @@ input:checked+span{background:var(--xshiver-blue);border-color:var(--xshiver-blu
   color:var(--gray-text);
 }
 
-/* ─── QUALITY BADGE ─── */
+/* ─── QUALITY BADGE ───
 .video-quality{
   position:absolute;
   top:8px;
@@ -471,7 +471,7 @@ input:checked+span{background:var(--xshiver-blue);border-color:var(--xshiver-blu
   border-radius:var(--r-sm);
   font-size:0.7rem;
   font-weight:600;
-}
+}*/
 
 /* ─── LOADING & PAGINATION ─── */
 .loading-state{display:flex;flex-direction:column;align-items:center;gap:var(--md);padding:var(--xl) 0;}
