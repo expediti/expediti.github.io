@@ -1,6 +1,6 @@
 /* ──────────────────────────────────────────────────────────
    Xshiver – Responsive Video Page CSS  (≥1280  | 768-1279 | ≤767)
-   UPDATED 2025-08-05: Fixed controls positioning & title placement
+   UPDATED 2025-08-06: Fixed video title positioning - moved to metadata section
    ────────────────────────────────────────────────────────── */
 
 /* 0) Reset – keep it light */
@@ -76,12 +76,12 @@ ul{list-style:none}
 @keyframes spin{to{transform:rotate(360deg)}}
 
 /* ═══════════════════════════════════════════════════════════════════
-   6) FIXED CONTROLS OVERLAY - Now positioned at bottom
+   6) FIXED CONTROLS OVERLAY - Title overlay now hidden
    ═══════════════════════════════════════════════════════════════════ */
 .video-controls-overlay{
     position:absolute;
     left:0; bottom:0; width:100%;
-    pointer-events:none;           /* overlay itself ignores clicks */
+    pointer-events:none;
     opacity:0;
     transition:opacity var(--tr-mid);
     background:linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.4) 50%, transparent 100%);
@@ -113,7 +113,7 @@ ul{list-style:none}
 .big-play-btn:hover{scale:1.1;box-shadow:var(--shadow-xl)}
 .big-play-btn.hidden{opacity:0;pointer-events:none}
 
-/* Remove old controls-top since title is now outside player */
+/* Controls-top with title overlay HIDDEN */
 .controls-top{
     position:absolute;
     top:var(--space-4);
@@ -124,15 +124,17 @@ ul{list-style:none}
     pointer-events:auto;
 }
 
+/* HIDE THE VIDEO TITLE OVERLAY */
+.video-title-overlay{
+    display:none !important;
+}
 
-
-
-/* Quality selector - positioned top-right 
+/* Quality selector - positioned top-right */
 .quality-selector{position:relative}
 .quality-btn{
     display:flex;align-items:center;gap:var(--space-1);
     background:rgba(0,0,0,.7);color:#fff;
-    padding:var(--space-2)var(--space-3);border-radius:var(--radius-2);
+    padding:var(--space-2) var(--space-3);border-radius:var(--radius-2);
     pointer-events:auto;
 }
 .quality-btn:hover{background:var(--clr-blue)}
@@ -141,14 +143,8 @@ ul{list-style:none}
     background:rgba(0,0,0,.9);backdrop-filter:blur(10px);
     border-radius:var(--radius-2);padding:var(--space-1);min-width:120px
 }
-.quality-option{padding:var(--space-1)var(--space-2);color:#fff;border-radius:var(--radius-1)}
-.quality-option:hover,.quality-option.active{background:var(--clr-blue)}  */
-
-
-
-
-
-
+.quality-option{padding:var(--space-1) var(--space-2);color:#fff;border-radius:var(--radius-1)}
+.quality-option:hover,.quality-option.active{background:var(--clr-blue)}
 
 /* Bottom controls bar */
 .controls-bottom{
@@ -177,8 +173,6 @@ ul{list-style:none}
 }
 .control-btn:hover{background:rgba(255,255,255,.25)}
 
-
-
 /* Volume controls */
 .volume-container{display:flex;align-items:center;gap:var(--space-2)}
 .volume-slider{
@@ -195,8 +189,6 @@ ul{list-style:none}
     left:80%;
 }
 
-
-
 /* Time display */
 .time-display{
     font-family:'Courier New',Courier,monospace;
@@ -204,9 +196,7 @@ ul{list-style:none}
     white-space:nowrap;
 }
 
-
-
-/* Speed menu 
+/* Speed menu */
 .speed-menu{
     position:absolute;
     bottom:calc(100% + var(--space-6));
@@ -216,23 +206,20 @@ ul{list-style:none}
     pointer-events:auto;
 }
 .speed-option{
-    padding:var(--space-2)var(--space-3);color:#fff;
+    padding:var(--space-2) var(--space-3);color:#fff;
     border-radius:var(--radius-1);text-align:center;
     cursor:pointer;transition:background var(--tr-fast);
 }
-.speed-option:hover,.speed-option.active{background:var(--clr-blue)} */
-
-
-
+.speed-option:hover,.speed-option.active{background:var(--clr-blue)}
 
 /* ═══════════════════════════════════════════════════════════════════
-   7) VIDEO INFO SECTION - Title now appears below player
+   7) VIDEO INFO SECTION - FIXED: Title now appears above metadata
    ═══════════════════════════════════════════════════════════════════ */
 .video-info-section{
-    margin-top:var(--space-5);
+    margin-top:var(--space-4);
 }
 
-/* Main video title - now styled as page title */
+/* NEW: Video title positioned above metadata section */
 .video-page-title{
     font-size:1.8rem;
     font-weight:700;
@@ -242,22 +229,50 @@ ul{list-style:none}
 }
 
 .video-details{
-    background:var(--clr-dark);border-radius:var(--radius-3);
-    padding:var(--space-5);border:1px solid var(--clr-dark-2)
+    background:var(--clr-dark);
+    border-radius:var(--radius-3);
+    padding:var(--space-5);
+    border:1px solid var(--clr-dark-2);
 }
+
 .video-meta{
-    display:flex;justify-content:space-between;align-items:center;
-    margin-bottom:var(--space-4);padding-bottom:var(--space-4);
-    border-bottom:1px solid var(--clr-dark-2)
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:var(--space-4);
+    padding-bottom:var(--space-4);
+    border-bottom:1px solid var(--clr-dark-2);
 }
+
 .video-stats{
-    display:flex;gap:var(--space-3);
-    color:var(--clr-gray);font-size:.95rem;
+    display:flex;
+    gap:var(--space-3);
+    color:var(--clr-gray);
+    font-size:.95rem;
 }
-.video-rating{display:flex;align-items:center;gap:var(--space-2)}
-.rating-stars{display:flex;align-items:center;gap:var(--space-1)}
-.rating-stars .star{color:var(--clr-gold);font-size:1.2rem}
-.rating-text{color:var(--clr-gray);font-size:.9rem;margin-left:var(--space-2)}
+
+.video-rating{
+    display:flex;
+    align-items:center;
+    gap:var(--space-2);
+}
+
+.rating-stars{
+    display:flex;
+    align-items:center;
+    gap:var(--space-1);
+}
+
+.rating-stars .star{
+    color:var(--clr-gold);
+    font-size:1.2rem;
+}
+
+.rating-text{
+    color:var(--clr-gray);
+    font-size:.9rem;
+    margin-left:var(--space-2);
+}
 
 .video-description h2{color:var(--clr-blue);margin-bottom:var(--space-3)}
 .video-description p{color:var(--clr-silver);line-height:1.6;margin-bottom:var(--space-4)}
@@ -265,7 +280,7 @@ ul{list-style:none}
 /* Tags */
 .video-tags{display:flex;flex-wrap:wrap;gap:var(--space-2)}
 .video-tag{
-    padding:var(--space-1)var(--space-2);font-size:.8rem;font-weight:500;
+    padding:var(--space-1) var(--space-2);font-size:.8rem;font-weight:500;
     background:var(--clr-blue-20);color:var(--clr-blue);
     border:1px solid var(--clr-blue);border-radius:var(--radius-3);
     text-decoration:none;transition:all var(--tr-fast);
@@ -324,7 +339,6 @@ ul{list-style:none}
     width:100vw;height:100vh;border-radius:0;
 }
 
-
 /* 10) Share modal */
 .share-options{display:flex;flex-wrap:wrap;gap:var(--space-4)}
 .share-btn{
@@ -343,7 +357,7 @@ ul{list-style:none}
 .toast{
     position:fixed;bottom:20px;right:20px;
     background:var(--clr-dark);color:var(--clr-silver);
-    padding:var(--space-3)var(--space-4);border-radius:var(--radius-2);
+    padding:var(--space-3) var(--space-4);border-radius:var(--radius-2);
     transform:translateX(100%);transition:transform .3s ease;z-index:1001;
 }
 .toast.show{transform:translateX(0)}
@@ -361,18 +375,36 @@ ul{list-style:none}
         padding:calc(var(--space-5)+56px) var(--space-4)
     }
     .related-videos-sidebar{position:static;margin-top:var(--space-5)}
+    
+    .video-meta{
+        flex-direction:column;
+        align-items:flex-start;
+        gap:var(--space-2);
+    }
 }
 
 /* Phone ≤767 */
 @media(max-width:767px){
     .video-header{height:48px;padding:0 var(--space-2)}
     .big-play-btn{width:64px;height:64px}
+    
     .video-page-title{font-size:1.4rem}
+    
+    .video-meta{
+        flex-direction:column;
+        align-items:flex-start;
+        gap:var(--space-2);
+    }
+    
+    .video-stats{
+        flex-wrap:wrap;
+    }
+    
     .controls-bottom{gap:var(--space-1)}
     .controls-row{flex-wrap:wrap;gap:var(--space-2)}
     .time-display{font-size:.8rem;min-width:70px}
     .volume-slider{width:70px}
-    .video-info-section{margin-top:var(--space-4)}
+    .video-info-section{margin-top:var(--space-3)}
     .video-details{padding:var(--space-4)}
     .video-description h2{font-size:1.1rem}
     .sidebar-title{font-size:1rem}
