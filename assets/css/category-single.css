@@ -104,6 +104,16 @@ input:checked+span{background:var(--xshiver-blue);border-color:var(--xshiver-blu
 
 
 
+
+
+
+
+
+
+
+
+
+
 /* ─── ENHANCED VIDEOS GRID & VIDEO CONTAINERS ─── */
 .videos-grid {
   display: grid;
@@ -205,50 +215,181 @@ input:checked+span{background:var(--xshiver-blue);border-color:var(--xshiver-blu
 
 
 /* ─── THUMBNAIL CONTAINER & FITTING ───  */
+/* ─── CSS VARIABLES (Add these if missing) ─── */
+:root {
+  --lg: 24px;
+  --md: 16px;
+  --sm: 12px;
+  --card-dark: #1a1a1a;
+  --xshiver-secondary: #333;
+  --xshiver-blue: #4a90e2;
+  --r-lg: 12px;
+  --normal: 0.3s ease;
+  --thumbnail-ratio: 56.25%; /* 16:9 aspect ratio */
+}
+
+/* ─── ENHANCED VIDEOS GRID ─── */
+.videos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
+  gap: var(--lg);
+  padding: var(--md) 0;
+  width: 100%;
+  max-width: 100%;
+}
+
+/* ─── VIDEO CONTAINER BOXES ─── */
+.video-item {
+  background: var(--card-dark);
+  border: 1px solid var(--xshiver-secondary);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  transition: transform var(--normal), box-shadow var(--normal);
+  position: relative;
+  cursor: pointer;
+  width: 100%;
+  height: auto;
+  max-width: 400px;
+  justify-self: center;
+}
+
+.video-item:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 25px rgba(74,144,226,0.15);
+  border-color: var(--xshiver-blue);
+}
+
+/* ─── THUMBNAIL CONTAINER & FITTING ─── */
 .video-thumbnail-container {
   position: relative;
   width: 100%;
-  /* Use padding-top to define aspect ratio based on --thumbnail-ratio variable */
-  padding-top: var(--thumbnail-ratio, 56.25%); /* default 16:9 ratio */
+  padding-top: var(--thumbnail-ratio); /* 16:9 aspect ratio */
   overflow: hidden;
-  background: var(--xshiver-dark, #1a1a1a); /* Added fallback color */
-  border-radius: var(--radius-1, 4px); /* Added border radius for consistency */
+  background: #2a2a2a;
+  border-radius: 8px 8px 0 0;
 }
 
 .video-thumbnail {
   position: absolute;
-  top: 0; 
-  left: 0; 
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;           /* Ensures thumbnail fits perfectly without distortion */
+  object-fit: cover;
   object-position: center;
-  transition: transform var(--normal, 0.3s ease);
-  display: block; /* Ensures image displays properly */
+  transition: transform var(--normal);
+  display: block;
 }
 
 .video-thumbnail:hover {
   transform: scale(1.05);
 }
 
-/* Fallback for missing images */
-.video-thumbnail-container::before {
-  content: '';
+/* ─── THUMBNAIL OVERLAYS ─── */
+.video-quality, .video-duration {
   position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: linear-gradient(45deg, 
-    var(--xshiver-dark, #1a1a1a) 25%, transparent 25%),
-    linear-gradient(-45deg, 
-    var(--xshiver-dark, #1a1a1a) 25%, transparent 25%),
-    linear-gradient(45deg, transparent 75%, 
-    var(--xshiver-dark, #1a1a1a) 75%),
-    linear-gradient(-45deg, transparent 75%, 
-    var(--xshiver-dark, #1a1a1a) 75%);
-  background-size: 8px 8px;
-  background-position: 0 0, 0 4px, 4px -4px, -4px 0px;
-  opacity: 0.3;
-  z-index: -1;
+  background: rgba(0,0,0,0.8);
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 600;
 }
+
+.video-quality {
+  top: 8px;
+  left: 8px;
+  background: rgba(74,144,226,0.9);
+}
+
+.video-duration {
+  bottom: 8px;
+  right: 8px;
+}
+
+/* ─── VIDEO INFO SECTION ─── */
+.video-info {
+  padding: 16px;
+}
+
+.video-title {
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0 0 8px 0;
+  line-height: 1.4;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.video-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+  color: #888;
+}
+
+.video-views {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.video-views svg {
+  width: 14px;
+  height: 14px;
+  stroke: currentColor;
+}
+
+/* ─── LOADING STATE ─── */
+.loading-state {
+  text-align: center;
+  padding: 40px;
+  color: #888;
+}
+
+.loading-spinner {
+  border: 3px solid #333;
+  border-top: 3px solid var(--xshiver-blue);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 16px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* ─── RESPONSIVE BREAKPOINTS ─── */
+@media (max-width: 480px) {
+  .videos-grid {
+    grid-template-columns: 1fr;
+    gap: var(--md);
+  }
+  
+  .video-item {
+    max-width: 100%;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .videos-grid {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  }
+}
+
+@media (min-width: 1400px) {
+  .videos-grid {
+    grid-template-columns: repeat(auto-fit, minmax(320px, 380px));
+  }
+}
+
 
 
 
