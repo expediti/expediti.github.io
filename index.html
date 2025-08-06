@@ -559,5 +559,66 @@
     <!-- Loading Scripts -->
     <script src="assets/js/age-verification.js"></script>
     <script src="assets/js/main.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Complete SEO Integration Script -->
+<script src="assets/js/seo-manager.js"></script>
+<script src="seo/structured-data.js"></script>
+<script>
+// Auto-initialize all SEO systems
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('🔍 Initializing complete SEO system...');
+    
+    // Initialize SEO Manager
+    if (typeof XshiverSEOManager !== 'undefined') {
+        window.xshiverSEO = new XshiverSEOManager();
+    }
+    
+    // Initialize Structured Data
+    if (typeof XshiverStructuredData !== 'undefined') {
+        window.xshiverStructuredData = new XshiverStructuredData();
+    }
+    
+    // Initialize Sitemap Generator (for dynamic updates)
+    if (typeof XshiverSitemapGenerator !== 'undefined') {
+        window.xshiverSitemapGenerator = new XshiverSitemapGenerator();
+    }
+    
+    // Auto-audit SEO on page load
+    setTimeout(() => {
+        if (window.xshiverSEO) {
+            const issues = window.xshiverSEO.auditCurrentPage();
+            if (issues.length === 0) {
+                console.log('✅ SEO Audit: Perfect score!');
+            } else {
+                console.warn('⚠️ SEO Issues found:', issues);
+            }
+        }
+    }, 2000);
+    
+    console.log('✅ Complete SEO system initialized');
+});
+</script>
+
+
+
+
+
+
+
+
+
+
+    
 </body>
 </html>
