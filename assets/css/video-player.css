@@ -168,7 +168,7 @@ ul{list-style:none}
 .controls-row{display:flex;justify-content:space-between;align-items:center;gap:var(--space-4)}
 .controls-left,.controls-right{display:flex;align-items:center;gap:var(--space-3)}
 .control-btn{
-    padding:var(--space-2);color:#fff;border-radius:var(--radius-1);
+    padding:var(--space-2);color:#0000FF;border-radius:var(--radius-1);
     transition:background var(--tr-fast);
 }
 .control-btn:hover{background:rgba(255,255,255,.25)}
