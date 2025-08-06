@@ -1,35 +1,85 @@
-# Xshiver Platform - Robots.txt
-# Phase 7: Deployment & Optimization
+# Xshiver Adult Video Streaming Platform - SEO Optimized robots.txt
+# Updated: August 2025
 
+# Adult content compliance and crawl optimization
 User-agent: *
-Allow: /
-
-# Sitemap location
-Sitemap: https://yourusername.github.io/xshiver-platform/sitemap.xml
-
-# Disallow sensitive areas
-Disallow: /admin/
-Disallow: /api/
-Disallow: /*.json$
-Disallow: /assets/data/
-Disallow: /deploy/
-Disallow: /optimization/
-
-# Adult content compliance
-# Crawl delay for adult content sites
 Crawl-delay: 10
 
-# Block specific bots that don't respect adult content
-User-agent: ia_archiver
-Disallow: /
-
-User-agent: Wayback
-Disallow: /
-
-# Allow important pages for SEO
+# Allow main content areas
+Allow: /
 Allow: /assets/css/
 Allow: /assets/js/
 Allow: /assets/images/
-Allow: /pages/
+Allow: /pages/browse/
+Allow: /pages/watch/
+Allow: /pages/legal/
+Allow: /sitemap*.xml
 Allow: /manifest.json
-Allow: /sw.js
+
+# Disallow sensitive and duplicate content areas
+Disallow: /pages/admin/
+Disallow: /pages/auth/
+Disallow: /pages/dashboard/
+Disallow: /pages/upload.html
+Disallow: /pages/subscription/checkout.html
+Disallow: /api/
+Disallow: /deploy/
+Disallow: /optimization/
+Disallow: /analytics/
+Disallow: /*?*
+Disallow: /search?
+Disallow: /*.json$
+Disallow: /assets/data/
+Disallow: /temp/
+Disallow: /*.log$
+
+# Block specific problem bots for adult content
+User-agent: Wayback
+Disallow: /
+
+User-agent: ia_archiver
+Disallow: /
+
+User-agent: archive.org_bot
+Disallow: /
+
+# Age verification and legal compliance
+User-agent: *
+Disallow: /age-verification-bypass
+Disallow: /admin-panel
+Disallow: /private/
+
+# Special crawling rules for Google
+User-agent: Googlebot
+Allow: /pages/browse/
+Allow: /pages/watch/
+Allow: /pages/legal/terms.html
+Allow: /pages/legal/privacy.html
+Allow: /pages/legal/dmca.html
+Crawl-delay: 5
+
+# Video-specific bot handling
+User-agent: Googlebot-Video
+Allow: /pages/watch/
+Allow: /assets/videos/
+Crawl-delay: 3
+
+# Image bot optimization
+User-agent: Googlebot-Image
+Allow: /assets/images/
+Allow: /thumbnails/
+Crawl-delay: 2
+
+# Mobile optimization
+User-agent: Googlebot-Mobile
+Allow: /
+Crawl-delay: 3
+
+# Sitemaps for rapid indexing
+Sitemap: https://yourusername.github.io/xshiver-platform/sitemap.xml
+Sitemap: https://yourusername.github.io/xshiver-platform/sitemap-videos.xml
+Sitemap: https://yourusername.github.io/xshiver-platform/sitemap-images.xml
+Sitemap: https://yourusername.github.io/xshiver-platform/sitemap-pages.xml
+
+# Host information for better crawling
+Host: yourusername.github.io
