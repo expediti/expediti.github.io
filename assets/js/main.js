@@ -1,23 +1,99 @@
 /**
- * Main JavaScript functionality for Xshiver Video Platform
- * Handles navigation, search, and basic interactions
+ * Enhanced JavaScript functionality for Xshiver Video Platform
+ * Handles navigation, search, and all interactive features
  */
 
 class XshiverApp {
     constructor() {
         this.currentSection = 'home';
         this.mobileMenuOpen = false;
+        this.searchHistory = JSON.parse(localStorage.getItem('xshiver_search_history') || '[]');
+        this.searchResults = [];
+        this.isSearching = false;
         this.init();
     }
 
     init() {
         this.bindEvents();
         this.initializeComponents();
+        this.setupSearchDatabase();
         
         // Listen for age verification completion
         document.addEventListener('xshiverAgeVerified', () => {
             this.onAgeVerified();
         });
+    }
+
+    setupSearchDatabase() {
+        // Enhanced mock database for realistic search results
+        this.videoDatabase = [
+            {
+                id: 1,
+                title: 'Amazing Amateur Performance',
+                category: 'amateur',
+                tags: ['amateur', 'performance', 'hot'],
+                duration: '12:34',
+                quality: 'HD',
+                views: '125K',
+                rating: '4.8',
+                thumbnail: 'thumb1.jpg'
+            },
+            {
+                id: 2,
+                title: 'Professional Studio Production',
+                category: 'professional',
+                tags: ['professional', 'studio', 'quality'],
+                duration: '18:42',
+                quality: '4K',
+                views: '89K',
+                rating: '4.9',
+                thumbnail: 'thumb2.jpg'
+            },
+            {
+                id: 3,
+                title: 'Hot MILF Content',
+                category: 'milf',
+                tags: ['milf', 'mature', 'experienced'],
+                duration: '15:28',
+                quality: 'HD',
+                views: '156K',
+                rating: '4.7',
+                thumbnail: 'thumb3.jpg'
+            },
+            {
+                id: 4,
+                title: 'Teen (18+) Exclusive',
+                category: 'teen',
+                tags: ['teen', '18+', 'young', 'exclusive'],
+                duration: '22:15',
+                quality: '4K',
+                views: '203K',
+                rating: '4.9',
+                thumbnail: 'thumb4.jpg'
+            },
+            {
+                id: 5,
+                title: 'Hardcore Action',
+                category: 'hardcore',
+                tags: ['hardcore', 'intense', 'action'],
+                duration: '25:33',
+                quality: '4K',
+                views: '178K',
+                rating: '4.6',
+                thumbnail: 'thumb5.jpg'
+            },
+            {
+                id: 6,
+                title: 'Lesbian Romance',
+                category: 'lesbian',
+                tags: ['lesbian', 'romance', 'intimate'],
+                duration: '19:45',
+                quality: 'HD',
+                views: '134K',
+                rating: '4.8',
+                thumbnail: 'thumb6.jpg'
+            }
+        ];
     }
 
     bindEvents() {
@@ -29,7 +105,7 @@ class XshiverApp {
             });
         }
 
-        // Search functionality
+        // Enhanced search functionality
         const searchBtn = document.getElementById('search-btn');
         const searchInput = document.getElementById('search-input');
         
@@ -46,9 +122,27 @@ class XshiverApp {
                 }
             });
             
-            // Search suggestions (basic implementation)
+            // Enhanced search suggestions with debouncing
+            let searchTimeout;
             searchInput.addEventListener('input', (e) => {
-                this.handleSearchInput(e.target.value);
+                clearTimeout(searchTimeout);
+                searchTimeout = setTimeout(() => {
+                    this.handleSearchInput(e.target.value);
+                }, 300);
+            });
+
+            // Focus and blur events for search
+            searchInput.addEventListener('focus', () => {
+                this.showSearchHistory();
+            });
+
+            searchInput.addEventListener('blur', (e) => {
+                // Delay hiding to allow clicking on suggestions
+                setTimeout(() => {
+                    if (!e.relatedTarget?.closest('.search-suggestions')) {
+                        this.hideSearchSuggestions();
+                    }
+                }, 150);
             });
         }
 
@@ -69,109 +163,175 @@ class XshiverApp {
             });
         });
 
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', (e) => {
-                e.preventDefault();
-                const target = document.querySelector(anchor.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-
-        // Keyboard shortcuts
+        // Enhanced keyboard shortcuts
         document.addEventListener('keydown', (e) => {
             this.handleKeyboardShortcuts(e);
         });
 
-        // Window resize handling
+        // Window events
         window.addEventListener('resize', () => {
             this.handleResize();
         });
 
-        // Scroll handling for header
         window.addEventListener('scroll', () => {
             this.handleScroll();
+        });
+
+        // Click outside to close search suggestions
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.nav-search')) {
+                this.hideSearchSuggestions();
+            }
         });
     }
 
     initializeComponents() {
-        // Initialize any component that needs setup
         this.initializePlaceholderVideos();
         this.setupIntersectionObserver();
         this.initializeTooltips();
+        this.createSearchResultsContainer();
     }
 
-    onAgeVerified() {
-        console.log('🎬 Age verification completed, initializing full functionality...');
-        
-        // Load trending videos
-        this.loadTrendingVideos();
-        
-        // Initialize advanced features
-        this.initializeAdvancedFeatures();
-        
-        // Show welcome animation
-        this.showWelcomeAnimation();
-    }
-
-    toggleMobileMenu() {
-        const mobileNav = document.getElementById('mobile-nav');
-        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-        
-        if (mobileNav && mobileMenuBtn) {
-            this.mobileMenuOpen = !this.mobileMenuOpen;
+    createSearchResultsContainer() {
+        // Create a container for search results if it doesn't exist
+        if (!document.getElementById('search-results-section')) {
+            const searchSection = document.createElement('section');
+            searchSection.id = 'search-results-section';
+            searchSection.className = 'search-results-section';
+            searchSection.style.display = 'none';
+            searchSection.innerHTML = `
+                <div class="container">
+                    <div class="search-results-header">
+                        <h2 class="section-title">Search Results</h2>
+                        <button class="close-search-btn" onclick="window.xshiverApp.closeSearchResults()">✕</button>
+                    </div>
+                    <div id="search-results-grid" class="video-grid">
+                        <!-- Search results will be populated here -->
+                    </div>
+                    <div id="no-results" class="no-results" style="display: none;">
+                        <h3>No results found</h3>
+                        <p>Try adjusting your search terms or browse our categories.</p>
+                    </div>
+                </div>
+            `;
             
-            if (this.mobileMenuOpen) {
-                mobileNav.classList.remove('hidden');
-                mobileMenuBtn.classList.add('active');
-                
-                // Animate menu button
-                const spans = mobileMenuBtn.querySelectorAll('span');
-                spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
-                spans[1].style.opacity = '0';
-                spans[2].style.transform = 'rotate(-45deg) translate(7px, -6px)';
-            } else {
-                mobileNav.classList.add('hidden');
-                mobileMenuBtn.classList.remove('active');
-                
-                // Reset menu button
-                const spans = mobileMenuBtn.querySelectorAll('span');
-                spans[0].style.transform = 'none';
-                spans[1].style.opacity = '1';
-                spans[2].style.transform = 'none';
+            // Insert after trending section
+            const trendingSection = document.getElementById('trending');
+            if (trendingSection) {
+                trendingSection.parentNode.insertBefore(searchSection, trendingSection.nextSibling);
             }
         }
     }
 
     performSearch() {
         const searchInput = document.getElementById('search-input');
-        if (searchInput) {
-            const query = searchInput.value.trim();
-            if (query) {
-                console.log('🔍 Searching for:', query);
+        if (!searchInput) return;
+
+        const query = searchInput.value.trim();
+        if (!query) {
+            this.showNotification('Please enter a search term', 'warning');
+            return;
+        }
+
+        if (this.isSearching) return;
+
+        console.log('🔍 Searching for:', query);
+        this.isSearching = true;
+        
+        // Show search loading
+        this.showSearchLoading();
+        
+        // Hide suggestions
+        this.hideSearchSuggestions();
+        
+        // Simulate API call delay
+        setTimeout(() => {
+            this.executeSearch(query);
+        }, 800);
+        
+        // Add to search history
+        this.addToSearchHistory(query);
+    }
+
+    executeSearch(query) {
+        // Enhanced search algorithm
+        const results = this.videoDatabase.filter(video => {
+            const searchTerm = query.toLowerCase();
+            return (
+                video.title.toLowerCase().includes(searchTerm) ||
+                video.category.toLowerCase().includes(searchTerm) ||
+                video.tags.some(tag => tag.toLowerCase().includes(searchTerm))
+            );
+        });
+
+        this.searchResults = results;
+        this.displaySearchResults(query, results);
+        this.isSearching = false;
+    }
+
+    displaySearchResults(query, results) {
+        const searchSection = document.getElementById('search-results-section');
+        const resultsGrid = document.getElementById('search-results-grid');
+        const noResults = document.getElementById('no-results');
+        const searchTitle = searchSection.querySelector('.section-title');
+
+        if (!searchSection || !resultsGrid) return;
+
+        // Update title
+        searchTitle.textContent = `Search Results for "${query}" (${results.length})`;
+
+        // Show search section
+        searchSection.style.display = 'block';
+        searchSection.scrollIntoView({ behavior: 'smooth' });
+
+        if (results.length === 0) {
+            resultsGrid.style.display = 'none';
+            noResults.style.display = 'block';
+        } else {
+            resultsGrid.style.display = 'grid';
+            noResults.style.display = 'none';
+            
+            // Clear previous results
+            resultsGrid.innerHTML = '';
+            
+            // Create video cards for results
+            results.forEach((video, index) => {
+                const videoCard = this.createVideoCard(video);
+                resultsGrid.appendChild(videoCard);
                 
-                // Show search loading
-                this.showSearchLoading();
-                
-                // In a real app, this would make an API call
+                // Animate in with delay
                 setTimeout(() => {
-                    this.displaySearchResults(query);
-                }, 1000);
-                
-                // Add to search history
-                this.addToSearchHistory(query);
-            }
+                    videoCard.style.animation = 'slideInUp 0.5s ease forwards';
+                }, index * 100);
+            });
+        }
+
+        // Hide loading
+        this.hideSearchLoading();
+        
+        this.showNotification(`Found ${results.length} results for "${query}"`, 'success');
+    }
+
+    closeSearchResults() {
+        const searchSection = document.getElementById('search-results-section');
+        if (searchSection) {
+            searchSection.style.display = 'none';
+        }
+        
+        // Clear search input
+        const searchInput = document.getElementById('search-input');
+        if (searchInput) {
+            searchInput.value = '';
         }
     }
 
     handleSearchInput(value) {
-        if (value.length > 2) {
-            // Show search suggestions
+        if (value.length === 0) {
+            this.showSearchHistory();
+            return;
+        }
+
+        if (value.length > 1) {
             this.showSearchSuggestions(value);
         } else {
             this.hideSearchSuggestions();
@@ -179,19 +339,37 @@ class XshiverApp {
     }
 
     showSearchSuggestions(query) {
-        // Mock search suggestions based on categories
-        const suggestions = [
-            'amateur videos',
-            'professional content',
-            'milf videos',
-            'teen 18+ content',
-            'hardcore videos',
-            'lesbian content'
-        ].filter(suggestion => 
-            suggestion.toLowerCase().includes(query.toLowerCase())
-        );
+        // Get suggestions from video database
+        const suggestions = new Set();
+        
+        // Add matching titles and categories
+        this.videoDatabase.forEach(video => {
+            if (video.title.toLowerCase().includes(query.toLowerCase())) {
+                suggestions.add(video.title);
+            }
+            if (video.category.toLowerCase().includes(query.toLowerCase())) {
+                suggestions.add(video.category);
+            }
+            video.tags.forEach(tag => {
+                if (tag.toLowerCase().includes(query.toLowerCase())) {
+                    suggestions.add(tag);
+                }
+            });
+        });
 
-        // Create suggestions dropdown (basic implementation)
+        // Convert to array and limit
+        const suggestionArray = Array.from(suggestions).slice(0, 6);
+
+        this.renderSuggestions(suggestionArray, 'suggestions');
+    }
+
+    showSearchHistory() {
+        if (this.searchHistory.length > 0) {
+            this.renderSuggestions(this.searchHistory.slice(0, 5), 'history');
+        }
+    }
+
+    renderSuggestions(items, type) {
         let suggestionsEl = document.getElementById('search-suggestions');
         if (!suggestionsEl) {
             suggestionsEl = document.createElement('div');
@@ -204,12 +382,16 @@ class XshiverApp {
             }
         }
 
-        if (suggestions.length > 0) {
-            suggestionsEl.innerHTML = suggestions
-                .slice(0, 5)
-                .map(suggestion => `
-                    <div class="suggestion-item" onclick="selectSuggestion('${suggestion}')">
-                        ${suggestion}
+        if (items.length > 0) {
+            const header = type === 'history' ? '<div class="suggestion-header">Recent Searches</div>' : '';
+            const icon = type === 'history' ? '🕒' : '🔍';
+            
+            suggestionsEl.innerHTML = header + items
+                .map(item => `
+                    <div class="suggestion-item" onclick="selectSuggestion('${item.replace(/'/g, "\\'")}')">
+                        <span class="suggestion-icon">${icon}</span>
+                        <span class="suggestion-text">${item}</span>
+                        ${type === 'history' ? '<span class="remove-history" onclick="event.stopPropagation(); window.xshiverApp.removeFromHistory(\'' + item.replace(/'/g, "\\'") + '\')">✕</span>' : ''}
                     </div>
                 `).join('');
             suggestionsEl.style.display = 'block';
@@ -225,15 +407,97 @@ class XshiverApp {
         }
     }
 
+    removeFromHistory(query) {
+        this.searchHistory = this.searchHistory.filter(item => item !== query);
+        localStorage.setItem('xshiver_search_history', JSON.stringify(this.searchHistory));
+        
+        // Refresh suggestions if showing history
+        const searchInput = document.getElementById('search-input');
+        if (searchInput && searchInput.value === '') {
+            this.showSearchHistory();
+        }
+    }
+
+    showSearchLoading() {
+        // Create or update loading indicator
+        let loadingEl = document.getElementById('search-loading');
+        if (!loadingEl) {
+            loadingEl = document.createElement('div');
+            loadingEl.id = 'search-loading';
+            loadingEl.className = 'search-loading-overlay';
+            loadingEl.innerHTML = `
+                <div class="search-loading-content">
+                    <div class="loading-spinner"></div>
+                    <p>Searching videos...</p>
+                </div>
+            `;
+            document.body.appendChild(loadingEl);
+        }
+        
+        loadingEl.style.display = 'flex';
+        setTimeout(() => loadingEl.classList.add('show'), 10);
+    }
+
+    hideSearchLoading() {
+        const loadingEl = document.getElementById('search-loading');
+        if (loadingEl) {
+            loadingEl.classList.remove('show');
+            setTimeout(() => {
+                loadingEl.style.display = 'none';
+            }, 300);
+        }
+    }
+
+    addToSearchHistory(query) {
+        // Remove if already exists
+        this.searchHistory = this.searchHistory.filter(item => item !== query);
+        
+        // Add to beginning
+        this.searchHistory.unshift(query);
+        
+        // Keep only last 10 searches
+        if (this.searchHistory.length > 10) {
+            this.searchHistory.splice(10);
+        }
+        
+        localStorage.setItem('xshiver_search_history', JSON.stringify(this.searchHistory));
+    }
+
+    // Keep all your existing methods (toggleMobileMenu, navigateToSection, etc.)
+    toggleMobileMenu() {
+        const mobileNav = document.getElementById('mobile-nav');
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        
+        if (mobileNav && mobileMenuBtn) {
+            this.mobileMenuOpen = !this.mobileMenuOpen;
+            
+            if (this.mobileMenuOpen) {
+                mobileNav.classList.remove('hidden');
+                mobileMenuBtn.classList.add('active');
+                
+                const spans = mobileMenuBtn.querySelectorAll('span');
+                spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
+                spans[1].style.opacity = '0';
+                spans[2].style.transform = 'rotate(-45deg) translate(7px, -6px)';
+            } else {
+                mobileNav.classList.add('hidden');
+                mobileMenuBtn.classList.remove('active');
+                
+                const spans = mobileMenuBtn.querySelectorAll('span');
+                spans[0].style.transform = 'none';
+                spans[1].style.opacity = '1';
+                spans[2].style.transform = 'none';
+            }
+        }
+    }
+
     navigateToSection(sectionId) {
-        // Update active navigation
         document.querySelectorAll('.nav-link').forEach(link => {
             link.classList.remove('active');
         });
         
         document.querySelector(`[href="#${sectionId}"]`)?.classList.add('active');
         
-        // Scroll to section
         const section = document.getElementById(sectionId);
         if (section) {
             section.scrollIntoView({
@@ -244,7 +508,6 @@ class XshiverApp {
         
         this.currentSection = sectionId;
         
-        // Close mobile menu if open
         if (this.mobileMenuOpen) {
             this.toggleMobileMenu();
         }
@@ -253,19 +516,61 @@ class XshiverApp {
     openCategory(category) {
         console.log('📂 Opening category:', category);
         
-        // In a real app, this would navigate to category page
-        // For now, show a notification
-        this.showNotification(`Opening ${category} category...`, 'info');
+        // Perform category search
+        const searchInput = document.getElementById('search-input');
+        if (searchInput) {
+            searchInput.value = category;
+            this.performSearch();
+        }
         
-        // Simulate navigation delay
-        setTimeout(() => {
-            // This would typically be: window.location.href = `pages/categories/${category}.html`;
-            console.log(`Would navigate to: pages/categories/${category}.html`);
-        }, 500);
+        this.showNotification(`Browsing ${category} videos...`, 'info');
+    }
+
+    createVideoCard(video) {
+        const card = document.createElement('div');
+        card.className = 'video-card';
+        card.style.opacity = '0';
+        card.innerHTML = `
+            <div class="video-thumbnail">
+                <div class="thumbnail-placeholder" style="
+                    background: linear-gradient(45deg, var(--deep-navy), var(--xshiver-secondary));
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    color: var(--xshiver-blue);
+                    font-size: 2rem;
+                ">▶️</div>
+                <div class="video-duration">${video.duration}</div>
+                <div class="video-quality">${video.quality}</div>
+                <div class="video-overlay">
+                    <div class="play-button">▶</div>
+                </div>
+            </div>
+            <div class="video-info">
+                <h4 class="video-title">${video.title}</h4>
+                <div class="video-stats">
+                    <span class="views">${video.views} views</span>
+                    <span class="rating">★ ${video.rating}</span>
+                </div>
+                <div class="video-tags">
+                    ${video.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+                </div>
+            </div>
+        `;
+        
+        card.addEventListener('click', () => {
+            this.playVideo(video);
+        });
+        
+        return card;
+    }
+
+    playVideo(video) {
+        console.log('▶️ Playing video:', video.title);
+        this.showNotification(`Playing: ${video.title}`, 'success');
     }
 
     handleKeyboardShortcuts(e) {
-        // Only handle shortcuts when not in input fields
         if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') {
             return;
         }
@@ -294,12 +599,9 @@ class XshiverApp {
     }
 
     handleResize() {
-        // Handle responsive changes
         if (window.innerWidth > 768 && this.mobileMenuOpen) {
             this.toggleMobileMenu();
         }
-        
-        // Recalculate any layout-dependent features
         this.recalculateLayout();
     }
 
@@ -314,8 +616,6 @@ class XshiverApp {
                 header.style.backdropFilter = 'blur(10px)';
             }
         }
-        
-        // Update active section based on scroll position
         this.updateActiveSection();
     }
 
@@ -333,7 +633,6 @@ class XshiverApp {
         if (currentSection && currentSection !== this.currentSection) {
             this.currentSection = currentSection;
             
-            // Update navigation
             document.querySelectorAll('.nav-link').forEach(link => {
                 link.classList.remove('active');
             });
@@ -341,8 +640,8 @@ class XshiverApp {
         }
     }
 
+    // Keep all other existing methods...
     initializePlaceholderVideos() {
-        // Add some animation to placeholder cards
         document.querySelectorAll('.video-card.placeholder').forEach((card, index) => {
             setTimeout(() => {
                 card.style.animation = 'slideInUp 0.5s ease forwards';
@@ -351,7 +650,6 @@ class XshiverApp {
     }
 
     setupIntersectionObserver() {
-        // Set up intersection observer for lazy loading and animations
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -363,14 +661,12 @@ class XshiverApp {
             rootMargin: '50px'
         });
         
-        // Observe elements that should animate on scroll
         document.querySelectorAll('.category-card, .video-card, .section-title').forEach(el => {
             observer.observe(el);
         });
     }
 
     initializeTooltips() {
-        // Simple tooltip system
         document.querySelectorAll('[data-tooltip]').forEach(element => {
             element.addEventListener('mouseenter', (e) => {
                 this.showTooltip(e.target, e.target.getAttribute('data-tooltip'));
@@ -422,57 +718,26 @@ class XshiverApp {
         }
     }
 
+    onAgeVerified() {
+        console.log('🎬 Age verification completed, initializing full functionality...');
+        this.loadTrendingVideos();
+        this.initializeAdvancedFeatures();
+        this.showWelcomeAnimation();
+    }
+
     loadTrendingVideos() {
-        // Simulate loading trending videos
         console.log('📈 Loading trending videos...');
         
         const trendingContainer = document.getElementById('trending-videos');
         if (trendingContainer) {
-            // Remove placeholder cards
             trendingContainer.innerHTML = '';
             
-            // Mock trending videos data
-            const trendingVideos = [
-                {
-                    id: 1,
-                    title: 'Amazing Amateur Performance',
-                    duration: '12:34',
-                    quality: 'HD',
-                    views: '125K',
-                    rating: '4.8'
-                },
-                {
-                    id: 2,
-                    title: 'Professional Studio Production',
-                    duration: '18:42',
-                    quality: '4K',
-                    views: '89K',
-                    rating: '4.9'
-                },
-                {
-                    id: 3,
-                    title: 'Hot MILF Content',
-                    duration: '15:28',
-                    quality: 'HD',
-                    views: '156K',
-                    rating: '4.7'
-                },
-                {
-                    id: 4,
-                    title: 'Teen (18+) Exclusive',
-                    duration: '22:15',
-                    quality: '4K',
-                    views: '203K',
-                    rating: '4.9'
-                }
-            ];
+            const trendingVideos = this.videoDatabase.slice(0, 4);
             
-            // Create video cards
             trendingVideos.forEach((video, index) => {
                 const videoCard = this.createVideoCard(video);
                 trendingContainer.appendChild(videoCard);
                 
-                // Animate in
                 setTimeout(() => {
                     videoCard.style.animation = 'slideInUp 0.5s ease forwards';
                 }, index * 100);
@@ -480,64 +745,14 @@ class XshiverApp {
         }
     }
 
-    createVideoCard(video) {
-        const card = document.createElement('div');
-        card.className = 'video-card';
-        card.style.opacity = '0';
-        card.innerHTML = `
-            <div class="video-thumbnail">
-                <div class="thumbnail-placeholder" style="
-                    background: linear-gradient(45deg, var(--deep-navy), var(--xshiver-secondary));
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    color: var(--xshiver-blue);
-                    font-size: 2rem;
-                ">▶️</div>
-                <div class="video-duration">${video.duration}</div>
-                <div class="video-quality">${video.quality}</div>
-            </div>
-            <div class="video-info">
-                <h4 class="video-title">${video.title}</h4>
-                <div class="video-stats">
-                    <span class="views">${video.views} views</span>
-                    <span class="rating">★ ${video.rating}</span>
-                </div>
-            </div>
-        `;
-        
-        // Add click handler
-        card.addEventListener('click', () => {
-            this.playVideo(video);
-        });
-        
-        return card;
-    }
-
-    playVideo(video) {
-        console.log('▶️ Playing video:', video.title);
-        this.showNotification(`Playing: ${video.title}`, 'success');
-        
-        // In a real app, this would navigate to video player
-        // window.location.href = `pages/watch/video.html?id=${video.id}`;
-    }
-
     initializeAdvancedFeatures() {
-        // Initialize features that require age verification
         console.log('🚀 Initializing advanced features...');
-        
-        // Setup advanced search
         this.setupAdvancedSearch();
-        
-        // Initialize recommendation engine
         this.initRecommendations();
-        
-        // Setup analytics
         this.setupAnalytics();
     }
 
     setupAdvancedSearch() {
-        // Advanced search functionality
         const searchFilters = {
             duration: ['short', 'medium', 'long'],
             quality: ['480p', '720p', '1080p', '4k'],
@@ -548,13 +763,11 @@ class XshiverApp {
     }
 
     initRecommendations() {
-        // Simple recommendation system based on viewed categories
         const userPreferences = JSON.parse(localStorage.getItem('xshiver_preferences') || '{}');
         console.log('🎯 Recommendations initialized for preferences:', userPreferences);
     }
 
     setupAnalytics() {
-        // Basic analytics tracking
         const sessionData = {
             sessionId: this.generateSessionId(),
             startTime: new Date().toISOString(),
@@ -571,7 +784,6 @@ class XshiverApp {
     }
 
     showWelcomeAnimation() {
-        // Create welcome overlay
         const welcome = document.createElement('div');
         welcome.className = 'welcome-overlay';
         welcome.innerHTML = `
@@ -611,49 +823,18 @@ class XshiverApp {
         }, 2000);
     }
 
-    showSearchLoading() {
-        const loadingEl = document.createElement('div');
-        loadingEl.id = 'search-loading';
-        loadingEl.innerHTML = `
-            <div class="loading-spinner"></div>
-            <p>Searching...</p>
-        `;
-        
-        // Add to search results area
-        console.log('🔄 Search loading...');
-    }
-
-    displaySearchResults(query) {
-        console.log('📋 Displaying results for:', query);
-        this.showNotification(`Found results for "${query}"`, 'success');
-    }
-
-    addToSearchHistory(query) {
-        const history = JSON.parse(localStorage.getItem('xshiver_search_history') || '[]');
-        history.unshift(query);
-        
-        // Keep only last 20 searches
-        if (history.length > 20) {
-            history.splice(20);
-        }
-        
-        localStorage.setItem('xshiver_search_history', JSON.stringify(history));
-    }
-
     recalculateLayout() {
-        // Handle any layout calculations on resize
         console.log('📐 Recalculating layout for:', window.innerWidth + 'x' + window.innerHeight);
     }
 
     showNotification(message, type = 'info') {
-        // Use the notification system from age verification
         if (window.ageVerification) {
             window.ageVerification.showNotification(message, type);
         }
     }
 }
 
-// Global functions for HTML onclick handlers
+// Global functions
 function scrollToSection(sectionId) {
     if (window.xshiverApp) {
         window.xshiverApp.navigateToSection(sectionId);
@@ -662,7 +843,6 @@ function scrollToSection(sectionId) {
 
 function showAllCategories() {
     console.log('📂 Showing all categories...');
-    // In a real app, this would navigate to categories page
     if (window.xshiverApp) {
         window.xshiverApp.showNotification('Loading all categories...', 'info');
     }
@@ -679,12 +859,12 @@ function selectSuggestion(suggestion) {
     }
 }
 
-// Initialize the app when DOM is loaded
+// Initialize when DOM loads
 document.addEventListener('DOMContentLoaded', () => {
     window.xshiverApp = new XshiverApp();
 });
 
-// Add CSS animations
+// Enhanced CSS styles
 const appStyles = document.createElement('style');
 appStyles.textContent = `
     @keyframes slideInUp {
@@ -711,17 +891,29 @@ appStyles.textContent = `
         border: 1px solid var(--xshiver-blue);
         border-top: none;
         border-radius: 0 0 8px 8px;
-        max-height: 200px;
+        max-height: 300px;
         overflow-y: auto;
         z-index: 1000;
         display: none;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    }
+    
+    .suggestion-header {
+        padding: 8px 15px;
+        font-size: 0.85rem;
+        color: var(--xshiver-accent);
+        background: rgba(0, 0, 0, 0.3);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     }
     
     .suggestion-item {
-        padding: 10px 15px;
+        padding: 12px 15px;
         cursor: pointer;
-        transition: background-color 0.2s ease;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        transition: all 0.2s ease;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        display: flex;
+        align-items: center;
+        gap: 10px;
     }
     
     .suggestion-item:hover {
@@ -732,6 +924,166 @@ appStyles.textContent = `
         border-bottom: none;
     }
     
+    .suggestion-icon {
+        opacity: 0.7;
+        font-size: 0.9rem;
+    }
+    
+    .suggestion-text {
+        flex: 1;
+    }
+    
+    .remove-history {
+        opacity: 0.5;
+        padding: 2px 6px;
+        border-radius: 50%;
+        transition: all 0.2s ease;
+    }
+    
+    .remove-history:hover {
+        opacity: 1;
+        background: rgba(255, 0, 0, 0.2);
+    }
+    
+    .search-results-section {
+        padding: 60px 0;
+        background: linear-gradient(135deg, var(--deep-navy), var(--xshiver-dark));
+        min-height: 50vh;
+    }
+    
+    .search-results-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 30px;
+    }
+    
+    .close-search-btn {
+        background: var(--xshiver-secondary);
+        border: 1px solid var(--xshiver-blue);
+        color: var(--silver-text);
+        padding: 8px 12px;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+    
+    .close-search-btn:hover {
+        background: var(--xshiver-blue);
+        color: white;
+    }
+    
+    .video-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 25px;
+        padding: 20px 0;
+    }
+    
+    .video-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.5);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transition: all 0.3s ease;
+    }
+    
+    .video-card:hover .video-overlay {
+        opacity: 1;
+    }
+    
+    .play-button {
+        width: 60px;
+        height: 60px;
+        background: var(--xshiver-blue);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 1.5rem;
+        transform: scale(0.8);
+        transition: all 0.3s ease;
+    }
+    
+    .video-card:hover .play-button {
+        transform: scale(1);
+    }
+    
+    .video-tags {
+        margin-top: 8px;
+        display: flex;
+        gap: 6px;
+        flex-wrap: wrap;
+    }
+    
+    .tag {
+        background: rgba(74, 144, 226, 0.2);
+        color: var(--xshiver-blue);
+        padding: 2px 8px;
+        border-radius: 12px;
+        font-size: 0.75rem;
+        border: 1px solid rgba(74, 144, 226, 0.3);
+    }
+    
+    .no-results {
+        text-align: center;
+        padding: 60px 20px;
+        color: var(--silver-text);
+    }
+    
+    .no-results h3 {
+        color: var(--xshiver-blue);
+        margin-bottom: 15px;
+        font-size: 1.5rem;
+    }
+    
+    .search-loading-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.8);
+        display: none;
+        align-items: center;
+        justify-content: center;
+        z-index: 9999;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+    
+    .search-loading-overlay.show {
+        opacity: 1;
+    }
+    
+    .search-loading-content {
+        text-align: center;
+        color: var(--silver-text);
+    }
+    
+    .loading-spinner {
+        width: 50px;
+        height: 50px;
+        border: 4px solid rgba(74, 144, 226, 0.3);
+        border-top: 4px solid var(--xshiver-blue);
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+        margin: 0 auto 20px;
+    }
+    
+    @keyframes spin {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+    }
+    
+    /* Keep all existing styles for welcome animation, tooltips etc. */
     .welcome-content {
         text-align: center;
         color: var(--silver-text);
@@ -755,19 +1107,17 @@ appStyles.textContent = `
         color: var(--xshiver-accent);
     }
     
-    .loading-spinner {
-        width: 40px;
-        height: 40px;
-        border: 4px solid rgba(74, 144, 226, 0.3);
-        border-top: 4px solid var(--xshiver-blue);
-        border-radius: 50%;
-        animation: spin 1s linear infinite;
-        margin: 0 auto 15px;
-    }
-    
-    @keyframes spin {
-        from { transform: rotate(0deg); }
-        to { transform: rotate(360deg); }
+    @media (max-width: 768px) {
+        .video-grid {
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .search-results-header {
+            flex-direction: column;
+            gap: 15px;
+            text-align: center;
+        }
     }
 `;
 document.head.appendChild(appStyles);
