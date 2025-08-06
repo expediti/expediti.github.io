@@ -180,7 +180,6 @@ input:checked+span{background:var(--xshiver-blue);border-color:var(--xshiver-blu
 
 
 
-
 /* ─── THUMBNAIL CONTAINER & FITTING ───  */
 .video-thumbnail-container {
   position: relative;
@@ -188,23 +187,45 @@ input:checked+span{background:var(--xshiver-blue);border-color:var(--xshiver-blu
   /* Use padding-top to define aspect ratio based on --thumbnail-ratio variable */
   padding-top: var(--thumbnail-ratio, 56.25%); /* default 16:9 ratio */
   overflow: hidden;
-  background: var(--xshiver-dark);
-  height: 0; /* needed for padding-top trick */
+  background: var(--xshiver-dark, #1a1a1a); /* Added fallback color */
+  border-radius: var(--radius-1, 4px); /* Added border radius for consistency */
 }
 
 .video-thumbnail {
   position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
+  top: 0; 
+  left: 0; 
   width: 100%;
   height: 100%;
   object-fit: cover;           /* Ensures thumbnail fits perfectly without distortion */
   object-position: center;
-  transition: transform var(--normal);
+  transition: transform var(--normal, 0.3s ease);
+  display: block; /* Ensures image displays properly */
 }
 
-.video-item:hover .video-thumbnail {
+.video-thumbnail:hover {
   transform: scale(1.05);
 }
+
+/* Fallback for missing images */
+.video-thumbnail-container::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: linear-gradient(45deg, 
+    var(--xshiver-dark, #1a1a1a) 25%, transparent 25%),
+    linear-gradient(-45deg, 
+    var(--xshiver-dark, #1a1a1a) 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, 
+    var(--xshiver-dark, #1a1a1a) 75%),
+    linear-gradient(-45deg, transparent 75%, 
+    var(--xshiver-dark, #1a1a1a) 75%);
+  background-size: 8px 8px;
+  background-position: 0 0, 0 4px, 4px -4px, -4px 0px;
+  opacity: 0.3;
+  z-index: -1;
+}
+
 
 
 
