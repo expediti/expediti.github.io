@@ -107,32 +107,56 @@ input:checked+span{background:var(--xshiver-blue);border-color:var(--xshiver-blu
 /* ─── ENHANCED VIDEOS GRID & VIDEO CONTAINERS ─── */
 .videos-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  grid-auto-flow: row; /* Fill horizontally first, then move to next row */
-  gap: var(--lg);
-  padding: var(--md) 0;
-  width: 100%; /* Ensure full width usage */
+  grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
+  gap: clamp(12px, var(--lg, 24px), 32px);
+  padding: var(--md, 16px) 0;
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
 }
 
 /* ─── VIDEO CONTAINER BOXES ─── */
 .video-item {
-  background: var(--card-dark);
-  border: 1px solid var(--xshiver-secondary);
-  border-radius: var(--r-lg);
+  background: var(--card-dark, #1a1a1a);
+  border: 1px solid var(--xshiver-secondary, #333);
+  border-radius: var(--r-lg, 12px);
   overflow: hidden;
-  transition: transform var(--normal), box-shadow var(--normal);
+  transition: transform var(--normal, 0.3s ease), 
+              box-shadow var(--normal, 0.3s ease);
   position: relative;
   cursor: pointer;
-  width: 100%; /* Fill the entire grid cell width */
-  height: 100%; /* Fill the entire grid cell height */
-  min-height: 320px; /* Minimum height for consistent appearance */
+  width: 100%;
+  height: 100%;
+  min-height: clamp(280px, 25vw, 320px); /* Responsive min-height */
+  max-width: 400px; /* Prevent cards from becoming too wide */
+  justify-self: center; /* Center cards in their grid cells */
 }
 
 .video-item:hover {
   transform: translateY(-4px);
   box-shadow: 0 8px 25px rgba(74,144,226,0.15);
-  border-color: var(--xshiver-blue);
+  border-color: var(--xshiver-blue, #4a90e2);
 }
+
+/* ─── RESPONSIVE BREAKPOINTS ─── */
+@media (max-width: 320px) {
+  .videos-grid {
+    grid-template-columns: 1fr; /* Single column on very small screens */
+    gap: var(--sm, 12px);
+    padding: var(--sm, 12px) 0;
+  }
+  
+  .video-item {
+    min-height: 250px; /* Smaller cards on mobile */
+  }
+}
+
+@media (min-width: 1400px) {
+  .videos-grid {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 350px));
+  }
+}
+
 
 
 
