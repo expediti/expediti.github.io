@@ -3,6 +3,7 @@
    • Catbox hosting   • Adaptive quality   • Chromecast
    • Keyboard & touch shortcuts   • Share / bookmark / toast
    • Analytics milestones          • Theater & fullscreen
+   • FIXED: Video title now appears below player in metadata section
    ------------------------------------------------------------------ */
 
 /* ------------------------------------------------------------------ */
@@ -218,6 +219,7 @@ class XshiverVideoPlayer {
         }
     }
 
+    // FIXED: Now properly updates both title locations
     updatePageMetadata(v){
         document.title = `${v.title} – Xshiver`;
         document.getElementById('video-title').textContent = document.title;
@@ -227,7 +229,12 @@ class XshiverVideoPlayer {
         document.getElementById('og-video').content        = v.catbox_video_url;
         document.getElementById('og-thumbnail').content    = v.catbox_thumbnail_url;
 
+        // Update the overlay title (kept for any existing functionality)
         if (this.videoTitle) this.videoTitle.textContent = v.title;
+        
+        // FIXED: Update the new title below the player
+        const movedTitle = document.getElementById('moved-video-title');
+        if (movedTitle) movedTitle.textContent = v.title;
 
         /* info section */
         const views  = document.getElementById('video-views');
@@ -251,6 +258,19 @@ class XshiverVideoPlayer {
             embedUrl:window.location.href,interactionCount:v.view_count
         };
         document.getElementById('video-schema').textContent = JSON.stringify(schema);
+    }
+
+    // NEW: Helper function to set video title in both locations
+    setVideoTitle(title) {
+        // Update the hidden overlay title (for any existing functionality)
+        if (this.videoTitle) this.videoTitle.textContent = title;
+        
+        // Update the new visible title below the player
+        const movedTitle = document.getElementById('moved-video-title');
+        if (movedTitle) movedTitle.textContent = title;
+        
+        // Update page title
+        document.title = `${title} – Xshiver`;
     }
 
     /* helper */
@@ -726,9 +746,12 @@ function goBack(){
 
 function closeShareModal(){ document.getElementById('share-modal').classList.remove('active'); }
 
+// FIXED: Updated to get title from the new location
 function shareToTwitter(){
     const url=encodeURIComponent(window.location.href);
-    const txt=encodeURIComponent(document.getElementById('current-video-title').textContent);
+    // Get title from new location or fallback to the old one
+    const titleElement = document.getElementById('moved-video-title') || document.getElementById('current-video-title');
+    const txt=encodeURIComponent(titleElement.textContent);
     window.open(`https://twitter.com/intent/tweet?text=${txt}&url=${url}`,
                 '_blank','width=600,height=400');
 }
@@ -737,9 +760,12 @@ function shareToFacebook(){
     window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}`,
                 '_blank','width=600,height=400');
 }
+// FIXED: Updated to get title from the new location
 function shareToReddit(){
     const url=encodeURIComponent(window.location.href);
-    const title=encodeURIComponent(document.getElementById('current-video-title').textContent);
+    // Get title from new location or fallback to the old one
+    const titleElement = document.getElementById('moved-video-title') || document.getElementById('current-video-title');
+    const title=encodeURIComponent(titleElement.textContent);
     window.open(`https://reddit.com/submit?title=${title}&url=${url}`,
                 '_blank','width=800,height=600');
 }
