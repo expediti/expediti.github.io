@@ -4,25 +4,25 @@
     
     <!-- Primary Pages Sitemap -->
     <sitemap>
-        <loc>https://yourusername.github.io/xshiver-platform/sitemap-pages.xml</loc>
+        <loc>https://xshiver.site/xshiver-platform/sitemap-pages.xml</loc>
         <lastmod>2025-08-06T14:19:00+05:30</lastmod>
     </sitemap>
     
     <!-- Video Content Sitemap -->
     <sitemap>
-        <loc>https://yourusername.github.io/xshiver-platform/sitemap-videos.xml</loc>
+        <loc>https://xshiver.site/xshiver-platform/sitemap-videos.xml</loc>
         <lastmod>2025-08-06T14:19:00+05:30</lastmod>
     </sitemap>
     
     <!-- Image Content Sitemap -->
     <sitemap>
-        <loc>https://yourusername.github.io/xshiver-platform/sitemap-images.xml</loc>
+        <loc>https://xshiver.site/xshiver-platform/sitemap-images.xml</loc>
         <lastmod>2025-08-06T14:19:00+05:30</lastmod>
     </sitemap>
     
     <!-- Category Pages Sitemap -->
     <sitemap>
-        <loc>https://yourusername.github.io/xshiver-platform/sitemap-categories.xml</loc>
+        <loc>https://xshiver.site/xshiver-platform/sitemap-categories.xml</loc>
         <lastmod>2025-08-06T14:19:00+05:30</lastmod>
     </sitemap>
 </sitemapindex>
