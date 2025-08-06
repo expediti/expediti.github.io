@@ -6,7 +6,7 @@
 
     <!-- Homepage - Highest Priority -->
     <url>
-        <loc>https://yourusername.github.io/xshiver-platform/</loc>
+        <loc>https://xshiver.site/xshiver-platform/</loc>
         <lastmod>2025-08-06T14:19:00+05:30</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
@@ -14,7 +14,7 @@
 
     <!-- Main Browse Page -->
     <url>
-        <loc>https://yourusername.github.io/xshiver-platform/pages/browse/index.html</loc>
+        <loc>https://xshiver.site/xshiver-platform/pages/browse/index.html</loc>
         <lastmod>2025-08-06T14:19:00+05:30</lastmod>
         <changefreq>daily</changefreq>
         <priority>0.9</priority>
@@ -22,7 +22,7 @@
 
     <!-- Categories Page -->
     <url>
-        <loc>https://yourusername.github.io/xshiver-platform/pages/browse/categories.html</loc>
+        <loc>https://xshiver.site/xshiver-platform/pages/browse/categories.html</loc>
         <lastmod>2025-08-06T14:19:00+05:30</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
@@ -30,7 +30,7 @@
 
     <!-- Search Results Page -->
     <url>
-        <loc>https://yourusername.github.io/xshiver-platform/pages/browse/search-results.html</loc>
+        <loc>https://xshiver.site/xshiver-platform/pages/browse/search-results.html</loc>
         <lastmod>2025-08-06T14:19:00+05:30</lastmod>
         <changefreq>daily</changefreq>
         <priority>0.7</priority>
@@ -38,14 +38,14 @@
 
     <!-- Legal Pages - Important for Adult Content -->
     <url>
-        <loc>https://yourusername.github.io/xshiver-platform/pages/legal/terms.html</loc>
+        <loc>https://xshiver.site//xshiver-platform/pages/legal/terms.html</loc>
         <lastmod>2025-08-06T14:19:00+05:30</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.6</priority>
     </url>
 
     <url>
-        <loc>https://yourusername.github.io/xshiver-platform/pages/legal/privacy.html</loc>
+        <loc>https://xshiver.site/xshiver-platform/pages/legal/privacy.html</loc>
         <lastmod>2025-08-06T14:19:00+05:30</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.6</priority>
@@ -60,7 +60,7 @@
 
     <!-- Subscription Plans -->
     <url>
-        <loc>https://yourusername.github.io/xshiver-platform/pages/subscription/plans.html</loc>
+        <loc>https://xshiver.site/xshiver-platform/pages/subscription/plans.html</loc>
         <lastmod>2025-08-06T14:19:00+05:30</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
@@ -68,14 +68,14 @@
 
     <!-- Support Pages -->
     <url>
-        <loc>https://yourusername.github.io/xshiver-platform/pages/support/contact.html</loc>
+        <loc>https://xshiver.site/xshiver-platform/pages/support/contact.html</loc>
         <lastmod>2025-08-06T14:19:00+05:30</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.5</priority>
     </url>
 
     <url>
-        <loc>https://yourusername.github.io/xshiver-platform/pages/support/help.html</loc>
+        <loc>https://xshiver.site/xshiver-platform/pages/support/help.html</loc>
         <lastmod>2025-08-06T14:19:00+05:30</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.5</priority>
