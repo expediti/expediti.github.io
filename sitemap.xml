@@ -1,90 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <!-- Homepage (highest priority) -->
-  <url>
-    <loc>https://xshiver.site/</loc>
-    <lastmod>2025-06-08</lastmod>  <!-- Update with today's date -->
-    <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
-  </url>
-  
-  <!-- Add other pages of your site below -->
-  <url>
-    <loc>https://xshiver.site/video.html?category=Big%20Ass</loc>
-    <lastmod>2025-06-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
- 
-<url>
-    <loc>https://xshiver.site/video.html?category=Big%20Boobs</loc>
-    <lastmod>2025-06-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-<url>
-    <loc>https://xshiver.site/video.html?category=japanese</loc>
-    <lastmod>2025-06-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-<url>
-    <loc>https://xshiver.site/video.html?category=Indian</loc>
-    <lastmod>2025-06-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-
-<url>
-    <loc>https://xshiver.site/video.html?category=Blowjob</loc>
-    <lastmod>2025-06-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-
-<url>
-    <loc>https://xshiver.site/video.html?category=Pussy</loc>
-    <lastmod>2025-06-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-
-<url>
-    <loc>https://xshiver.site/video.html?category=Home</loc>
-    <lastmod>2025-06-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-
-<url>
-    <loc>https://xshiver.site/video.html?category=XNXX</loc>
-    <lastmod>2025-06-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-<url>
-    <loc>https://xshiver.site/video.html?category=Porn</loc>
-    <lastmod>2025-06-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  
-  <url>
-    <loc>https://xshiver.site/video.html?category=sexyvideo</loc>
-    <lastmod>2025-06-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
- 
-
-  
-  <!-- Continue with all other pages -->
-</urlset>
+<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <!-- Main Sitemap Index for Xshiver Adult Video Streaming Platform -->
+    
+    <!-- Primary Pages Sitemap -->
+    <sitemap>
+        <loc>https://yourusername.github.io/xshiver-platform/sitemap-pages.xml</loc>
+        <lastmod>2025-08-06T14:19:00+05:30</lastmod>
+    </sitemap>
+    
+    <!-- Video Content Sitemap -->
+    <sitemap>
+        <loc>https://yourusername.github.io/xshiver-platform/sitemap-videos.xml</loc>
+        <lastmod>2025-08-06T14:19:00+05:30</lastmod>
+    </sitemap>
+    
+    <!-- Image Content Sitemap -->
+    <sitemap>
+        <loc>https://yourusername.github.io/xshiver-platform/sitemap-images.xml</loc>
+        <lastmod>2025-08-06T14:19:00+05:30</lastmod>
+    </sitemap>
+    
+    <!-- Category Pages Sitemap -->
+    <sitemap>
+        <loc>https://yourusername.github.io/xshiver-platform/sitemap-categories.xml</loc>
+        <lastmod>2025-08-06T14:19:00+05:30</lastmod>
+    </sitemap>
+</sitemapindex>
