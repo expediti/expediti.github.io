@@ -129,7 +129,7 @@ ul{list-style:none}
     display:none !important;
 }
 
-/* Quality selector - positioned top-right */
+/* Quality selector - positioned top-right 
 .quality-selector{position:relative}
 .quality-btn{
     display:flex;align-items:center;gap:var(--space-1);
@@ -144,7 +144,7 @@ ul{list-style:none}
     border-radius:var(--radius-2);padding:var(--space-1);min-width:120px
 }
 .quality-option{padding:var(--space-1) var(--space-2);color:#fff;border-radius:var(--radius-1)}
-.quality-option:hover,.quality-option.active{background:var(--clr-blue)}
+.quality-option:hover,.quality-option.active{background:var(--clr-blue)} */
 
 /* Bottom controls bar */
 .controls-bottom{
